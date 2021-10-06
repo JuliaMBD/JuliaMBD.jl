@@ -1,10 +1,12 @@
 module JuliaMBD
 
-export ConstantBlock, GainBlock
-export Line, Var
+export ContinuousSignal
+export GainBlock, SystemBlock, InBlock, OutBlock
 export connect
-export _toexpr
+export InPort, OutPort
+export generate_instance, generate_definition
+export add_block
 
-include("_block.jl")
+include("_blocknew.jl")
 
 end
