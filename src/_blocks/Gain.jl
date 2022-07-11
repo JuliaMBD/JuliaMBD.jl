@@ -18,7 +18,12 @@ end
     
 function expr(blk::Gain)
     i = expr_setvalue(blk.inport.var, expr_refvalue(blk.inport.line.var))
-    b = expr_setvalue(blk.outport.var, Expr(:call, :*, expr_refvalue(blk.K), expr_refvalue(blk.inport.var)))
+
+    inport = expr_refvalue(blk.inport.var)
+    K = expr_refvalue(blk.K)
+
+    b = expr_setvalue(blk.outport.var, :($K * $inport))
+
     o = [expr_setvalue(line.var, expr_refvalue(blk.outport.var)) for line = blk.outport.lines]
     Expr(:block, i, b, o...)
 end

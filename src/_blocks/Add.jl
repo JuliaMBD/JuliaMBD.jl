@@ -21,7 +21,12 @@ end
 function expr(blk::Add)
     i1 = expr_setvalue(blk.left.var, expr_refvalue(blk.left.line.var))
     i2 = expr_setvalue(blk.right.var, expr_refvalue(blk.right.line.var))
-    b = expr_setvalue(blk.outport.var, Expr(:call, :+, expr_refvalue(blk.left.var), expr_refvalue(blk.right.var)))
+
+    left = expr_refvalue(blk.left.var)
+    right = expr_refvalue(blk.right.var)
+
+    b = expr_setvalue(blk.outport.var, :($left + $right))
+
     o = [expr_setvalue(line.var, expr_refvalue(blk.outport.var)) for line = blk.outport.lines]
     Expr(:block, i1, i2, b, o...)
 end

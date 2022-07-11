@@ -15,7 +15,10 @@ end
     
 
 function expr(blk::Constant)
-    b = expr_setvalue(blk.outport.var, expr_refvalue(blk.value))
+    value = expr_refvalue(blk.value)
+
+    b = expr_setvalue(blk.outport.var, :($value))
+
     o = [expr_setvalue(line.var, expr_refvalue(blk.outport.var)) for line = blk.outport.lines]
     Expr(:block, b, o...)
 end

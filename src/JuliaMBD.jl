@@ -24,6 +24,7 @@ include("_blocks/Out.jl")
 include("_blocks/Constant.jl")
 include("_blocks/Gain.jl")
 include("_blocks/Add.jl")
+include("_blocks/PulseGenerator.jl")
 
 include("_system.jl")
 include("_macro.jl")
