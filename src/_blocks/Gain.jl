@@ -1,11 +1,11 @@
 export Gain
 
-mutable struct Gain <: AbstractFunctionBlock
-    K::Union{Value,SymbolicValue}
+mutable struct Gain <: AbstractBlock
+    K::Parameter
     inport::InPort
     outport::OutPort
 
-    function Gain(;K::Union{Value,SymbolicValue}, inport::InPort, outport::OutPort)
+    function Gain(;K::Parameter, inport::InPort, outport::OutPort)
         blk = new()
         blk.K = K
         blk.inport = inport

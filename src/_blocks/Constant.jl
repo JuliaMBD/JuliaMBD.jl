@@ -1,10 +1,10 @@
 export Constant
 
-mutable struct Constant <: AbstractFunctionBlock
-    value::Union{Value,SymbolicValue}
+mutable struct Constant <: AbstractBlock
+    value::Parameter
     outport::OutPort
 
-    function Constant(;value::Union{Value,SymbolicValue}, outport::OutPort)
+    function Constant(;value::Parameter, outport::OutPort)
         blk = new()
         blk.value = value
         blk.outport = outport
@@ -25,4 +25,8 @@ end
 
 function next(blk::Constant)
     [line.dest.parent for line = blk.outport.lines]
+end
+
+function Base.show(io::IO, x::Constant)
+    Base.show(io, "Constant($(x.value))")
 end

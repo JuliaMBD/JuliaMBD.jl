@@ -1,6 +1,6 @@
 export Add
 
-mutable struct Add <: AbstractFunctionBlock
+mutable struct Add <: AbstractBlock
     left::InPort
     right::InPort
     outport::OutPort

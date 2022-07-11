@@ -18,6 +18,11 @@ function addBlock!(blk::SystemBlockDefinition, x::AbstractBlock)
     push!(blk.blks, x)
 end
     
+function addBlock!(blk::SystemBlockDefinition, x::AbstractIntegratorBlock)
+    addBlock!(blk, x.inblk)
+    addBlock!(blk, x.outblk)
+end
+
 function addBlock!(blk::SystemBlockDefinition, x::In)
     push!(blk.blks, x)
     push!(blk.inports, x.inport)

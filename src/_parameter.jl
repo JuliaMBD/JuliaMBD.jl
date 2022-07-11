@@ -38,6 +38,8 @@ function SymbolicValue(x::Symbol)
     SymbolicValue{Auto}(x)
 end
 
+const Parameter = Union{Value,SymbolicValue}
+
 function Base.show(io::IO, x::SymbolicValue{Tv}) where Tv
     Base.show(io, Expr(:(::), x.name, Tv))
 end

@@ -58,6 +58,13 @@ mutable struct Line <: AbstractLine
         push!(o.lines, line)
         line
     end
+
+    function Line(o::OutPort, i::InPort, name::Symbol)
+        line = new(SymbolicValue{Auto}(name), o, i)
+        i.line = line
+        push!(o.lines, line)
+        line
+    end
 end
 
 function Base.show(io::IO, x::AbstractLine)

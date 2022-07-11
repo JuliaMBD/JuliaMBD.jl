@@ -1,20 +1,18 @@
-export PulseGeneratorBlock
-
 export PulseGenerator
 
-mutable struct PulseGenerator <: AbstractFunctionBlock
-    amplitude::Union{Value,SymbolicValue}
-    period::Union{Value,SymbolicValue}
-    pulsewidth::Union{Value,SymbolicValue}
-    phasedelay::Union{Value,SymbolicValue}
+mutable struct PulseGenerator <: AbstractBlock
+    amplitude::Parameter
+    period::Parameter
+    pulsewidth::Parameter
+    phasedelay::Parameter
     timeport::InPort
     outport::OutPort
 
     function PulseGenerator(;
-        amplitude::Union{Value,SymbolicValue}=Value{Float64}(1),
-        period::Union{Value,SymbolicValue}=Value{Float64}(10),
-        pulsewidth::Union{Value,SymbolicValue}=Value{Float64}(5),
-        phasedelay::Union{Value,SymbolicValue}=Value{Float64}(0),
+        amplitude::Parameter=Value{Float64}(1),
+        period::Parameter=Value{Float64}(10),
+        pulsewidth::Parameter=Value{Float64}(5),
+        phasedelay::Parameter=Value{Float64}(0),
         timeport::InPort,
         outport::OutPort)
         blk = new()
@@ -30,10 +28,6 @@ mutable struct PulseGenerator <: AbstractFunctionBlock
     end
 end
 
-macro assign(x, y)
-    Expr(:call, :expr_setvalue, x, y)
-end
-    
 function expr(blk::PulseGenerator)
     ## inports
     i = expr_setvalue(blk.timeport.var, expr_refvalue(blk.timeport.line.var))

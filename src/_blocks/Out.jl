@@ -24,3 +24,7 @@ end
 function next(blk::Out)
     []
 end
+
+function Base.show(io::IO, x::Out)
+    Base.show(io, "Out()")
+end

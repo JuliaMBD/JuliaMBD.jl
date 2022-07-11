@@ -6,4 +6,5 @@ using Test
 # include("test_system.jl")
 
 include("test_blocks.jl")
+include("test_integrator.jl")
 
