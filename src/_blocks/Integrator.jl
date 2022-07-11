@@ -3,10 +3,10 @@ export Integrator
 mutable struct Integrator <: AbstractIntegratorBlock
     initialcondition::Parameter
     saturationlimits::NTuple{2,Union{Parameter,Nothing}}
-    inblk::AbstractBlock
-    outblk::AbstractBlock
     inport::AbstractInPort
     outport::AbstractOutPort
+    inblk::StateOut
+    outblk::StateIn
 
     function Integrator(;
         statein::AbstractInPort,
@@ -18,8 +18,8 @@ mutable struct Integrator <: AbstractIntegratorBlock
         blk = new()
         blk.initialcondition = initialcondition
         blk.saturationlimits = saturationlimits
-        blk.inblk = Out(inport=inport, outport=stateout)
-        blk.outblk = In(inport=statein, outport=outport)
+        blk.inblk = StateOut(inport=inport, outport=stateout)
+        blk.outblk = StateIn(inport=statein, outport=outport)
         blk.inport = inport
         blk.outport = outport
         blk

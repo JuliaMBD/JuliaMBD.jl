@@ -28,7 +28,7 @@ end
     addBlock!(b, b1)
     addBlock!(b, b3)
 
-    println(expr_define_systemfunction(b))
+    # println(expr_define_systemfunction(b))
 end
 
 @testset "integrator4" begin
@@ -71,10 +71,12 @@ end
     println(expr_define_structure(b))
     eval(expr_define_structure(b))
     eval(expr_define_next(b))
+    println(expr_define_expr(b))
     eval(expr_define_expr(b))
 
     time = In(inport=InPort(:time), outport=OutPort())
     s1 = PulseGenerator(timeport=InPort(), outport=OutPort())
+    # s2 = RLCBlock(vin=InPort(), sin1=InPort(), sin2=InPort(), sout1=OutPort(), sout2=OutPort(), R=Value(1.0), C=Value(1.0), L=Value(1.0))
     s2 = RLCBlock(vin=InPort(), sin1=InPort(), sin2=InPort(), sout1=OutPort(), sout2=OutPort(), R=Value(1.0), C=Value(1.0), L=Value(1.0))
     sin1 = In(inport=InPort(:sin1), outport=OutPort())
     sin2 = In(inport=InPort(:sin2), outport=OutPort())

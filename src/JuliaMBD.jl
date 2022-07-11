@@ -1,6 +1,6 @@
 module JuliaMBD
 
-export AbstractBlock
+export AbstractBlock, AbstractInPort, AbstractOutPort
 export Auto, Value, SymbolicValue, Parameter
 export InPort, OutPort, Line
 export expr_refvalue, expr_setvalue, expr, next, tsort

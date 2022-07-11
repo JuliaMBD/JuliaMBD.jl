@@ -1,5 +1,4 @@
-export Add
-export Add2
+export Add, Add2
 
 mutable struct Add <: AbstractBlock
     left::AbstractInPort
