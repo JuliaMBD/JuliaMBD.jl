@@ -10,6 +10,16 @@ import JuliaMBD
     println(expr(b))
 end
 
+@testset "add2" begin
+    b = Add2(inports=[InPort(), InPort(), InPort()], signs=[:+, :-, :+], outport=OutPort(Float64))
+    println(b)
+    for p = b.inports
+        Line(OutPort(), p)
+    end
+    Line(b.outport, InPort())
+    println(expr(b))
+end
+
 @testset "gain" begin
     b = Gain(K=Value(10.0), inport=InPort(), outport=OutPort(Float64))
     println(b)

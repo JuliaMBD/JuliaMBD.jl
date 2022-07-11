@@ -3,10 +3,12 @@ mutable struct SystemBlockDefinition
     parameters::Vector{SymbolicValue}
     inports::Vector{InPort}
     outports::Vector{OutPort}
+    stateinports::Vector{InPort}
+    stateoutports::Vector{OutPort}
     blks::Vector{AbstractBlock}
     
     function SystemBlockDefinition(name::Symbol)
-        new(name, SymbolicValue[], InPort[], OutPort[], AbstractBlock[])
+        new(name, SymbolicValue[], InPort[], OutPort[], InPort[], OutPort[], AbstractBlock[])
     end
 end
 
@@ -21,6 +23,8 @@ end
 function addBlock!(blk::SystemBlockDefinition, x::AbstractIntegratorBlock)
     addBlock!(blk, x.inblk)
     addBlock!(blk, x.outblk)
+    push!(blk.stateinports, x.outblk.inport)
+    push!(blk.stateoutports, x.inblk.outport)
 end
 
 function addBlock!(blk::SystemBlockDefinition, x::In)
@@ -31,6 +35,29 @@ end
 function addBlock!(blk::SystemBlockDefinition, x::Out)
     push!(blk.blks, x)
     push!(blk.outports, x.outport)
+end
+
+function expr_define_systemfunction(blk::SystemBlockDefinition)
+    params = [expr_defvalue(x) for x = blk.parameters]
+    args = []
+    outs = []
+
+    # remove independent blocks
+    systemblks = AbstractBlock[x.parent for x = blk.stateoutports]
+    for b = reverse(tsort(blk.blks))
+        if b in systemblks || !isempty(intersect(next(b), systemblks))
+            pushfirst!(systemblks, b)
+            if typeof(b) <: AbstractInBlock
+                pushfirst!(args, expr_defvalue(b.inport.var))
+            elseif typeof(b) <: AbstractOutBlock
+                pushfirst!(outs, expr_refvalue(b.outport.var))
+            end
+        end
+    end
+    body = [expr(b) for b = systemblks]
+    Expr(:function, Expr(:call, Symbol(blk.name, "SystemFunc"),
+            Expr(:parameters, args..., params...)),
+        Expr(:block, body..., Expr(:tuple, outs...)))
 end
 
 function expr_define_function(blk::SystemBlockDefinition)
@@ -48,7 +75,7 @@ function expr_define_structure(blk::SystemBlockDefinition)
     ins = [p.var.name for p = blk.inports]
     outs = [p.var.name for p = blk.outports]
     
-    paramdef = [Expr(:(::), x, Expr(:curly, :Union, :Value, :SymbolicValue)) for x = params]
+    paramdef = [Expr(:(::), x, :Parameter) for x = params]
     indef = [Expr(:(::), x, :InPort) for x = ins]
     outdef = [Expr(:(::), x, :OutPort) for x = outs]
 

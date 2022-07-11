@@ -1,10 +1,10 @@
-mutable struct InPort <: AbstractPort
+mutable struct InPort <: AbstractInPort
     var::SymbolicValue
     parent::Union{AbstractBlock,Nothing}
     line::Union{AbstractLine,Nothing}
 end
 
-mutable struct OutPort <: AbstractPort
+mutable struct OutPort <: AbstractOutPort
     var::SymbolicValue
     parent::Union{AbstractBlock,Nothing}
     lines::Vector{AbstractLine}
@@ -48,10 +48,10 @@ end
 
 mutable struct Line <: AbstractLine
     var::SymbolicValue{Auto}
-    source::OutPort
-    dest::InPort
+    source::AbstractOutPort
+    dest::AbstractInPort
     
-    function Line(o::OutPort, i::InPort)
+    function Line(o::AbstractOutPort, i::AbstractInPort)
         name = Symbol(o.var.name, i.var.name)
         line = new(SymbolicValue{Auto}(name), o, i)
         i.line = line
@@ -59,7 +59,7 @@ mutable struct Line <: AbstractLine
         line
     end
 
-    function Line(o::OutPort, i::InPort, name::Symbol)
+    function Line(o::AbstractOutPort, i::AbstractInPort, name::Symbol)
         line = new(SymbolicValue{Auto}(name), o, i)
         i.line = line
         push!(o.lines, line)

@@ -2,10 +2,10 @@ export Gain
 
 mutable struct Gain <: AbstractBlock
     K::Parameter
-    inport::InPort
-    outport::OutPort
+    inport::AbstractInPort
+    outport::AbstractOutPort
 
-    function Gain(;K::Parameter, inport::InPort, outport::OutPort)
+    function Gain(;K::Parameter, inport::AbstractInPort, outport::AbstractOutPort)
         blk = new()
         blk.K = K
         blk.inport = inport

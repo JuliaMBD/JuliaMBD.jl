@@ -1,10 +1,10 @@
 export Out
 
-mutable struct Out <: AbstractBlock
-    inport::InPort
-    outport::OutPort
+mutable struct Out <: AbstractOutBlock
+    inport::AbstractInPort
+    outport::AbstractOutPort
 
-    function Out(;inport::InPort, outport::OutPort)
+    function Out(;inport::AbstractInPort, outport::AbstractOutPort)
         blk = new()
         blk.inport = inport
         blk.outport = outport

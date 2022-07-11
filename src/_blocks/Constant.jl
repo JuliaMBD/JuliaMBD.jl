@@ -2,9 +2,9 @@ export Constant
 
 mutable struct Constant <: AbstractBlock
     value::Parameter
-    outport::OutPort
+    outport::AbstractOutPort
 
-    function Constant(;value::Parameter, outport::OutPort)
+    function Constant(;value::Parameter, outport::AbstractOutPort)
         blk = new()
         blk.value = value
         blk.outport = outport

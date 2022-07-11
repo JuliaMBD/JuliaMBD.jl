@@ -5,16 +5,16 @@ mutable struct Integrator <: AbstractIntegratorBlock
     saturationlimits::NTuple{2,Union{Parameter,Nothing}}
     inblk::AbstractBlock
     outblk::AbstractBlock
-    inport::InPort
-    outport::OutPort
+    inport::AbstractInPort
+    outport::AbstractOutPort
 
     function Integrator(;
-        statein::InPort,
-        stateout::OutPort,
+        statein::AbstractInPort,
+        stateout::AbstractOutPort,
         initialcondition::Parameter = Value{Float64}(0),
         saturationlimits::NTuple{2,Union{Parameter,Nothing}} = (nothing,nothing),
-        inport::InPort,
-        outport::OutPort)
+        inport::AbstractInPort,
+        outport::AbstractOutPort)
         blk = new()
         blk.initialcondition = initialcondition
         blk.saturationlimits = saturationlimits
