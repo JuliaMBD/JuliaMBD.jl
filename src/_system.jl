@@ -25,6 +25,16 @@ function addBlock!(blk::SystemBlockDefinition, x::AbstractIntegratorBlock)
     addBlock!(blk, x.outblk)
 end
 
+function addBlock!(blk::SystemBlockDefinition, x::AbstractSystemBlock)
+    push!(blk.blks, x)
+    for b = x.inblk
+        addBlock!(blk, b)
+    end
+    for b = x.outblk
+        addBlock!(blk, b)
+    end
+end
+
 function addBlock!(blk::SystemBlockDefinition, x::In)
     push!(blk.blks, x)
     push!(blk.inports, x.inport)
@@ -37,73 +47,73 @@ end
 
 function addBlock!(blk::SystemBlockDefinition, x::StateIn)
     push!(blk.blks, x)
-    push!(blk.inports, x.inport)
     push!(blk.stateinports, x.inport)
 end
 
 function addBlock!(blk::SystemBlockDefinition, x::StateOut)
     push!(blk.blks, x)
-    push!(blk.outports, x.outport)
     push!(blk.stateoutports, x.outport)
 end
-
-# function expr_define_systemfunction(blk::SystemBlockDefinition)
-#     params = [expr_defvalue(x) for x = blk.parameters]
-#     args = []
-#     outs = []
-
-#     # remove independent blocks
-#     systemblks = AbstractBlock[x.parent for x = blk.stateoutports]
-#     for b = reverse(tsort(blk.blks))
-#         if b in systemblks || !isempty(intersect(next(b), systemblks))
-#             pushfirst!(systemblks, b)
-#             if typeof(b) <: AbstractInBlock
-#                 pushfirst!(args, expr_defvalue(b.inport.var))
-#             elseif typeof(b) <: AbstractOutBlock
-#                 pushfirst!(outs, expr_refvalue(b.outport.var))
-#             end
-#         end
-#     end
-#     body = [expr(b) for b = systemblks]
-#     Expr(:function, Expr(:call, Symbol(blk.name, "SystemFunc"),
-#             Expr(:parameters, args..., params...)),
-#         Expr(:block, body..., Expr(:tuple, outs...)))
-# end
 
 function expr_define_function(blk::SystemBlockDefinition)
     params = [expr_defvalue(x) for x = blk.parameters]
     args = [expr_defvalue(p.var) for p = blk.inports]
     outs = [expr_refvalue(p.var) for p = blk.outports]
-    # sargs = [expr_defvalue(p.var) for p = blk.stateinports]
-    # souts = [expr_refvalue(p.var) for p = blk.stateoutports]
+    sargs = [expr_defvalue(p.var) for p = blk.stateinports]
+    souts = [expr_refvalue(p.var) for p = blk.stateoutports]
     body = [expr(b) for b = tsort(blk.blks)]
     Expr(:function, Expr(:call, Symbol(blk.name, "Func"),
-            Expr(:parameters, args..., params...)),
-        Expr(:block, body..., Expr(:tuple, outs...)))
+            Expr(:parameters, args..., params..., sargs...)),
+        Expr(:block, body..., Expr(:tuple, outs..., souts...)))
 end
 
 function expr_define_structure(blk::SystemBlockDefinition)
     params = [x.name for x = blk.parameters]
     ins = [p.var.name for p = blk.inports]
     outs = [p.var.name for p = blk.outports]
+    sins = [p.var.name for p = blk.stateinports]
+    souts = [p.var.name for p = blk.stateoutports]
 
     paramdef = [:($x::Parameter) for x = params]
     indef = [:($x::AbstractInPort) for x = ins]
     outdef = [:($x::AbstractOutPort) for x = outs]
+    sindef = [:($x::AbstractInPort) for x = sins]
+    soutdef = [:($x::AbstractOutPort) for x = souts]
 
     quote
-        mutable struct $(blk.name) <: AbstractBlock
+        mutable struct $(blk.name) <: AbstractSystemBlock
             $(paramdef...)
             $(indef...)
             $(outdef...)
+            $(sindef...)
+            $(soutdef...)
+            inblk::Vector{StateOut}
+            outblk::Vector{StateIn}
 
             function $(blk.name)(; $(paramdef...), $(indef...), $(outdef...))
                 b = new()
                 $([:(b.$x = $x) for x = params]...)
                 $([:(b.$x = $x) for x = ins]...)
-                $([:(b.$x = $x) for x = outs]...)
                 $([:(b.$x.parent = b) for x = ins]...)
+                $([:(b.$x = $x) for x = outs]...)
                 $([:(b.$x.parent = b) for x = outs]...)
+
+                b.outblk = StateIn[]
+                $([quote
+                    b.$x = InPort()
+                    b.$x.parent = b
+                    tmp = StateIn(inport=InPort($(Expr(:quote, x))), outport=OutPort())
+                    Line(tmp.outport, b.$x)
+                    push!(b.outblk, tmp)
+                end for x = sins]...)
+                b.inblk = StateOut[]
+                $([quote
+                    b.$x = OutPort()
+                    b.$x.parent = b
+                    tmp = StateOut(inport=InPort(), outport=OutPort($(Expr(:quote, x))))
+                    Line(b.$x, tmp.inport)
+                    push!(b.inblk, tmp)
+                end for x = souts]...)
                 b
             end    
         end
@@ -112,15 +122,7 @@ end
 
 function expr_define_next(blk::SystemBlockDefinition)
     outs = [p.var.name for p = blk.outports]
-
-    # body = [Expr(:for, Expr(:(=), :line, Expr(:., Expr(:., :b, Expr(:quote, x)), Expr(:quote, :lines))),
-    # Expr(:block,
-    #     Expr(:call, :push!, :s, Expr(:., Expr(:., :line, Expr(:quote, :dest)), Expr(:quote, :parent)))
-    #     )) for x = outs]
-
-    # Expr(:function, Expr(:call, :next, Expr(:(::), :b, blk.name)),
-    #     Expr(:block,
-    #         Expr(:(=), :s, Expr(:ref, :AbstractBlock)), body..., :s))
+    souts = [p.var.name for p = blk.stateoutports]
 
     body = [quote
         for line = b.$x.lines
@@ -128,88 +130,58 @@ function expr_define_next(blk::SystemBlockDefinition)
         end
     end for x = outs]
 
+    sbody = [quote
+        for line = b.$x.lines
+            push!(s, line.dest.parent)
+        end
+    end for x = souts]
+
     quote
         function next(b::$(blk.name))
             s = AbstractBlock[]
             $(body...)
+            $(sbody...)
             s
         end
     end
 end
 
 function expr_define_expr(blk::SystemBlockDefinition)
-    # params = [Expr(:., :b, Expr(:quote, x.name)) for x = blk.parameters]
-    # ins = [Expr(:., :b, Expr(:quote, p.var.name)) for p = blk.inports]
-    # outs = [Expr(:., :b, Expr(:quote, p.var.name)) for p = blk.outports]
-    
-    # expr_setvalue(blk.inport.var, expr_refvalue(blk.inport.line.var))
-    # bodyin = [Expr(:call, :push!, :i,
-    #     Expr(:call, :expr_setvalue, Expr(:., x, Expr(:quote, :var)),
-    #         Expr(:call, :expr_refvalue, Expr(:., Expr(:., x, Expr(:quote, :line)), Expr(:quote, :var))))) for x = ins]
-
-    # for line = blk.outport.lines
-    #   push!(o, expr_setvalue(line.var, expr_refvalue(blk.outport.var)))
-    # end
-
-    # bodyout = [Expr(:for, Expr(:(=), :line, Expr(:., x, Expr(:quote, :lines))),
-    #         Expr(:block,
-    #             Expr(:call, :push!, :o,
-    #     Expr(:call, :expr_setvalue, Expr(:., :line, Expr(:quote, :var)),
-    #         Expr(:call, :expr_refvalue, Expr(:., x, Expr(:quote, :var))))))) for x = outs]
-    
-    # args = [expr_kwvalue(p.var, Expr(:call, :expr_refvalue, Expr(:., x, Expr(:quote, :var)))) for (p,x) = zip(blk.inports, ins)]
-    # ps = [expr_kwvalue(p, Expr(:call, :expr_refvalue, x)) for (p,x) = zip(blk.parameters, params)]
-    # oos = [Expr(:call, :expr_refvalue, Expr(:., x, Expr(:quote, :var))) for x = outs]
-
-    # f = Expr(:(=), Expr(:tuple, :a, :b), Expr(:call, :xxx, Expr(:kw, t, expr_refvalue(b.t))))
-    # fbody = Expr(:(=), :f,
-    #     Expr(:call, :Expr, Expr(:quote, :(=)),
-    #         Expr(:call, :Expr, Expr(:quote, :tuple), oos...),
-    #         Expr(:call, :Expr, Expr(:quote, :call),
-    #     Expr(:call, :Symbol, Expr(:quote, blk.name), Expr(:quote, :Func)), args..., ps...)))
-
-    # Expr(:function, Expr(:call, :expr, Expr(:(::), :b, blk.name)),
-    # Expr(:block,
-    #     Expr(:(=), :i, Expr(:ref, :Expr)),
-    #     bodyin...,
-    #     fbody,
-    #     Expr(:(=), :o, Expr(:ref, :Expr)),
-    #     bodyout...,
-    #     Expr(:call, :Expr, Expr(:quote, :block), Expr(:..., :i), :f, Expr(:..., :o))
-    # ))
-    # Expr(:function, Expr(:call, :expr, Expr(:(::), :b, blk.name)),
-    # Expr(:block,
-    #     Expr(:(=), :i, Expr(:ref, :Expr)),
-    #     bodyin...,
-    #     fbody,
-    #     Expr(:(=), :o, Expr(:ref, :Expr)),
-    #     bodyout...,
-    #     Expr(:call, :Expr, Expr(:quote, :block), Expr(:..., :i), :f, Expr(:..., :o))
-    # ))
-
     params = [:(b.$(x.name)) for x = blk.parameters]
     ins = [:(b.$(p.var.name)) for p = blk.inports]
     outs = [:(b.$(p.var.name)) for p = blk.outports]
+    sins = [:(b.$(p.var.name)) for p = blk.stateinports]
+    souts = [:(b.$(p.var.name)) for p = blk.stateoutports]
 
     bodyin = [:(push!(i, expr_setvalue($x.var, expr_refvalue($x.line.var)))) for x = ins]
+    sbodyin = [:(push!(i, expr_setvalue($x.var, expr_refvalue($x.line.var)))) for x = sins]
 
     bodyout = [quote
         for line = $x.lines
             push!(o, expr_setvalue(line.var, expr_refvalue($x.var)))
         end
     end for x = outs]
+    sbodyout = [quote
+        for line = $x.lines
+            push!(o, expr_setvalue(line.var, expr_refvalue($x.var)))
+        end
+    end for x = souts]
     
-    args = [expr_kwvalue(p.var, :(expr_refvalue($x.var))) for (p,x) = zip(blk.inports, ins)]
     ps = [expr_kwvalue(p, :(expr_refvalue($x))) for (p,x) = zip(blk.parameters, params)]
+    args = [expr_kwvalue(p.var, :(expr_refvalue($x.var))) for (p,x) = zip(blk.inports, ins)]
+    sargs = [expr_kwvalue(p.var, :(expr_refvalue($x.var))) for (p,x) = zip(blk.stateinports, sins)]
     oos = [:(expr_refvalue($x.var)) for x = outs]
+    soos = [:(expr_refvalue($x.var)) for x = souts]
 
     quote
         function expr(b::$(blk.name))
             i = Expr[]
             $(bodyin...)
-            f = Expr(:(=), Expr(:tuple, $(oos...)), Expr(:call, Symbol($(blk.name), :Func), $(args...), $(ps...)))
+            $(sbodyin...)
+            f = Expr(:(=), Expr(:tuple, $(oos...), $(soos...)), Expr(:call, Symbol($(blk.name), :Func), $(args...), $(ps...), $(sargs...)))
             o = Expr[]
             $(bodyout...)
+            $(sbodyout...)
             Expr(:block, i..., f, o...)
         end
     end

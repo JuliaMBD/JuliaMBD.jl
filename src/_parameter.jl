@@ -38,8 +38,6 @@ function SymbolicValue(x::Symbol)
     SymbolicValue{Auto}(x)
 end
 
-const Parameter = Union{Value,SymbolicValue}
-
 function Base.show(io::IO, x::SymbolicValue{Tv}) where Tv
     Base.show(io, Expr(:(::), x.name, Tv))
 end
@@ -48,29 +46,18 @@ function Base.show(io::IO, x::SymbolicValue{Auto})
     Base.show(io, x.name)
 end
 
-# macro value(x)
-#     genparam(x)
+# """
+# SymbolicExpr
+
+# The type expresses a symbolic expression
+# """
+
+# struct SymbolicExpr
+#     params::Dict{Symbol,SymbolicValue}
+#     expr::Expr
 # end
 
-# function genparam(x::Symbol)
-#     SymbolicValue{Auto}(x)
-# end
-
-# function genparam(x::Any)
-#     Value(x)
-# end
-
-# function genparam(expr::Expr)
-#     if Meta.isexpr(expr, :(::))
-#         if typeof(expr.args[1]) == Symbol
-#             SymbolicValue{expr.args[2]}(expr.args[1])
-#         else
-#             Value(eval(expr))
-#         end
-#     else
-#         Value(eval(expr))
-#     end
-# end
+const Parameter = Union{Value,SymbolicValue}
 
 function expr_refvalue(x::Value{Tv}) where Tv
     x.value

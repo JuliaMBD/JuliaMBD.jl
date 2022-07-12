@@ -1,4 +1,4 @@
-export Out
+export Out, StateOut
 
 mutable struct Out <: AbstractOutBlock
     inport::AbstractInPort
