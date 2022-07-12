@@ -72,9 +72,9 @@ end
 function expr_define_function(blk::SystemBlockDefinition)
     params = [expr_defvalue(x) for x = blk.parameters]
     args = [expr_defvalue(p.var) for p = blk.inports]
-    outs = [expr_refvalue(p.var) for p = blk.outports]
     sargs = [expr_defvalue(p.var) for p = blk.stateinports]
-    souts = [expr_refvalue(p.var) for p = blk.stateoutports]
+    outs = [:($(p.var.name) = $(expr_refvalue(p.var))) for p = blk.outports]
+    souts = [:($(p.var.name) = $(expr_refvalue(p.var))) for p = blk.stateoutports]
     body = [expr(b) for b = tsort(blk.blks)]
     Expr(:function, Expr(:call, Symbol(blk.name, "Func"),
             Expr(:parameters, args..., params..., sargs...)),
