@@ -7,9 +7,7 @@ export InPort, OutPort, Line
 export expr_refvalue, expr_setvalue, expr, next, tsort
 export SystemBlockDefinition, addBlock!, addParameter!
 export expr_define_function, expr_define_structure, expr_define_next, expr_define_expr
-export expr_define_systemfunction
-
-export @define
+export @define, define
 
 import Base
 # import DifferentialEquations

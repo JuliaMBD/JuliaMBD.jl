@@ -55,6 +55,20 @@ function addBlock!(blk::SystemBlockDefinition, x::StateOut)
     push!(blk.stateoutports, x.outport)
 end
 
+function define(blk::SystemBlockDefinition)
+    quote
+        import JuliaMBD: next, expr
+        $(expr_define_function(blk))
+        $(expr_define_structure(blk))
+        $(expr_define_next(blk))
+        $(expr_define_expr(blk))
+    end
+end
+
+macro define(x)
+    esc(:(eval(define($x))))
+end
+
 function expr_define_function(blk::SystemBlockDefinition)
     params = [expr_defvalue(x) for x = blk.parameters]
     args = [expr_defvalue(p.var) for p = blk.inports]

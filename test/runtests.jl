@@ -7,4 +7,5 @@ using Test
 
 include("test_blocks.jl")
 include("test_integrator.jl")
+include("test_module.jl")
 
