@@ -11,7 +11,7 @@ mutable struct Integrator <: AbstractIntegratorBlock
     function Integrator(;
         statein::AbstractInPort,
         stateout::AbstractOutPort,
-        initialcondition::Parameter = Value{Float64}(0),
+        initialcondition::Parameter = Float64(0),
         saturationlimits::NTuple{2,Union{Parameter,Nothing}} = (nothing,nothing),
         inport::AbstractInPort,
         outport::AbstractOutPort)

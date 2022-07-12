@@ -9,10 +9,10 @@ mutable struct PulseGenerator <: AbstractBlock
     outport::AbstractOutPort
 
     function PulseGenerator(;
-        amplitude::Parameter=Value{Float64}(1),
-        period::Parameter=Value{Float64}(10),
-        pulsewidth::Parameter=Value{Float64}(5),
-        phasedelay::Parameter=Value{Float64}(0),
+        amplitude::Parameter = Float64(1),
+        period::Parameter = Float64(10),
+        pulsewidth::Parameter = Float64(5),
+        phasedelay::Parameter = Float64(0),
         timeport::AbstractInPort,
         outport::AbstractOutPort)
         blk = new()

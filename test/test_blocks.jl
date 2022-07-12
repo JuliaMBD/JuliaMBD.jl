@@ -21,7 +21,7 @@ end
 end
 
 @testset "gain" begin
-    b = Gain(K=Value(10.0), inport=InPort(), outport=OutPort(Float64))
+    b = Gain(K=10.0, inport=InPort(), outport=OutPort(Float64))
     println(b)
     Line(OutPort(), b.inport)
     Line(b.outport, InPort())
@@ -29,7 +29,7 @@ end
 end
 
 @testset "constant" begin
-    b = Constant(value=Value(10.0), outport=OutPort(Float64))
+    b = Constant(value=10.0, outport=OutPort(Float64))
     println(b)
     Line(b.outport, InPort())
     println(expr(b))

@@ -11,20 +11,6 @@ Auto means the variable type is determined automatically from the code
 struct Auto end
 
 """
-struct Value{Tv}
-
-The type involves a concrate value.
-"""
-
-struct Value{Tv}
-    value::Tv
-end
-
-function Base.show(io::IO, x::Value{Tv}) where Tv
-    Base.show(io, x.value)
-end
-
-"""
 SymbolicValue{Tv}
 
 The type expresses a symbolic parameter
@@ -44,23 +30,6 @@ end
 
 function Base.show(io::IO, x::SymbolicValue{Auto})
     Base.show(io, x.name)
-end
-
-# """
-# SymbolicExpr
-
-# The type expresses a symbolic expression
-# """
-
-# struct SymbolicExpr
-#     params::Dict{Symbol,SymbolicValue}
-#     expr::Expr
-# end
-
-const Parameter = Union{Value,SymbolicValue}
-
-function expr_refvalue(x::Value{Tv}) where Tv
-    x.value
 end
 
 function expr_refvalue(x::SymbolicValue{Tv}) where Tv
@@ -91,3 +60,8 @@ function expr_kwvalue(x::SymbolicValue{Auto}, expr)
     Expr(:call, :Expr, Expr(:quote, :kw), Expr(:quote, x.name), expr)
 end
 
+const Parameter = Any
+
+function expr_refvalue(x::Any)
+    x
+end

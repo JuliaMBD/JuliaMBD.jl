@@ -7,7 +7,7 @@ import JuliaMBD: expr, next
 end
 
 @testset "integrator2" begin
-    b0 = Constant(value=Value(1), outport=OutPort(Float64))
+    b0 = Constant(value=Float64(1), outport=OutPort(Float64))
     b1 = Integrator(statein=InPort(:sin), stateout=OutPort(:sout), inport=InPort(), outport=OutPort())
     b3 = Out(inport=InPort(), outport=OutPort())
     Line(b0.outport, b1.inport)
@@ -17,7 +17,7 @@ end
 end
 
 @testset "integrator3" begin
-    b0 = Constant(value=Value(1), outport=OutPort(Float64))
+    b0 = Constant(value=Float64(1), outport=OutPort(Float64))
     b1 = Integrator(statein=InPort(:sin), stateout=OutPort(:sout), inport=InPort(), outport=OutPort())
     b3 = Out(inport=InPort(), outport=OutPort())
     Line(b0.outport, b1.inport)
@@ -72,7 +72,7 @@ end
 
     time = In(inport=InPort(:time), outport=OutPort())
     s1 = PulseGenerator(timeport=InPort(), outport=OutPort())
-    s2 = RLCBlock(vin=InPort(), R=Value(1.0), C=Value(1.0), L=Value(1.0))
+    s2 = RLCBlock(vin=InPort(), R=1.0, C=1.0, L=1.0)
     Line(time.outport, s1.timeport)
     Line(s1.outport, s2.vin)
 
@@ -127,7 +127,7 @@ end
 
     time = In(inport=InPort(:time), outport=OutPort())
     s1 = PulseGenerator(timeport=InPort(), outport=OutPort())
-    s2 = RLCBlock(vin=InPort(), R=Value(1.0), C=Value(1.0), L=Value(1.0))
+    s2 = RLCBlock(vin=InPort(), R=1.0, C=1.0, L=1.0)
     Line(time.outport, s1.timeport)
     Line(s1.outport, s2.vin)
 
