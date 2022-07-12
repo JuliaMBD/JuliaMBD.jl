@@ -1,10 +1,10 @@
-export Out, StateOut
+export OutBlock, StateOut
 
-mutable struct Out <: AbstractOutBlock
+mutable struct OutBlock <: AbstractOutBlock
     inport::AbstractInPort
     outport::AbstractOutPort
 
-    function Out(;inport::AbstractInPort, outport::AbstractOutPort)
+    function OutBlock(;inport::AbstractInPort, outport::AbstractOutPort)
         blk = new()
         blk.inport = inport
         blk.outport = outport
@@ -39,7 +39,7 @@ function next(blk::AbstractOutBlock)
     []
 end
 
-function Base.show(io::IO, x::Out)
+function Base.show(io::IO, x::OutBlock)
     Base.show(io, "Out()")
 end
 

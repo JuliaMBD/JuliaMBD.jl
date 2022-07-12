@@ -1,10 +1,10 @@
-export In, StateIn
+export InBlock, StateIn
 
-mutable struct In <: AbstractInBlock
+mutable struct InBlock <: AbstractInBlock
     inport::AbstractInPort
     outport::AbstractOutPort
 
-    function In(;inport::AbstractInPort, outport::AbstractOutPort)
+    function InBlock(;inport::AbstractInPort, outport::AbstractOutPort)
         blk = new()
         blk.inport = inport
         blk.outport = outport
@@ -39,7 +39,7 @@ function next(blk::AbstractInBlock)
     [line.dest.parent for line = blk.outport.lines]
 end
 
-function Base.show(io::IO, x::In)
+function Base.show(io::IO, x::InBlock)
     Base.show(io, "In()")
 end
 

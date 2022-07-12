@@ -35,12 +35,12 @@ function addBlock!(blk::SystemBlockDefinition, x::AbstractSystemBlock)
     end
 end
 
-function addBlock!(blk::SystemBlockDefinition, x::In)
+function addBlock!(blk::SystemBlockDefinition, x::InBlock)
     push!(blk.blks, x)
     push!(blk.inports, x.inport)
 end
 
-function addBlock!(blk::SystemBlockDefinition, x::Out)
+function addBlock!(blk::SystemBlockDefinition, x::OutBlock)
     push!(blk.blks, x)
     push!(blk.outports, x.outport)
 end
