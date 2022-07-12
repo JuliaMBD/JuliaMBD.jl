@@ -5,10 +5,14 @@ mutable struct SystemBlockDefinition
     outports::Vector{OutPort}
     stateinports::Vector{InPort}
     stateoutports::Vector{OutPort}
+    scopeoutports::Vector{OutPort}
     blks::Vector{AbstractBlock}
     
     function SystemBlockDefinition(name::Symbol)
-        new(name, SymbolicValue[], InPort[], OutPort[], InPort[], OutPort[], AbstractBlock[])
+        new(name, SymbolicValue[],
+            InPort[], OutPort[],
+            InPort[], OutPort[],
+            OutPort[], AbstractBlock[])
     end
 end
 
@@ -33,6 +37,9 @@ function addBlock!(blk::SystemBlockDefinition, x::AbstractSystemBlock)
     for b = x.outblk
         addBlock!(blk, b)
     end
+    for b = x.scopes
+        addBlock!(blk, b)
+    end
 end
 
 function addBlock!(blk::SystemBlockDefinition, x::InBlock)
@@ -55,6 +62,11 @@ function addBlock!(blk::SystemBlockDefinition, x::StateOut)
     push!(blk.stateoutports, x.outport)
 end
 
+function addBlock!(blk::SystemBlockDefinition, x::Scope)
+    push!(blk.blks, x)
+    push!(blk.scopeoutports, x.outport)
+end
+
 function define(blk::SystemBlockDefinition)
     quote
         import JuliaMBD: next, expr
@@ -75,10 +87,11 @@ function expr_define_function(blk::SystemBlockDefinition)
     sargs = [expr_defvalue(p.var) for p = blk.stateinports]
     outs = [:($(p.var.name) = $(expr_refvalue(p.var))) for p = blk.outports]
     souts = [:($(p.var.name) = $(expr_refvalue(p.var))) for p = blk.stateoutports]
+    scopes = [:($(p.var.name) = $(expr_refvalue(p.var))) for p = blk.scopeoutports]
     body = [expr(b) for b = tsort(blk.blks)]
     Expr(:function, Expr(:call, Symbol(blk.name, "Func"),
             Expr(:parameters, args..., params..., sargs...)),
-        Expr(:block, body..., Expr(:tuple, outs..., souts...)))
+        Expr(:block, body..., Expr(:tuple, outs..., souts..., scopes...)))
 end
 
 function expr_define_structure(blk::SystemBlockDefinition)
@@ -87,12 +100,14 @@ function expr_define_structure(blk::SystemBlockDefinition)
     outs = [p.var.name for p = blk.outports]
     sins = [p.var.name for p = blk.stateinports]
     souts = [p.var.name for p = blk.stateoutports]
+    scopes = [p.var.name for p = blk.scopeoutports]
 
     paramdef = [:($x::Parameter) for x = params]
     indef = [:($x::AbstractInPort) for x = ins]
     outdef = [:($x::AbstractOutPort) for x = outs]
     sindef = [:($x::AbstractInPort) for x = sins]
     soutdef = [:($x::AbstractOutPort) for x = souts]
+    scopesdef = [:($x::AbstractOutPort) for x = scopes]
 
     quote
         mutable struct $(blk.name) <: AbstractSystemBlock
@@ -101,8 +116,10 @@ function expr_define_structure(blk::SystemBlockDefinition)
             $(outdef...)
             $(sindef...)
             $(soutdef...)
+            $(scopesdef...)
             inblk::Vector{StateOut}
             outblk::Vector{StateIn}
+            scopes::Vector{Scope}
 
             function $(blk.name)(; $(paramdef...), $(indef...), $(outdef...))
                 b = new()
@@ -128,6 +145,14 @@ function expr_define_structure(blk::SystemBlockDefinition)
                     Line(b.$x, tmp.inport)
                     push!(b.inblk, tmp)
                 end for x = souts]...)
+                b.scopes = Scope[]
+                $([quote
+                    b.$x = OutPort()
+                    b.$x.parent = b
+                    tmp = Scope(inport=InPort(), outport=OutPort($(Expr(:quote, x))))
+                    Line(b.$x, tmp.inport)
+                    push!(b.scopes, tmp)
+                end for x = scopes]...)
                 b
             end    
         end
@@ -137,6 +162,7 @@ end
 function expr_define_next(blk::SystemBlockDefinition)
     outs = [p.var.name for p = blk.outports]
     souts = [p.var.name for p = blk.stateoutports]
+    scopes = [p.var.name for p = blk.scopeoutports]
 
     body = [quote
         for line = b.$x.lines
@@ -150,11 +176,18 @@ function expr_define_next(blk::SystemBlockDefinition)
         end
     end for x = souts]
 
+    scbody = [quote
+        for line = b.$x.lines
+            push!(s, line.dest.parent)
+        end
+    end for x = scopes]
+
     quote
         function next(b::$(blk.name))
             s = AbstractBlock[]
             $(body...)
             $(sbody...)
+            $(scbody...)
             s
         end
     end
@@ -166,6 +199,7 @@ function expr_define_expr(blk::SystemBlockDefinition)
     outs = [:(b.$(p.var.name)) for p = blk.outports]
     sins = [:(b.$(p.var.name)) for p = blk.stateinports]
     souts = [:(b.$(p.var.name)) for p = blk.stateoutports]
+    scopes = [:(b.$(p.var.name)) for p = blk.scopeoutports]
 
     bodyin = [:(push!(i, expr_setvalue($x.var, expr_refvalue($x.line.var)))) for x = ins]
     sbodyin = [:(push!(i, expr_setvalue($x.var, expr_refvalue($x.line.var)))) for x = sins]
@@ -180,22 +214,30 @@ function expr_define_expr(blk::SystemBlockDefinition)
             push!(o, expr_setvalue(line.var, expr_refvalue($x.var)))
         end
     end for x = souts]
+    scbodyout = [quote
+        for line = $x.lines
+            push!(o, expr_setvalue(line.var, expr_refvalue($x.var)))
+        end
+    end for x = scopes]
     
     ps = [expr_kwvalue(p, :(expr_refvalue($x))) for (p,x) = zip(blk.parameters, params)]
     args = [expr_kwvalue(p.var, :(expr_refvalue($x.var))) for (p,x) = zip(blk.inports, ins)]
     sargs = [expr_kwvalue(p.var, :(expr_refvalue($x.var))) for (p,x) = zip(blk.stateinports, sins)]
     oos = [:(expr_refvalue($x.var)) for x = outs]
     soos = [:(expr_refvalue($x.var)) for x = souts]
+    scoos = [:(expr_refvalue($x.var)) for x = scopes]
 
     quote
         function expr(b::$(blk.name))
             i = Expr[]
             $(bodyin...)
             $(sbodyin...)
-            f = Expr(:(=), Expr(:tuple, $(oos...), $(soos...)), Expr(:call, Symbol($(blk.name), :Func), $(args...), $(ps...), $(sargs...)))
+            f = Expr(:(=), Expr(:tuple, $(oos...), $(soos...), $(scoos...)),
+                Expr(:call, Symbol($(blk.name), :Func), $(args...), $(ps...), $(sargs...)))
             o = Expr[]
             $(bodyout...)
             $(sbodyout...)
+            $(scbodyout...)
             Expr(:block, i..., f, o...)
         end
     end
