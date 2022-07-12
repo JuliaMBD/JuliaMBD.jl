@@ -4,9 +4,9 @@ import JuliaMBD
     int1 = Integrator(statein=InPort(:sin1), stateout=OutPort(:sout1), inport=InPort(), outport=OutPort())
     int2 = Integrator(statein=InPort(:sin2), stateout=OutPort(:sout2), inport=InPort(), outport=OutPort())
     in1 = In(inport=InPort(:vin), outport=OutPort())
-    gain1 = Gain(K=SymbolicValue{Float64}(:R), inport=InPort(:g1in), outport=OutPort(:g1out))
-    gain2 = Gain(K=SymbolicValue{Float64}(:C), inport=InPort(:g2in), outport=OutPort(:g2out)) # 1/C を入れたい
-    gain3 = Gain(K=SymbolicValue{Float64}(:L), inport=InPort(:g3in), outport=OutPort(:g3out)) # 1/L を入れたい
+    gain1 = Gain(K=:R, inport=InPort(:g1in), outport=OutPort(:g1out))
+    gain2 = Gain(K=:(1/C), inport=InPort(:g2in), outport=OutPort(:g2out))
+    gain3 = Gain(K=:(1/L), inport=InPort(:g3in), outport=OutPort(:g3out))
     add = Add2(inports=[InPort(:a), InPort(:b), InPort(:c)], signs=[:+, :-, :-], outport=OutPort())
     Line(in1.outport, add.inports[1])
     Line(gain1.outport, add.inports[2])

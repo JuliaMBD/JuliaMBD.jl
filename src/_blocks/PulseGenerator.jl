@@ -37,7 +37,7 @@ function expr(blk::PulseGenerator)
     amplitude = expr_refvalue(blk.amplitude)
     phasedelay = expr_refvalue(blk.phasedelay)
     period = expr_refvalue(blk.period)
-    pulsewidth = expr_refvalue(blk.phasedelay)
+    pulsewidth = expr_refvalue(blk.pulsewidth)
 
     ## body
     b = expr_setvalue(blk.outport.var,
