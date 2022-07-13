@@ -80,6 +80,46 @@ function addBlock!(blk::SystemBlockDefinition, x::Scope)
     push!(blk.scopeoutports, x.outport)
 end
 
+"""
+Utilities to create Expr
+"""
+
+function name(x::SymbolicValue)
+    x.name
+end
+
+function expr_refvalue(x::SymbolicValue{Tv}) where Tv
+    x.name
+end
+
+function expr_setvalue(x::SymbolicValue{Tv}, expr) where Tv
+    Expr(:(=), x.name, Expr(:call, Symbol(Tv), expr))
+end
+
+function expr_setvalue(x::SymbolicValue{Auto}, expr)
+    Expr(:(=), x.name, expr)
+end
+
+function expr_kwvalue(x::SymbolicValue{Tv}, expr) where Tv
+    Expr(:call, :Expr, Expr(:quote, :kw), Expr(:quote, x.name), Expr(:call, :Expr, Expr(:quote, :call), Expr(:call, :Symbol, Tv), expr))
+end
+
+function expr_kwvalue(x::SymbolicValue{Auto}, expr)
+    Expr(:call, :Expr, Expr(:quote, :kw), Expr(:quote, x.name), expr)
+end
+
+function expr_refvalue(x::Any)
+    x
+end
+
+function _toquote(x::Symbol)
+    Expr(:quote, x)
+end
+
+function _toquote(x::Any)
+    x
+end
+
 function expr_defvalue(x::SymbolicValue{Tv}) where Tv
     Expr(:(::), x.name, Symbol(Tv))
 end
@@ -92,18 +132,82 @@ function expr_defvalue(x::Tuple{SymbolicValue,Any})
     Expr(:kw, expr_defvalue(x[1]), x[2])
 end
 
-function expr_define_function(blk::SystemBlockDefinition)
-    params = [expr_defvalue(x) for x = blk.parameters]
-    args = [expr_defvalue(p.var) for p = blk.inports]
-    sargs = [expr_defvalue(p.var) for p = blk.stateinports]
-    outs = [:($(name(p.var)) = $(expr_refvalue(p.var))) for p = blk.outports]
-    souts = [:($(name(p.var)) = $(expr_refvalue(p.var))) for p = blk.stateoutports]
-    scopes = [:($(name(p.var)) = $(expr_refvalue(p.var))) for p = blk.scopeoutports]
-    body = [expr(b) for b = tsort(blk.blks)]
-    Expr(:function, Expr(:call, Symbol(blk.name, "Func"),
-            Expr(:parameters, args..., params..., sargs...)),
-        Expr(:block, body..., Expr(:tuple, outs..., souts..., scopes...)))
+"""
+Expr for creating a structure for systemblok
+
+An example of structure is
+```
+mutable struct MSD <: AbstractSystemBlock
+    M::Parameter
+    D::Parameter
+    k::Parameter
+    g::Parameter
+    time::AbstractInPort
+    in1::AbstractInPort
+    out1::AbstractOutPort
+    sin1::AbstractInPort
+    sin2::AbstractInPort
+    sout1::AbstractOutPort
+    sout2::AbstractOutPort
+    inblk::Vector{StateOut}
+    outblk::Vector{StateIn}
+    scopes::Vector{Scope}
+
+    function MSD(; M = :M, D = :D, k = :k, g = 9.8,
+        time::AbstractInPort = InPort(),
+        in1::AbstractInPort = InPort(),
+        out1::AbstractOutPort = OutPort(),
+        sin1::AbstractInPort = InPort(:sin1),
+        sin2::AbstractInPort = InPort(:sin2),
+        sout1::AbstractOutPort = OutPort(:sout1),
+        sout2::AbstractOutPort = OutPort(:sout2))
+        b = new()
+        b.M = M
+        b.D = D
+        b.k = k
+        b.g = g
+        b.time = time
+        b.in1 = in1
+        b.time.parent = b
+        b.in1.parent = b
+        b.out1 = out1
+        b.out1.parent = b
+        b.outblk = StateIn[]
+        begin
+            b.sin1 = InPort()
+            b.sin1.parent = b
+            tmp = StateIn(inport = sin1, outport = OutPort())
+            Line(tmp.outport, b.sin1)
+            push!(b.outblk, tmp)
+        end
+        begin
+            b.sin2 = InPort()
+            b.sin2.parent = b
+            tmp = StateIn(inport = sin2, outport = OutPort())
+            Line(tmp.outport, b.sin2)
+            push!(b.outblk, tmp)
+        end
+        b.inblk = StateOut[]
+        begin
+            b.sout1 = OutPort()
+            b.sout1.parent = b
+            tmp = StateOut(inport = InPort(), outport = sout1)
+            Line(b.sout1, tmp.inport)
+            push!(b.inblk, tmp)
+        end
+        begin
+            b.sout2 = OutPort()
+            b.sout2.parent = b
+            tmp = StateOut(inport = InPort(), outport = sout2)
+            Line(b.sout2, tmp.inport)
+            push!(b.inblk, tmp)
+        end
+        b.scopes = Scope[]
+        b
+    end
 end
+```
+"""    
 
 function expr_define_structure(blk::SystemBlockDefinition)
     params = [name(x[1]) for x = blk.parameters]
@@ -177,6 +281,15 @@ function expr_define_structure(blk::SystemBlockDefinition)
     end
 end
 
+"""
+Expr to define the following generic functions for AbstractBlock.
+next, defaultInPort, defaultOutPort should be imported as `import JuliaMBD: next, defaultInPort, defaultOutPort`
+
+- next: Get next blocks
+- defaultInPort: Get the default inport
+- defaultOutPort: Get the default outport
+"""
+
 function expr_define_next(blk::SystemBlockDefinition)
     outs = [name(p.var) for p = blk.outports]
     souts = [name(p.var) for p = blk.stateoutports]
@@ -218,6 +331,13 @@ function expr_define_next(blk::SystemBlockDefinition)
         end
     end
 end
+
+"""
+Expr to define the generic functions `expr` for AbstractBlock.
+expr should be imported as `import JuliaMBD: expr`
+
+- expr: Generate Expr to define the call of systemfunction
+"""
 
 function expr_define_expr(blk::SystemBlockDefinition)
     params = [:(b.$(name(x[1]))) for x = blk.parameters]
@@ -267,6 +387,24 @@ function expr_define_expr(blk::SystemBlockDefinition)
             Expr(:block, i..., f, o...)
         end
     end
+end
+
+"""
+Expr to define the systemfunction of SystemBlock
+The toporogical sort `tsort` is used.
+"""
+
+function expr_define_function(blk::SystemBlockDefinition)
+    params = [expr_defvalue(x) for x = blk.parameters]
+    args = [expr_defvalue(p.var) for p = blk.inports]
+    sargs = [expr_defvalue(p.var) for p = blk.stateinports]
+    outs = [:($(name(p.var)) = $(expr_refvalue(p.var))) for p = blk.outports]
+    souts = [:($(name(p.var)) = $(expr_refvalue(p.var))) for p = blk.stateoutports]
+    scopes = [:($(name(p.var)) = $(expr_refvalue(p.var))) for p = blk.scopeoutports]
+    body = [expr(b) for b = tsort(blk.blks)]
+    Expr(:function, Expr(:call, Symbol(blk.name, "Func"),
+            Expr(:parameters, args..., params..., sargs...)),
+        Expr(:block, body..., Expr(:tuple, outs..., souts..., scopes...)))
 end
 
 """

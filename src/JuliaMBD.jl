@@ -26,6 +26,12 @@ abstract type AbstractTimeBlock <: AbstractBlock end
 abstract type AbstractInBlock <: AbstractBlock end
 abstract type AbstractOutBlock <: AbstractBlock end
 
+"""
+Note:
+- AbstractTimeBlock has a property `timeport`
+- AbstractIntegratorBlock has `inblk`, `outblk` that are the vectors to store StateIn, StateOut blocks.
+"""
+
 include("_parameter.jl")
 include("_ports_and_line.jl")
 
