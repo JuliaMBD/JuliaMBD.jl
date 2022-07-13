@@ -14,7 +14,7 @@ function _toparam(x::Expr, m)
     elseif Meta.isexpr(x, :(=)) && Meta.isexpr(x.args[1], :(::)) && length(x.args) == 2
         :(addParameter!($m, SymbolicValue{$(x.args[1].args[2])}($(Expr(:quote, x.args[1].args[1]))), $(x.args[2])))
     else
-        throw(TypeError(x, "Invalid format for parameter"))
+        x
     end
 end
 
@@ -38,7 +38,7 @@ function _toblk(x::Expr, m)
             addBlock!($m, $(x.args[1]))
         end
     else
-        throw(TypeError(x, "Invalid format for block"))
+        x
     end
 end
 
@@ -59,7 +59,7 @@ function _toconnect(x::Expr)
     if Meta.isexpr(x, :call) && x.args[1] == :(=>) && length(x.args) == 3
         :(Line($(x.args[2]), $(x.args[3])))
     else
-        throw(TypeError(x, "Invalid format for block"))
+        x
     end
 end
 
