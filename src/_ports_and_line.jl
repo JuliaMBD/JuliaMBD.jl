@@ -46,6 +46,22 @@ function OutPort()
     OutPort(SymbolicValue{Auto}(gensym()), nothing, AbstractLine[])
 end
 
+function defaultInPort(p::AbstractInPort)
+    p
+end
+
+function defaultInPort(p::AbstractOutPort)
+    defaultInPort(p.parent)
+end
+
+function defaultOutPort(p::AbstractOutPort)
+    p
+end
+
+function defaultOutPort(p::AbstractInPort)
+    defaultOutPort(p.parent)
+end
+
 mutable struct Line <: AbstractLine
     var::SymbolicValue{Auto}
     source::AbstractOutPort
@@ -65,6 +81,18 @@ mutable struct Line <: AbstractLine
         push!(o.lines, line)
         line
     end
+end
+
+function Base.:(=>)(o::To, i::Ti) where {To<:Union{AbstractOutPort,AbstractBlock},Ti<:Union{AbstractInPort,AbstractBlock}}
+    Line(defaultOutPort(o), defaultInPort(i))
+    defaultInPort(o)
+end
+
+function Base.:(=>)(o::To, is::Tuple{N,Ti}) where {N,To<:Union{AbstractOutPort,AbstractBlock},Ti<:Union{AbstractInPort,AbstractBlock}}
+    for i = is
+        Line(defaultOutPort(o), defaultInPort(i))
+    end
+    defaultInPort(o)
 end
 
 function Base.show(io::IO, x::AbstractLine)

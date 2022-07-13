@@ -13,8 +13,8 @@ mutable struct PulseGenerator <: AbstractBlock
         period::Parameter = Float64(10),
         pulsewidth::Parameter = Float64(5),
         phasedelay::Parameter = Float64(0),
-        timeport::AbstractInPort,
-        outport::AbstractOutPort)
+        timeport::AbstractInPort = InPort(),
+        outport::AbstractOutPort = OutPort())
         blk = new()
         blk.amplitude = amplitude
         blk.period = period
@@ -63,4 +63,12 @@ end
 
 function next(blk::PulseGenerator)
     [line.dest.parent for line = blk.outport.lines]
+end
+
+function defaultInPort(blk::PulseGenerator)
+    nothing
+end
+
+function defaultOutPort(blk::PulseGenerator)
+    blk.outport
 end

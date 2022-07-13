@@ -5,7 +5,7 @@ mutable struct Gain <: AbstractBlock
     inport::AbstractInPort
     outport::AbstractOutPort
 
-    function Gain(;K::Parameter, inport::AbstractInPort, outport::AbstractOutPort)
+    function Gain(;K::Parameter, inport::AbstractInPort = InPort(), outport::AbstractOutPort = OutPort())
         blk = new()
         blk.K = K
         blk.inport = inport
@@ -30,4 +30,12 @@ end
 
 function next(blk::Gain)
     [line.dest.parent for line = blk.outport.lines]
+end
+
+function defaultInPort(blk::Gain)
+    blk.inport
+end
+
+function defaultOutPort(blk::Gain)
+    blk.outport
 end

@@ -12,6 +12,10 @@ mutable struct OutBlock <: AbstractOutBlock
         blk.outport.parent = blk
         blk
     end
+
+    function OutBlock(name::Symbol; inport::AbstractInPort = InPort())
+        OutBlock(inport = inport, outport = OutPort(name))
+    end
 end
 
 mutable struct StateOut <: AbstractOutBlock
@@ -40,6 +44,10 @@ mutable struct Scope <: AbstractOutBlock
         blk.outport.parent = blk
         blk
     end
+
+    function Scope(name::Symbol; inport::AbstractInPort = InPort())
+        Scope(inport=inport, outport=OutPort(name))
+    end
 end
 
 function expr(blk::AbstractOutBlock)
@@ -63,4 +71,12 @@ end
 
 function Base.show(io::IO, x::Scope)
     Base.show(io, "Scope()")
+end
+
+function defaultInPort(blk::AbstractOutBlock)
+    blk.inport
+end
+
+function defaultOutPort(blk::AbstractOutBlock)
+    nothing
 end

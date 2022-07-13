@@ -14,18 +14,18 @@ end
     println(y)
 end
 
-@testset "macro03" begin
-    y = @macroexpand @connection b.a => b.b
-    println(y)
-end
+# @testset "macro03" begin
+#     y = @macroexpand @connection b.a => b.b
+#     println(y)
+# end
 
-@testset "macro04" begin
-    y = @macroexpand @connection begin
-        b.a => b.b
-        b.y => t.t
-    end
-    println(y)
-end
+# @testset "macro04" begin
+#     y = @macroexpand @connection begin
+#         b.a => b.b
+#         b.y => t.t
+#     end
+#     println(y)
+# end
 
 @testset "macro05" begin
     y = @macroexpand @parameter b x = 9.8
@@ -57,7 +57,7 @@ end
         @block begin
             a = InBlock(inport=InPort(:x), outport=OutPort())
         end
-        @connection begin
+        begin
             a.outport => b.inport
         end
     end

@@ -51,26 +51,26 @@ macro block(m, b)
     end
 end
 
-function _toconnect(x::Any)
-    x
-end
+# function _toconnect(x::Any)
+#     x
+# end
 
-function _toconnect(x::Expr)
-    if Meta.isexpr(x, :call) && x.args[1] == :(=>) && length(x.args) == 3
-        :(Line($(x.args[2]), $(x.args[3])))
-    else
-        x
-    end
-end
+# function _toconnect(x::Expr)
+#     if Meta.isexpr(x, :call) && x.args[1] == :(=>) && length(x.args) == 3
+#         :(Line($(x.args[2]), $(x.args[3])))
+#     else
+#         x
+#     end
+# end
 
-macro connection(b)
-    if Meta.isexpr(b, :block)
-        body = [_toconnect(x) for x = b.args]
-        esc(Expr(:block, body...))
-    else
-        esc(_toconnect(b))
-    end
-end
+# macro connection(b)
+#     if Meta.isexpr(b, :block)
+#         body = [_toconnect(x) for x = b.args]
+#         esc(Expr(:block, body...))
+#     else
+#         esc(_toconnect(b))
+#     end
+# end
 
 macro model(f, block)
     body = []
@@ -84,6 +84,7 @@ macro model(f, block)
     push!(body, :(eval(expr_define_structure(tmp))))
     push!(body, :(eval(expr_define_next(tmp))))
     push!(body, :(eval(expr_define_expr(tmp))))
+    push!(body, :tmp)
     esc(Expr(:block, body...))
 end
 

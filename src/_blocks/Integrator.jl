@@ -13,8 +13,8 @@ mutable struct Integrator <: AbstractIntegratorBlock
         stateout::AbstractOutPort,
         initialcondition::Parameter = Float64(0),
         saturationlimits::NTuple{2,Union{Parameter,Nothing}} = (nothing,nothing),
-        inport::AbstractInPort,
-        outport::AbstractOutPort)
+        inport::AbstractInPort = InPort(),
+        outport::AbstractOutPort = OutPort())
         blk = new()
         blk.initialcondition = initialcondition
         blk.saturationlimits = saturationlimits
@@ -24,8 +24,28 @@ mutable struct Integrator <: AbstractIntegratorBlock
         blk.outport = outport
         blk
     end
+
+    function Integrator(state::Symbol;
+        initialcondition::Parameter = Float64(0),
+        saturationlimits::NTuple{2,Union{Parameter,Nothing}} = (nothing,nothing),
+        inport::AbstractInPort = InPort(),
+        outport::AbstractOutPort = OutPort())
+        Integrator(statein = InPort(Symbol(state, :in)), stateout = OutPort(Symbol(state, :out)),
+            initialcondition = initialcondition,
+            saturationlimits = saturationlimits,
+            inport = inport,
+            outport = outport)
+    end
 end
 
 function Base.show(io::IO, x::Integrator)
     Base.show(io, "Integrator($([x.inblk, x.outblk]))")
+end
+
+function defaultInPort(blk::Integrator)
+    blk.inport
+end
+
+function defaultOutPort(blk::Integrator)
+    blk.outport
 end

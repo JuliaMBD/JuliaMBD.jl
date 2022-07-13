@@ -199,6 +199,14 @@ function expr_define_next(blk::SystemBlockDefinition)
             $(scbody...)
             s
         end
+
+        function defaultInPort(b::$(blk.name))
+            nothing
+        end
+
+        function defaultOutPort(b::$(blk.name))
+            nothing
+        end
     end
 end
 

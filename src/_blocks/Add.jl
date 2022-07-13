@@ -5,7 +5,8 @@ mutable struct Plus <: AbstractBlock
     right::AbstractInPort
     outport::AbstractOutPort
 
-    function Plus(;left::AbstractInPort, right::AbstractInPort, outport::AbstractOutPort)
+    function Plus(;left::AbstractInPort = InPort(), right::AbstractInPort = InPort(),
+        outport::AbstractOutPort = OutPort())
         blk = new()
         blk.left = left
         blk.right = right
@@ -34,12 +35,20 @@ function next(blk::Plus)
     [line.dest.parent for line = blk.outport.lines]
 end
 
+function defaultInPort(blk::Plus)
+    nothing
+end
+
+function defaultOutPort(blk::Plus)
+    blk.outport
+end
+
 mutable struct Add <: AbstractBlock
     inports::Vector{InPort}
     signs::Vector{Symbol}
     outport::AbstractOutPort
 
-    function Add(; inports::Vector{InPort}, signs::Vector{Symbol}, outport::AbstractOutPort)
+    function Add(; inports::Vector{InPort}, signs::Vector{Symbol}, outport::AbstractOutPort = OutPort())
         blk = new()
         blk.inports = inports
         blk.signs = signs
@@ -64,4 +73,12 @@ end
 
 function next(blk::Add)
     [line.dest.parent for line = blk.outport.lines]
+end
+
+function defaultInPort(blk::Add)
+    nothing
+end
+
+function defaultOutPort(blk::Add)
+    blk.outport
 end

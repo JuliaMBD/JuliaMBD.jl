@@ -4,10 +4,11 @@ export AbstractBlock, AbstractSystemBlock
 export AbstractInPort, AbstractOutPort
 export Auto, Value, SymbolicValue, Parameter
 export InPort, OutPort, Line
-export expr_refvalue, expr_setvalue, expr, next, tsort
+export expr_refvalue, expr_setvalue
+export expr, next, defaultInPort, defaultOutPort
 export SystemBlockDefinition, addBlock!, addParameter!
 export expr_define_function, expr_define_structure, expr_define_next, expr_define_expr
-export @parameter, @block, @connection, @model
+export @parameter, @block, @model
 
 import Base
 # import DifferentialEquations

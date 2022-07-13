@@ -4,7 +4,7 @@ mutable struct Constant <: AbstractBlock
     value::Parameter
     outport::AbstractOutPort
 
-    function Constant(;value::Parameter, outport::AbstractOutPort)
+    function Constant(;value::Parameter, outport::AbstractOutPort = OutPort())
         blk = new()
         blk.value = value
         blk.outport = outport
@@ -29,4 +29,12 @@ end
 
 function Base.show(io::IO, x::Constant)
     Base.show(io, "Constant($(x.value))")
+end
+
+function defaultInPort(blk::Constant)
+    nothing
+end
+
+function defaultOutPort(blk::Constant)
+    blk.outport
 end

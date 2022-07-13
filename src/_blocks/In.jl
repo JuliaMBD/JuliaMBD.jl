@@ -12,6 +12,10 @@ mutable struct InBlock <: AbstractInBlock
         blk.outport.parent = blk
         blk
     end
+
+    function InBlock(name::Symbol; outport::AbstractOutPort = OutPort())
+        InBlock(inport=InPort(name), outport=outport)
+    end
 end
 
 mutable struct StateIn <: AbstractInBlock
@@ -19,6 +23,20 @@ mutable struct StateIn <: AbstractInBlock
     outport::AbstractOutPort
 
     function StateIn(;inport::AbstractInPort, outport::AbstractOutPort)
+        blk = new()
+        blk.inport = inport
+        blk.outport = outport
+        blk.inport.parent = blk
+        blk.outport.parent = blk
+        blk
+    end
+end
+
+mutable struct TimeIn <: AbstractInBlock
+    inport::AbstractInPort
+    outport::AbstractOutPort
+
+    function TimeIn(;inport::AbstractInPort, outport::AbstractOutPort)
         blk = new()
         blk.inport = inport
         blk.outport = outport
@@ -45,4 +63,12 @@ end
 
 function Base.show(io::IO, x::StateIn)
     Base.show(io, "StateIn()")
+end
+
+function defaultInPort(blk::AbstractInBlock)
+    nothing
+end
+
+function defaultOutPort(blk::AbstractInBlock)
+    blk.outport
 end
