@@ -26,3 +26,24 @@ end
     end
     println(y)
 end
+
+@testset "macro05" begin
+    y = @macroexpand @parameter b x = 9.8
+    println(y)
+end
+
+@testset "macro06" begin
+    y = @macroexpand @parameter b begin
+            x = 9.8
+            z
+    end
+    println(y)
+end
+
+@testset "macro07" begin
+    y = @macroexpand @parameter b begin
+            x::Float64 = 9.8
+            z::Int
+    end
+    println(y)
+end
