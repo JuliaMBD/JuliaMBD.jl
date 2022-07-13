@@ -67,27 +67,13 @@ function addBlock!(blk::SystemBlockDefinition, x::Scope)
     push!(blk.scopeoutports, x.outport)
 end
 
-# function define(blk::SystemBlockDefinition)
-#     quote
-#         import JuliaMBD: next, expr
-#         $(expr_define_function(blk))
-#         $(expr_define_structure(blk))
-#         $(expr_define_next(blk))
-#         $(expr_define_expr(blk))
-#     end
-# end
-
-# macro define(x)
-#     esc(:(eval(define($x))))
-# end
-
 function expr_define_function(blk::SystemBlockDefinition)
     params = [expr_defvalue(x) for x = blk.parameters]
     args = [expr_defvalue(p.var) for p = blk.inports]
     sargs = [expr_defvalue(p.var) for p = blk.stateinports]
-    outs = [:($(p.var.name) = $(expr_refvalue(p.var))) for p = blk.outports]
-    souts = [:($(p.var.name) = $(expr_refvalue(p.var))) for p = blk.stateoutports]
-    scopes = [:($(p.var.name) = $(expr_refvalue(p.var))) for p = blk.scopeoutports]
+    outs = [:($(name(p.var)) = $(expr_refvalue(p.var))) for p = blk.outports]
+    souts = [:($(name(p.var)) = $(expr_refvalue(p.var))) for p = blk.stateoutports]
+    scopes = [:($(name(p.var)) = $(expr_refvalue(p.var))) for p = blk.scopeoutports]
     body = [expr(b) for b = tsort(blk.blks)]
     Expr(:function, Expr(:call, Symbol(blk.name, "Func"),
             Expr(:parameters, args..., params..., sargs...)),
@@ -95,12 +81,12 @@ function expr_define_function(blk::SystemBlockDefinition)
 end
 
 function expr_define_structure(blk::SystemBlockDefinition)
-    params = [x.name for x = blk.parameters]
-    ins = [p.var.name for p = blk.inports]
-    outs = [p.var.name for p = blk.outports]
-    sins = [p.var.name for p = blk.stateinports]
-    souts = [p.var.name for p = blk.stateoutports]
-    scopes = [p.var.name for p = blk.scopeoutports]
+    params = [name(x) for x = blk.parameters]
+    ins = [name(p.var) for p = blk.inports]
+    outs = [name(p.var) for p = blk.outports]
+    sins = [name(p.var) for p = blk.stateinports]
+    souts = [name(p.var) for p = blk.stateoutports]
+    scopes = [name(p.var) for p = blk.scopeoutports]
 
     paramdef = [:($x::Parameter) for x = params]
     indef = [:($x::AbstractInPort) for x = ins]
@@ -160,9 +146,9 @@ function expr_define_structure(blk::SystemBlockDefinition)
 end
 
 function expr_define_next(blk::SystemBlockDefinition)
-    outs = [p.var.name for p = blk.outports]
-    souts = [p.var.name for p = blk.stateoutports]
-    scopes = [p.var.name for p = blk.scopeoutports]
+    outs = [name(p.var) for p = blk.outports]
+    souts = [name(p.var) for p = blk.stateoutports]
+    scopes = [name(p.var) for p = blk.scopeoutports]
 
     body = [quote
         for line = b.$x.lines
@@ -194,12 +180,12 @@ function expr_define_next(blk::SystemBlockDefinition)
 end
 
 function expr_define_expr(blk::SystemBlockDefinition)
-    params = [:(b.$(x.name)) for x = blk.parameters]
-    ins = [:(b.$(p.var.name)) for p = blk.inports]
-    outs = [:(b.$(p.var.name)) for p = blk.outports]
-    sins = [:(b.$(p.var.name)) for p = blk.stateinports]
-    souts = [:(b.$(p.var.name)) for p = blk.stateoutports]
-    scopes = [:(b.$(p.var.name)) for p = blk.scopeoutports]
+    params = [:(b.$(name(x))) for x = blk.parameters]
+    ins = [:(b.$(name(p.var))) for p = blk.inports]
+    outs = [:(b.$(name(p.var))) for p = blk.outports]
+    sins = [:(b.$(name(p.var))) for p = blk.stateinports]
+    souts = [:(b.$(name(p.var))) for p = blk.stateoutports]
+    scopes = [:(b.$(name(p.var))) for p = blk.scopeoutports]
 
     bodyin = [:(push!(i, expr_setvalue($x.var, expr_refvalue($x.line.var)))) for x = ins]
     sbodyin = [:(push!(i, expr_setvalue($x.var, expr_refvalue($x.line.var)))) for x = sins]

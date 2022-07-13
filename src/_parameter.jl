@@ -24,6 +24,10 @@ function SymbolicValue(x::Symbol)
     SymbolicValue{Auto}(x)
 end
 
+function name(x::SymbolicValue)
+    x.name
+end
+
 function Base.show(io::IO, x::SymbolicValue{Tv}) where Tv
     Base.show(io, Expr(:(::), x.name, Tv))
 end
