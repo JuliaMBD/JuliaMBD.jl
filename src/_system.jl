@@ -1,6 +1,6 @@
 mutable struct SystemBlockDefinition
     name::Symbol
-    parameters::Vector{SymbolicValue}
+    parameters::Vector{Tuple{SymbolicValue,Any}}
     inports::Vector{InPort}
     outports::Vector{OutPort}
     stateinports::Vector{InPort}
@@ -9,7 +9,7 @@ mutable struct SystemBlockDefinition
     blks::Vector{AbstractBlock}
     
     function SystemBlockDefinition(name::Symbol)
-        new(name, SymbolicValue[],
+        new(name, Tuple{SymbolicValue,Any}[],
             InPort[], OutPort[],
             InPort[], OutPort[],
             OutPort[], AbstractBlock[])
@@ -17,7 +17,11 @@ mutable struct SystemBlockDefinition
 end
 
 function addParameter!(blk::SystemBlockDefinition, x::SymbolicValue)
-    push!(blk.parameters, x)
+    push!(blk.parameters, (x, x.name))
+end
+
+function addParameter!(blk::SystemBlockDefinition, x::SymbolicValue, y)
+    push!(blk.parameters, (x, y))
 end
 
 function addBlock!(blk::SystemBlockDefinition, x::AbstractBlock)
@@ -67,6 +71,18 @@ function addBlock!(blk::SystemBlockDefinition, x::Scope)
     push!(blk.scopeoutports, x.outport)
 end
 
+function expr_defvalue(x::SymbolicValue{Tv}) where Tv
+    Expr(:(::), x.name, Symbol(Tv))
+end
+
+function expr_defvalue(x::SymbolicValue{Auto})
+    x.name
+end
+
+function expr_defvalue(x::Tuple{SymbolicValue,Any})
+    Expr(:kw, expr_defvalue(x[1]), x[2])
+end
+
 function expr_define_function(blk::SystemBlockDefinition)
     params = [expr_defvalue(x) for x = blk.parameters]
     args = [expr_defvalue(p.var) for p = blk.inports]
@@ -81,7 +97,7 @@ function expr_define_function(blk::SystemBlockDefinition)
 end
 
 function expr_define_structure(blk::SystemBlockDefinition)
-    params = [name(x) for x = blk.parameters]
+    params = [name(x[1]) for x = blk.parameters]
     ins = [name(p.var) for p = blk.inports]
     outs = [name(p.var) for p = blk.outports]
     sins = [name(p.var) for p = blk.stateinports]
@@ -95,6 +111,13 @@ function expr_define_structure(blk::SystemBlockDefinition)
     soutdef = [:($x::AbstractOutPort) for x = souts]
     scopesdef = [:($x::AbstractOutPort) for x = scopes]
 
+    paramdefin = [Expr(:kw, :($(name(x[1])))::Parameter, _toquote(x[2])) for x = blk.parameters]
+    indefin = [Expr(:kw, :($x::AbstractInPort), :(InPort())) for x = ins]
+    outdefin = [Expr(:kw, :($x::AbstractOutPort), :(OutPort())) for x = outs]
+    sindefin = [Expr(:kw, :($x::AbstractInPort), :(InPort($(Expr(:quote, x))))) for x = sins]
+    soutdefin = [Expr(:kw, :($x::AbstractOutPort), :(OutPort($(Expr(:quote, x))))) for x = souts]
+    scopesdefin = [Expr(:kw, :($x::AbstractOutPort), :(OutPort($(Expr(:quote, x))))) for x = scopes]
+
     quote
         mutable struct $(blk.name) <: AbstractSystemBlock
             $(paramdef...)
@@ -107,7 +130,7 @@ function expr_define_structure(blk::SystemBlockDefinition)
             outblk::Vector{StateIn}
             scopes::Vector{Scope}
 
-            function $(blk.name)(; $(paramdef...), $(indef...), $(outdef...))
+            function $(blk.name)(; $(paramdefin...), $(indefin...), $(outdefin...), $(sindefin...), $(soutdefin...), $(scopesdefin...))
                 b = new()
                 $([:(b.$x = $x) for x = params]...)
                 $([:(b.$x = $x) for x = ins]...)
@@ -119,7 +142,7 @@ function expr_define_structure(blk::SystemBlockDefinition)
                 $([quote
                     b.$x = InPort()
                     b.$x.parent = b
-                    tmp = StateIn(inport=InPort($(Expr(:quote, x))), outport=OutPort())
+                    tmp = StateIn(inport=$x, outport=OutPort())
                     Line(tmp.outport, b.$x)
                     push!(b.outblk, tmp)
                 end for x = sins]...)
@@ -127,7 +150,7 @@ function expr_define_structure(blk::SystemBlockDefinition)
                 $([quote
                     b.$x = OutPort()
                     b.$x.parent = b
-                    tmp = StateOut(inport=InPort(), outport=OutPort($(Expr(:quote, x))))
+                    tmp = StateOut(inport=InPort(), outport=$x)
                     Line(b.$x, tmp.inport)
                     push!(b.inblk, tmp)
                 end for x = souts]...)
@@ -135,7 +158,7 @@ function expr_define_structure(blk::SystemBlockDefinition)
                 $([quote
                     b.$x = OutPort()
                     b.$x.parent = b
-                    tmp = Scope(inport=InPort(), outport=OutPort($(Expr(:quote, x))))
+                    tmp = Scope(inport=InPort(), outport=$x)
                     Line(b.$x, tmp.inport)
                     push!(b.scopes, tmp)
                 end for x = scopes]...)
@@ -180,7 +203,7 @@ function expr_define_next(blk::SystemBlockDefinition)
 end
 
 function expr_define_expr(blk::SystemBlockDefinition)
-    params = [:(b.$(name(x))) for x = blk.parameters]
+    params = [:(b.$(name(x[1]))) for x = blk.parameters]
     ins = [:(b.$(name(p.var))) for p = blk.inports]
     outs = [:(b.$(name(p.var))) for p = blk.outports]
     sins = [:(b.$(name(p.var))) for p = blk.stateinports]
@@ -206,7 +229,7 @@ function expr_define_expr(blk::SystemBlockDefinition)
         end
     end for x = scopes]
     
-    ps = [expr_kwvalue(p, :(expr_refvalue($x))) for (p,x) = zip(blk.parameters, params)]
+    ps = [expr_kwvalue(p[1], :(expr_refvalue($x))) for (p,x) = zip(blk.parameters, params)]
     args = [expr_kwvalue(p.var, :(expr_refvalue($x.var))) for (p,x) = zip(blk.inports, ins)]
     sargs = [expr_kwvalue(p.var, :(expr_refvalue($x.var))) for (p,x) = zip(blk.stateinports, sins)]
     oos = [:(expr_refvalue($x.var)) for x = outs]

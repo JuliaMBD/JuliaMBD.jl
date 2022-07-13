@@ -40,14 +40,6 @@ function expr_refvalue(x::SymbolicValue{Tv}) where Tv
     x.name
 end
 
-function expr_defvalue(x::SymbolicValue{Tv}) where Tv
-    Expr(:(::), x.name, Symbol(Tv))
-end
-
-function expr_defvalue(x::SymbolicValue{Auto})
-    x.name
-end
-
 function expr_setvalue(x::SymbolicValue{Tv}, expr) where Tv
     Expr(:(=), x.name, Expr(:call, Symbol(Tv), expr))
 end
@@ -67,5 +59,13 @@ end
 const Parameter = Any
 
 function expr_refvalue(x::Any)
+    x
+end
+
+function _toquote(x::Symbol)
+    Expr(:quote, x)
+end
+
+function _toquote(x::Any)
     x
 end

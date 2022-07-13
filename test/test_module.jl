@@ -29,6 +29,8 @@ import JuliaMBD
     addBlock!(b, gain3)
     addBlock!(b, add)
 
+    println(expr_define_function(b))
+    println(expr_define_structure(b))
     eval(expr_define_function(b))
     eval(expr_define_structure(b))
     eval(expr_define_next(b))

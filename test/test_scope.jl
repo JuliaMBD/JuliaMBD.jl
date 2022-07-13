@@ -20,7 +20,7 @@ import JuliaMBD
     Line(gain3.outport, scope1.inport)
 
     b = SystemBlockDefinition(:RLCBlock2)
-    addParameter!(b, SymbolicValue{Float64}(:R))
+    addParameter!(b, SymbolicValue{Float64}(:R), 100.0)
     addParameter!(b, SymbolicValue{Float64}(:C))
     addParameter!(b, SymbolicValue{Float64}(:L))
     addBlock!(b, int1)
