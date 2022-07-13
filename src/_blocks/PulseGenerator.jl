@@ -42,12 +42,12 @@ function expr(blk::PulseGenerator)
     ## body
     b = expr_setvalue(blk.outport.var,
     quote
-        if $time < $(phasedelay)
+        if $time < $phasedelay
             0
         else
-            tmpu = (($time - $(phasedelay)) % $(period)) / $(period) * 100
-            if tmpu < $(pulsewidth)
-                $(amplitude)
+            tmpu =  (($time - $phasedelay) % $period) / $period * 100
+            if tmpu < $pulsewidth
+                $amplitude
             else
                 0
             end
