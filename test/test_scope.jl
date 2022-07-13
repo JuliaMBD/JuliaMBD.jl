@@ -37,7 +37,10 @@ import JuliaMBD
     println(expr_define_next(b))
     println(expr_define_expr(b))
 
-    @define(b)
+    eval(expr_define_function(b))
+    eval(expr_define_structure(b))
+    eval(expr_define_next(b))
+    eval(expr_define_expr(b))
 
     time = InBlock(inport=InPort(:time), outport=OutPort())
     s1 = PulseGenerator(timeport=InPort(), outport=OutPort())
@@ -50,7 +53,10 @@ import JuliaMBD
     addBlock!(bt, s1)
     addBlock!(bt, s2)
 
-    @define(bt)
+    eval(expr_define_function(bt))
+    eval(expr_define_structure(bt))
+    eval(expr_define_next(bt))
+    eval(expr_define_expr(bt))
 
     println(expr_define_function(bt))
 end

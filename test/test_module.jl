@@ -29,7 +29,10 @@ import JuliaMBD
     addBlock!(b, gain3)
     addBlock!(b, add)
 
-    @define(b)
+    eval(expr_define_function(b))
+    eval(expr_define_structure(b))
+    eval(expr_define_next(b))
+    eval(expr_define_expr(b))
 
     time = InBlock(inport=InPort(:time), outport=OutPort())
     s1 = PulseGenerator(timeport=InPort(), outport=OutPort())
@@ -42,7 +45,10 @@ import JuliaMBD
     addBlock!(bt, s1)
     addBlock!(bt, s2)
 
-    @define(bt)
+    eval(expr_define_function(bt))
+    eval(expr_define_structure(bt))
+    eval(expr_define_next(bt))
+    eval(expr_define_expr(bt))
 
     println(TestBlockFunc(; time=1.0, sin1=1.0, sin2=1.0))
 end

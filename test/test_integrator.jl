@@ -123,7 +123,10 @@ end
     addBlock!(b, gain3)
     addBlock!(b, add)
 
-    @define(b)
+    eval(expr_define_function(b))
+    eval(expr_define_structure(b))
+    eval(expr_define_next(b))
+    eval(expr_define_expr(b))
 
     time = InBlock(inport=InPort(:time), outport=OutPort())
     s1 = PulseGenerator(timeport=InPort(), outport=OutPort())
