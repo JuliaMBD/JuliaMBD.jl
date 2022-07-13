@@ -2,7 +2,7 @@
 import JuliaMBD
 
 @testset "add" begin
-    b = Add(left=InPort(), right=InPort(), outport=OutPort(Float64))
+    b = Plus(left=InPort(), right=InPort(), outport=OutPort(Float64))
     println(b)
     Line(OutPort(), b.left)
     Line(OutPort(), b.right)
@@ -11,7 +11,7 @@ import JuliaMBD
 end
 
 @testset "add2" begin
-    b = Add2(inports=[InPort(), InPort(), InPort()], signs=[:+, :-, :+], outport=OutPort(Float64))
+    b = Add(inports=[InPort(), InPort(), InPort()], signs=[:+, :-, :+], outport=OutPort(Float64))
     println(b)
     for p = b.inports
         Line(OutPort(), p)

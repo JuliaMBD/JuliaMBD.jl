@@ -7,7 +7,7 @@ import JuliaMBD
     gain1 = Gain(K=:R, inport=InPort(:g1in), outport=OutPort(:g1out))
     gain2 = Gain(K=:(1/C), inport=InPort(:g2in), outport=OutPort(:g2out))
     gain3 = Gain(K=:(1/L), inport=InPort(:g3in), outport=OutPort(:g3out))
-    add = Add2(inports=[InPort(:a), InPort(:b), InPort(:c)], signs=[:+, :-, :-], outport=OutPort())
+    add = Add(inports=[InPort(:a), InPort(:b), InPort(:c)], signs=[:+, :-, :-], outport=OutPort())
     scope1 = Scope(inport=InPort(), outport=OutPort(:scope1))
     Line(in1.outport, add.inports[1])
     Line(gain1.outport, add.inports[2])

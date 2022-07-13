@@ -1,11 +1,11 @@
-export Add, Add2
+export Add, Plus
 
-mutable struct Add <: AbstractBlock
+mutable struct Plus <: AbstractBlock
     left::AbstractInPort
     right::AbstractInPort
     outport::AbstractOutPort
 
-    function Add(;left::AbstractInPort, right::AbstractInPort, outport::AbstractOutPort)
+    function Plus(;left::AbstractInPort, right::AbstractInPort, outport::AbstractOutPort)
         blk = new()
         blk.left = left
         blk.right = right
@@ -17,7 +17,7 @@ mutable struct Add <: AbstractBlock
     end
 end
     
-function expr(blk::Add)
+function expr(blk::Plus)
     i1 = expr_setvalue(blk.left.var, expr_refvalue(blk.left.line.var))
     i2 = expr_setvalue(blk.right.var, expr_refvalue(blk.right.line.var))
 
@@ -30,16 +30,16 @@ function expr(blk::Add)
     Expr(:block, i1, i2, b, o...)
 end
 
-function next(blk::Add)
+function next(blk::Plus)
     [line.dest.parent for line = blk.outport.lines]
 end
 
-mutable struct Add2 <: AbstractBlock
+mutable struct Add <: AbstractBlock
     inports::Vector{InPort}
     signs::Vector{Symbol}
     outport::AbstractOutPort
 
-    function Add2(; inports::Vector{InPort}, signs::Vector{Symbol}, outport::AbstractOutPort)
+    function Add(; inports::Vector{InPort}, signs::Vector{Symbol}, outport::AbstractOutPort)
         blk = new()
         blk.inports = inports
         blk.signs = signs
@@ -52,8 +52,7 @@ mutable struct Add2 <: AbstractBlock
     end
 end
     
-
-function expr(blk::Add2)
+function expr(blk::Add)
     i = [expr_setvalue(b.var, expr_refvalue(b.line.var)) for b = blk.inports]
 
     b0 = expr_setvalue(blk.outport.var, 0)
@@ -63,6 +62,6 @@ function expr(blk::Add2)
     Expr(:block, i..., b0, b..., o...)
 end
 
-function next(blk::Add2)
+function next(blk::Add)
     [line.dest.parent for line = blk.outport.lines]
 end
