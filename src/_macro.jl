@@ -35,7 +35,7 @@ function _toblk(x::Expr, m)
     if Meta.isexpr(x, :(=)) && typeof(x.args[1]) == Symbol && length(x.args) == 2
         quote
             $x
-            $m.addBlock!($(x.args[1]))
+            addBlock!($m, $(x.args[1]))
         end
     else
         throw(TypeError(x, "Invalid format for block"))
