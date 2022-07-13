@@ -70,14 +70,14 @@ end
     eval(expr_define_next(b))
     eval(expr_define_expr(b))
 
-    time = InBlock(inport=InPort(:time), outport=OutPort())
+    # time = InBlock(inport=InPort(:time), outport=OutPort())
     s1 = PulseGenerator(timeport=InPort(), outport=OutPort())
     s2 = RLCBlock(vin=InPort(), R=1.0, C=1.0, L=1.0)
-    Line(time.outport, s1.timeport)
+    # Line(time.outport, s1.timeport)
     Line(s1.outport, s2.vin)
 
     bt = SystemBlockDefinition(:TestBlock)
-    addBlock!(bt, time)
+    # addBlock!(bt, time)
     addBlock!(bt, s1)
     addBlock!(bt, s2)
 
@@ -128,14 +128,14 @@ end
     eval(expr_define_next(b))
     eval(expr_define_expr(b))
 
-    time = InBlock(inport=InPort(:time), outport=OutPort())
+    # time = InBlock(inport=InPort(:time), outport=OutPort())
     s1 = PulseGenerator(timeport=InPort(), outport=OutPort())
     s2 = RLCBlock(vin=InPort(), R=1.0, C=1.0, L=1.0)
-    Line(time.outport, s1.timeport)
+    # Line(time.outport, s1.timeport)
     Line(s1.outport, s2.vin)
 
     bt = SystemBlockDefinition(:TestBlock)
-    addBlock!(bt, time)
+    # addBlock!(bt, time)
     addBlock!(bt, s1)
     addBlock!(bt, s2)
 

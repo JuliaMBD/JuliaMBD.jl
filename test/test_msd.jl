@@ -53,14 +53,14 @@
     pulse = PulseGenerator(amplitude=:f, period=:p_cycle, pulsewidth=:p_width, phasedelay=10.0,
         timeport=InPort(), outport=OutPort())
     addBlock!(b, pulse)
-    time = InBlock(inport=InPort(:time), outport=OutPort())
-    addBlock!(b, time)
+    # time = InBlock(inport=InPort(:time), outport=OutPort())
+    # addBlock!(b, time)
     scope1 = Scope(inport=InPort(), outport=OutPort(:F))
     addBlock!(b, scope1)
     scope2 = Scope(inport=InPort(), outport=OutPort(:x))
     addBlock!(b, scope2)
 
-    Line(time.outport, pulse.timeport)
+    # Line(time.outport, pulse.timeport)
     Line(pulse.outport, msd.in1)
     Line(pulse.outport, scope1.inport)
     Line(msd.out1, scope2.inport)
@@ -119,12 +119,12 @@ end
             msd = MSD(M=:M, D=:D, k=:k, in1=InPort(), out1=OutPort())
             pulse = PulseGenerator(amplitude=:f, period=:p_cycle, pulsewidth=:p_width, phasedelay=10.0,
                 timeport=InPort(), outport=OutPort())
-            time = InBlock(inport=InPort(:time), outport=OutPort())
+            # time = InBlock(inport=InPort(:time), outport=OutPort())
             scope1 = Scope(inport=InPort(), outport=OutPort(:F))
             scope2 = Scope(inport=InPort(), outport=OutPort(:x))
         end
         begin
-            time.outport => pulse.timeport
+            # time.outport => pulse.timeport
             pulse.outport => msd.in1
             pulse.outport => scope1.inport
             msd.out1 => scope2.inport
@@ -176,12 +176,12 @@ end
         @block begin
             msd = MSD22()
             pulse = PulseGenerator(amplitude=:f, period=:p_cycle, pulsewidth=:p_width, phasedelay=10.0)
-            time = InBlock(:time)
+            # time = InBlock(:time)
             scope1 = Scope(:F)
             scope2 = Scope(:x)
         end
         begin
-            time => pulse.timeport
+            # time => pulse.timeport
             pulse => (msd.in1, scope1)
             msd.out1 => scope2
         end

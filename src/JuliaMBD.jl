@@ -2,7 +2,7 @@ module JuliaMBD
 
 export AbstractBlock, AbstractSystemBlock
 export AbstractInPort, AbstractOutPort
-export Auto, Value, SymbolicValue, Parameter
+export Auto, SymbolicValue, Parameter
 export InPort, OutPort, Line
 export expr_refvalue, expr_setvalue
 export expr, next, defaultInPort, defaultOutPort
@@ -22,6 +22,7 @@ abstract type AbstractOutPort <: AbstractPort end
 abstract type AbstractBlock end
 abstract type AbstractIntegratorBlock <: AbstractBlock end
 abstract type AbstractSystemBlock <: AbstractBlock end
+abstract type AbstractTimeBlock <: AbstractBlock end
 abstract type AbstractInBlock <: AbstractBlock end
 abstract type AbstractOutBlock <: AbstractBlock end
 

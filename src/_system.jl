@@ -1,18 +1,21 @@
 mutable struct SystemBlockDefinition
     name::Symbol
     parameters::Vector{Tuple{SymbolicValue,Any}}
-    inports::Vector{InPort}
-    outports::Vector{OutPort}
-    stateinports::Vector{InPort}
-    stateoutports::Vector{OutPort}
-    scopeoutports::Vector{OutPort}
+    inports::Vector{InPort} # TODO: check whether the vector has the ports with same name
+    outports::Vector{OutPort} # TODO: check whether the vector has the ports with same name
+    stateinports::Vector{InPort} # TODO: check whether the vector has the ports with same name
+    stateoutports::Vector{OutPort} # TODO: check whether the vector has the ports with same name
+    scopeoutports::Vector{OutPort} # TODO: check whether the vector has the ports with same name
+    timeblk::AbstractInBlock
     blks::Vector{AbstractBlock}
     
     function SystemBlockDefinition(name::Symbol)
-        new(name, Tuple{SymbolicValue,Any}[],
+        b = new(name, Tuple{SymbolicValue,Any}[],
             InPort[], OutPort[],
             InPort[], OutPort[],
-            OutPort[], AbstractBlock[])
+            OutPort[], InBlock(inport=InPort(:time), outport=OutPort()), AbstractBlock[])
+        addBlock!(b, b.timeblk)
+        b
     end
 end
 
@@ -33,6 +36,11 @@ function addBlock!(blk::SystemBlockDefinition, x::AbstractIntegratorBlock)
     addBlock!(blk, x.outblk)
 end
 
+function addBlock!(blk::SystemBlockDefinition, x::AbstractTimeBlock)
+    push!(blk.blks, x)
+    Line(blk.timeblk.outport, x.timeport)
+end
+
 function addBlock!(blk::SystemBlockDefinition, x::AbstractSystemBlock)
     push!(blk.blks, x)
     for b = x.inblk
@@ -44,6 +52,7 @@ function addBlock!(blk::SystemBlockDefinition, x::AbstractSystemBlock)
     for b = x.scopes
         addBlock!(blk, b)
     end
+    Line(blk.timeblk.outport, x.time)
 end
 
 function addBlock!(blk::SystemBlockDefinition, x::InBlock)
