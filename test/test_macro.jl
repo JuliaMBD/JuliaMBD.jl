@@ -47,3 +47,19 @@ end
     end
     println(y)
 end
+
+@testset "macro08" begin
+    y = @macroexpand @model MSD begin
+        @parameter begin
+            M::Float64
+            g = 9.8
+        end
+        @block begin
+            a = InBlock(inport=InPort(:x), outport=OutPort())
+        end
+        @connection begin
+            a.outport => b.inport
+        end
+    end
+    println(y)
+end

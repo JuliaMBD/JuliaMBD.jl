@@ -71,3 +71,30 @@ macro connection(b)
         esc(_toconnect(b))
     end
 end
+
+macro model(f, block)
+    body = []
+    push!(body, Expr(:(=), :tmp, Expr(:call, :SystemBlockDefinition, Expr(:quote, f))))
+    if Meta.isexpr(block, :block)
+        for x = block.args
+            push!(body, _replace_macro(x))
+        end
+    end
+    push!(body, :(eval(expr_define_function(tmp))))
+    push!(body, :(eval(expr_define_structure(tmp))))
+    push!(body, :(eval(expr_define_next(tmp))))
+    push!(body, :(eval(expr_define_expr(tmp))))
+    esc(Expr(:block, body...))
+end
+
+function _replace_macro(x::Any)
+    x
+end
+
+function _replace_macro(x::Expr)
+    if Meta.isexpr(x, :macrocall) && (x.args[1] == Symbol("@block") || x.args[1] == Symbol("@parameter"))
+        Expr(:macrocall, x.args[1], x.args[2], :tmp, [_replace_macro(u) for u = x.args[3:end]]...)
+    else
+        Expr(x.head, [_replace_macro(u) for u = x.args]...)
+    end
+end
