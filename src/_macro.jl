@@ -51,7 +51,25 @@ macro block(m, b)
     end
 end
 
-macro model(f, block)
+macro model(f, e::Bool, block)　　
+    body = []
+    push!(body, Expr(:(=), :tmp, Expr(:call, :SystemBlockDefinition, Expr(:quote, f))))
+    if Meta.isexpr(block, :block)
+        for x = block.args
+            push!(body, _replace_macro(x))
+        end
+    end
+    if e == true
+        push!(body, :(eval(expr_define_function(tmp))))
+        push!(body, :(eval(expr_define_structure(tmp))))
+        push!(body, :(eval(expr_define_next(tmp))))
+        push!(body, :(eval(expr_define_expr(tmp))))
+    end
+    push!(body, :tmp)
+    esc(Expr(:block, body...))
+end
+
+macro model(f, block)　　
     body = []
     push!(body, Expr(:(=), :tmp, Expr(:call, :SystemBlockDefinition, Expr(:quote, f))))
     if Meta.isexpr(block, :block)
