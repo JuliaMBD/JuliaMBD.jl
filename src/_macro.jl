@@ -92,7 +92,7 @@ end
 
 macro model(f, block)　　
     body = []
-    push!(body, Expr(:(=), :tmp, Expr(:call, :SystemBlockDefinition, Expr(:quote, f))))
+    push!(body, Expr(:(=), :tmp, Expr(:call, :SystemBlockDefinition, Expr(:quote, esc(f)))))
     if Meta.isexpr(block, :block)
         for x = block.args
             push!(body, _replace_macro(x))
