@@ -51,7 +51,7 @@ function expr(blk::BinaryOperator)
     right = expr_refvalue(blk.right.var)
     operator = blk.operator
 
-    b = expr_setvalue(blk.outport.var, :($left $operator $right))
+    b = expr_setvalue(blk.outport.var, Expr(:call, operator, left, right))
 
     o = [expr_setvalue(line.var, expr_refvalue(blk.outport.var)) for line = blk.outport.lines]
     Expr(:block, i1, i2, b, o...)
