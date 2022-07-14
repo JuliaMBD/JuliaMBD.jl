@@ -46,6 +46,8 @@ include("_blocks/Integrator.jl")
 include("_blocks/PulseGenerator.jl")
 include("_blocks/Ramp.jl")
 include("_blocks/Step.jl")
+include("_blocks/Quantizer.jl")
+include("_blocks/Saturation.jl")
 
 include("_system.jl")
 include("_macro.jl")
