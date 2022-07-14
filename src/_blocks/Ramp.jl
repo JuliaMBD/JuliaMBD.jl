@@ -41,7 +41,7 @@ function expr(blk::Ramp)
         if $time < $starttime
             $initialoutput
         else
-            $slope * ($time - $starttime)
+            $slope * ($time - $starttime) + $initialoutput
         end
     end)
 
