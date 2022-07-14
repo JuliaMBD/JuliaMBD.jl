@@ -10,8 +10,9 @@ mutable struct MathFunction <: AbstractBlock
         outport::AbstractOutPort = OutPort())
         blk = new()
         blk.f = f
+        blk.inport = inport
         blk.outport = outport
-        blk.f.parent = blk
+        blk.inport.parent = blk
         blk.outport.parent = blk
         blk
     end
