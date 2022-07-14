@@ -388,7 +388,7 @@ function expr_define_expr(blk::SystemBlockDefinition)
             $(bodyout...)
             $(sbodyout...)
             $(scbodyout...)
-            Expr(:block, i..., f, o...)
+            Expr(:call, :esc, Expr(:block, i..., f, o...))
         end
     end
 end
