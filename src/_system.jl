@@ -19,6 +19,10 @@ mutable struct SystemBlockDefinition
     end
 end
 
+function Base.show(io::IO, b::SystemBlockDefinition)
+    Base.show(io, "SystemBlock($(b.name))")
+end
+
 function addParameter!(blk::SystemBlockDefinition, x::SymbolicValue)
     push!(blk.parameters, (x, x.name))
 end
