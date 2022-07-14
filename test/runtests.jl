@@ -1,11 +1,16 @@
 using JuliaMBD
 using Test
 
-@testset "JuliaMBD.jl" begin
-    blk1 = ConstantBlock(5)
-    blk2 = GainBlock(Var(:K, Float64))
-    l1 = Line(:x, Int)
-    connect(blk1.outport, blk2.inport, l1)
-    println(_toexpr(blk1.outport))
-    println(_toexpr(blk2.outport))
-end
+import JuliaMBD: next, expr, defaultInPort, defaultOutPort
+
+include("test_parameter.jl")
+include("test_port.jl")
+
+include("test_blocks.jl")
+include("test_integrator.jl")
+include("test_module.jl")
+include("test_scope.jl")
+include("test_macro.jl")
+include("test_msd.jl")
+
+include("test_inmodule.jl")
