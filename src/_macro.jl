@@ -51,6 +51,27 @@ macro block(m, b)
     end
 end
 
+function _addscope(x::Any, m)
+    x
+end
+
+function _addscope(x::Symbol, m)
+    :(addBlock!($m, Scope($x)))
+end
+
+function _addscope(x::Expr, m)
+    :(addBlock!($m, Scope($x)))
+end
+
+macro scope(m, b)
+    if Meta.isexpr(b, :block)
+        body = [_addscope(x, m) for x = b.args]
+        esc(Expr(:block, body...))
+    else
+        esc(_addscope(b, m))
+    end
+end
+
 macro model(f, e::Bool, block)　　
     body = []
     push!(body, Expr(:(=), :tmp, Expr(:call, :SystemBlockDefinition, Expr(:quote, f))))
@@ -90,7 +111,7 @@ function _replace_macro(x::Any)
 end
 
 function _replace_macro(x::Expr)
-    if Meta.isexpr(x, :macrocall) && (x.args[1] == Symbol("@block") || x.args[1] == Symbol("@parameter"))
+    if Meta.isexpr(x, :macrocall) && (x.args[1] == Symbol("@block") || x.args[1] == Symbol("@parameter") || x.args[1] == Symbol("@scope"))
         Expr(:macrocall, x.args[1], x.args[2], :tmp, [_replace_macro(u) for u = x.args[3:end]]...)
     else
         Expr(x.head, [_replace_macro(u) for u = x.args]...)

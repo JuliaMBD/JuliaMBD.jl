@@ -8,7 +8,7 @@ export expr_refvalue, expr_setvalue
 export expr, next, defaultInPort, defaultOutPort
 export SystemBlockDefinition, addBlock!, addParameter!
 export expr_define_function, expr_define_structure, expr_define_next, expr_define_expr
-export @parameter, @block, @model
+export @parameter, @block, @model, @scope
 
 import Base
 # import DifferentialEquations
