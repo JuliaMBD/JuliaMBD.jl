@@ -383,7 +383,7 @@ function expr_define_expr(blk::SystemBlockDefinition)
             $(bodyin...)
             $(sbodyin...)
             f = Expr(:(=), Expr(:tuple, $(oos...), $(soos...), $(scoos...)),
-                Expr(:call, Symbol($(blk.name), :Func), $(args...), $(ps...), $(sargs...)))
+                Expr(:call, Symbol($(Expr(:quote, (blk.name))), :Func), $(args...), $(ps...), $(sargs...)))
             o = Expr[]
             $(bodyout...)
             $(sbodyout...)

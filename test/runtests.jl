@@ -13,3 +13,4 @@ include("test_scope.jl")
 include("test_macro.jl")
 include("test_msd.jl")
 
+include("test_inmodule.jl")
