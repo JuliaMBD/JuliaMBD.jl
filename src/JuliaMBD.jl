@@ -15,11 +15,13 @@ import Base
 
 abstract type AbstractLine end
 
-abstract type AbstractPort end
+abstract type AbstractComponent end
+
+abstract type AbstractPort <: AbstractComponent end
 abstract type AbstractInPort <: AbstractPort end
 abstract type AbstractOutPort <: AbstractPort end
 
-abstract type AbstractBlock end
+abstract type AbstractBlock <: AbstractComponent end
 abstract type AbstractIntegratorBlock <: AbstractBlock end
 abstract type AbstractSystemBlock <: AbstractBlock end
 abstract type AbstractTimeBlock <: AbstractBlock end

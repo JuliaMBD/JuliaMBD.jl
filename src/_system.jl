@@ -423,7 +423,10 @@ end
 
 function tsort(blks::Vector{AbstractBlock})
     l = []
-    check = Dict([n => 0 for n = blks])
+    check = Dict()
+    for n = blks
+        check[n] = 0
+    end
     for n = blks
         if check[n] != 2
             _visit(n, check, l)

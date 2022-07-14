@@ -83,17 +83,26 @@ mutable struct Line <: AbstractLine
     end
 end
 
-function Base.:(=>)(o::To, i::Ti) where {To<:Union{AbstractOutPort,AbstractBlock},Ti<:Union{AbstractInPort,AbstractBlock}}
+function Base.:(=>)(o::AbstractComponent, i::AbstractComponent)
     Line(defaultOutPort(o), defaultInPort(i))
     defaultInPort(o)
 end
 
-function Base.:(=>)(o::To, is::Tuple{N,Ti}) where {N,To<:Union{AbstractOutPort,AbstractBlock},Ti<:Union{AbstractInPort,AbstractBlock}}
+function Base.:(=>)(o::AbstractComponent, is::Vector{<:AbstractComponent})
     for i = is
         Line(defaultOutPort(o), defaultInPort(i))
     end
     defaultInPort(o)
 end
+
+# ## This is for tsort
+# function Base.:(=>)(o::To, x::Number) where {To<:Union{AbstractOutPort,AbstractBlock}}
+#     throw(ErrorException("Cannot use => for AbstractBlock"))
+# end
+
+# function Base.:(=>)(o::To, is::Any) where {To<:Union{AbstractOutPort,AbstractBlock}}
+#     throw(ErrorException("Type mismatch for =>"))
+# end
 
 function Base.show(io::IO, x::AbstractLine)
     Base.show(io, x.var)

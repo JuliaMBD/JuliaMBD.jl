@@ -158,7 +158,7 @@ end
             constant1 => add.inports[2]
             gain1 => add.inports[3]
             gain2 => add.inports[4]
-            add => gain3 => int1 => (int2, gain1)
+            add => gain3 => int1 => [int2, gain1]
             int2 => gain2
             int2 => out1
         end
@@ -182,7 +182,7 @@ end
         end
         begin
             # time => pulse.timeport
-            pulse => (msd.in1, scope1)
+            pulse => [msd.in1, scope1]
             msd.out1 => scope2
         end
     end

@@ -74,8 +74,8 @@ end
     in1 => add.inports[1]
     gain1 => add.inports[2]
     gain2 => int1 => add.inports[3]
-    add => gain3 => (int2, scope1)
-    int2 => (gain1, gain2)
+    add => gain3 => [int2, scope1]
+    int2 => [gain1, gain2]
 
     b = SystemBlockDefinition(:RLCBlock2)
     addParameter!(b, SymbolicValue{Float64}(:R), 100.0)
