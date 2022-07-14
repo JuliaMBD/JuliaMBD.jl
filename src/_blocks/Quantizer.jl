@@ -7,7 +7,7 @@ mutable struct Quantizer <: AbstractBlock
 
     function Quantizer(; inport::AbstractInPort = InPort(),
         outport::AbstractOutPort = OutPort(),
-        quantizationinterval = Float64(0))
+        quantizationinterval = Float64(1))
         blk = new()
         blk.quantizationinterval = quantizationinterval
         blk.inport = inport
