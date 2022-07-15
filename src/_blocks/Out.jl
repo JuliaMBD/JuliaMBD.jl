@@ -56,7 +56,7 @@ mutable struct Scope <: AbstractOutBlock
     end
 
     function Scope(target::AbstractBlock)
-        Scope(defaultOutPort(target))
+        Scope(get_default_outport(target))
     end
 
     function Scope(target::AbstractInPort)
