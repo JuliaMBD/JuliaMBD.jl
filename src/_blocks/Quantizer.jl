@@ -30,10 +30,6 @@ function expr(blk::Quantizer)
     Expr(:block, i, b, o)
 end
 
-function next(blk::Quantizer)
-    [line.dest.parent for line = blk.outport.lines]
-end
-
 get_default_inport(blk::Quantizer) = blk.inport
 get_default_outport(blk::Quantizer) = blk.outport
 get_inports(blk::Quantizer) = [blk.inport]

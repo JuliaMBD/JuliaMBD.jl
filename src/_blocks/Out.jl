@@ -70,10 +70,6 @@ function expr(blk::AbstractOutBlock)
     Expr(:block, i, b)
 end
 
-function next(blk::AbstractOutBlock)
-    []
-end
-
 get_default_inport(blk::AbstractOutBlock) = blk.inport
 get_default_outport(blk::AbstractOutBlock) = nothing
 get_inports(blk::AbstractOutBlock) = [blk.inport]

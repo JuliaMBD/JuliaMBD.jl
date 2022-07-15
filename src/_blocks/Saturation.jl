@@ -42,10 +42,6 @@ function expr(blk::Saturation)
     Expr(:block, i, b, o)
 end
 
-function next(blk::Saturation)
-    [line.dest.parent for line = blk.outport.lines]
-end
-
 get_default_inport(blk::Saturation) = blk.inport
 get_default_outport(blk::Saturation) = blk.outport
 get_inports(blk::Saturation) = [blk.inport]

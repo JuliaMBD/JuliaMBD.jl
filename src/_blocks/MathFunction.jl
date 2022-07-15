@@ -36,10 +36,6 @@ function expr(blk::MathFunction)
     Expr(:block, i, b, o)
 end
 
-function next(blk::MathFunction)
-    [line.dest.parent for line = blk.outport.lines]
-end
-
 get_default_inport(blk::MathFunction) = blk.inport
 get_default_outport(blk::MathFunction) = blk.outport
 get_inports(blk::MathFunction) = [blk.inport]

@@ -56,10 +56,6 @@ function expr(blk::BinaryOperator)
     Expr(:block, i, b, o)
 end
 
-function next(blk::BinaryOperator)
-    [line.dest.parent for line = blk.outport.lines]
-end
-
 get_default_inport(blk::BinaryOperator) = nothing
 get_default_outport(blk::BinaryOperator) = blk.outport
 get_inports(blk::BinaryOperator) = [blk.left, blk.right]

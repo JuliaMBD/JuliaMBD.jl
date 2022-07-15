@@ -27,10 +27,6 @@ function expr(blk::Gain)
     Expr(:block, i, b, o)
 end
 
-function next(blk::Gain)
-    [line.dest.parent for line = blk.outport.lines]
-end
-
 get_default_inport(blk::Gain) = blk.inport
 get_default_outport(blk::Gain) = blk.outport
 get_inports(blk::Gain) = [blk.inport]

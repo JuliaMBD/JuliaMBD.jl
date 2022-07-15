@@ -30,10 +30,6 @@ function expr(blk::Plus)
     Expr(:block, i, b, o)
 end
 
-function next(blk::Plus)
-    [line.dest.parent for line = blk.outport.lines]
-end
-
 get_default_inport(blk::Plus) = nothing
 get_default_outport(blk::Plus) = blk.outport
 get_inports(blk::Plus) = [blk.left, blk.right]
@@ -69,10 +65,6 @@ function expr(blk::Add)
 
     o = expr_set_outports(blk.outport)
     Expr(:block, i, b0, b..., o)
-end
-
-function next(blk::Add)
-    [line.dest.parent for line = blk.outport.lines]
 end
 
 get_default_inport(blk::Add) = nothing

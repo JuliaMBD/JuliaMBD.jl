@@ -52,10 +52,6 @@ function expr(blk::Ramp)
     Expr(:block, i, b, o)
 end
 
-function next(blk::Ramp)
-    [line.dest.parent for line = blk.outport.lines]
-end
-
 get_default_inport(blk::Ramp) = nothing
 get_default_outport(blk::Ramp) = blk.outport
 get_inports(blk::Ramp) = [blk.timeport]

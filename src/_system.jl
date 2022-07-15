@@ -319,6 +319,10 @@ function expr_define_next(blk::SystemBlockDefinition)
             $(scbody...)
             s
         end
+
+        function get_outports(b::$(blk.name))
+            $(Expr(:vect, outs..., souts..., scopes...))
+        end
     end
 end
 

@@ -52,10 +52,6 @@ function expr(blk::Step)
     Expr(:block, i, b, o)
 end
 
-function next(blk::Step)
-    [line.dest.parent for line = blk.outport.lines]
-end
-
 get_default_inport(blk::Step) = nothing
 get_default_outport(blk::Step) = blk.outport
 get_inports(blk::Step) = [blk.timeport]

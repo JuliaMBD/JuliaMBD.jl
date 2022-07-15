@@ -61,10 +61,6 @@ function expr(blk::PulseGenerator)
     Expr(:block, i, b, o)
 end
 
-function next(blk::PulseGenerator)
-    [line.dest.parent for line = blk.outport.lines]
-end
-
 get_default_inport(blk::PulseGenerator) = nothing
 get_default_outport(blk::PulseGenerator) = blk.outport
 get_inports(blk::PulseGenerator) = [blk.timeport]

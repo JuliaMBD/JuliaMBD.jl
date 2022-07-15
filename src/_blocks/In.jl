@@ -52,10 +52,6 @@ function expr(blk::AbstractInBlock)
     Expr(:block, b, o)
 end
 
-function next(blk::AbstractInBlock)
-    [line.dest.parent for line = blk.outport.lines]
-end
-
 get_default_inport(blk::AbstractInBlock) = nothing
 get_default_outport(blk::AbstractInBlock) = blk.outport
 get_inports(blk::AbstractInBlock) = []

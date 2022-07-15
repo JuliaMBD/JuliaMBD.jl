@@ -21,10 +21,6 @@ function expr(blk::Constant)
     Expr(:block, b, o)
 end
 
-function next(blk::Constant)
-    [line.dest.parent for line = blk.outport.lines]
-end
-
 get_default_inport(blk::Constant) = nothing
 get_default_outport(blk::Constant) = blk.outport
 get_inports(blk::Constant) = []
