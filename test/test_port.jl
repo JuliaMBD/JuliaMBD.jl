@@ -1,6 +1,4 @@
 
-import JuliaMBD
-
 @testset "inport" begin
     x = InPort()
     println(x)

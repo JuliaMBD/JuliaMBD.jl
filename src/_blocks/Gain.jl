@@ -14,6 +14,16 @@ mutable struct Gain <: AbstractBlock
         blk.outport.parent = blk
         blk
     end
+
+    function Gain(K::Parameter; inport::AbstractInPort = InPort(), outport::AbstractOutPort = OutPort())
+        blk = new()
+        blk.K = K
+        blk.inport = inport
+        blk.outport = outport
+        blk.inport.parent = blk
+        blk.outport.parent = blk
+        blk
+    end
 end
     
 function expr(blk::Gain)

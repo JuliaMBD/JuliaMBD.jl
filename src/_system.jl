@@ -38,7 +38,7 @@ end
 
 function addBlock!(blk::SystemBlockDefinition, x::AbstractTimeBlock)
     push!(blk.blks, x)
-    Line(blk.timeblk.outport, x.timeport)
+    Line(blk.timeblk.outport, get_timeport(x))
 end
 
 function addBlock!(blk::SystemBlockDefinition, x::AbstractSystemBlock)
@@ -334,7 +334,7 @@ function expr_define_expr(blk::SystemBlockDefinition)
         function expr(b::$(blk.name))
             i = $(Expr(:call, :expr_set_inports, ins..., sins...))
             f = Expr(:(=), Expr(:tuple, $(oos...), $(soos...), $(scoos...)),
-                Expr(:call, Symbol($(Expr(:quote, (blk.name))), :Func), $(args...), $(ps...), $(sargs...)))
+                Expr(:call, Symbol($(Expr(:quote, (blk.name))), :Function), $(args...), $(ps...), $(sargs...)))
             o = $(Expr(:call, :expr_set_outports, outs..., souts..., scopes...))
             Expr(:block, i, f, o)
         end
@@ -366,7 +366,7 @@ function expr_define_function(blk::SystemBlockDefinition)
     end
     blks = allblocks(v)
     body = [expr(b) for b = tsort(blks)]
-    Expr(:function, Expr(:call, Symbol(blk.name, "Func"),
+    Expr(:function, Expr(:call, Symbol(blk.name, "Function"),
             Expr(:parameters, args..., params..., sargs...)),
         Expr(:block, body..., Expr(:tuple, outs..., souts..., scopes...)))
 end

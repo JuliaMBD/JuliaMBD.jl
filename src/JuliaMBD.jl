@@ -59,10 +59,10 @@ include("_tsort.jl")
 include("_system.jl")
 include("_macro.jl")
 
-Base.show(io::IO, x::Constant) = Base.show(io, "Constant($(x.value))")
+Base.show(io::IO, x::Constant) = Base.show(io, "Constant()")
 Base.show(io::IO, x::InBlock) = Base.show(io, "In()")
 Base.show(io::IO, x::StateIn) = Base.show(io, "StateIn()")
-Base.show(io::IO, x::Integrator) = Base.show(io, "Integrator($([x.inblk, x.outblk]))")
+Base.show(io::IO, x::Integrator) = Base.show(io, "Integrator()")
 Base.show(io::IO, x::OutBlock) = Base.show(io, "Out()")
 Base.show(io::IO, x::StateOut) = Base.show(io, "StateOut()")
 Base.show(io::IO, x::Scope) = Base.show(io, "Scope()")
@@ -71,8 +71,6 @@ Base.show(io::IO, x::AbstractPort) = Base.show(io, x.var)
 Base.show(io::IO, x::SymbolicValue{Tv}) where Tv = Base.show(io, Expr(:(::), x.name, Tv))
 Base.show(io::IO, x::SymbolicValue{Auto}) = Base.show(io, x.name)
 
-function Base.show(io::IO, b::SystemBlockDefinition)
-    Base.show(io, "SystemBlock($(b.name))")
-end
+Base.show(io::IO, b::SystemBlockDefinition) = Base.show(io, "SystemBlock($(b.name))")
 
 end

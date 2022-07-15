@@ -11,6 +11,14 @@ mutable struct Constant <: AbstractBlock
         blk.outport.parent = blk
         blk
     end
+
+    function Constant(value::Parameter; outport::AbstractOutPort = OutPort())
+        blk = new()
+        blk.value = value
+        blk.outport = outport
+        blk.outport.parent = blk
+        blk
+    end
 end
     
 
