@@ -15,6 +15,16 @@ expr_call(blk::AbstractBlock) = Expr(:tuple)
 
 get_timeport(blk::AbstractTimeBlock) = nothing
 
+function prev(blk::AbstractBlock)
+    b = AbstractBlock[]
+    for p = get_inports(blk)
+        if !isnothing(p.line)
+            push!(b, p.line.source.parent)
+        end
+    end
+    b
+end
+
 function next(blk::AbstractBlock)
     b = AbstractBlock[]
     for p = get_outports(blk)

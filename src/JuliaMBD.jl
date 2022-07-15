@@ -4,9 +4,10 @@ export AbstractBlock, AbstractSystemBlock
 export AbstractInPort, AbstractOutPort
 export Auto, SymbolicValue, Parameter
 export InPort, OutPort, Line
-export expr_refvalue, expr_setvalue
-export expr, next, defaultInPort, defaultOutPort
+export expr_refvalue, expr_setvalue, expr
+export next, prev
 export SystemBlockDefinition, addBlock!, addParameter!
+export get_default_inport, get_default_outport
 export expr_define_function, expr_define_structure, expr_define_next, expr_define_expr
 export expr_set_inports, expr_set_outports
 export get_inports, get_outports
@@ -54,6 +55,7 @@ include("_blocks/Step.jl")
 include("_blocks/Quantizer.jl")
 include("_blocks/Saturation.jl")
 
+include("_tsort.jl")
 include("_system.jl")
 include("_macro.jl")
 

@@ -285,7 +285,8 @@ end
 Expr to define the following generic functions for AbstractBlock.
 next, should be imported as `import JuliaMBD: next`
 
-- next: Get next blocks
+- get_inports: Get inports
+- get_outports: Get outports
 """
 
 function expr_define_next(blk::SystemBlockDefinition)
@@ -297,6 +298,10 @@ function expr_define_next(blk::SystemBlockDefinition)
     scopes = [:(b.$(name(p.var))) for p = blk.scopeoutports]
 
     quote
+        function get_inports(b::$(blk.name))
+            $(Expr(:vect, ins..., sins...))
+        end
+
         function get_outports(b::$(blk.name))
             $(Expr(:vect, outs..., souts..., scopes...))
         end
@@ -348,45 +353,20 @@ function expr_define_function(blk::SystemBlockDefinition)
     outs = [:($(name(p.var)) = $(expr_refvalue(p.var))) for p = blk.outports]
     souts = [:($(name(p.var)) = $(expr_refvalue(p.var))) for p = blk.stateoutports]
     scopes = [:($(name(p.var)) = $(expr_refvalue(p.var))) for p = blk.scopeoutports]
-    body = [expr(b) for b = tsort(blk.blks)]
+
+    v = AbstractBlock[]
+    for p = blk.outports
+        push!(v, p.parent)
+    end
+    for p = blk.stateoutports
+        push!(v, p.parent)
+    end
+    for p = blk.scopeoutports
+        push!(v, p.parent)
+    end
+    blks = allblocks(v)
+    body = [expr(b) for b = tsort(blks)]
     Expr(:function, Expr(:call, Symbol(blk.name, "Func"),
             Expr(:parameters, args..., params..., sargs...)),
         Expr(:block, body..., Expr(:tuple, outs..., souts..., scopes...)))
-end
-
-"""
-tsort
-
-Tomprogical sort to determine the sequence of expression in SystemBlock
-"""
-
-# function expr(blks::Vector{AbstractBlock})
-#     Expr(:block, [expr(x) for x = tsort(blks)]...)
-# end
-
-function tsort(blks::Vector{AbstractBlock})
-    l = []
-    check = Dict()
-    for n = blks
-        check[n] = 0
-    end
-    for n = blks
-        if check[n] != 2
-            _visit(n, check, l)
-        end
-    end
-    l
-end
-
-function _visit(n, check, l)
-    if check[n] == 1
-        throw(ErrorException("DAG has a closed path"))
-    elseif check[n] == 0
-        check[n] = 1
-        for m = next(n)
-            _visit(m, check, l)
-        end
-        check[n] = 2
-        pushfirst!(l, n)
-    end
 end
