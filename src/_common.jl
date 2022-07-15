@@ -10,7 +10,7 @@ get_default_inport(blk::AbstractBlock) = nothing
 get_default_outport(blk::AbstractBlock) = nothing
 
 get_inports(blk::AbstractBlock) = []
-get_outports(blk::AbstractBlock) = []
+# get_outports(blk::AbstractBlock) = []
 expr_call(blk::AbstractBlock) = Expr(:tuple)
 
 get_timeport(blk::AbstractTimeBlock) = nothing

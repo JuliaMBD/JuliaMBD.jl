@@ -289,49 +289,17 @@ next, should be imported as `import JuliaMBD: next`
 """
 
 function expr_define_next(blk::SystemBlockDefinition)
-    outs = [name(p.var) for p = blk.outports]
-    souts = [name(p.var) for p = blk.stateoutports]
-    scopes = [name(p.var) for p = blk.scopeoutports]
+    params = [:(b.$(name(x[1]))) for x = blk.parameters]
+    ins = [:(b.$(name(p.var))) for p = blk.inports]
+    outs = [:(b.$(name(p.var))) for p = blk.outports]
+    sins = [:(b.$(name(p.var))) for p = blk.stateinports]
+    souts = [:(b.$(name(p.var))) for p = blk.stateoutports]
+    scopes = [:(b.$(name(p.var))) for p = blk.scopeoutports]
 
-    body = [quote
-        for line = b.$x.lines
-            push!(s, line.dest.parent)
-        end
-    end for x = outs]
-
-    sbody = [quote
-        for line = b.$x.lines
-            push!(s, line.dest.parent)
-        end
-    end for x = souts]
-
-    scbody = [quote
-        for line = b.$x.lines
-            push!(s, line.dest.parent)
-        end
-    end for x = scopes]
-
-    a = [Expr(:., :b, Expr(:quote, x)) for x = outs]
-    b = [Expr(:., :b, Expr(:quote, x)) for x = souts]
-    c = [Expr(:., :b, Expr(:quote, x)) for x = scopes]
-    println(a)
     quote
-        function next(b::$(blk.name))
-            s = AbstractBlock[]
-            $(body...)
-            $(sbody...)
-            $(scbody...)
-            s
+        function get_outports(b::$(blk.name))
+            $(Expr(:vect, outs..., souts..., scopes...))
         end
-
-        # function get_outports(b::$(blk.name))
-        #     # s = AbstractOutPort[]
-        #     # push!(s, $(a...))
-        #     # push!(s, $(b...))
-        #     # push!(s, $(c...))
-        #     # s
-        #     [$(a...), $(b...), $(c...)]
-        # end
     end
 end
 
