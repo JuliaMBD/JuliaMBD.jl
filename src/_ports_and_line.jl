@@ -10,37 +10,15 @@ mutable struct OutPort <: AbstractOutPort
     lines::Vector{AbstractLine}
 end
 
-function InPort(name, ::Type{Tv}) where Tv
-    InPort(SymbolicValue{Tv}(name), nothing, nothing)
-end
+InPort(name, ::Type{Tv}) where Tv = InPort(SymbolicValue{Tv}(name), nothing, nothing)
+InPort(name) = InPort(SymbolicValue{Auto}(name), nothing, nothing)
+InPort(::Type{Tv}) where Tv = InPort(SymbolicValue{Tv}(gensym()), nothing, nothing)
+InPort() = InPort(SymbolicValue{Auto}(gensym()), nothing, nothing)
 
-function InPort(name)
-    InPort(SymbolicValue{Auto}(name), nothing, nothing)
-end
-
-function InPort(::Type{Tv}) where Tv
-    InPort(SymbolicValue{Tv}(gensym()), nothing, nothing)
-end
-
-function InPort()
-    InPort(SymbolicValue{Auto}(gensym()), nothing, nothing)
-end
-
-function OutPort(name, ::Type{Tv}) where Tv
-    OutPort(SymbolicValue{Tv}(name), nothing, AbstractLine[])
-end
-
-function OutPort(name)
-    OutPort(SymbolicValue{Auto}(name), nothing, AbstractLine[])
-end
-
-function OutPort(::Type{Tv}) where Tv
-    OutPort(SymbolicValue{Tv}(gensym()), nothing, AbstractLine[])
-end
-
-function OutPort()
-    OutPort(SymbolicValue{Auto}(gensym()), nothing, AbstractLine[])
-end
+OutPort(name, ::Type{Tv}) where Tv = OutPort(SymbolicValue{Tv}(name), nothing, AbstractLine[])
+OutPort(name) = OutPort(SymbolicValue{Auto}(name), nothing, AbstractLine[])
+OutPort(::Type{Tv}) where Tv = OutPort(SymbolicValue{Tv}(gensym()), nothing, AbstractLine[])
+OutPort() = OutPort(SymbolicValue{Auto}(gensym()), nothing, AbstractLine[])
 
 mutable struct Line <: AbstractLine
     var::SymbolicValue{Auto}
