@@ -311,6 +311,10 @@ function expr_define_next(blk::SystemBlockDefinition)
         end
     end for x = scopes]
 
+    a = [Expr(:., :b, Expr(:quote, x)) for x = outs]
+    b = [Expr(:., :b, Expr(:quote, x)) for x = souts]
+    c = [Expr(:., :b, Expr(:quote, x)) for x = scopes]
+    println(a)
     quote
         function next(b::$(blk.name))
             s = AbstractBlock[]
@@ -320,9 +324,14 @@ function expr_define_next(blk::SystemBlockDefinition)
             s
         end
 
-        function get_outports(b::$(blk.name))
-            $(Expr(:vect, outs..., souts..., scopes...))
-        end
+        # function get_outports(b::$(blk.name))
+        #     # s = AbstractOutPort[]
+        #     # push!(s, $(a...))
+        #     # push!(s, $(b...))
+        #     # push!(s, $(c...))
+        #     # s
+        #     [$(a...), $(b...), $(c...)]
+        # end
     end
 end
 
@@ -340,25 +349,6 @@ function expr_define_expr(blk::SystemBlockDefinition)
     sins = [:(b.$(name(p.var))) for p = blk.stateinports]
     souts = [:(b.$(name(p.var))) for p = blk.stateoutports]
     scopes = [:(b.$(name(p.var))) for p = blk.scopeoutports]
-
-    bodyin = [:(push!(i, expr_setvalue($x.var, expr_refvalue($x.line.var)))) for x = ins]
-    sbodyin = [:(push!(i, expr_setvalue($x.var, expr_refvalue($x.line.var)))) for x = sins]
-
-    bodyout = [quote
-        for line = $x.lines
-            push!(o, expr_setvalue(line.var, expr_refvalue($x.var)))
-        end
-    end for x = outs]
-    sbodyout = [quote
-        for line = $x.lines
-            push!(o, expr_setvalue(line.var, expr_refvalue($x.var)))
-        end
-    end for x = souts]
-    scbodyout = [quote
-        for line = $x.lines
-            push!(o, expr_setvalue(line.var, expr_refvalue($x.var)))
-        end
-    end for x = scopes]
     
     ps = [expr_kwvalue(p[1], :(expr_refvalue($x))) for (p,x) = zip(blk.parameters, params)]
     args = [expr_kwvalue(p.var, :(expr_refvalue($x.var))) for (p,x) = zip(blk.inports, ins)]
@@ -369,16 +359,11 @@ function expr_define_expr(blk::SystemBlockDefinition)
 
     quote
         function expr(b::$(blk.name))
-            i = Expr[]
-            $(bodyin...)
-            $(sbodyin...)
+            i = $(Expr(:call, :expr_set_inports, ins..., sins...))
             f = Expr(:(=), Expr(:tuple, $(oos...), $(soos...), $(scoos...)),
                 Expr(:call, Symbol($(Expr(:quote, (blk.name))), :Func), $(args...), $(ps...), $(sargs...)))
-            o = Expr[]
-            $(bodyout...)
-            $(sbodyout...)
-            $(scbodyout...)
-            Expr(:block, i..., f, o...)
+            o = $(Expr(:call, :expr_set_outports, outs..., souts..., scopes...))
+            Expr(:block, i, f, o)
         end
     end
 end

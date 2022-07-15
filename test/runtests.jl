@@ -1,7 +1,7 @@
 using JuliaMBD
 using Test
 
-import JuliaMBD: next, expr, defaultInPort, defaultOutPort
+import JuliaMBD: next, expr
 
 include("test_parameter.jl")
 include("test_port.jl")
