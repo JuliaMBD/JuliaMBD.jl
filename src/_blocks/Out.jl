@@ -65,9 +65,8 @@ mutable struct Scope <: AbstractOutBlock
 end
 
 function expr(blk::AbstractOutBlock)
-    i = expr_setvalue(blk.inport.var, expr_refvalue(blk.inport.line.var))
+    i = expr_set_inports(blk.inport)
     b = expr_setvalue(blk.outport.var, expr_refvalue(blk.inport.var))
-    # o = [expr_setvalue(line.var, expr_refvalue(blk.outport.var)) for line = blk.outport.lines]
     Expr(:block, i, b)
 end
 
@@ -75,22 +74,7 @@ function next(blk::AbstractOutBlock)
     []
 end
 
-function Base.show(io::IO, x::OutBlock)
-    Base.show(io, "Out()")
-end
-
-function Base.show(io::IO, x::StateOut)
-    Base.show(io, "StateOut()")
-end
-
-function Base.show(io::IO, x::Scope)
-    Base.show(io, "Scope()")
-end
-
-function defaultInPort(blk::AbstractOutBlock)
-    blk.inport
-end
-
-function defaultOutPort(blk::AbstractOutBlock)
-    nothing
-end
+get_default_inport(blk::AbstractOutBlock) = blk.inport
+get_default_outport(blk::AbstractOutBlock) = nothing
+get_inports(blk::AbstractOutBlock) = [blk.inport]
+get_outports(blk::AbstractOutBlock) = []

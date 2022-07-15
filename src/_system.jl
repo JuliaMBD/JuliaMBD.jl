@@ -19,10 +19,6 @@ mutable struct SystemBlockDefinition
     end
 end
 
-function Base.show(io::IO, b::SystemBlockDefinition)
-    Base.show(io, "SystemBlock($(b.name))")
-end
-
 function addParameter!(blk::SystemBlockDefinition, x::SymbolicValue)
     push!(blk.parameters, (x, x.name))
 end
@@ -287,11 +283,9 @@ end
 
 """
 Expr to define the following generic functions for AbstractBlock.
-next, defaultInPort, defaultOutPort should be imported as `import JuliaMBD: next, defaultInPort, defaultOutPort`
+next, should be imported as `import JuliaMBD: next`
 
 - next: Get next blocks
-- defaultInPort: Get the default inport
-- defaultOutPort: Get the default outport
 """
 
 function expr_define_next(blk::SystemBlockDefinition)
@@ -324,14 +318,6 @@ function expr_define_next(blk::SystemBlockDefinition)
             $(sbody...)
             $(scbody...)
             s
-        end
-
-        function defaultInPort(b::$(blk.name))
-            nothing
-        end
-
-        function defaultOutPort(b::$(blk.name))
-            nothing
         end
     end
 end
@@ -417,9 +403,9 @@ tsort
 Tomprogical sort to determine the sequence of expression in SystemBlock
 """
 
-function expr(blks::Vector{AbstractBlock})
-    Expr(:block, [expr(x) for x = tsort(blks)]...)
-end
+# function expr(blks::Vector{AbstractBlock})
+#     Expr(:block, [expr(x) for x = tsort(blks)]...)
+# end
 
 function tsort(blks::Vector{AbstractBlock})
     l = []

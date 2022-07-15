@@ -19,29 +19,29 @@ mutable struct Plus <: AbstractBlock
 end
     
 function expr(blk::Plus)
-    i1 = expr_setvalue(blk.left.var, expr_refvalue(blk.left.line.var))
-    i2 = expr_setvalue(blk.right.var, expr_refvalue(blk.right.line.var))
+    i = expr_set_inports(blk.left, blk.right)
 
     left = expr_refvalue(blk.left.var)
     right = expr_refvalue(blk.right.var)
 
     b = expr_setvalue(blk.outport.var, :($left + $right))
 
-    o = [expr_setvalue(line.var, expr_refvalue(blk.outport.var)) for line = blk.outport.lines]
-    Expr(:block, i1, i2, b, o...)
+    o = expr_set_outports(blk.outport)
+    Expr(:block, i, b, o)
 end
 
 function next(blk::Plus)
     [line.dest.parent for line = blk.outport.lines]
 end
 
-function defaultInPort(blk::Plus)
-    nothing
-end
+get_default_inport(blk::Plus) = nothing
+get_default_outport(blk::Plus) = blk.outport
+get_inports(blk::Plus) = [blk.left, blk.right]
+get_outports(blk::Plus) = [blk.outport]
 
-function defaultOutPort(blk::Plus)
-    blk.outport
-end
+"""
+Add
+"""
 
 mutable struct Add <: AbstractBlock
     inports::Vector{InPort}
@@ -62,23 +62,20 @@ mutable struct Add <: AbstractBlock
 end
     
 function expr(blk::Add)
-    i = [expr_setvalue(b.var, expr_refvalue(b.line.var)) for b = blk.inports]
+    i = expr_set_inports(blk.inports...)
 
     b0 = expr_setvalue(blk.outport.var, 0)
     b = [expr_setvalue(blk.outport.var, Expr(:call, s, expr_refvalue(blk.outport.var), expr_refvalue(b.var))) for (s,b) = zip(blk.signs, blk.inports)]
 
-    o = [expr_setvalue(line.var, expr_refvalue(blk.outport.var)) for line = blk.outport.lines]
-    Expr(:block, i..., b0, b..., o...)
+    o = expr_set_outports(blk.outport)
+    Expr(:block, i, b0, b..., o)
 end
 
 function next(blk::Add)
     [line.dest.parent for line = blk.outport.lines]
 end
 
-function defaultInPort(blk::Add)
-    nothing
-end
-
-function defaultOutPort(blk::Add)
-    blk.outport
-end
+get_default_inport(blk::Add) = nothing
+get_default_outport(blk::Add) = blk.outport
+get_inports(blk::Add) = blk.inports
+get_outports(blk::Add) = [blk.outport]

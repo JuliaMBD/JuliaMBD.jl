@@ -25,26 +25,22 @@ function Abs(;
 end
 
 function expr(blk::MathFunction)
-    i = expr_setvalue(blk.inport.var, expr_refvalue(blk.inport.line.var))
+    i = expr_set_inports(blk.inport)
 
     x = expr_refvalue(blk.inport.var)
     f = blk.f
 
     b = expr_setvalue(blk.outport.var, Expr(:call, f, x))
 
-    o = [expr_setvalue(line.var, expr_refvalue(blk.outport.var)) for line = blk.outport.lines]
-    Expr(:block, i, b, o...)
+    o = expr_set_outports(blk.outport)
+    Expr(:block, i, b, o)
 end
 
 function next(blk::MathFunction)
     [line.dest.parent for line = blk.outport.lines]
 end
 
-function defaultInPort(blk::MathFunction)
-    blk.inport
-end
-
-function defaultOutPort(blk::MathFunction)
-    blk.outport
-end
-
+get_default_inport(blk::MathFunction) = blk.inport
+get_default_outport(blk::MathFunction) = blk.outport
+get_inports(blk::MathFunction) = [blk.inport]
+get_outports(blk::MathFunction) = [blk.outport]

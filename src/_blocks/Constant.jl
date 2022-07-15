@@ -16,25 +16,16 @@ end
 
 function expr(blk::Constant)
     value = expr_refvalue(blk.value)
-
     b = expr_setvalue(blk.outport.var, :($value))
-
-    o = [expr_setvalue(line.var, expr_refvalue(blk.outport.var)) for line = blk.outport.lines]
-    Expr(:block, b, o...)
+    o = expr_set_outports(blk.outport)
+    Expr(:block, b, o)
 end
 
 function next(blk::Constant)
     [line.dest.parent for line = blk.outport.lines]
 end
 
-function Base.show(io::IO, x::Constant)
-    Base.show(io, "Constant($(x.value))")
-end
-
-function defaultInPort(blk::Constant)
-    nothing
-end
-
-function defaultOutPort(blk::Constant)
-    blk.outport
-end
+get_default_inport(blk::Constant) = nothing
+get_default_outport(blk::Constant) = blk.outport
+get_inports(blk::Constant) = []
+get_outports(blk::Constant) = [blk.outport]

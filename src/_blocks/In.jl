@@ -47,28 +47,16 @@ mutable struct TimeIn <: AbstractInBlock
 end
 
 function expr(blk::AbstractInBlock)
-    # i = expr_setvalue(blk.inport.var, expr_refvalue(blk.inport.line.var))
     b = expr_setvalue(blk.outport.var, expr_refvalue(blk.inport.var))
-    o = [expr_setvalue(line.var, expr_refvalue(blk.outport.var)) for line = blk.outport.lines]
-    Expr(:block, b, o...)
+    o = expr_set_outports(blk.outport)
+    Expr(:block, b, o)
 end
 
 function next(blk::AbstractInBlock)
     [line.dest.parent for line = blk.outport.lines]
 end
 
-function Base.show(io::IO, x::InBlock)
-    Base.show(io, "In()")
-end
-
-function Base.show(io::IO, x::StateIn)
-    Base.show(io, "StateIn()")
-end
-
-function defaultInPort(blk::AbstractInBlock)
-    nothing
-end
-
-function defaultOutPort(blk::AbstractInBlock)
-    blk.outport
-end
+get_default_inport(blk::AbstractInBlock) = nothing
+get_default_outport(blk::AbstractInBlock) = blk.outport
+get_inports(blk::AbstractInBlock) = []
+get_outports(blk::AbstractInBlock) = [blk.outport]

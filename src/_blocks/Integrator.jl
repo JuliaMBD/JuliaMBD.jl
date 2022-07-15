@@ -38,14 +38,7 @@ mutable struct Integrator <: AbstractIntegratorBlock
     end
 end
 
-function Base.show(io::IO, x::Integrator)
-    Base.show(io, "Integrator($([x.inblk, x.outblk]))")
-end
-
-function defaultInPort(blk::Integrator)
-    blk.inport
-end
-
-function defaultOutPort(blk::Integrator)
-    blk.outport
-end
+get_default_inport(blk::Integrator) = blk.inport
+get_default_outport(blk::Integrator) = blk.outport
+# get_inports(blk::Integrator) = [blk.inport]
+# get_outports(blk::Integrator) = [blk.outport]

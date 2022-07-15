@@ -24,13 +24,5 @@ function SymbolicValue(x::Symbol)
     SymbolicValue{Auto}(x)
 end
 
-function Base.show(io::IO, x::SymbolicValue{Tv}) where Tv
-    Base.show(io, Expr(:(::), x.name, Tv))
-end
-
-function Base.show(io::IO, x::SymbolicValue{Auto})
-    Base.show(io, x.name)
-end
-
 const Parameter = Any
 
