@@ -51,3 +51,6 @@ function expr_set_outports(outports...)
 end
 
         
+function expr_initial(b::AbstractBlock)
+    expr(b)
+end

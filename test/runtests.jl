@@ -1,7 +1,7 @@
 using JuliaMBD
 using Test
 
-import JuliaMBD: expr, get_inports, get_outports
+import JuliaMBD: expr, expr_initial, get_inports, get_outports
 
 include("test_parameter.jl")
 include("test_port.jl")
@@ -14,3 +14,4 @@ include("test_macro.jl")
 include("test_msd.jl")
 
 include("test_inmodule.jl")
+include("test_initial.jl")

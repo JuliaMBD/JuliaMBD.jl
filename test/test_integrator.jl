@@ -11,7 +11,7 @@ end
     Line(b0.outport, b1.inport)
     Line(b1.outport, b3.inport)
     println(b1)
-    [println(expr(b)) for b = JuliaMBD.tsort([b1.inblk,b1.outblk,b3,b0])]
+    [println(expr(b)) for b = JuliaMBD.tsort([b1.inblk,b1.outblk,b1.innerblk,b3,b0])]
 end
 
 @testset "integrator3" begin

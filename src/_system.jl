@@ -34,6 +34,7 @@ end
 function addBlock!(blk::SystemBlockDefinition, x::AbstractIntegratorBlock)
     addBlock!(blk, x.inblk)
     addBlock!(blk, x.outblk)
+    addBlock!(blk, x.innerblk)
 end
 
 function addBlock!(blk::SystemBlockDefinition, x::AbstractTimeBlock)
@@ -330,11 +331,20 @@ function expr_define_expr(blk::SystemBlockDefinition)
     soos = [:(expr_refvalue($x.var)) for x = souts]
     scoos = [:(expr_refvalue($x.var)) for x = scopes]
 
+    tmp = [Expr(:quote, name(p.var)) for p = blk.stateinports]
     quote
         function expr(b::$(blk.name))
             i = $(Expr(:call, :expr_set_inports, ins..., sins...))
             f = Expr(:(=), Expr(:tuple, $(oos...), $(soos...), $(scoos...)),
                 Expr(:call, Symbol($(Expr(:quote, (blk.name))), :Function), $(args...), $(ps...), $(sargs...)))
+            o = $(Expr(:call, :expr_set_outports, outs..., souts..., scopes...))
+            Expr(:block, i, f, o)
+        end
+
+        function expr_initial(b::$(blk.name))
+            i = $(Expr(:call, :expr_set_inports, ins..., sins...))
+            f = Expr(:(=), Expr(:tuple, $(oos...), $(soos...), $(scoos...)),
+                Expr(:call, Symbol($(Expr(:quote, (blk.name))), :InitialFunction), $(args...), $(ps...), $(sargs...)))
             o = $(Expr(:call, :expr_set_outports, outs..., souts..., scopes...))
             Expr(:block, i, f, o)
         end
@@ -370,3 +380,34 @@ function expr_define_function(blk::SystemBlockDefinition)
             Expr(:parameters, args..., params..., sargs...)),
         Expr(:block, body..., Expr(:tuple, outs..., souts..., scopes...)))
 end
+
+"""
+Expr to define the initialfunction of SystemBlock
+The toporogical sort `tsort` is used.
+"""
+
+function expr_define_initialfunction(blk::SystemBlockDefinition)
+    params = [expr_defvalue(x) for x = blk.parameters]
+    args = [expr_defvalue(p.var) for p = blk.inports]
+    sargs = [expr_defvalue(p.var) for p = blk.stateinports]
+    outs = [:($(name(p.var)) = $(expr_refvalue(p.var))) for p = blk.outports]
+    souts = [:($(name(p.var)) = $(expr_refvalue(p.var))) for p = blk.stateoutports]
+    scopes = [:($(name(p.var)) = $(expr_refvalue(p.var))) for p = blk.scopeoutports]
+
+    v = AbstractBlock[]
+    for p = blk.outports
+        push!(v, p.parent)
+    end
+    for p = blk.stateoutports
+        push!(v, p.parent)
+    end
+    for p = blk.scopeoutports
+        push!(v, p.parent)
+    end
+    blks = allblocks(v)
+    body = [expr_initial(b) for b = tsort(blks)]
+    Expr(:function, Expr(:call, Symbol(blk.name, "InitialFunction"),
+            Expr(:parameters, args..., params..., sargs...)),
+        Expr(:block, body..., Expr(:tuple, outs..., souts..., scopes...)))
+end
+
