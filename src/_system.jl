@@ -364,17 +364,18 @@ function expr_define_function(blk::SystemBlockDefinition)
     souts = [:($(name(p.var)) = $(expr_refvalue(p.var))) for p = blk.stateoutports]
     scopes = [:($(name(p.var)) = $(expr_refvalue(p.var))) for p = blk.scopeoutports]
 
-    v = AbstractBlock[]
-    for p = blk.outports
-        push!(v, p.parent)
-    end
-    for p = blk.stateoutports
-        push!(v, p.parent)
-    end
-    for p = blk.scopeoutports
-        push!(v, p.parent)
-    end
-    blks = allblocks(v)
+    # v = AbstractBlock[]
+    # for p = blk.outports
+    #     push!(v, p.parent)
+    # end
+    # for p = blk.stateoutports
+    #     push!(v, p.parent)
+    # end
+    # for p = blk.scopeoutports
+    #     push!(v, p.parent)
+    # end
+    # blks = allblocks(v)
+    blks = blk.blks
     body = [expr(b) for b = tsort(blks)]
     Expr(:function, Expr(:call, Symbol(blk.name, "Function"),
             Expr(:parameters, args..., params..., sargs...)),
@@ -394,17 +395,18 @@ function expr_define_initialfunction(blk::SystemBlockDefinition)
     souts = [:($(name(p.var)) = $(expr_refvalue(p.var))) for p = blk.stateoutports]
     scopes = [:($(name(p.var)) = $(expr_refvalue(p.var))) for p = blk.scopeoutports]
 
-    v = AbstractBlock[]
-    for p = blk.outports
-        push!(v, p.parent)
-    end
-    for p = blk.stateoutports
-        push!(v, p.parent)
-    end
-    for p = blk.scopeoutports
-        push!(v, p.parent)
-    end
-    blks = allblocks(v)
+    # v = AbstractBlock[]
+    # for p = blk.outports
+    #     push!(v, p.parent)
+    # end
+    # for p = blk.stateoutports
+    #     push!(v, p.parent)
+    # end
+    # for p = blk.scopeoutports
+    #     push!(v, p.parent)
+    # end
+    # blks = allblocks(v)
+    blks = blk.blks
     body = [expr_initial(b) for b = tsort(blks)]
     Expr(:function, Expr(:call, Symbol(blk.name, "InitialFunction"),
             Expr(:parameters, args..., params..., sargs...)),
