@@ -22,7 +22,7 @@ mutable struct Saturation <: AbstractBlock
 end
 
 function expr(blk::Saturation)
-    i = expr_setvalue(blk.inport.var, expr_refvalue(blk.inport.line.var))
+    i = expr_set_inports(blk.inport)
 
     x = expr_refvalue(blk.inport.var)
     upperlimit = expr_refvalue(blk.upperlimit)
@@ -38,19 +38,11 @@ function expr(blk::Saturation)
         end
     end)
 
-    o = [expr_setvalue(line.var, expr_refvalue(blk.outport.var)) for line = blk.outport.lines]
-    Expr(:block, i, b, o...)
+    o = expr_set_outports(blk.outport)
+    Expr(:block, i, b, o)
 end
 
-function next(blk::Saturation)
-    [line.dest.parent for line = blk.outport.lines]
-end
-
-function defaultInPort(blk::Saturation)
-    blk.inport
-end
-
-function defaultOutPort(blk::Saturation)
-    blk.outport
-end
-
+get_default_inport(blk::Saturation) = blk.inport
+get_default_outport(blk::Saturation) = blk.outport
+get_inports(blk::Saturation) = [blk.inport]
+get_outports(blk::Saturation) = [blk.outport]

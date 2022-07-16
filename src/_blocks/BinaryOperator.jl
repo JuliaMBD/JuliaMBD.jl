@@ -44,8 +44,7 @@ function Mod(;
 end
     
 function expr(blk::BinaryOperator)
-    i1 = expr_setvalue(blk.left.var, expr_refvalue(blk.left.line.var))
-    i2 = expr_setvalue(blk.right.var, expr_refvalue(blk.right.line.var))
+    i = expr_set_inports(blk.left, blk.right)
 
     left = expr_refvalue(blk.left.var)
     right = expr_refvalue(blk.right.var)
@@ -53,19 +52,11 @@ function expr(blk::BinaryOperator)
 
     b = expr_setvalue(blk.outport.var, Expr(:call, operator, left, right))
 
-    o = [expr_setvalue(line.var, expr_refvalue(blk.outport.var)) for line = blk.outport.lines]
-    Expr(:block, i1, i2, b, o...)
+    o = expr_set_outports(blk.outport)
+    Expr(:block, i, b, o)
 end
 
-function next(blk::BinaryOperator)
-    [line.dest.parent for line = blk.outport.lines]
-end
-
-function defaultInPort(blk::BinaryOperator)
-    nothing
-end
-
-function defaultOutPort(blk::BinaryOperator)
-    blk.outport
-end
-
+get_default_inport(blk::BinaryOperator) = nothing
+get_default_outport(blk::BinaryOperator) = blk.outport
+get_inports(blk::BinaryOperator) = [blk.left, blk.right]
+get_outports(blk::BinaryOperator) = [blk.outport]

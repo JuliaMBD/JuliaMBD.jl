@@ -5,9 +5,13 @@ export AbstractInPort, AbstractOutPort
 export Auto, SymbolicValue, Parameter
 export InPort, OutPort, Line
 export expr_refvalue, expr_setvalue
-export expr, next, defaultInPort, defaultOutPort
+export expr, expr_initial
+export next, prev
 export SystemBlockDefinition, addBlock!, addParameter!
-export expr_define_function, expr_define_structure, expr_define_next, expr_define_expr
+export get_default_inport, get_default_outport
+export expr_define_function, expr_define_structure, expr_define_next, expr_define_expr, expr_define_initialfunction
+export expr_set_inports, expr_set_outports
+export get_inports, get_outports
 export @parameter, @block, @model, @scope
 
 import Base
@@ -36,6 +40,7 @@ Note:
 
 include("_parameter.jl")
 include("_ports_and_line.jl")
+include("_common.jl")
 
 include("_blocks/In.jl")
 include("_blocks/Out.jl")
@@ -51,7 +56,22 @@ include("_blocks/Step.jl")
 include("_blocks/Quantizer.jl")
 include("_blocks/Saturation.jl")
 
+include("_tsort.jl")
 include("_system.jl")
 include("_macro.jl")
+
+Base.show(io::IO, x::Constant) = Base.show(io, "Constant()")
+Base.show(io::IO, x::InBlock) = Base.show(io, "In()")
+Base.show(io::IO, x::StateIn) = Base.show(io, "StateIn()")
+Base.show(io::IO, x::Integrator) = Base.show(io, "Integrator()")
+Base.show(io::IO, x::OutBlock) = Base.show(io, "Out()")
+Base.show(io::IO, x::StateOut) = Base.show(io, "StateOut()")
+Base.show(io::IO, x::Scope) = Base.show(io, "Scope()")
+Base.show(io::IO, x::AbstractLine) = Base.show(io, x.var)
+Base.show(io::IO, x::AbstractPort) = Base.show(io, x.var)
+Base.show(io::IO, x::SymbolicValue{Tv}) where Tv = Base.show(io, Expr(:(::), x.name, Tv))
+Base.show(io::IO, x::SymbolicValue{Auto}) = Base.show(io, x.name)
+
+Base.show(io::IO, b::SystemBlockDefinition) = Base.show(io, "SystemBlock($(b.name))")
 
 end

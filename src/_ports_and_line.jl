@@ -10,57 +10,15 @@ mutable struct OutPort <: AbstractOutPort
     lines::Vector{AbstractLine}
 end
 
-function Base.show(io::IO, x::AbstractPort)
-    Base.show(io, x.var)
-end
+InPort(name, ::Type{Tv}) where Tv = InPort(SymbolicValue{Tv}(name), nothing, nothing)
+InPort(name) = InPort(SymbolicValue{Auto}(name), nothing, nothing)
+InPort(::Type{Tv}) where Tv = InPort(SymbolicValue{Tv}(gensym()), nothing, nothing)
+InPort() = InPort(SymbolicValue{Auto}(gensym()), nothing, nothing)
 
-function InPort(name, ::Type{Tv}) where Tv
-    InPort(SymbolicValue{Tv}(name), nothing, nothing)
-end
-
-function InPort(name)
-    InPort(SymbolicValue{Auto}(name), nothing, nothing)
-end
-
-function InPort(::Type{Tv}) where Tv
-    InPort(SymbolicValue{Tv}(gensym()), nothing, nothing)
-end
-
-function InPort()
-    InPort(SymbolicValue{Auto}(gensym()), nothing, nothing)
-end
-
-function OutPort(name, ::Type{Tv}) where Tv
-    OutPort(SymbolicValue{Tv}(name), nothing, AbstractLine[])
-end
-
-function OutPort(name)
-    OutPort(SymbolicValue{Auto}(name), nothing, AbstractLine[])
-end
-
-function OutPort(::Type{Tv}) where Tv
-    OutPort(SymbolicValue{Tv}(gensym()), nothing, AbstractLine[])
-end
-
-function OutPort()
-    OutPort(SymbolicValue{Auto}(gensym()), nothing, AbstractLine[])
-end
-
-function defaultInPort(p::AbstractInPort)
-    p
-end
-
-function defaultInPort(p::AbstractOutPort)
-    defaultInPort(p.parent)
-end
-
-function defaultOutPort(p::AbstractOutPort)
-    p
-end
-
-function defaultOutPort(p::AbstractInPort)
-    defaultOutPort(p.parent)
-end
+OutPort(name, ::Type{Tv}) where Tv = OutPort(SymbolicValue{Tv}(name), nothing, AbstractLine[])
+OutPort(name) = OutPort(SymbolicValue{Auto}(name), nothing, AbstractLine[])
+OutPort(::Type{Tv}) where Tv = OutPort(SymbolicValue{Tv}(gensym()), nothing, AbstractLine[])
+OutPort() = OutPort(SymbolicValue{Auto}(gensym()), nothing, AbstractLine[])
 
 mutable struct Line <: AbstractLine
     var::SymbolicValue{Auto}
@@ -84,15 +42,15 @@ mutable struct Line <: AbstractLine
 end
 
 function Base.:(=>)(o::AbstractComponent, i::AbstractComponent)
-    Line(defaultOutPort(o), defaultInPort(i))
-    defaultInPort(o)
+    Line(get_default_outport(o), get_default_inport(i))
+    get_default_inport(o)
 end
 
 function Base.:(=>)(o::AbstractComponent, is::Vector{<:AbstractComponent})
     for i = is
-        Line(defaultOutPort(o), defaultInPort(i))
+        Line(get_default_outport(o), get_default_inport(i))
     end
-    defaultInPort(o)
+    get_default_inport(o)
 end
 
 # ## This is for tsort
@@ -104,6 +62,3 @@ end
 #     throw(ErrorException("Type mismatch for =>"))
 # end
 
-function Base.show(io::IO, x::AbstractLine)
-    Base.show(io, x.var)
-end

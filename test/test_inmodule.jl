@@ -1,9 +1,6 @@
 @testset "integrator5" begin
 # module MyModule
 
-using JuliaMBD
-import JuliaMBD: next, expr, defaultInPort, defaultOutPort
-
 b = @model DCMotorDisk false begin
     ## モータ特性
     @parameter begin
@@ -24,12 +21,12 @@ b = @model DCMotorDisk false begin
         in1 = InBlock(:v_M) # 印加電圧
         int = Integrator(:s1, outport=OutPort(:i_M))
         int1 = Integrator(:s2, outport=OutPort(:omega))
-        gain = Gain(K=:(1/L))
-        gain1 = Gain(K=:K_tau)
-        gain2 = Gain(K=:(1/(J_M+J_I)))
-        gain3 = Gain(K=:D)
-        gain4 = Gain(K=:K_e)
-        gain5 = Gain(K=:R)
+        gain = Gain(:(1/L))
+        gain1 = Gain(:K_tau)
+        gain2 = Gain(:(1/(J_M+J_I)))
+        gain3 = Gain(:D)
+        gain4 = Gain(:K_e)
+        gain5 = Gain(:R)
         out1 = OutBlock(:out1)
         out2 = OutBlock(:out2)
         sum1 = Add(inports=[InPort(), InPort(), InPort()], signs=[:+, :-, :-])

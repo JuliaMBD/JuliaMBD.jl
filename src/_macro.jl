@@ -82,6 +82,7 @@ macro model(f, e::Bool, block)　　
     end
     if e == true
         push!(body, :(eval(expr_define_function(tmp))))
+        push!(body, :(eval(expr_define_initialfunction(tmp))))
         push!(body, :(eval(expr_define_structure(tmp))))
         push!(body, :(eval(expr_define_next(tmp))))
         push!(body, :(eval(expr_define_expr(tmp))))
@@ -99,6 +100,7 @@ macro model(f, block)　　
         end
     end
     push!(body, :(eval(expr_define_function(tmp))))
+    push!(body, :(eval(expr_define_initialfunction(tmp))))
     push!(body, :(eval(expr_define_structure(tmp))))
     push!(body, :(eval(expr_define_next(tmp))))
     push!(body, :(eval(expr_define_expr(tmp))))

@@ -30,7 +30,7 @@ end
 
 function expr(blk::PulseGenerator)
     ## inports
-    i = expr_setvalue(blk.timeport.var, expr_refvalue(blk.timeport.line.var))
+    i = expr_set_inports(blk.timeport)
 
     ## parameters
     time = expr_refvalue(blk.timeport.var)
@@ -55,20 +55,13 @@ function expr(blk::PulseGenerator)
     end)
 
     ## outports
-    o = [expr_setvalue(line.var, expr_refvalue(blk.outport.var)) for line = blk.outport.lines]
+    o = expr_set_outports(blk.outport)
 
     ## Expr
-    Expr(:block, i, b, o...)
+    Expr(:block, i, b, o)
 end
 
-function next(blk::PulseGenerator)
-    [line.dest.parent for line = blk.outport.lines]
-end
-
-function defaultInPort(blk::PulseGenerator)
-    nothing
-end
-
-function defaultOutPort(blk::PulseGenerator)
-    blk.outport
-end
+get_default_inport(blk::PulseGenerator) = nothing
+get_default_outport(blk::PulseGenerator) = blk.outport
+get_inports(blk::PulseGenerator) = [blk.timeport]
+get_outports(blk::PulseGenerator) = [blk.outport]

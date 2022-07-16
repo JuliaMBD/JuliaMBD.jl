@@ -1,4 +1,3 @@
-import JuliaMBD
 
 @testset "integrator5" begin
     int1 = Integrator(statein=InPort(:sin1), stateout=OutPort(:sout1), inport=InPort(), outport=OutPort())
@@ -52,5 +51,5 @@ import JuliaMBD
     eval(expr_define_next(bt))
     eval(expr_define_expr(bt))
 
-    println(TestBlockFunc(; time=1.0, sin1=1.0, sin2=1.0))
+    println(TestBlockFunction(; time=1.0, sin1=1.0, sin2=1.0))
 end

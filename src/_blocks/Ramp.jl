@@ -27,7 +27,7 @@ end
 
 function expr(blk::Ramp)
     ## inports
-    i = expr_setvalue(blk.timeport.var, expr_refvalue(blk.timeport.line.var))
+    i = expr_set_inports(blk.timeport)
 
     ## parameters
     time = expr_refvalue(blk.timeport.var)
@@ -46,20 +46,13 @@ function expr(blk::Ramp)
     end)
 
     ## outports
-    o = [expr_setvalue(line.var, expr_refvalue(blk.outport.var)) for line = blk.outport.lines]
+    o = expr_set_outports(blk.outport)
 
     ## Expr
-    Expr(:block, i, b, o...)
+    Expr(:block, i, b, o)
 end
 
-function next(blk::Ramp)
-    [line.dest.parent for line = blk.outport.lines]
-end
-
-function defaultInPort(blk::Ramp)
-    nothing
-end
-
-function defaultOutPort(blk::Ramp)
-    blk.outport
-end
+get_default_inport(blk::Ramp) = nothing
+get_default_outport(blk::Ramp) = blk.outport
+get_inports(blk::Ramp) = [blk.timeport]
+get_outports(blk::Ramp) = [blk.outport]

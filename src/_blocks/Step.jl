@@ -27,7 +27,7 @@ end
 
 function expr(blk::Step)
     ## inports
-    i = expr_setvalue(blk.timeport.var, expr_refvalue(blk.timeport.line.var))
+    i = expr_set_inports(blk.timeport)
 
     ## parameters
     time = expr_refvalue(blk.timeport.var)
@@ -46,20 +46,13 @@ function expr(blk::Step)
     end)
 
     ## outports
-    o = [expr_setvalue(line.var, expr_refvalue(blk.outport.var)) for line = blk.outport.lines]
+    o = expr_set_outports(blk.outport)
 
     ## Expr
-    Expr(:block, i, b, o...)
+    Expr(:block, i, b, o)
 end
 
-function next(blk::Step)
-    [line.dest.parent for line = blk.outport.lines]
-end
-
-function defaultInPort(blk::Step)
-    nothing
-end
-
-function defaultOutPort(blk::Step)
-    blk.outport
-end
+get_default_inport(blk::Step) = nothing
+get_default_outport(blk::Step) = blk.outport
+get_inports(blk::Step) = [blk.timeport]
+get_outports(blk::Step) = [blk.outport]
