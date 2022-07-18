@@ -54,3 +54,21 @@ end
 function expr_initial(b::AbstractBlock)
     expr(b)
 end
+
+name(x::SymbolicValue) = x.name
+name(x::AbstractPort) = x.var.name
+name(x::Vector{Ts}) where Ts = [name(e) for e = x]
+
+macro q(x)
+    esc(:(_toquote($x)))
+end
+
+function _toquote(x::Symbol)
+    Expr(:quote, x)
+end
+
+function _toquote(x::Any)
+    x
+end
+
+

@@ -85,10 +85,6 @@ end
 Utilities to create Expr
 """
 
-function name(x::SymbolicValue)
-    x.name
-end
-
 function expr_refvalue(x::SymbolicValue{Tv}) where Tv
     x.name
 end
@@ -110,14 +106,6 @@ function expr_kwvalue(x::SymbolicValue{Auto}, expr)
 end
 
 function expr_refvalue(x::Any)
-    x
-end
-
-function _toquote(x::Symbol)
-    Expr(:quote, x)
-end
-
-function _toquote(x::Any)
     x
 end
 

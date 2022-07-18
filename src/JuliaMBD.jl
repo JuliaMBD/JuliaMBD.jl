@@ -9,10 +9,11 @@ export expr, expr_initial
 export next, prev
 export SystemBlockDefinition, addBlock!, addParameter!
 export get_default_inport, get_default_outport
-export expr_define_function, expr_define_structure, expr_define_next, expr_define_expr, expr_define_initialfunction
+export expr_define_structure, expr_define_next, expr_define_expr
+export expr_define_function, expr_define_initialfunction, expr_define_sfunction
 export expr_set_inports, expr_set_outports
 export get_inports, get_outports
-export @parameter, @block, @model, @scope
+export @parameter, @block, @model, @scope, @modelbuild
 
 import Base
 # import DifferentialEquations
@@ -58,6 +59,7 @@ include("_blocks/Saturation.jl")
 
 include("_tsort.jl")
 include("_system.jl")
+include("_ode.jl")
 include("_macro.jl")
 
 Base.show(io::IO, x::Constant) = Base.show(io, "Constant()")
