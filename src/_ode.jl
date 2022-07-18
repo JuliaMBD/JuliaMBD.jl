@@ -74,7 +74,7 @@ end
 
 function simulate(prob::MBDProblem, tspan; n = 1000, kwargs...)
     params = (;prob.parameters...)
-    iv = ifunc(params)
+    iv = prob.ifunc(params)
     p = DifferentialEquations.ODEProblem(prob.sfunc, iv, tspan, params)
     sol = DifferentialEquations.solve(p, kwargs...)
     ts = LinRange(tspan[1], tspan[2], n)
