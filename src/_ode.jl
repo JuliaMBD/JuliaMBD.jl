@@ -72,11 +72,11 @@ function expr_define_sfunction(blk::SystemBlockDefinition)
     )
 end
 
-function simulate(prob::MBDProblem, tspan; n = 1000, kwargs...)
+function simulate(prob::MBDProblem, tspan; n = 1000, alg=DifferentialEquations.Tsit5(), kwargs...)
     params = (;prob.parameters...)
     iv = prob.ifunc(params)
     p = DifferentialEquations.ODEProblem(prob.sfunc, iv, tspan, params)
-    sol = DifferentialEquations.solve(p, kwargs...)
+    sol = DifferentialEquations.solve(p, alg; kwargs...)
     ts = LinRange(tspan[1], tspan[2], n)
     results = prob.ofunc(sol, params, ts)
     Plots.plot(ts, [x for (_,x) = results], layout=(length(results),1), leg=false)
