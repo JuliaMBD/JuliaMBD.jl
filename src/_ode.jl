@@ -33,7 +33,7 @@ function expr_define_sfunction(blk::SystemBlockDefinition)
 
     sins = [Expr(:kw, name(p), :(u[$i])) for (i,p) = enumerate(blk.stateinports)]
     sins0 = [Expr(:kw, name(p), 0) for (i,p) = enumerate(blk.stateinports)]
-    sins1 = [Expr(:kw, name(p), :(u(t)[$i])) for (i,p) = enumerate(blk.stateinports)]
+    sins1 = [Expr(:kw, name(p), :(sol(t)[$i]) for (i,p) = enumerate(blk.stateinports)]
     souts = [:(result.$(name(p))) for p = blk.stateoutports]
     dus = [:(du[$i]) for (i,_) = enumerate(blk.stateoutports)]
 
