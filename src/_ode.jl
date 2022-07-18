@@ -66,7 +66,7 @@ function expr_define_sfunction(blk::SystemBlockDefinition)
         Expr(:->, Expr(:tuple, :u, :p, :ts),
             Expr(:block,
                 :(result = [$(Expr(:call, Symbol(blk.name, "Function"), Expr(:kw, :time, :t), params..., sins1...)) for t = ts]),
-                Expr(:Dict, scopes...)
+                Expr(:call, :Dict, scopes...)
             )
         )
     )
