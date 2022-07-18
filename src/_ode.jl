@@ -1,5 +1,4 @@
 mutable struct ODEProblem
-    self
     name
     parameters
     sfunc
@@ -64,20 +63,22 @@ function expr_define_sfunction(blk::SystemBlockDefinition)
                 Expr(:vect, souts...)
             )
         ),
-        Expr(:->, Expr(:tuple, :u, :p, :tspan),
+        Expr(:->, Expr(:tuple, :u, :p, :ts),
             Expr(:block,
-                :(ts = LinRange(tspan[1], tspan[2], 1000)),
-                :(result = [$(Expr(:call, Symbol(blk.name, "Function"), Expr(:kw, :time, :t), params..., sins1...)) for t = ts]),
-                Expr(:tuple, scopes...)
-            )
-        ),
-        Expr(:->, Expr(:tuple, :tspan),
-            Expr(:block,
-                :(ts = LinRange(tspan[1], tspan[2], 1000)),
                 :(result = [$(Expr(:call, Symbol(blk.name, "Function"), Expr(:kw, :time, :t), params..., sins1...)) for t = ts]),
                 Expr(:tuple, scopes...)
             )
         )
     )
-    @assert false "$(expr)"
 end
+
+function simulate(prob::ODEProblem, tspan; n = 1000)
+    params = (;prob.parameters...)
+    iv = ifunc(params)
+    p = DifferentialEquations.ODEProblem(prob.sfunc, iv, tspan, params)
+    sol = DifferentialEquations.solve(p)
+    ts = LinRange(tspan[1], tspan[2], n)
+    results = prob.ofunc(sol.u, params, ts)
+    Plots.plot(ts, results, layout=(length(results),1), leg=false)
+end
+

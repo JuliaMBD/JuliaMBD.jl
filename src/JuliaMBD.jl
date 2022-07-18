@@ -16,7 +16,8 @@ export get_inports, get_outports
 export @parameter, @block, @model, @scope, @modelbuild
 
 import Base
-# import DifferentialEquations
+import DifferentialEquations
+import Plots
 
 abstract type AbstractLine end
 
