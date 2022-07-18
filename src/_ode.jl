@@ -37,7 +37,7 @@ function expr_define_sfunction(blk::SystemBlockDefinition)
     souts = [:(result.$(name(p))) for p = blk.stateoutports]
     dus = [:(du[$i]) for (i,_) = enumerate(blk.stateoutports)]
 
-    scopes = [Expr(:(=), name(p), :([x.$(name(p)) for x = result])) for p = blk.scopeoutports]
+    scopes = [Expr(:call, :(=>), @q(name(p)), :([x.$(name(p)) for x = result])) for p = blk.scopeoutports]
 
     expr = Expr(:call,
         :ODEProblem,
@@ -66,17 +66,17 @@ function expr_define_sfunction(blk::SystemBlockDefinition)
         Expr(:->, Expr(:tuple, :u, :p, :ts),
             Expr(:block,
                 :(result = [$(Expr(:call, Symbol(blk.name, "Function"), Expr(:kw, :time, :t), params..., sins1...)) for t = ts]),
-                Expr(:tuple, scopes...)
+                Expr(:Dict, scopes...)
             )
         )
     )
 end
 
-function simulate(prob::ODEProblem, tspan; n = 1000)
+function simulate(prob::ODEProblem, tspan; n = 1000, kwargs...)
     params = (;prob.parameters...)
     iv = ifunc(params)
     p = DifferentialEquations.ODEProblem(prob.sfunc, iv, tspan, params)
-    sol = DifferentialEquations.solve(p)
+    sol = DifferentialEquations.solve(p, kwargs...)
     ts = LinRange(tspan[1], tspan[2], n)
     results = prob.ofunc(sol.u, params, ts)
     Plots.plot(ts, results, layout=(length(results),1), leg=false)
