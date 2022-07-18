@@ -79,6 +79,6 @@ function simulate(prob::MBDProblem, tspan; n = 1000, kwargs...)
     sol = DifferentialEquations.solve(p, kwargs...)
     ts = LinRange(tspan[1], tspan[2], n)
     results = prob.ofunc(sol, params, ts)
-    # Plots.plot(ts, [x for (_,x) = results], layout=(length(results),1), leg=false)
+    Plots.plot(ts, [x for (_,x) = results], layout=(length(results),1), leg=false)
 end
 
