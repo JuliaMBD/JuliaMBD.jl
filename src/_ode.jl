@@ -1,4 +1,4 @@
-mutable struct ODEProblem
+mutable struct MBDProblem
     name
     parameters
     sfunc
@@ -40,7 +40,7 @@ function expr_define_sfunction(blk::SystemBlockDefinition)
     scopes = [Expr(:call, :(=>), @q(name(p)), :([x.$(name(p)) for x = result])) for p = blk.scopeoutports]
 
     expr = Expr(:call,
-        :ODEProblem,
+        :MBDProblem,
         @q(blk.name),
         Expr(:call, :Dict, params_init...),
         Expr(:->, Expr(:tuple, :du, :u, :p, :t),
@@ -72,7 +72,7 @@ function expr_define_sfunction(blk::SystemBlockDefinition)
     )
 end
 
-function simulate(prob::ODEProblem, tspan; n = 1000, kwargs...)
+function simulate(prob::MBDProblem, tspan; n = 1000, kwargs...)
     params = (;prob.parameters...)
     iv = ifunc(params)
     p = DifferentialEquations.ODEProblem(prob.sfunc, iv, tspan, params)
