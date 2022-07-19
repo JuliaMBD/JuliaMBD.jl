@@ -1,6 +1,6 @@
 
 function simulate(blk::AbstractBlock, tspan; n = 1000, alg=DifferentialEquations.Tsit5(), kwargs...)
-    params = get_parameters(blk)
+    params = (;get_parameters(blk)...)
     iv = blk.ifunc(params)
     p = DifferentialEquations.ODEProblem(blk.sfunc, iv, tspan, params)
     sol = DifferentialEquations.solve(p, alg; kwargs...)
