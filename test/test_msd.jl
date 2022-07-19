@@ -78,7 +78,7 @@
     params = m.pfunc(m) #Dict(:M => 10.0, :D => 10.0, :k => 18.0, :f => 1.0, :p_cycle => 20.0, :p_width => 50.0)
     println(m.ifunc((;params...)))
     println(m.sfunc([0.0, 0.0], [0.0, 9.8], (;params...), 10.0))
-    println(simulate(m, params, (0.0, 10.0)))
+    println(simulate(m, (0.0, 10.0)))
 end
 
 @testset "integrator3" begin

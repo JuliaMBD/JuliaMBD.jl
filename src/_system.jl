@@ -82,46 +82,6 @@ function addBlock!(blk::SystemBlockDefinition, x::Scope)
 end
 
 """
-Utilities to create Expr
-"""
-
-function expr_refvalue(x::SymbolicValue{Tv}) where Tv
-    x.name
-end
-
-function expr_setvalue(x::SymbolicValue{Tv}, expr) where Tv
-    Expr(:(=), x.name, Expr(:call, Symbol(Tv), expr))
-end
-
-function expr_setvalue(x::SymbolicValue{Auto}, expr)
-    Expr(:(=), x.name, expr)
-end
-
-function expr_kwvalue(x::SymbolicValue{Tv}, expr) where Tv
-    Expr(:call, :Expr, Expr(:quote, :kw), Expr(:quote, x.name), Expr(:call, :Expr, Expr(:quote, :call), Expr(:call, :Symbol, Tv), expr))
-end
-
-function expr_kwvalue(x::SymbolicValue{Auto}, expr)
-    Expr(:call, :Expr, Expr(:quote, :kw), Expr(:quote, x.name), expr)
-end
-
-function expr_refvalue(x::Any)
-    x
-end
-
-function expr_defvalue(x::SymbolicValue{Tv}) where Tv
-    Expr(:(::), x.name, Symbol(Tv))
-end
-
-function expr_defvalue(x::SymbolicValue{Auto})
-    x.name
-end
-
-function expr_defvalue(x::Tuple{SymbolicValue,Any})
-    Expr(:kw, expr_defvalue(x[1]), x[2])
-end
-
-"""
 Expr for creating a structure for systemblok
 
 An example of structure is
@@ -405,17 +365,6 @@ function expr_define_function(blk::SystemBlockDefinition)
     souts = [:($(name(p.var)) = $(expr_refvalue(p.var))) for p = blk.stateoutports]
     scopes = [:($(name(p.var)) = $(expr_refvalue(p.var))) for p = blk.scopeoutports]
 
-    # v = AbstractBlock[]
-    # for p = blk.outports
-    #     push!(v, p.parent)
-    # end
-    # for p = blk.stateoutports
-    #     push!(v, p.parent)
-    # end
-    # for p = blk.scopeoutports
-    #     push!(v, p.parent)
-    # end
-    # blks = allblocks(v)
     blks = blk.blks
     body = [expr(b) for b = tsort(blks)]
     Expr(:function, Expr(:call, Symbol(blk.name, "Function"),
@@ -436,17 +385,6 @@ function expr_define_initialfunction(blk::SystemBlockDefinition)
     souts = [:($(name(p.var)) = $(expr_refvalue(p.var))) for p = blk.stateoutports]
     scopes = [:($(name(p.var)) = $(expr_refvalue(p.var))) for p = blk.scopeoutports]
 
-    # v = AbstractBlock[]
-    # for p = blk.outports
-    #     push!(v, p.parent)
-    # end
-    # for p = blk.stateoutports
-    #     push!(v, p.parent)
-    # end
-    # for p = blk.scopeoutports
-    #     push!(v, p.parent)
-    # end
-    # blks = allblocks(v)
     blks = blk.blks
     body = [expr_initial(b) for b = tsort(blks)]
     Expr(:function, Expr(:call, Symbol(blk.name, "InitialFunction"),

@@ -13,8 +13,8 @@ export expr_define_structure, expr_define_next, expr_define_expr
 export expr_define_function, expr_define_initialfunction, expr_define_sfunction
 export expr_set_inports, expr_set_outports
 export get_inports, get_outports
-export @parameter, @block, @model, @scope, @modelbuild
-export MBDProblem, get_parameters, simulate
+export @parameter, @block, @model, @scope
+export get_parameters, simulate
 
 import Base
 import DifferentialEquations

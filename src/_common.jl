@@ -65,12 +65,28 @@ macro q(x)
     esc(:(_toquote($x)))
 end
 
-function _toquote(x::Symbol)
-    Expr(:quote, x)
+_toquote(x::Symbol) = Expr(:quote, x)
+_toquote(x::Any) = x
+
+expr_refvalue(x::Any) = x
+expr_refvalue(x::SymbolicValue{Tv}) where Tv = x.name
+expr_setvalue(x::SymbolicValue{Tv}, expr) where Tv = Expr(:(=), x.name, Expr(:call, Symbol(Tv), expr))
+expr_setvalue(x::SymbolicValue{Auto}, expr) = Expr(:(=), x.name, expr)
+
+function expr_kwvalue(x::SymbolicValue{Tv}, expr) where Tv
+    Expr(:call, :Expr, Expr(:quote, :kw), Expr(:quote, x.name),
+    Expr(:call, :Expr, Expr(:quote, :call), Expr(:call, :Symbol, Tv), expr))
 end
 
-function _toquote(x::Any)
-    x
+function expr_kwvalue(x::SymbolicValue{Auto}, expr)
+    Expr(:call, :Expr, Expr(:quote, :kw), Expr(:quote, x.name), expr)
 end
 
+
+expr_defvalue(x::SymbolicValue{Tv}) where Tv = Expr(:(::), x.name, Symbol(Tv))
+expr_defvalue(x::SymbolicValue{Auto}) = x.name
+expr_defvalue(x::Tuple{SymbolicValue,Any}) = Expr(:kw, expr_defvalue(x[1]), x[2])
+
+expr_setpair(x::SymbolicValue{Tv}, expr) where Tv = Expr(:call, :(=>), @q(x.name), Expr(:call, Symbol(Tv), expr))
+expr_setpair(x::SymbolicValue{Auto}, expr) = Expr(:call, :(=>), @q(x.name), expr)
 
