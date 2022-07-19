@@ -15,6 +15,8 @@ expr_call(blk::AbstractBlock) = Expr(:tuple)
 
 get_timeport(blk::AbstractTimeBlock) = blk.timeport
 
+get_parameters(blk::AbstractBlock) = blk.pfunc(blk)
+
 function prev(blk::AbstractBlock)
     b = AbstractBlock[]
     for p = get_inports(blk)

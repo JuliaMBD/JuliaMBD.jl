@@ -225,8 +225,9 @@ function expr_define_structure(blk::SystemBlockDefinition)
     soutdefin = [Expr(:kw, :($x::AbstractOutPort), :(OutPort($(Expr(:quote, x))))) for x = souts]
     scopesdefin = [Expr(:kw, :($x::AbstractOutPort), :(OutPort($(Expr(:quote, x))))) for x = scopes]
 
-    (sfunc, ifunc, ofunc) = let
+    (pfunc, sfunc, ifunc, ofunc) = let
         xparams = [Expr(:kw, name(x[1]), :(p.$(name(x[1])))) for x = blk.parameters]
+        xparams_init = [Expr(:call, :(=>), @q(name(x[1])), :(b.$(name(x[1])))) for x = blk.parameters]
 
         xsins = [Expr(:kw, name(p), :(u[$i])) for (i,p) = enumerate(blk.stateinports)]
         xsins0 = [Expr(:kw, name(p), 0) for (i,p) = enumerate(blk.stateinports)]
@@ -236,6 +237,8 @@ function expr_define_structure(blk::SystemBlockDefinition)
 
         xscopes = [Expr(:call, :(=>), @q(name(p)), :([x.$(name(p)) for x = result])) for p = blk.scopeoutports]
         
+        pfunc = Expr(:->, Expr(:tuple, :b), Expr(:call, :Dict, xparams_init...))
+
        sfunc = Expr(:->, Expr(:tuple, :du, :u, :p, :t),
                 Expr(:block,
                     Expr(:(=), :result, Expr(:call, Symbol(blk.name, "Function"),
@@ -259,7 +262,7 @@ function expr_define_structure(blk::SystemBlockDefinition)
                     Expr(:call, :Dict, xscopes...)
                 )
             )
-        (sfunc, ifunc, ofunc)
+        (pfunc, sfunc, ifunc, ofunc)
     end
 
     v = quote
@@ -273,6 +276,7 @@ function expr_define_structure(blk::SystemBlockDefinition)
             inblk::Vector{StateOut}
             outblk::Vector{StateIn}
             scopes::Vector{Scope}
+            pfunc
             ifunc
             sfunc
             ofunc
@@ -309,6 +313,7 @@ function expr_define_structure(blk::SystemBlockDefinition)
                     Line(b.$x, tmp.inport)
                     push!(b.scopes, tmp)
                 end for x = scopes]...)
+                b.pfunc = $(pfunc)
                 b.sfunc = $(sfunc)
                 b.ifunc = $(ifunc)
                 b.ofunc = $(ofunc)
