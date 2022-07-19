@@ -64,6 +64,7 @@ end
     println(expr_define_expr(b))
 
     eval(expr_define_function(b))
+    println(expr_define_structure(b))
     eval(expr_define_structure(b))
     eval(expr_define_next(b))
     eval(expr_define_expr(b))

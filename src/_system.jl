@@ -82,58 +82,6 @@ function addBlock!(blk::SystemBlockDefinition, x::Scope)
 end
 
 """
-Utilities to create Expr
-"""
-
-function name(x::SymbolicValue)
-    x.name
-end
-
-function expr_refvalue(x::SymbolicValue{Tv}) where Tv
-    x.name
-end
-
-function expr_setvalue(x::SymbolicValue{Tv}, expr) where Tv
-    Expr(:(=), x.name, Expr(:call, Symbol(Tv), expr))
-end
-
-function expr_setvalue(x::SymbolicValue{Auto}, expr)
-    Expr(:(=), x.name, expr)
-end
-
-function expr_kwvalue(x::SymbolicValue{Tv}, expr) where Tv
-    Expr(:call, :Expr, Expr(:quote, :kw), Expr(:quote, x.name), Expr(:call, :Expr, Expr(:quote, :call), Expr(:call, :Symbol, Tv), expr))
-end
-
-function expr_kwvalue(x::SymbolicValue{Auto}, expr)
-    Expr(:call, :Expr, Expr(:quote, :kw), Expr(:quote, x.name), expr)
-end
-
-function expr_refvalue(x::Any)
-    x
-end
-
-function _toquote(x::Symbol)
-    Expr(:quote, x)
-end
-
-function _toquote(x::Any)
-    x
-end
-
-function expr_defvalue(x::SymbolicValue{Tv}) where Tv
-    Expr(:(::), x.name, Symbol(Tv))
-end
-
-function expr_defvalue(x::SymbolicValue{Auto})
-    x.name
-end
-
-function expr_defvalue(x::Tuple{SymbolicValue,Any})
-    Expr(:kw, expr_defvalue(x[1]), x[2])
-end
-
-"""
 Expr for creating a structure for systemblok
 
 An example of structure is
@@ -153,6 +101,11 @@ mutable struct MSD <: AbstractSystemBlock
     inblk::Vector{StateOut}
     outblk::Vector{StateIn}
     scopes::Vector{Scope}
+    ## for ode
+    parafunc
+    ifunc
+    sfunc
+    ofunc
 
     function MSD(; M = :M, D = :D, k = :k, g = 9.8,
         time::AbstractInPort = InPort(),
@@ -232,7 +185,47 @@ function expr_define_structure(blk::SystemBlockDefinition)
     soutdefin = [Expr(:kw, :($x::AbstractOutPort), :(OutPort($(Expr(:quote, x))))) for x = souts]
     scopesdefin = [Expr(:kw, :($x::AbstractOutPort), :(OutPort($(Expr(:quote, x))))) for x = scopes]
 
-    quote
+    (pfunc, sfunc, ifunc, ofunc) = let
+        xparams = [Expr(:kw, name(x[1]), :(p.$(name(x[1])))) for x = blk.parameters]
+        xparams_init = [Expr(:call, :(=>), @q(name(x[1])), :(b.$(name(x[1])))) for x = blk.parameters]
+
+        xsins = [Expr(:kw, name(p), :(u[$i])) for (i,p) = enumerate(blk.stateinports)]
+        xsins0 = [Expr(:kw, name(p), 0) for (i,p) = enumerate(blk.stateinports)]
+        xsins1 = [Expr(:kw, name(p), :(u(t)[$i])) for (i,p) = enumerate(blk.stateinports)]
+        xsouts = [:(result.$(name(p))) for p = blk.stateoutports]
+        xdus = [:(du[$i]) for (i,_) = enumerate(blk.stateoutports)]
+
+        xscopes = [Expr(:call, :(=>), @q(name(p)), :([x.$(name(p)) for x = result])) for p = blk.scopeoutports]
+        
+        pfunc = Expr(:->, Expr(:tuple, :b), Expr(:call, :Dict, xparams_init...))
+
+       sfunc = Expr(:->, Expr(:tuple, :du, :u, :p, :t),
+                Expr(:block,
+                    Expr(:(=), :result, Expr(:call, Symbol(blk.name, "Function"),
+                    Expr(:kw, :time, :t), xparams..., xsins...)),
+                    Expr(:(=), Expr(:tuple, xdus...), Expr(:tuple, xsouts...))
+                )
+            )
+        ifunc = Expr(:->, Expr(:tuple, :p),
+                Expr(:block,
+                    Expr(:(=), :result, Expr(:call, Symbol(blk.name, "InitialFunction"),
+                        Expr(:kw, :time, 0),
+                        xparams...,
+                        xsins0...
+                    )),
+                    Expr(:vect, xsouts...)
+                )
+            )
+        ofunc = Expr(:->, Expr(:tuple, :u, :p, :ts),
+                Expr(:block,
+                    :(result = [$(Expr(:call, Symbol(blk.name, "Function"), Expr(:kw, :time, :t), xparams..., xsins1...)) for t = ts]),
+                    Expr(:call, :Dict, xscopes...)
+                )
+            )
+        (pfunc, sfunc, ifunc, ofunc)
+    end
+
+    v = quote
         mutable struct $(blk.name) <: AbstractSystemBlock
             $(paramdef...)
             $(indef...)
@@ -243,6 +236,10 @@ function expr_define_structure(blk::SystemBlockDefinition)
             inblk::Vector{StateOut}
             outblk::Vector{StateIn}
             scopes::Vector{Scope}
+            pfunc
+            ifunc
+            sfunc
+            ofunc
 
             function $(blk.name)(; $(paramdefin...), $(indefin...), $(outdefin...), $(sindefin...), $(soutdefin...), $(scopesdefin...))
                 b = new()
@@ -276,8 +273,12 @@ function expr_define_structure(blk::SystemBlockDefinition)
                     Line(b.$x, tmp.inport)
                     push!(b.scopes, tmp)
                 end for x = scopes]...)
+                b.pfunc = $(pfunc)
+                b.sfunc = $(sfunc)
+                b.ifunc = $(ifunc)
+                b.ofunc = $(ofunc)
                 b
-            end    
+            end
         end
     end
 end
@@ -364,17 +365,6 @@ function expr_define_function(blk::SystemBlockDefinition)
     souts = [:($(name(p.var)) = $(expr_refvalue(p.var))) for p = blk.stateoutports]
     scopes = [:($(name(p.var)) = $(expr_refvalue(p.var))) for p = blk.scopeoutports]
 
-    # v = AbstractBlock[]
-    # for p = blk.outports
-    #     push!(v, p.parent)
-    # end
-    # for p = blk.stateoutports
-    #     push!(v, p.parent)
-    # end
-    # for p = blk.scopeoutports
-    #     push!(v, p.parent)
-    # end
-    # blks = allblocks(v)
     blks = blk.blks
     body = [expr(b) for b = tsort(blks)]
     Expr(:function, Expr(:call, Symbol(blk.name, "Function"),
@@ -395,17 +385,6 @@ function expr_define_initialfunction(blk::SystemBlockDefinition)
     souts = [:($(name(p.var)) = $(expr_refvalue(p.var))) for p = blk.stateoutports]
     scopes = [:($(name(p.var)) = $(expr_refvalue(p.var))) for p = blk.scopeoutports]
 
-    # v = AbstractBlock[]
-    # for p = blk.outports
-    #     push!(v, p.parent)
-    # end
-    # for p = blk.stateoutports
-    #     push!(v, p.parent)
-    # end
-    # for p = blk.scopeoutports
-    #     push!(v, p.parent)
-    # end
-    # blks = allblocks(v)
     blks = blk.blks
     body = [expr_initial(b) for b = tsort(blks)]
     Expr(:function, Expr(:call, Symbol(blk.name, "InitialFunction"),

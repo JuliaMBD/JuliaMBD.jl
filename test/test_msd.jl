@@ -36,6 +36,7 @@
     Line(int2.outport, out1.inport)
 
     eval(expr_define_function(b))
+    eval(expr_define_initialfunction(b))
     eval(expr_define_structure(b))
     eval(expr_define_next(b))
     eval(expr_define_expr(b))
@@ -66,11 +67,18 @@
     Line(msd.out1, scope2.inport)
 
     eval(expr_define_function(b))
+    eval(expr_define_initialfunction(b))
     eval(expr_define_structure(b))
     eval(expr_define_next(b))
     eval(expr_define_expr(b))
+    # eval(expr_define_sfunction(b))
 
     println(expr_define_function(b))
+    m = TestBlockMSD(M=10.0, D=10.0, k=10.0, f=1.0, p_cycle=20.0, p_width=10.0)
+    params = m.pfunc(m) #Dict(:M => 10.0, :D => 10.0, :k => 18.0, :f => 1.0, :p_cycle => 20.0, :p_width => 50.0)
+    println(m.ifunc((;params...)))
+    println(m.sfunc([0.0, 0.0], [0.0, 9.8], (;params...), 10.0))
+    println(simulate(m, (0.0, 10.0)))
 end
 
 @testset "integrator3" begin
