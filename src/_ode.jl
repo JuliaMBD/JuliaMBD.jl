@@ -82,3 +82,11 @@ function simulate(prob::MBDProblem, tspan; n = 1000, alg=DifferentialEquations.T
     Plots.plot(ts, [x for (_,x) = results], layout=(length(results),1), leg=false)
 end
 
+function simulate(b::AbstractBlock, tspan; n = 1000, alg=DifferentialEquations.Tsit5(), kwargs...)
+    iv = b.ifunc(b)
+    p = DifferentialEquations.ODEProblem(b.sfunc, iv, tspan, b)
+    sol = DifferentialEquations.solve(p, alg; kwargs...)
+    ts = LinRange(tspan[1], tspan[2], n)
+    results = b.ofunc(sol, b, ts)
+    # Plots.plot(ts, [x for (_,x) = results], layout=(length(results),1), leg=false)
+end
