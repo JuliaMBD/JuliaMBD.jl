@@ -15,5 +15,5 @@ function simulate(blk::AbstractFunctionBlock, tspan; n = 1000, alg=DifferentialE
     ts = LinRange(tspan[1], tspan[2], n)
     results = blk.ofunc(0, params, ts)
     graph = Plots.plot(ts, [x for (_,x) = results], layout=(length(results),1), leg=false)
-    (params=params, solution=sol, ts=ts, outputs=results, graph=graph)
+    (params=params, ts=ts, outputs=results, graph=graph)
 end
