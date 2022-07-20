@@ -225,8 +225,14 @@ function expr_define_structure(blk::SystemBlockDefinition)
         (pfunc, sfunc, ifunc, ofunc)
     end
 
+    if length(sins) == 0
+        amodel = :AbstractFunctionBlock
+    else
+        amodel = :AbstractSystemBlock
+    end
+
     v = quote
-        mutable struct $(blk.name) <: AbstractSystemBlock
+        mutable struct $(blk.name) <: $(amodel)
             $(paramdef...)
             $(indef...)
             $(outdef...)

@@ -15,3 +15,4 @@ include("test_msd.jl")
 
 include("test_inmodule.jl")
 include("test_initial.jl")
+include("test_func.jl")
