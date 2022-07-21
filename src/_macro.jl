@@ -56,11 +56,11 @@ function _addscope(x::Any, m)
 end
 
 function _addscope(x::Symbol, m)
-    :(addBlock!($m, Scope($x)))
+    :(addBlock!($m, Scope($x, $(@q(x)))))
 end
 
 function _addscope(x::Expr, m)
-    :(addBlock!($m, Scope($x)))
+    :(addBlock!($m, Scope($x, $(@q(Symbol("$x"))))))
 end
 
 macro scope(m, b)

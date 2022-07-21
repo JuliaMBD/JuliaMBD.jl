@@ -185,13 +185,16 @@ end
             msd = MSD22()
             pulse = PulseGenerator(amplitude=:f, period=:p_cycle, pulsewidth=:p_width, phasedelay=10.0)
             # time = InBlock(:time)
-            scope1 = Scope(:F)
-            scope2 = Scope(:x)
         end
+
+        @scope begin
+            pulse
+            msd.out1
+        end
+
         begin
             # time => pulse.timeport
-            pulse => [msd.in1, scope1]
-            msd.out1 => scope2
+            pulse => msd.in1
         end
     end
 

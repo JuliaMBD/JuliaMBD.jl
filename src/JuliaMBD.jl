@@ -77,6 +77,7 @@ Base.show(io::IO, x::AbstractPort) = Base.show(io, x.var)
 Base.show(io::IO, x::SymbolicValue{Tv}) where Tv = Base.show(io, Expr(:(::), x.name, Tv))
 Base.show(io::IO, x::SymbolicValue{Auto}) = Base.show(io, x.name)
 
-Base.show(io::IO, b::SystemBlockDefinition) = Base.show(io, "SystemBlock($(b.name))")
+Base.show(io::IO, b::SystemBlockDefinition) = Base.show(io, Expr(:call, :SystemBlockDefinition, b.name))
+Base.show(io::IO, b::AbstractSystemBlock) = Base.show(io, Expr(:call, typeof(b), [Expr(:kw, k, v) for (k,v) = b.pfunc(b)]...))
 
 end
