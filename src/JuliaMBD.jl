@@ -14,7 +14,7 @@ export expr_define_function, expr_define_initialfunction, expr_define_sfunction
 export expr_set_inports, expr_set_outports
 export get_inports, get_outports
 export @parameter, @block, @model, @scope
-export get_parameters, simulate
+export get_parameters, simulate, odesolve
 
 import Base
 import DifferentialEquations
