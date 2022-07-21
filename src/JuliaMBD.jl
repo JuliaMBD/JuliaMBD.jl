@@ -14,7 +14,7 @@ export expr_define_function, expr_define_initialfunction, expr_define_sfunction
 export expr_set_inports, expr_set_outports
 export get_inports, get_outports
 export @parameter, @block, @model, @scope
-export get_parameters, simulate
+export get_parameters, simulate, odesolve
 
 import Base
 import DifferentialEquations
@@ -77,6 +77,7 @@ Base.show(io::IO, x::AbstractPort) = Base.show(io, x.var)
 Base.show(io::IO, x::SymbolicValue{Tv}) where Tv = Base.show(io, Expr(:(::), x.name, Tv))
 Base.show(io::IO, x::SymbolicValue{Auto}) = Base.show(io, x.name)
 
-Base.show(io::IO, b::SystemBlockDefinition) = Base.show(io, "SystemBlock($(b.name))")
+Base.show(io::IO, b::SystemBlockDefinition) = Base.show(io, Expr(:call, :SystemBlockDefinition, b.name))
+Base.show(io::IO, b::AbstractSystemBlock) = Base.show(io, Expr(:call, typeof(b), [Expr(:kw, k, v) for (k,v) = b.pfunc(b)]...))
 
 end

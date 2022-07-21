@@ -62,6 +62,20 @@ mutable struct Scope <: AbstractOutBlock
     function Scope(target::AbstractInPort)
         Scope(target.line.source)
     end
+
+    function Scope(target::AbstractOutPort, scope_label::Symbol)
+        s = Scope(inport=InPort(), outport=OutPort(Symbol(:scope_, scope_label)))
+        Line(target, s.inport)
+        s
+    end
+
+    function Scope(target::AbstractBlock, scope_label::Symbol)
+        Scope(get_default_outport(target), scope_label)
+    end
+
+    function Scope(target::AbstractInPort, scope_label::Symbol)
+        Scope(target.line.source, scope_label)
+    end
 end
 
 function expr(blk::AbstractOutBlock)

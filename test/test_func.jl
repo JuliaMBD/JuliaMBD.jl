@@ -32,5 +32,6 @@
     end
 
     m = ExampleTest(K=2.0, v=10.0)
+    println(m)
     println(simulate(m, (0.0, 1.0)))
 end

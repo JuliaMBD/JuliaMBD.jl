@@ -106,6 +106,8 @@ mutable struct MSD <: AbstractSystemBlock
     ifunc
     sfunc
     ofunc
+    systemfunc
+    initialfunc
 
     function MSD(; M = :M, D = :D, k = :k, g = 9.8,
         time::AbstractInPort = InPort(),
