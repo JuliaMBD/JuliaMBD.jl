@@ -21,7 +21,7 @@ end
     Line(b0.outport, b1.inport)
     Line(b1.outport, b3.inport)
 
-    b = SystemBlockDefinition(:TestBlock)
+    b = BlockDefinition(:TestBlock)
     addBlock!(b, b0)
     addBlock!(b, b1)
     addBlock!(b, b3)
@@ -46,7 +46,7 @@ end
     Line(int2.outport, gain2.inport)
     Line(gain2.outport, int1.inport)
 
-    b = SystemBlockDefinition(:RLCBlock)
+    b = BlockDefinition(:RLCBlock)
     addParameter!(b, SymbolicValue{Float64}(:R))
     addParameter!(b, SymbolicValue{Float64}(:C))
     addParameter!(b, SymbolicValue{Float64}(:L))
@@ -75,7 +75,7 @@ end
     # Line(time.outport, s1.timeport)
     Line(s1.outport, s2.vin)
 
-    bt = SystemBlockDefinition(:TestBlock)
+    bt = BlockDefinition(:TestBlock)
     # addBlock!(bt, time)
     addBlock!(bt, s1)
     addBlock!(bt, s2)
@@ -110,7 +110,7 @@ end
     Line(int2.outport, gain2.inport)
     Line(gain2.outport, int1.inport)
 
-    b = SystemBlockDefinition(:RLCBlock)
+    b = BlockDefinition(:RLCBlock)
     addParameter!(b, SymbolicValue{Float64}(:R))
     addParameter!(b, SymbolicValue{Float64}(:C))
     addParameter!(b, SymbolicValue{Float64}(:L))
@@ -133,7 +133,7 @@ end
     # Line(time.outport, s1.timeport)
     Line(s1.outport, s2.vin)
 
-    bt = SystemBlockDefinition(:TestBlock)
+    bt = BlockDefinition(:TestBlock)
     # addBlock!(bt, time)
     addBlock!(bt, s1)
     addBlock!(bt, s2)

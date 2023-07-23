@@ -16,7 +16,7 @@
     Line(int2.outport, gain2.inport)
     Line(gain2.outport, int1.inport)
 
-    b = SystemBlockDefinition(:RLCBlock)
+    b = BlockDefinition(:RLCBlock)
     addParameter!(b, SymbolicValue{Float64}(:R))
     addParameter!(b, SymbolicValue{Float64}(:C))
     addParameter!(b, SymbolicValue{Float64}(:L))
@@ -41,7 +41,7 @@
     # Line(time.outport, s1.timeport)
     Line(s1.outport, s2.vin)
 
-    bt = SystemBlockDefinition(:TestBlock)
+    bt = BlockDefinition(:TestBlock)
     # addBlock!(bt, time)
     addBlock!(bt, s1)
     addBlock!(bt, s2)

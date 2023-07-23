@@ -18,7 +18,7 @@
     Line(gain2.outport, int1.inport)
     Line(gain3.outport, scope1.inport)
 
-    b = SystemBlockDefinition(:RLCBlock2)
+    b = BlockDefinition(:RLCBlock2)
     addParameter!(b, SymbolicValue{Float64}(:R), 100.0)
     addParameter!(b, SymbolicValue{Float64}(:C))
     addParameter!(b, SymbolicValue{Float64}(:L))
@@ -47,7 +47,7 @@
     # Line(time.outport, s1.timeport)
     Line(s1.outport, s2.vin)
 
-    bt = SystemBlockDefinition(:TestBlock2)
+    bt = BlockDefinition(:TestBlock2)
     # addBlock!(bt, time)
     addBlock!(bt, s1)
     addBlock!(bt, s2)
@@ -76,7 +76,7 @@ end
     add => gain3 => [int2, scope1]
     int2 => [gain1, gain2]
 
-    b = SystemBlockDefinition(:RLCBlock2)
+    b = BlockDefinition(:RLCBlock2)
     addParameter!(b, SymbolicValue{Float64}(:R), 100.0)
     addParameter!(b, SymbolicValue{Float64}(:C))
     addParameter!(b, SymbolicValue{Float64}(:L))
@@ -105,7 +105,7 @@ end
     # Line(time.outport, s1.timeport)
     Line(s1.outport, s2.vin)
 
-    bt = SystemBlockDefinition(:TestBlock3)
+    bt = BlockDefinition(:TestBlock3)
     # addBlock!(bt, time)
     addBlock!(bt, s1)
     addBlock!(bt, s2)
@@ -133,7 +133,7 @@ end
     add => gain3 => [int2, out1]
     int2 => [gain1, gain2]
 
-    b = SystemBlockDefinition(:RLCBlock4566)
+    b = BlockDefinition(:RLCBlock4566)
     addParameter!(b, SymbolicValue{Float64}(:R), 100.0)
     addParameter!(b, SymbolicValue{Float64}(:C))
     addParameter!(b, SymbolicValue{Float64}(:L))
@@ -164,7 +164,7 @@ end
 
     sc = Scope(s2.out1, :scope_test)
 
-    bt = SystemBlockDefinition(:TestBlock543)
+    bt = BlockDefinition(:TestBlock543)
     # addBlock!(bt, time)
     addBlock!(bt, s1)
     addBlock!(bt, s2)

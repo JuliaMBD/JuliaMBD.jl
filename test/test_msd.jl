@@ -1,5 +1,5 @@
 @testset "integrator2" begin
-    b = SystemBlockDefinition(:MSD)
+    b = BlockDefinition(:MSD)
     addParameter!(b, SymbolicValue{Float64}(:M))
     addParameter!(b, SymbolicValue{Float64}(:D))
     addParameter!(b, SymbolicValue{Float64}(:k))
@@ -41,7 +41,7 @@
     eval(expr_define_next(b))
     eval(expr_define_expr(b))
 
-    b = SystemBlockDefinition(:TestBlockMSD)
+    b = BlockDefinition(:TestBlockMSD)
     addParameter!(b, SymbolicValue{Float64}(:M))
     addParameter!(b, SymbolicValue{Float64}(:D))
     addParameter!(b, SymbolicValue{Float64}(:k))
