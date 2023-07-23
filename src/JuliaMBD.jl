@@ -7,7 +7,7 @@ export InPort, OutPort, Line
 export expr_refvalue, expr_setvalue
 export expr, expr_initial
 export next, prev
-export SystemBlockDefinition, addBlock!, addParameter!
+export BlockDefinition, addBlock!, addParameter!
 export get_default_inport, get_default_outport
 export expr_define_structure, expr_define_next, expr_define_expr
 export expr_define_function, expr_define_initialfunction, expr_define_sfunction
@@ -77,7 +77,7 @@ Base.show(io::IO, x::AbstractPort) = Base.show(io, x.var)
 Base.show(io::IO, x::SymbolicValue{Tv}) where Tv = Base.show(io, Expr(:(::), x.name, Tv))
 Base.show(io::IO, x::SymbolicValue{Auto}) = Base.show(io, x.name)
 
-Base.show(io::IO, b::SystemBlockDefinition) = Base.show(io, Expr(:call, :SystemBlockDefinition, b.name))
+Base.show(io::IO, b::BlockDefinition) = Base.show(io, Expr(:call, :BlockDefinition, b.name))
 Base.show(io::IO, b::AbstractSystemBlock) = Base.show(io, Expr(:call, typeof(b), [Expr(:kw, k, v) for (k,v) = b.pfunc(b)]...))
 
 end

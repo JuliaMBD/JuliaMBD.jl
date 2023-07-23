@@ -72,9 +72,9 @@ macro scope(m, b)
     end
 end
 
-macro model(f, e::Bool, block)　　
+macro model(f, e::Bool, block)
     body = []
-    push!(body, Expr(:(=), :tmp, Expr(:call, :SystemBlockDefinition, Expr(:quote, f))))
+    push!(body, Expr(:(=), :tmp, Expr(:call, :BlockDefinition, Expr(:quote, f))))
     if Meta.isexpr(block, :block)
         for x = block.args
             push!(body, _replace_macro(x))
@@ -93,7 +93,7 @@ end
 
 macro model(f, block)　　
     body = []
-    push!(body, Expr(:(=), :tmp, Expr(:call, :SystemBlockDefinition, Expr(:quote, f))))
+    push!(body, Expr(:(=), :tmp, Expr(:call, :BlockDefinition, Expr(:quote, f))))
     if Meta.isexpr(block, :block)
         for x = block.args
             push!(body, _replace_macro(x))

@@ -1,4 +1,4 @@
-mutable struct SystemBlockDefinition
+mutable struct BlockDefinition
     name::Symbol
     parameters::Vector{Tuple{SymbolicValue,Any}}
     inports::Vector{InPort} # TODO: check whether the vector has the ports with same name
@@ -9,7 +9,7 @@ mutable struct SystemBlockDefinition
     timeblk::AbstractInBlock
     blks::Vector{AbstractBlock}
     
-    function SystemBlockDefinition(name::Symbol)
+    function BlockDefinition(name::Symbol)
         b = new(name, Tuple{SymbolicValue,Any}[],
             InPort[], OutPort[],
             InPort[], OutPort[],
@@ -19,30 +19,30 @@ mutable struct SystemBlockDefinition
     end
 end
 
-function addParameter!(blk::SystemBlockDefinition, x::SymbolicValue)
+function addParameter!(blk::BlockDefinition, x::SymbolicValue)
     push!(blk.parameters, (x, x.name))
 end
 
-function addParameter!(blk::SystemBlockDefinition, x::SymbolicValue, y)
+function addParameter!(blk::BlockDefinition, x::SymbolicValue, y)
     push!(blk.parameters, (x, y))
 end
 
-function addBlock!(blk::SystemBlockDefinition, x::AbstractBlock)
+function addBlock!(blk::BlockDefinition, x::AbstractBlock)
     push!(blk.blks, x)
 end
     
-function addBlock!(blk::SystemBlockDefinition, x::AbstractIntegratorBlock)
+function addBlock!(blk::BlockDefinition, x::AbstractIntegratorBlock)
     addBlock!(blk, x.inblk)
     addBlock!(blk, x.outblk)
     addBlock!(blk, x.innerblk)
 end
 
-function addBlock!(blk::SystemBlockDefinition, x::AbstractTimeBlock)
+function addBlock!(blk::BlockDefinition, x::AbstractTimeBlock)
     push!(blk.blks, x)
     Line(blk.timeblk.outport, get_timeport(x))
 end
 
-function addBlock!(blk::SystemBlockDefinition, x::AbstractSystemBlock)
+function addBlock!(blk::BlockDefinition, x::AbstractSystemBlock)
     push!(blk.blks, x)
     for b = x.inblk
         addBlock!(blk, b)
@@ -56,27 +56,27 @@ function addBlock!(blk::SystemBlockDefinition, x::AbstractSystemBlock)
     Line(blk.timeblk.outport, x.time)
 end
 
-function addBlock!(blk::SystemBlockDefinition, x::InBlock)
+function addBlock!(blk::BlockDefinition, x::InBlock)
     push!(blk.blks, x)
     push!(blk.inports, x.inport)
 end
 
-function addBlock!(blk::SystemBlockDefinition, x::OutBlock)
+function addBlock!(blk::BlockDefinition, x::OutBlock)
     push!(blk.blks, x)
     push!(blk.outports, x.outport)
 end
 
-function addBlock!(blk::SystemBlockDefinition, x::StateIn)
+function addBlock!(blk::BlockDefinition, x::StateIn)
     push!(blk.blks, x)
     push!(blk.stateinports, x.inport)
 end
 
-function addBlock!(blk::SystemBlockDefinition, x::StateOut)
+function addBlock!(blk::BlockDefinition, x::StateOut)
     push!(blk.blks, x)
     push!(blk.stateoutports, x.outport)
 end
 
-function addBlock!(blk::SystemBlockDefinition, x::Scope)
+function addBlock!(blk::BlockDefinition, x::Scope)
     push!(blk.blks, x)
     push!(blk.scopeoutports, x.outport)
 end
@@ -165,7 +165,7 @@ end
 ```
 """    
 
-function expr_define_structure(blk::SystemBlockDefinition)
+function expr_define_structure(blk::BlockDefinition)
     params = [name(x[1]) for x = blk.parameters]
     ins = [name(p.var) for p = blk.inports]
     outs = [name(p.var) for p = blk.outports]
@@ -299,7 +299,7 @@ next, should be imported as `import JuliaMBD: next`
 - get_outports: Get outports
 """
 
-function expr_define_next(blk::SystemBlockDefinition)
+function expr_define_next(blk::BlockDefinition)
     params = [:(b.$(name(x[1]))) for x = blk.parameters]
     ins = [:(b.$(name(p.var))) for p = blk.inports]
     outs = [:(b.$(name(p.var))) for p = blk.outports]
@@ -325,7 +325,7 @@ expr should be imported as `import JuliaMBD: expr`
 - expr: Generate Expr to define the call of systemfunction
 """
 
-function expr_define_expr(blk::SystemBlockDefinition)
+function expr_define_expr(blk::BlockDefinition)
     params = [:(b.$(name(x[1]))) for x = blk.parameters]
     ins = [:(b.$(name(p.var))) for p = blk.inports]
     outs = [:(b.$(name(p.var))) for p = blk.outports]
@@ -365,7 +365,7 @@ Expr to define the systemfunction of SystemBlock
 The toporogical sort `tsort` is used.
 """
 
-function expr_define_function(blk::SystemBlockDefinition)
+function expr_define_function(blk::BlockDefinition)
     params = [expr_defvalue(x) for x = blk.parameters]
     args = [expr_defvalue(p.var) for p = blk.inports]
     sargs = [expr_defvalue(p.var) for p = blk.stateinports]
@@ -385,7 +385,7 @@ Expr to define the initialfunction of SystemBlock
 The toporogical sort `tsort` is used.
 """
 
-function expr_define_initialfunction(blk::SystemBlockDefinition)
+function expr_define_initialfunction(blk::BlockDefinition)
     params = [expr_defvalue(x) for x = blk.parameters]
     args = [expr_defvalue(p.var) for p = blk.inports]
     sargs = [expr_defvalue(p.var) for p = blk.stateinports]

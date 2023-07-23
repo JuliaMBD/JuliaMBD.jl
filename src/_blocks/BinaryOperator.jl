@@ -40,7 +40,7 @@ function Mod(;
     left::AbstractInPort = InPort(),
     right::AbstractInPort = InPort(),
     outport::AbstractOutPort = OutPort())
-    BinaryOperator(:%, left = left, right = right, outport = outport)
+    BinaryOperator(:mod, left = left, right = right, outport = outport)
 end
     
 function expr(blk::BinaryOperator)
