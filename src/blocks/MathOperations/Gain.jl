@@ -1,12 +1,12 @@
-export Gain
-
 mutable struct Gain <: AbstractBlock
+    name::Symbol
     K::Parameter
     inport::AbstractInPort
     outport::AbstractOutPort
 
-    function Gain(;K::Parameter, inport::AbstractInPort = InPort(), outport::AbstractOutPort = OutPort())
+    function Gain(;K::Parameter, name::Symbol = gensym(), inport::AbstractInPort = InPort(), outport::AbstractOutPort = OutPort())
         blk = new()
+        blk.name = name
         blk.K = K
         blk.inport = inport
         blk.outport = outport
@@ -15,8 +15,9 @@ mutable struct Gain <: AbstractBlock
         blk
     end
 
-    function Gain(K::Parameter; inport::AbstractInPort = InPort(), outport::AbstractOutPort = OutPort())
+    function Gain(K::Parameter;name::Symbol = gensym(), inport::AbstractInPort = InPort(), outport::AbstractOutPort = OutPort())
         blk = new()
+        blk.name = name
         blk.K = K
         blk.inport = inport
         blk.outport = outport

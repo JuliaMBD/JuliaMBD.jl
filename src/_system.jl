@@ -1,85 +1,53 @@
-mutable struct BlockDefinition
+mutable struct SystemBlock <: AbstractSystemBlock
     name::Symbol
     parameters::Vector{Tuple{SymbolicValue,Any}}
-    inports::Vector{InPort} # TODO: check whether the vector has the ports with same name
-    outports::Vector{OutPort} # TODO: check whether the vector has the ports with same name
-    stateinports::Vector{InPort} # TODO: check whether the vector has the ports with same name
-    stateoutports::Vector{OutPort} # TODO: check whether the vector has the ports with same name
-    scopeoutports::Vector{OutPort} # TODO: check whether the vector has the ports with same name
-    timeblk::AbstractInBlock
-    blks::Vector{AbstractBlock}
+    inports::Dict{Symbol,InPort}
+    outports::Dict{Symbol,OutPort}
+    blks::Dict{Symbol,AbstractBlock}
     
-    function BlockDefinition(name::Symbol)
-        b = new(name, Tuple{SymbolicValue,Any}[],
-            InPort[], OutPort[],
-            InPort[], OutPort[],
-            OutPort[], InBlock(inport=InPort(:time), outport=OutPort()), AbstractBlock[])
-        addBlock!(b, b.timeblk)
+    function SystemBlock(name::Symbol)
+        b = new(name,
+            Tuple{SymbolicValue,Any}[],
+            Dict{Symbol,InPort}(),
+            Dict{Symbol,OutPort}(),
+            Dict{Symbol,AbstractBlock}())
         b
     end
 end
 
-function addParameter!(blk::BlockDefinition, x::SymbolicValue)
+function addParameter!(blk::SystemBlock, x::SymbolicValue)
     push!(blk.parameters, (x, x.name))
 end
 
-function addParameter!(blk::BlockDefinition, x::SymbolicValue, y)
+function addParameter!(blk::SystemBlock, x::SymbolicValue, y)
     push!(blk.parameters, (x, y))
 end
 
-function addBlock!(blk::BlockDefinition, x::AbstractBlock)
-    push!(blk.blks, x)
+function addBlock!(blk::SystemBlock, x::AbstractBlock)
+    blk.blks[get_name(x)] = x
 end
     
-function addBlock!(blk::BlockDefinition, x::AbstractIntegratorBlock)
-    addBlock!(blk, x.inblk)
-    addBlock!(blk, x.outblk)
-    addBlock!(blk, x.innerblk)
+function addBlock!(blk::SystemBlock, x::AbstractSystemBlock)
+    blk.blks[get_name(x)] = x
 end
 
-function addBlock!(blk::BlockDefinition, x::AbstractTimeBlock)
-    push!(blk.blks, x)
-    Line(blk.timeblk.outport, get_timeport(x))
+function addBlock!(blk::SystemBlock, x::InBlock)
+    blk.blks[get_name(x)] = x
+    blk.inports[get_name(x)] = x
 end
 
-function addBlock!(blk::BlockDefinition, x::AbstractSystemBlock)
-    push!(blk.blks, x)
-    for b = x.inblk
-        addBlock!(blk, b)
-    end
-    for b = x.outblk
-        addBlock!(blk, b)
-    end
-    for b = x.scopes
-        addBlock!(blk, b)
-    end
-    Line(blk.timeblk.outport, x.time)
+function addBlock!(blk::SystemBlock, x::OutBlock)
+    blk.blks[get_name(x)] = x
+    blk.outports[get_name(x)] = x
 end
 
-function addBlock!(blk::BlockDefinition, x::InBlock)
-    push!(blk.blks, x)
-    push!(blk.inports, x.inport)
+function expr(blk::SystemBlock)
 end
 
-function addBlock!(blk::BlockDefinition, x::OutBlock)
-    push!(blk.blks, x)
-    push!(blk.outports, x.outport)
-end
-
-function addBlock!(blk::BlockDefinition, x::StateIn)
-    push!(blk.blks, x)
-    push!(blk.stateinports, x.inport)
-end
-
-function addBlock!(blk::BlockDefinition, x::StateOut)
-    push!(blk.blks, x)
-    push!(blk.stateoutports, x.outport)
-end
-
-function addBlock!(blk::BlockDefinition, x::Scope)
-    push!(blk.blks, x)
-    push!(blk.scopeoutports, x.outport)
-end
+# get_default_inport(blk::SystemBlock) = blk.inport
+# get_default_outport(blk::SystemBlock) = blk.outport
+# get_inports(blk::SystemBlock) = collect(values(blk.inports))
+# get_outports(blk::SystemBlock) = collect(values(blk.outport))
 
 """
 Expr for creating a structure for systemblok

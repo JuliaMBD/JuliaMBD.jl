@@ -1,16 +1,17 @@
-export BinaryOperator, Product, Division, Mod
-
 mutable struct BinaryOperator <: AbstractBlock
+    name::Symbol
     left::AbstractInPort
     right::AbstractInPort
     outport::AbstractOutPort
     operator::Symbol
 
     function BinaryOperator(operator::Symbol;
+        name::Symbol = gensym(),
         left::AbstractInPort = InPort(),
         right::AbstractInPort = InPort(),
         outport::AbstractOutPort = OutPort())
         blk = new()
+        blk.name = name
         blk.operator = operator
         blk.left = left
         blk.right = right
@@ -22,27 +23,6 @@ mutable struct BinaryOperator <: AbstractBlock
     end
 end
 
-function Product(;
-    left::AbstractInPort = InPort(),
-    right::AbstractInPort = InPort(),
-    outport::AbstractOutPort = OutPort())
-    BinaryOperator(:*, left = left, right = right, outport = outport)
-end
-
-function Division(;
-    left::AbstractInPort = InPort(),
-    right::AbstractInPort = InPort(),
-    outport::AbstractOutPort = OutPort())
-    BinaryOperator(:/, left = left, right = right, outport = outport)
-end
-
-function Mod(;
-    left::AbstractInPort = InPort(),
-    right::AbstractInPort = InPort(),
-    outport::AbstractOutPort = OutPort())
-    BinaryOperator(:mod, left = left, right = right, outport = outport)
-end
-    
 function expr(blk::BinaryOperator)
     i = expr_set_inports(blk.left, blk.right)
 

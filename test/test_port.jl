@@ -1,3 +1,7 @@
+module TestPort
+
+using Test
+import JuliaMBD: InPort, OutPort
 
 @testset "inport" begin
     x = InPort()
@@ -11,4 +15,6 @@ end
     println(x)
     x = OutPort(:leftin, Float64)
     println(x)
+end
+
 end

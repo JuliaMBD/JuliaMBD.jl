@@ -1,5 +1,15 @@
+module TestBlocks
 
-import JuliaMBD
+using Test
+import JuliaMBD:
+    Plus,
+    Line,
+    InPort,
+    OutPort,
+    Add,
+    Gain,
+    Constant,
+    PulseGenerator
 
 @testset "add" begin
     b = Plus(left=InPort(), right=InPort(), outport=OutPort(Float64))
@@ -43,3 +53,4 @@ end
     println(expr(b))
 end
 
+end

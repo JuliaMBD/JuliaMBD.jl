@@ -1,19 +1,20 @@
-export Constant
-
 mutable struct Constant <: AbstractBlock
+    name::Symbol
     value::Parameter
     outport::AbstractOutPort
 
-    function Constant(;value::Parameter, outport::AbstractOutPort = OutPort())
+    function Constant(;value::Parameter, name::Symbol = gensym(), outport::AbstractOutPort = OutPort())
         blk = new()
+        blk.name = name
         blk.value = value
         blk.outport = outport
         blk.outport.parent = blk
         blk
     end
 
-    function Constant(value::Parameter; outport::AbstractOutPort = OutPort())
+    function Constant(value::Parameter; name::Symbol = gensym(), outport::AbstractOutPort = OutPort())
         blk = new()
+        blk.name = name
         blk.value = value
         blk.outport = outport
         blk.outport.parent = blk

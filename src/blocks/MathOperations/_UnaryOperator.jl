@@ -1,14 +1,15 @@
-export MathFunction, Abs
-
-mutable struct MathFunction <: AbstractBlock
+mutable struct UnaryOperator <: AbstractBlock
+    name::Symbol
     inport::AbstractInPort
     outport::AbstractOutPort
     f::Symbol
 
-    function MathFunction(f::Symbol;
+    function UnaryOperator(f::Symbol;
+        name::Symbol = gensym(),
         inport::AbstractInPort = InPort(),
         outport::AbstractOutPort = OutPort())
         blk = new()
+        blk.name = name
         blk.f = f
         blk.inport = inport
         blk.outport = outport
@@ -18,13 +19,7 @@ mutable struct MathFunction <: AbstractBlock
     end
 end
 
-function Abs(;
-    inport::AbstractInPort = InPort(),
-    outport::AbstractOutPort = OutPort())
-    MathFunction(:abs, inport=inport, outport=outport)
-end
-
-function expr(blk::MathFunction)
+function expr(blk::UnaryOperator)
     i = expr_set_inports(blk.inport)
 
     x = expr_refvalue(blk.inport.var)
@@ -36,7 +31,7 @@ function expr(blk::MathFunction)
     Expr(:block, i, b, o)
 end
 
-get_default_inport(blk::MathFunction) = blk.inport
-get_default_outport(blk::MathFunction) = blk.outport
-get_inports(blk::MathFunction) = [blk.inport]
-get_outports(blk::MathFunction) = [blk.outport]
+get_default_inport(blk::UnaryOperator) = blk.inport
+get_default_outport(blk::UnaryOperator) = blk.outport
+get_inports(blk::UnaryOperator) = [blk.inport]
+get_outports(blk::UnaryOperator) = [blk.outport]
