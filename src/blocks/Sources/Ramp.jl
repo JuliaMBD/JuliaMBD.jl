@@ -1,5 +1,3 @@
-export Ramp
-
 mutable struct Ramp <: AbstractTimeBlock
     slope::Parameter
     starttime::Parameter

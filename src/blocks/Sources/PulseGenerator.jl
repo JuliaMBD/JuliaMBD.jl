@@ -1,5 +1,3 @@
-export PulseGenerator
-
 mutable struct PulseGenerator <: AbstractTimeBlock
     amplitude::Parameter
     period::Parameter

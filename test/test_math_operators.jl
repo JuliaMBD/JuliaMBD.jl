@@ -11,7 +11,9 @@ import JuliaMBD:
     Product,
     Divide,
     Mod,
-    expr
+    expr,
+    get_default_inport,
+    get_default_outport
 
 @testset "add" begin
     b = Plus(left=InPort(), right=InPort(), outport=OutPort(Float64))
@@ -62,8 +64,9 @@ end
 @testset "gain" begin
     b = Gain(K=10.0, inport=InPort(), outport=OutPort(Float64))
     println(b)
-    Line(OutPort(), b.inport)
-    Line(b.outport, InPort())
+    println(get_default_inport(b))
+    OutPort() => b
+    b => InPort()
     println(expr(b))
 end
 

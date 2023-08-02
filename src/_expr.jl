@@ -21,9 +21,9 @@ function expr_initial(b::AbstractBlock)
     expr(b)
 end
 
-# name(x::SymbolicValue) = x.name
-# name(x::AbstractPort) = x.var.name
-# name(x::Vector{Ts}) where Ts = [name(e) for e = x]
+name(x::SymbolicValue) = x.name
+name(x::AbstractPort) = x.var.name
+name(x::Vector{Ts}) where Ts = [name(e) for e = x]
 
 # macro q(x)
 #     esc(:(_toquote($x)))
@@ -54,3 +54,15 @@ expr_setvalue(x::SymbolicValue{Auto}, expr) = Expr(:(=), x.name, expr)
 # expr_setpair(x::SymbolicValue{Tv}, expr) where Tv = Expr(:call, :(=>), @q(x.name), Expr(:call, Symbol(Tv), expr))
 # expr_setpair(x::SymbolicValue{Auto}, expr) = Expr(:call, :(=>), @q(x.name), expr)
 
+function compile_function(blk::AbstractBlock)
+    params = [expr_defvalue(x) for x = blk.parameters]
+    ins = [expr_defvalue(p.var) for (_,p) = blk.inports]
+    outs = [:($(name(p.var)) = $(expr_refvalue(p.var))) for (_,p) = blk.outports]
+    # sargs = [expr_defvalue(p.var) for p = blk.stateinports]
+    # souts = [:($(name(p.var)) = $(expr_refvalue(p.var))) for p = blk.stateoutports]
+    # scopes = [:($(name(p.var)) = $(expr_refvalue(p.var))) for p = blk.scopeoutports]
+    expr(blk)
+    Expr(:function, Expr(:call, Symbol(blk.name, "Function"),
+            Expr(:parameters, ins..., params...),
+        Expr(:block, expr(blk), Expr(:tuple, outs...))))
+end

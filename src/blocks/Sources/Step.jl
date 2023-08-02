@@ -1,5 +1,3 @@
-export Step
-
 mutable struct Step <: AbstractTimeBlock
     steptime::Parameter
     initialvalue::Parameter
