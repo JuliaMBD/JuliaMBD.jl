@@ -1,24 +1,21 @@
 mutable struct BinaryOperator <: AbstractBlock
-    name::Symbol
-    left::AbstractInPort
-    right::AbstractInPort
-    outport::AbstractOutPort
+    blkname::Symbol
     operator::Symbol
+    inports::Dict{Symbol,AbstractInPort}
+    outports::Dict{Symbol,AbstractOutPort}
 
-    function BinaryOperator(operator::Symbol;
-        name::Symbol = gensym(),
+    function BinaryOperator(name::Symbol, operator::Symbol;
         left::AbstractInPort = InPort(),
         right::AbstractInPort = InPort(),
-        outport::AbstractOutPort = OutPort())
+        out::AbstractOutPort = OutPort())
         blk = new()
         blk.name = name
         blk.operator = operator
-        blk.left = left
-        blk.right = right
-        blk.outport = outport
-        blk.left.parent = blk
-        blk.right.parent = blk
-        blk.outport.parent = blk
+        left.parent = blk
+        right.parent = blk
+        out.parent = blk
+        blk.inports = Dict{Symbol,AbstractInPort}(:left => left, :right => right)
+        blk.outport = Dict{Symbol,AbstractOutPort}(:out => outport)
         blk
     end
 end

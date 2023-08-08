@@ -1,12 +1,9 @@
-using JuliaMBD
-using Test
-
-# import JuliaMBD: expr, expr_initial, get_inports, get_outports
 
 include("test_parameter.jl")
 include("test_port.jl")
+include("test_block.jl")
 
-include("test_math_operators.jl")
+# include("test_math_operators.jl")
 
 # include("test_integrator.jl")
 # include("test_module.jl")

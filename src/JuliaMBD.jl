@@ -20,15 +20,13 @@ module JuliaMBD
 # import DifferentialEquations
 # import Plots
 
-abstract type AbstractLine end
+abstract type AbstractSymbolicValue{Tv} end
+abstract type AbstractPort{Tv} <: AbstractSymbolicValue{Tv} end
+abstract type AbstractLine{Tv} <: AbstractSymbolicValue{Tv} end
+abstract type AbstractInPort{Tv} <: AbstractPort{Tv} end
+abstract type AbstractOutPort{Tv} <: AbstractPort{Tv} end
 
-abstract type AbstractComponent end
-
-abstract type AbstractPort <: AbstractComponent end
-abstract type AbstractInPort <: AbstractPort end
-abstract type AbstractOutPort <: AbstractPort end
-
-abstract type AbstractBlock <: AbstractComponent end
+abstract type AbstractBlock end
 # abstract type AbstractIntegratorBlock <: AbstractBlock end
 # abstract type AbstractSystemBlock <: AbstractBlock end
 # abstract type AbstractFunctionBlock <: AbstractSystemBlock end
@@ -44,12 +42,13 @@ Note:
 
 include("_parameter.jl")
 include("_ports_and_line.jl")
+include("_block.jl")
 
-include("_default_ports.jl")
+# include("_default_ports.jl")
 
-include("_expr.jl")
+# include("_expr.jl")
 
-include("blocks/MathOperations/mathoperations.jl")
+# include("blocks/MathOperations/mathoperations.jl")
 
 # include("_common.jl")
 

@@ -4,6 +4,10 @@
 abstract type AbstractBlock end
 ```
 
+- Properties
+    - name: Symbol for class name
+    - inports: Dict
+    - outports: Dict
 - AbstractBlock can generate the julia code by `_expr` (inner function).
 - AbstractBlock can be compiled by 'compile' to the ODEModel.
 - This should be connected to others.

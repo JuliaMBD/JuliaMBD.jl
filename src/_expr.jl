@@ -1,5 +1,5 @@
 
-expr_call(blk::AbstractBlock) = Expr(:tuple)
+# expr_call(blk::AbstractBlock) = Expr(:tuple)
 
 function expr_set_inports(inports...)
     body = [Expr(:block, expr_setvalue(p.var, expr_refvalue(p.line.var))) for p = inports]
@@ -21,9 +21,9 @@ function expr_initial(b::AbstractBlock)
     expr(b)
 end
 
-name(x::SymbolicValue) = x.name
-name(x::AbstractPort) = x.var.name
-name(x::Vector{Ts}) where Ts = [name(e) for e = x]
+# name(x::SymbolicValue) = x.name
+# name(x::AbstractPort) = x.var.name
+# name(x::Vector{Ts}) where Ts = [name(e) for e = x]
 
 # macro q(x)
 #     esc(:(_toquote($x)))
