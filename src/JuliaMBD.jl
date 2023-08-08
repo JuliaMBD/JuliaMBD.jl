@@ -48,7 +48,7 @@ include("_block.jl")
 
 # include("_expr.jl")
 
-# include("blocks/MathOperations/mathoperations.jl")
+include("blocks/MathOperations/mathoperations.jl")
 
 # include("_common.jl")
 

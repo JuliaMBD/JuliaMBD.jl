@@ -2,6 +2,7 @@
 Properties of AbstractBlock
 
 - blkname::Symbol The name of block (class name)
+- parameters::Vector{AbstractSymbolicValue}
 - inports::Vector{AbstractInPort}
 - outports::Vector{AbstractOutPort}
 - env::Dict{Symbol,Any}
@@ -53,6 +54,26 @@ function get_default_outport(blk::AbstractBlock)
 end
 
 """
+get_parameters(blk::AbstractBlock)
+
+Get a vector of parameters
+"""
+function get_parameters(blk::AbstractBlock)
+    blk.parameters
+end
+
+"""
+set_parameter!(blk::AbstractBlock, s::Symbol, x::Tv) where Tv
+
+Set a parameter.
+"""
+function set_parameter!(blk::AbstractBlock, s::Symbol, x::Tv) where Tv
+    # push!(blk.parameters, SymbolicValue{Tv}(s))
+    push!(blk.parameters, SymbolicValue{Auto}(s))
+    set_to_env!(blk, s, x)
+end
+
+"""
 set_to_env!(blk::AbstractBlock, s::Symbol, x::Any)
 
 Set a variable x to env.
@@ -67,6 +88,7 @@ set_inport!(blk::AbstractBlock, p::AbstractInPort)
 Set an inport.
 """
 function set_inport!(blk::AbstractBlock, p::AbstractInPort)
+    set_parent!(p, blk)
     push!(get_inports(blk), p)
     set_to_env!(blk, get_name(p), p)
 end
@@ -77,6 +99,7 @@ set_outport!(blk::AbstractBlock, p::AbstractOutPort)
 Set an outport.
 """
 function set_outport!(blk::AbstractBlock, p::AbstractOutPort)
+    set_parent!(p, blk)
     push!(get_outports(blk), p)
     set_to_env!(blk, get_name(p), p)
 end
@@ -136,6 +159,9 @@ function expr(blk::AbstractBlock)
             push!(outs_left, left)
             push!(outs_right, right)
         end
+    end
+    for x = get_parameters(blk)
+        push!(ins, Expr(:(=), expr_setpair(x, expr_refvalue(blk[get_name(x)]))...))
     end
     body = expr_body(blk)
     Expr(:(=), Expr(:tuple, outs_left...),

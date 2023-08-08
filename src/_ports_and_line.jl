@@ -26,7 +26,8 @@ mutable struct Line <: AbstractLine{Auto}
     dest::AbstractInPort
     
     function Line(o::AbstractOutPort, i::AbstractInPort)
-        name = Symbol(o.var.name, i.var.name)
+        # name = Symbol(o.var.name, gensym(), i.var.name)
+        name = gensym()
         line = new(SymbolicValue{Auto}(name), o, i)
         i.line = line
         push!(o.lines, line)
@@ -102,6 +103,15 @@ Get the var of line.
 """
 function get_var(x::AbstractLine)
     x.var
+end
+
+"""
+set_parent!(p::AbstractPort, x::AbstractBlock)
+
+Set a parent
+"""
+function set_parent!(p::AbstractPort, x::AbstractBlock)
+    p.parent = x
 end
 
 # function Base.:(=>)(o::AbstractComponent, i::AbstractComponent)
