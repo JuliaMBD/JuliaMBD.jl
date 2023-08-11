@@ -1,4 +1,4 @@
-module TestBlock
+module TestMathBlock
 
 using Test
 import JuliaMBD:

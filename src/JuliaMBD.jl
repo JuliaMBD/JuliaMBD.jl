@@ -44,6 +44,8 @@ include("_parameter.jl")
 include("_ports_and_line.jl")
 include("_block.jl")
 
+include("_tsort.jl")
+
 # include("_default_ports.jl")
 
 # include("_expr.jl")

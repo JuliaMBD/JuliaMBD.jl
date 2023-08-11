@@ -70,6 +70,24 @@ function get_name(x::AbstractLine)
 end
 
 """
+get_source(x::AbstractLine)
+
+Get a source
+"""
+function get_source(x::AbstractLine)
+    x.source
+end
+
+"""
+get_dest(x::AbstractLine)
+
+Get a dest
+"""
+function get_dest(x::AbstractLine)
+    x.dest
+end
+
+"""
 get_var(x::AbstractPort)
 
 Get the var of port.
@@ -103,6 +121,15 @@ Get the var of line.
 """
 function get_var(x::AbstractLine)
     x.var
+end
+
+"""
+get_parent(p::AbstractPort)
+
+Get a parent block
+"""
+function get_parent(p::AbstractPort)
+    p.parent
 end
 
 """

@@ -9,12 +9,21 @@ Properties of AbstractBlock
 """
 
 """
-get_blkname(blk::AbstractBlock)
+Base.show(io::IO, x::AbstractBlock)
+
+Show the block
+"""
+function Base.show(io::IO, x::AbstractBlock)
+    Base.show(io, get_name(x))
+end
+
+"""
+get_name(blk::AbstractBlock)
 
 Get the symbol representing the class of block
 """
-function get_blkname(blk::AbstractBlock)
-    blk.blkname
+function get_name(blk::AbstractBlock)
+    blk.name
 end
 
 """
@@ -168,6 +177,39 @@ function expr(blk::AbstractBlock)
         Expr(:let, Expr(:block, ins...),
             Expr(:block, body, Expr(:tuple, outs_right...))))
 end
+
+"""
+prev(blk::AbstractBlock)
+
+Get a vector of previous blocks
+"""
+function prev(blk::AbstractBlock)
+    b = AbstractBlock[]
+    for p = get_inports(blk)
+        line = get_line(p)
+        if !isnothing(line)
+            tmp = get_parent(get_source(line))
+            if !isnothing(tmp)
+                push!(b, tmp)
+            end
+        end
+    end
+    b
+end
+
+function next(blk::AbstractBlock)
+    b = AbstractBlock[]
+    for p = get_outports(blk)
+        for line = get_lines(p)
+            tmp = get_parent(get_dest(line))
+            if !isnothing(tmp)
+                push!(b, tmp)
+            end
+        end
+    end
+    b
+end
+
 
 # function expr()
 #     i = [expr_set_inports(blk.left, blk.right) for (k,p) = get_inports(blk)]
