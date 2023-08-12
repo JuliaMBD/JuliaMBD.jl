@@ -28,12 +28,26 @@ end
 
 """
 set_block!(blk::SystemBlock, s::Symbol, x::AbstractBlock)
+set_block!(blk::SystemBlock, s::Symbol, x::Inport)
+set_block!(blk::SystemBlock, s::Symbol, x::Outport)
 
 Set a block
 """
 function set_block!(blk::SystemBlock, s::Symbol, x::AbstractBlock)
     push!(get_blocks(blk), x)
     set_to_env!(blk, s, x)
+end
+
+function set_block!(blk::SystemBlock, s::Symbol, x::Inport)
+    push!(get_blocks(blk), x)
+    set_to_env!(blk, s, x)
+    set_inport!(blk, x[:in])
+end
+
+function set_block!(blk::SystemBlock, s::Symbol, x::Outport)
+    push!(get_blocks(blk), x)
+    set_to_env!(blk, s, x)
+    set_outport!(blk, x[:out])
 end
 
 function expr_body(blk::SystemBlock)

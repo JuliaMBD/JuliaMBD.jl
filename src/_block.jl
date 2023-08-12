@@ -158,15 +158,21 @@ function expr(blk::AbstractBlock)
         if !isnothing(l)
             push!(ins, Expr(:(=), expr_setpair(get_var(p), expr_refvalue(l))...))
         else
-            push!(ins, expr_refvalue(p))
+            # push!(ins, expr_refvalue(p))
+            push!(ins, Expr(:(=), expr_refvalue(p), expr_refvalue(p)))
         end
     end
     for p = get_outports(blk)
         push!(ins, expr_refvalue(p))
-        for l = get_lines(p)
-            left, right = expr_setpair(get_var(l), expr_refvalue(p))
-            push!(outs_left, left)
-            push!(outs_right, right)
+        if length(get_lines(p)) == 0
+            push!(outs_left, expr_refvalue(p))
+            push!(outs_right, expr_refvalue(p))
+        else
+            for l = get_lines(p)
+                left, right = expr_setpair(get_var(l), expr_refvalue(p))
+                push!(outs_left, left)
+                push!(outs_right, right)
+            end
         end
     end
     for x = get_parameters(blk)
@@ -177,6 +183,53 @@ function expr(blk::AbstractBlock)
         Expr(:let, Expr(:block, ins...),
             Expr(:block, body, Expr(:tuple, outs_right...))))
 end
+
+# """
+# expr_function(blk::AbstractBlock, f::Symbol)
+
+# Get Expr of function for a given block.
+
+# Rule:
+# - The name of an inport is used in the local scope of block.
+# - The name of an outport is used in the local scope.
+# - Example
+# ```
+#   function f((a tuple of the names of inports) = (a tuple of the names of lines)
+#     ...
+#     body
+#     ...
+#     (a tuple of the names of outports)
+#   end
+# ```
+# """
+# function expr(blk::AbstractBlock)
+#     ins = []
+#     outs_left = []
+#     outs_right = []
+#     for p = get_inports(blk)
+#         l = get_line(p)
+#         if !isnothing(l)
+#             push!(ins, Expr(:(=), expr_setpair(get_var(p), expr_refvalue(l))...))
+#         else
+#             push!(ins, expr_refvalue(p))
+#         end
+#     end
+#     for p = get_outports(blk)
+#         push!(ins, expr_refvalue(p))
+#         for l = get_lines(p)
+#             left, right = expr_setpair(get_var(l), expr_refvalue(p))
+#             push!(outs_left, left)
+#             push!(outs_right, right)
+#         end
+#     end
+#     for x = get_parameters(blk)
+#         push!(ins, Expr(:(=), expr_setpair(x, expr_refvalue(blk[get_name(x)]))...))
+#     end
+#     body = expr_body(blk)
+#     Expr(:(=), Expr(:tuple, outs_left...),
+#         Expr(:let, Expr(:block, ins...),
+#             Expr(:block, body, Expr(:tuple, outs_right...))))
+# end
 
 """
 prev(blk::AbstractBlock)
