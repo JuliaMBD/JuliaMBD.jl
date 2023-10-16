@@ -3,6 +3,7 @@ module TestMathBlock
 using Test
 import JuliaMBD:
     AbstractBlock,
+    AbstractBasicBlock,
     AbstractInPort,
     AbstractOutPort,
     AbstractSymbolicValue,
@@ -23,7 +24,7 @@ import JuliaMBD:
     Divide,
     Add
 
-mutable struct TestGain <: AbstractBlock
+mutable struct TestGain <: AbstractBasicBlock
     name::Symbol
     parameters::Vector{AbstractSymbolicValue}
     inports::Vector{AbstractInPort}

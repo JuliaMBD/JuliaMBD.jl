@@ -92,6 +92,12 @@ end
 
     bb = SubSystem()
     set_block!(bb, :ss, b)
+    ib = Inport()
+    ob = Outport()
+    set_block!(bb, :a, ib)
+    set_block!(bb, :b, ob)
+    Line(ib[:out], b[:c])
+    # Line(b[:d], ob[:in])
     println(expr(bb))
 end
 

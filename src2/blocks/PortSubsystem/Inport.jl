@@ -1,25 +1,24 @@
-mutable struct Inport <: AbstractBlock
+mutable struct Inport <: AbstractBasicBlock
     name::Symbol
     parameters::Vector{AbstractSymbolicValue}
     inports::Vector{AbstractInPort}
     outports::Vector{AbstractOutPort}
     env::Dict{Symbol,Any}
     
-    function Inport(; in::AbstractInPort = InPort(:in), out::AbstractOutPort = OutPort(:out)) where Tv
+    function Inport(; out::AbstractOutPort = OutPort(:out)) where Tv
         b = new(:Inport, AbstractSymbolicValue[], AbstractInPort[], AbstractOutPort[], Dict{Symbol,Any}())
-        set_inport!(b, in)
         set_outport!(b, out)
+        b.env[:label] = :none
         b
     end
 end
 
 function get_label(x::Inport)
-    get_name(get_inports(x)[1])
+    x.env[:label]
 end
 
-function set_label!(x::Inport, s::Symbol)
-    p = InPort(s)
-    get_inports(x)[1] = p
+function set_label!(x::Inport, label::Symbol)
+    x.env[:label] = label
 end
 
 function expr_body(blk::Inport)

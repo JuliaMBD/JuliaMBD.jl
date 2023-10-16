@@ -1,4 +1,4 @@
-mutable struct Divide <: AbstractBlock
+mutable struct Divide <: AbstractBasicBlock
     name::Symbol
     parameters::Vector{AbstractSymbolicValue}
     inports::Vector{AbstractInPort}

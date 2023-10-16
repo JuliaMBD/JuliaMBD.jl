@@ -1,4 +1,4 @@
-mutable struct Mod <: AbstractBlock
+mutable struct Mod <: AbstractBasicBlock
     name::Symbol
     parameters::Vector{AbstractSymbolicValue}
     inports::Vector{AbstractInPort}

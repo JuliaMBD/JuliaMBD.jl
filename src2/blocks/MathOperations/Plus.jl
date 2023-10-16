@@ -1,4 +1,4 @@
-mutable struct Plus <: AbstractBlock
+mutable struct Plus <: AbstractBasicBlock
     name::Symbol
     parameters::Vector{AbstractSymbolicValue}
     inports::Vector{AbstractInPort}

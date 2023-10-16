@@ -1,4 +1,4 @@
-mutable struct Gain <: AbstractBlock
+mutable struct Gain <: AbstractBasicBlock
     name::Symbol
     parameters::Vector{AbstractSymbolicValue}
     inports::Vector{AbstractInPort}
