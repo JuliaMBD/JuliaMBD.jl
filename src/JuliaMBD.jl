@@ -20,16 +20,16 @@ module JuliaMBD
 # import DifferentialEquations
 # import Plots
 
-abstract type AbstractSymbolicValue{Tv} end
-abstract type AbstractPort{Tv} <: AbstractSymbolicValue{Tv} end
-abstract type AbstractLine{Tv} <: AbstractSymbolicValue{Tv} end
-abstract type AbstractInPort{Tv} <: AbstractPort{Tv} end
-abstract type AbstractOutPort{Tv} <: AbstractPort{Tv} end
+# abstract type AbstractSymbolicValue{Tv} end
+# abstract type AbstractPort{Tv} <: AbstractSymbolicValue{Tv} end
+# abstract type AbstractLine{Tv} <: AbstractSymbolicValue{Tv} end
+# abstract type AbstractInPort{Tv} <: AbstractPort{Tv} end
+# abstract type AbstractOutPort{Tv} <: AbstractPort{Tv} end
 
-abstract type AbstractBlock end
-abstract type AbstractBasicBlock <: AbstractBlock end
-abstract type AbstractSystemBlockInstance <: AbstractBlock end
-abstract type AbstractSystemBlockDefinition end
+# abstract type AbstractBlock end
+# abstract type AbstractBasicBlock <: AbstractBlock end
+# abstract type AbstractSystemBlockInstance <: AbstractBlock end
+# abstract type AbstractSystemBlockDefinition end
 
 # abstract type AbstractIntegratorBlock <: AbstractBlock end
 # abstract type AbstractFunctionBlock <: AbstractSystemBlock end
@@ -43,14 +43,14 @@ Note:
 - AbstractIntegratorBlock has `inblk`, `outblk` that are the vectors to store StateIn, StateOut blocks.
 """
 
-include("_parameter.jl")
-include("_ports_and_line.jl")
+# include("_parameter.jl")
+# include("_ports_and_line.jl")
 
-include("blocks/MathOperations/include.jl")
-include("blocks/PortSubsystem/include.jl")
+# include("blocks/MathOperations/include.jl")
+# include("blocks/PortSubsystem/include.jl")
 
-include("_block.jl")
-include("_tsort.jl")
+# include("_block.jl")
+# include("_tsort.jl")
 
 # include("_system.jl")
 
