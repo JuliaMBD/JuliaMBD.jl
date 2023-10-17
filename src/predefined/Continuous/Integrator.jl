@@ -16,8 +16,8 @@ function IntegratorInner(name = :IntegratorInner;
     b = SimpleBlock(name, IntegratorInnerBlockType)
     set!(b, in.name, in)
     set!(b, out.name, out)
-    set!(b, initialcondition.name, initialcondition)
-    set!(b, saturationlimits.name, saturationlimits)
+    set!(b, :initialcondition, initialcondition)
+    set!(b, :saturationlimits, saturationlimits)
     b
 end
 
