@@ -1,9 +1,7 @@
 export Add
 
-struct AddBlockType <: AbstractBlockType end
-
-function Add(name = :Add; signs::Vector{Symbol}, out = OutPort())
-    b = SimpleBlock(name, AddBlockType)
+function Add(; signs::Vector{Symbol}, out = OutPort())
+    b = SimpleBlock(:Add)
     for (i,s) = enumerate(signs)
         set!(b, Symbol(:in, i), InPort())
     end
@@ -12,7 +10,7 @@ function Add(name = :Add; signs::Vector{Symbol}, out = OutPort())
     b
 end
 
-function expr(b::SimpleBlock, ::Type{AddBlockType})
+function expr(b::SimpleBlock, ::Val{:Add})
     signs = b.env[:signs]
     expr = 0
     for (i,s) = enumerate(signs)

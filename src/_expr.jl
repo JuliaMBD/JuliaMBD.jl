@@ -57,5 +57,49 @@ function _expr(x::ConstSignal{Auto})
 end
 
 function _expr(x::SimpleBlock)
-    expr(x, x.type)
+    expr(x, Val(x.name))
 end
+
+### compile
+
+function expr_function(b::AbstractCompositeBlock)
+    inargs = []
+    for p = [b.inports..., b.stateoutports...]
+        if typeof(p.type) != Auto
+            push!(inargs, Expr(:(::), p.name, p.type))
+        else
+            push!(inargs, p.name)
+        end
+    end
+    outargs = []
+    for p = [b.outports..., b.stateinports...]
+        if typeof(p.type) != Auto
+            push!(outargs, Expr(:(=), p.name, Expr(:call, p.type, p.name)))
+        else
+            push!(outargs, Expr(:(=), p.name, p.name))
+        end
+    end
+    paramargs = []
+    for p = b.parameters
+        if typeof(p.type) != Auto
+            v = Expr(:(::), p.name, p.type)
+        else
+            v = p.name
+        end
+        if haskey(b.env, p.name)
+            push!(paramargs, Expr(:kw, v, b.env[p.name]))
+        else
+            push!(paramargs, v)
+        end
+    end
+    body = [_expr(m) for m = tsort(allcomponents(b))]
+    Expr(:function,
+        Expr(:call, Symbol(b.name, "_systemfunction"),
+            Expr(:parameters, paramargs...), inargs...),
+        Expr(:block, body..., Expr(:tuple, outargs...)))
+end
+
+"""
+(:function, (:call, :f, (:parameters, (:kw, (:(::), :a, :Any), 1.0), (:(::), :b, :Float64)), (:(::), :x, :Float64), (:(::), :y, :Int)), (:block,
+"""
+  

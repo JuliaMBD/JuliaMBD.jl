@@ -7,16 +7,14 @@ mutable struct SimpleBlock <: AbstractSimpleBlock
     outports::Vector{AbstractOutPortBlock}
     parameters::Vector{AbstractParameterPortBlock}
     env::Dict{Symbol,Any}
-    type::DataType
 
-    function SimpleBlock(name::Symbol, ::Type{Tv}) where {Tv <: AbstractBlockType}
+    function SimpleBlock(name::Symbol)
         b = new(name,
             "",
             AbstractInPortBlock[],
             AbstractOutPortBlock[],
             AbstractParameterPortBlock[],
-            Dict{Symbol,Any}(),
-            Tv)
+            Dict{Symbol,Any}())
         b
     end
 end

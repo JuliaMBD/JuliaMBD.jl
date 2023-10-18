@@ -23,6 +23,17 @@ all blocks
 
 Get all blocks from a block
 """
+function allcomponents(b::AbstractCompositeBlock)
+    visited = Set{AbstractComponent}()
+    for p = b.inports
+        _allblocks(p, visited)
+    end
+    for p = b.outports
+        _allblocks(p, visited)
+    end
+    collect(visited)
+end
+
 function allcomponents(blk::AbstractComponent)
     visited = Set{AbstractComponent}()
     _allblocks(blk, visited)

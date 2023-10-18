@@ -18,5 +18,3 @@ struct UndefPort <: AbstractPortBlock end
 struct UndefSignal <: AbstractSignal end
 
 const undefset = Set([UndefBlock(), UndefPort(), UndefSignal()])
-
-abstract type AbstractBlockType end

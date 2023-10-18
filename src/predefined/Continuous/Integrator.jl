@@ -1,42 +1,41 @@
 export Integrator
 
-struct IntegratorInnerBlockType <: AbstractBlockType end
-
 """
 initialcondition::Parameter,
 saturationlimits::NTuple{2,Union{Parameter,Nothing}},
 inport::AbstractInPort = InPort(),
 outport::AbstractOutPort = OutPort())
 """
-function IntegratorInner(name = :IntegratorInner;
-    initialcondition = ParameterPort(:initialcondition),
-    saturationlimits = ParameterPort(:saturationlimits, NTuple{2,Auto}),
-    in = InPort(:sin),
-    out = OutPort(:sout))
-    b = SimpleBlock(name, IntegratorInnerBlockType)
-    set!(b, in.name, in)
-    set!(b, out.name, out)
+function IntegratorInner(;
+        initialcondition = ParameterPort(:initialcondition),
+        saturationlimits = ParameterPort(:saturationlimits, NTuple{2,Auto}),
+        in = InPort(),
+        out = OutPort())
+    b = SimpleBlock(:IntegratorInner)
+    set!(b, :sin, in)
+    set!(b, :sout, out)
     set!(b, :initialcondition, initialcondition)
     set!(b, :saturationlimits, saturationlimits)
     b
 end
 
-function expr(b::SimpleBlock, ::Type{IntegratorInnerBlockType})
+function expr(b::SimpleBlock, ::Val{:IntegratorInner})
     Expr(:(=), b.outports[1].name, b.inports[1].name)
 end
 
-function Integrator(name = :Integrator;
-    initialcondition = ParameterPort(:initialcondition),
-    saturationlimits = ParameterPort(:saturationlimits, NTuple{2,Auto}),
-    in = InPort(:in),
-    out = OutPort(:out))
-    b = SubSystemBlock(name)
-    in1 = Inport(in.name)
-    set!(b, in1.name, in1)
+function Integrator(;
+        initialcondition = ParameterPort(:initialcondition),
+        saturationlimits = ParameterPort(:saturationlimits, NTuple{2,Auto}),
+        in = :in, out = :out)
+    b = SubSystemBlock(:Integrator)
+    in1 = Inport(in)
+    out1 = Outport(out)
     inner = IntegratorInner(initialcondition = initialcondition, saturationlimits = saturationlimits)
-    set!(b, inner.name, inner)
-    out1 = Outport(out.name)
-    set!(b, out1.name, out1)
     LineSignal(in1.outports[1], inner.inports[1], "sout")
+    add!(b, in1)
+    add!(b, inner)
+    add!(b, out1)
+    push!(b.stateoutports, inner.outports[1])
+    push!(b.stateinports, out1.outports[1])
     b
 end

@@ -1,11 +1,13 @@
 export SubSystemBlock
-export set!
+export add!
 
 mutable struct SubSystemBlock <: AbstractCompositeBlock
     name::Symbol
     desc::String
     inports::Vector{AbstractInPortBlock}
     outports::Vector{AbstractOutPortBlock}
+    stateinports::Vector{AbstractPortBlock}
+    stateoutports::Vector{AbstractPortBlock}
     parameters::Vector{AbstractParameterPortBlock}
     blocks::Vector{AbstractBlock}
     env::Dict{Symbol,Any}
@@ -15,6 +17,8 @@ mutable struct SubSystemBlock <: AbstractCompositeBlock
             "",
             AbstractInPortBlock[],
             AbstractOutPortBlock[],
+            AbstractInPortBlock[],
+            AbstractOutPortBlock[],
             AbstractParameterPortBlock[],
             AbstractBlock[],
             Dict{Symbol,Any}())
@@ -22,29 +26,31 @@ mutable struct SubSystemBlock <: AbstractCompositeBlock
     end
 end
 
-function set!(b::AbstractCompositeBlock, s::Symbol, x::AbstractParameterPortBlock)
+function add!(b::AbstractCompositeBlock, x::AbstractParameterPortBlock)
     x.parent = b
     push!(b.parameters, x)
-    b.env[s] = x
 end
 
-function set!(b::AbstractCompositeBlock, s::Symbol, x::SimpleBlock)
+function add!(b::AbstractCompositeBlock, x::AbstractCompositeBlock)
     push!(b.blocks, x)
-    b.env[s] = x
-    _set!(b, s, x, x.type)
 end
 
-function _set!(::AbstractCompositeBlock, s::Symbol, x::SimpleBlock, ::Type{Tb}) where {Tb <: AbstractBlockType}
+function add!(b::AbstractCompositeBlock, x::AbstractSimpleBlock)
+    _add!(b, x, Val(x.name))
+    push!(b.blocks, x)
 end
 
-function _set!(b::AbstractCompositeBlock, s::Symbol, x::SimpleBlock, ::Type{InportBlockType{Tv}}) where Tv
+function _add!(::AbstractCompositeBlock, x::SimpleBlock, ::Any)
+end
+
+function _add!(b::AbstractCompositeBlock, x::SimpleBlock, ::Val{:Inport})
     p = x.inports[1]
     push!(b.inports, p)
-    b.env[s] = p
+    b.env[x.inports[1].name] = p
 end
 
-function _set!(b::AbstractCompositeBlock, s::Symbol, x::SimpleBlock, ::Type{OutportBlockType{Tv}}) where Tv
+function _add!(b::AbstractCompositeBlock, x::SimpleBlock, ::Val{:Outport})
     p = x.outports[1]
     push!(b.outports, p)
-    b.env[s] = p
+    b.env[x.outports[1].name] = p
 end
