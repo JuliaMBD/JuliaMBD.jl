@@ -13,6 +13,7 @@ include("predefined/PortSubsystem/_blocks.jl")
 include("predefined/MathOperations/_blocks.jl")
 include("predefined/Continuous/_blocks.jl")
 include("predefined/Sources/_blocks.jl")
+include("predefined/Discontinuities/_blocks.jl")
 
 include("_show.jl")
 include("_tsort.jl")
