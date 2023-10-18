@@ -11,10 +11,11 @@ mutable struct SubSystemBlock <: AbstractCompositeBlock
     stateoutports::Vector{AbstractPortBlock}
     parameterports::Vector{AbstractParameterPortBlock}
     blocks::Vector{AbstractBlock}
-    parameters::Vector{Tuple{Any,Any}}
+    parameters::Vector{Tuple{Symbol,Any}}
+    timeport::AbstractPortBlock
     env::Dict{Symbol,Any}
 
-    function SubSystemBlock(name::Symbol)
+    function SubSystemBlock(name::Symbol; timeport = OutPort(:time))
         b = new(name,
             "",
             AbstractInPortBlock[],
@@ -24,14 +25,19 @@ mutable struct SubSystemBlock <: AbstractCompositeBlock
             AbstractParameterPortBlock[],
             AbstractBlock[],
             Any[],
+            timeport,
             Dict{Symbol,Any}())
         b
     end
 end
 
-# function addparameter!(b::AbstractCompositeBlock, x::Any, default::Any)
-#     push!(b.parameters, (x, default))
-# end
+function addparameter!(b::AbstractCompositeBlock, x::Symbol)
+    push!(b.parameters, (x, x))
+end
+
+function addparameter!(b::AbstractCompositeBlock, x::Symbol, v::Any)
+    push!(b.parameters, (x, v))
+end
 
 function set!(b::AbstractCompositeBlock, s::Symbol, x::AbstractParameterPortBlock)
     push!(b.parameterports, x)

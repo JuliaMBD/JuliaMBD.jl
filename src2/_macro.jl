@@ -91,7 +91,7 @@ macro model(f, e::Bool, block)
     esc(Expr(:block, body...))
 end
 
-macro model(f, block)　　
+macro model(f, block)
     body = []
     push!(body, Expr(:(=), :tmp, Expr(:call, :BlockDefinition, Expr(:quote, f))))
     if Meta.isexpr(block, :block)

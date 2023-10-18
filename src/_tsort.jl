@@ -31,10 +31,7 @@ Get all blocks from a block
 """
 function allcomponents(b::AbstractCompositeBlock)
     visited = Set{AbstractComponent}()
-    for p = b.inports
-        _allblocks(p, visited)
-    end
-    for p = b.outports
+    for p = [b.inports..., b.outports..., b.stateinports..., b.stateoutports...]
         _allblocks(p, visited)
     end
     collect(visited)

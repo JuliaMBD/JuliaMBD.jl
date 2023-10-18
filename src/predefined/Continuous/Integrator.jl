@@ -23,7 +23,7 @@ function Integrator(;
     b
 end
 
-function expr(b::SimpleBlock, ::Val{:IntegratorInner})
+function expr(b::SimpleBlock, ::Val{:Integrator})
     Expr(:(=), b.outports[1].name, b.inports[1].name)
 end
 
