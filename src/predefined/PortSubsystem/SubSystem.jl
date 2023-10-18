@@ -1,5 +1,6 @@
 export SubSystemBlock
 export add!
+export set!
 
 mutable struct SubSystemBlock <: AbstractCompositeBlock
     name::Symbol
@@ -8,8 +9,9 @@ mutable struct SubSystemBlock <: AbstractCompositeBlock
     outports::Vector{AbstractOutPortBlock}
     stateinports::Vector{AbstractPortBlock}
     stateoutports::Vector{AbstractPortBlock}
-    parameters::Vector{AbstractParameterPortBlock}
+    parameterports::Vector{AbstractParameterPortBlock}
     blocks::Vector{AbstractBlock}
+    parameters::Vector{Tuple{Any,Any}}
     env::Dict{Symbol,Any}
 
     function SubSystemBlock(name::Symbol)
@@ -21,17 +23,28 @@ mutable struct SubSystemBlock <: AbstractCompositeBlock
             AbstractOutPortBlock[],
             AbstractParameterPortBlock[],
             AbstractBlock[],
+            Any[],
             Dict{Symbol,Any}())
         b
     end
 end
 
-function add!(b::AbstractCompositeBlock, x::AbstractParameterPortBlock)
-    x.parent = b
-    push!(b.parameters, x)
+# function addparameter!(b::AbstractCompositeBlock, x::Any, default::Any)
+#     push!(b.parameters, (x, default))
+# end
+
+function set!(b::AbstractCompositeBlock, s::Symbol, x::AbstractParameterPortBlock)
+    push!(b.parameterports, x)
+    b.env[s] = x
 end
 
 function add!(b::AbstractCompositeBlock, x::AbstractCompositeBlock)
+    for p = x.stateinports
+        push!(b.stateinports, p)
+    end
+    for p = x.stateoutports
+        push!(b.stateoutports, p)
+    end
     push!(b.blocks, x)
 end
 

@@ -5,7 +5,7 @@ mutable struct SimpleBlock <: AbstractSimpleBlock
     desc::String
     inports::Vector{AbstractInPortBlock}
     outports::Vector{AbstractOutPortBlock}
-    parameters::Vector{AbstractParameterPortBlock}
+    parameterports::Vector{AbstractParameterPortBlock}
     env::Dict{Symbol,Any}
 
     function SimpleBlock(name::Symbol)
@@ -33,7 +33,7 @@ end
 
 function set!(b::AbstractSimpleBlock, s::Symbol, x::AbstractParameterPortBlock)
     x.parent = b
-    push!(b.parameters, x)
+    push!(b.parameterports, x)
     b.env[s] = x
 end
 

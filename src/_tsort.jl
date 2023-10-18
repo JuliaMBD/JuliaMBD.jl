@@ -1,6 +1,6 @@
 ### prev, next
 
-prev(x::AbstractSimpleBlock) = [x.inports..., x.parameters...]
+prev(x::AbstractSimpleBlock) = [x.inports..., x.parameterports...]
 next(x::AbstractSimpleBlock) = x.outports
 
 prev(::AbstractConstSignal) = []
@@ -16,7 +16,13 @@ prev(x::AbstractOutPortBlock) = [x.parent]
 next(x::AbstractOutPortBlock) = x.outs
 
 prev(x::AbstractParameterPortBlock) = [x.in]
-next(x::AbstractParameterPortBlock) = [x.parent]
+function next(x::AbstractParameterPortBlock)
+    if x.parent in undefset
+        x.outs
+    else
+        [x.parent]
+    end
+end
 
 """
 all blocks

@@ -9,5 +9,5 @@ function Gain(; K = ParameterPort(), in = InPort(), out = OutPort())
 end
 
 function expr(b::SimpleBlock, ::Val{:Gain})
-    Expr(:(=), b.outports[1].name, Expr(:call, :*, b.parameters[1].name, b.inports[1].name))
+    Expr(:(=), b.outports[1].name, Expr(:call, :*, b.parameterports[1].name, b.inports[1].name))
 end

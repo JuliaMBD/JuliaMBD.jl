@@ -80,17 +80,18 @@ function expr_function(b::AbstractCompositeBlock)
         end
     end
     paramargs = []
-    for p = b.parameters
+    for p = b.parameterports
         if typeof(p.type) != Auto
             v = Expr(:(::), p.name, p.type)
         else
             v = p.name
         end
-        if haskey(b.env, p.name)
-            push!(paramargs, Expr(:kw, v, b.env[p.name]))
-        else
-            push!(paramargs, v)
-        end
+        push!(paramargs, v)
+        # if haskey(b.env, p.name)
+        #     push!(paramargs, Expr(:kw, v, b.env[p.name]))
+        # else
+        #     push!(paramargs, v)
+        # end
     end
     body = [_expr(m) for m = tsort(allcomponents(b))]
     Expr(:function,
