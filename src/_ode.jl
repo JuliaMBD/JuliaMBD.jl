@@ -1,4 +1,5 @@
 struct ODEModel
+    blk
     ifunc # the function to obtain the state vector from a given model parameters
     sfunc # the function to obtain the next state vector. This is an argument for ODEProblem
     ofunc # the function to obtain the outputs
@@ -17,12 +18,12 @@ function odesolve(blk::ODEModel, params, tspan; alg=DifferentialEquations.Tsit5(
     DifferentialEquations.solve(p, alg; kwargs...)
 end
 
-function odesolve(blk::AbstractFunctionBlock, params, tspan; alg=DifferentialEquations.Tsit5(), kwargs...)
-    (t) -> 0.0
-end
+# function odesolve(blk::AbstractFunctionBlock, params, tspan; alg=DifferentialEquations.Tsit5(), kwargs...)
+#     (t) -> 0.0
+# end
 
 function simulate(blk::ODEModel, tspan; n = 1000, alg=DifferentialEquations.Tsit5(), kwargs...)
-    params = (;get_parameters(blk)...)
+    params = [x[2] for x = blk.blk.parameters]
     u = odesolve(blk, params, tspan; alg=alg, kwargs...)
     ts = LinRange(tspan[1], tspan[2], n)
     results = blk.ofunc(u, params, ts)

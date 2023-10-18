@@ -10,6 +10,13 @@ mutable struct LineSignal <: AbstractLineSignal
         dest.in = line
         line
     end
+
+    function LineSignal(src::AbstractPortBlock, dest::AbstractPortBlock)
+        line = new(gensym(), "", src, dest)
+        push!(src.outs, line)
+        dest.in = line
+        line
+    end
 end
 
 default_value(::Type{Int})::Int = 0

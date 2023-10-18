@@ -1,8 +1,8 @@
 module JuliaMBD
 
-# import Base
-# import DifferentialEquations
-# import Plots
+import Base
+import Plots
+import DifferentialEquations
 
 include("_types.jl")
 include("_ports.jl")
@@ -17,5 +17,6 @@ include("predefined/Sources/_blocks.jl")
 include("_show.jl")
 include("_tsort.jl")
 include("_expr.jl")
+include("_ode.jl")
 
 end
