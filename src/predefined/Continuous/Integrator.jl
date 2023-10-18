@@ -10,8 +10,8 @@ line => in => block => sout
 [sin, out] => line
 """
 function Integrator(;
-        initialcondition = ParameterPort(:initialcondition),
-        saturationlimits = ParameterPort(:saturationlimits, NTuple{2,Auto}),
+        initialcondition = ParameterPort(),
+        saturationlimits = ParameterPort(NTuple{2,Auto}),
         in = InPort(), sin = OutPort(), sout = OutPort())
     b = SimpleBlock(:Integrator)
     set!(b, :in, in)
@@ -25,6 +25,10 @@ end
 
 function expr(b::SimpleBlock, ::Val{:Integrator})
     Expr(:(=), b.outports[1].name, b.inports[1].name)
+end
+
+function expr_initial(b::SimpleBlock, ::Val{:Integrator})
+    Expr(:(=), b.outports[1].name, b.env[:initialcondition].name)
 end
 
 function _add!(b::AbstractCompositeBlock, x::SimpleBlock, ::Val{:Integrator})

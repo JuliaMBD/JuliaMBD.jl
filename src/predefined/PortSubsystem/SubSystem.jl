@@ -12,6 +12,7 @@ mutable struct SubSystemBlock <: AbstractCompositeBlock
     parameterports::Vector{AbstractParameterPortBlock}
     blocks::Vector{AbstractBlock}
     parameters::Vector{Tuple{Symbol,Any}}
+    scopes::Vector{Tuple{Symbol,AbstractPortBlock}}
     timeport::AbstractPortBlock
     env::Dict{Symbol,Any}
 
@@ -25,6 +26,7 @@ mutable struct SubSystemBlock <: AbstractCompositeBlock
             AbstractParameterPortBlock[],
             AbstractBlock[],
             Any[],
+            Tuple{Symbol,AbstractPortBlock}[],
             timeport,
             Dict{Symbol,Any}())
         b
@@ -39,18 +41,19 @@ function addparameter!(b::AbstractCompositeBlock, x::Symbol, v::Any)
     push!(b.parameters, (x, v))
 end
 
+function addscope!(b::AbstractCompositeBlock, s::Symbol, p::AbstractPortBlock)
+    push!(b.scopes, (s, p))
+end
+
 function set!(b::AbstractCompositeBlock, s::Symbol, x::AbstractParameterPortBlock)
     push!(b.parameterports, x)
     b.env[s] = x
 end
 
 function add!(b::AbstractCompositeBlock, x::AbstractCompositeBlock)
-    for p = x.stateinports
-        push!(b.stateinports, p)
-    end
-    for p = x.stateoutports
-        push!(b.stateoutports, p)
-    end
+    push!(b.stateinports, x.stateinports...)
+    push!(b.stateoutports, x.stateoutports...)
+    push!(b.scopes, x.scopes...)
     push!(b.blocks, x)
 end
 

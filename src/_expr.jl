@@ -2,6 +2,10 @@ function _expr(::AbstractComponent)
     Expr(:tuple)
 end
 
+function _expr_initial(x::AbstractComponent)
+    _expr(x)
+end
+
 function _expr(x::InPort{Tv}) where Tv
     if !(x.in in undefset)
         Expr(:(=), x.name, Expr(:call, Tv, _expr(x.in)))
@@ -60,10 +64,18 @@ function _expr(x::SimpleBlock)
     expr(x, Val(x.name))
 end
 
+function _expr_initial(x::SimpleBlock)
+    expr_initial(x, Val(x.name))
+end
+
+function expr_initial(x::SimpleBlock, t::Any)
+    expr(x, t)
+end
+
 ### compile
 
 function expr_sfunc(b::AbstractCompositeBlock)
-    @assert length(b.stateinports) != 0
+    @assert length(b.stateinports) == length(b.stateoutports) && length(b.stateinports) != 0
     dxargs = []
     for p = b.stateinports
         if p.type != Auto
@@ -83,19 +95,22 @@ function expr_sfunc(b::AbstractCompositeBlock)
     xargs = []
     for p = b.stateoutports
         if p.type != Auto
-            push!(xargs, Expr(:(=), p.name, Expr(:call, p.type, p.name)))
+            push!(xargs, Expr(:call, p.type, p.name))
         else
-            push!(xargs, Expr(:(=), p.name, p.name))
+            push!(xargs, p.name)
         end
     end
-    outargs = []
-    for p = b.outports
-        if p.type != Auto
-            push!(outargs, Expr(:(=), p.name, Expr(:call, p.type, p.name)))
-        else
-            push!(outargs, Expr(:(=), p.name, p.name))
-        end
+    for _ = b.inports
+        push!(xargs, 0)
     end
+        # outargs = []
+    # for p = b.outports
+    #     if p.type != Auto
+    #         push!(outargs, Expr(:(=), p.name, Expr(:call, p.type, p.name)))
+    #     else
+    #         push!(outargs, Expr(:(=), p.name, p.name))
+    #     end
+    # end
     paramargs = []
     for (x,v) = b.parameters
         push!(paramargs, Expr(:kw, x, v))
@@ -105,7 +120,7 @@ function expr_sfunc(b::AbstractCompositeBlock)
     Expr(:function,
         Expr(:call, Symbol(b.name, "_sfunc"),
             Expr(:parameters, paramargs...), dxargs..., inargs...),
-        Expr(:block, body..., Expr(:tuple, xargs..., outargs...)))
+        Expr(:block, body..., Expr(:tuple, xargs...)))
 end
 
 """
@@ -119,33 +134,113 @@ end
 
 """
 function expr_odemodel_sfunc(b::AbstractCompositeBlock)
-    @assert length(b.stateinports) != 0
+    @assert length(b.stateinports) == length(b.stateoutports) && length(b.stateinports) != 0
     dxargs = []
     for (i,_) = enumerate(b.stateinports)
         push!(dxargs, Expr(:ref, :dx, i))
     end
     inargs = []
     for (i,_) = enumerate(b.inports)
-        push!(inargs, Expr(:ref, :p, i))
+        push!(inargs, Expr(:ref, :dx, i + length(b.stateinports)))
     end
     xargs = []
     for (i,_) = enumerate(b.stateoutports)
         push!(xargs, Expr(:ref, :x, i))
     end
-    outargs = []
-    for _ = b.outports
-        push!(outargs, :_)
+    x0args = []
+    for (i,_) = enumerate(b.inports)
+        push!(x0args, Expr(:ref, :x, i + length(b.stateoutports)))
+    end
+    # outargs = []
+    # for (_,_) = enumerate(b.inports)
+    #     push!(outargs, :_)
+    # end
+    paramargs = []
+    for (i,(x,_)) = enumerate(b.parameters)
+        push!(paramargs, Expr(:kw, x, Expr(:ref, :p, i)))
+    end
+    push!(paramargs, Expr(:kw, b.timeport.name, 0))
+    Expr(:->, Expr(:tuple, :dx, :x, :p, :t), Expr(:block,
+        Expr(:(=), Expr(:tuple, xargs..., x0args...),
+        Expr(:call, Symbol(b.name, "_sfunc"), dxargs..., inargs..., paramargs...,))))
+end
+
+function expr_ofunc(b::AbstractCompositeBlock)
+    dxargs = []
+    for p = b.stateinports
+        if p.type != Auto
+            push!(dxargs, Expr(:(::), p.name, p.type))
+        else
+            push!(dxargs, p.name)
+        end
+    end
+    inargs = []
+    for p = b.inports
+        if p.type != Auto
+            push!(inargs, Expr(:(::), p.name, p.type))
+        else
+            push!(inargs, p.name)
+        end
+    end
+    scopeargs = []
+    for (s,p) = b.scopes
+        if p.type != Auto
+            push!(scopeargs, Expr(:(=), s, Expr(:call, p.type, p.name)))
+        else
+            push!(scopeargs, Expr(:(=), s, p.name))
+        end
     end
     paramargs = []
-    j = length(inargs) + 1
-    for (x,_) = b.parameters
-        push!(paramargs, Expr(:kw, x, Expr(:ref, :p, j)))
-        j += 1
+    for (x,v) = b.parameters
+        push!(paramargs, Expr(:kw, x, v))
     end
-    Expr(:->, Expr(:tuple, :dx, :x, :p, :t), Expr(:block,
-        Expr(:(=), Expr(:tuple, xargs..., outargs...),
-        Expr(:call, Symbol(b.name, "_sfunc"), dxargs..., inargs..., paramargs..., Expr(:kw, :time, :t)))))
+    push!(paramargs, Expr(:kw, b.timeport.name, 0))
+    body = [_expr(m) for m = tsort(allcomponents(b))]
+    Expr(:function,
+        Expr(:call, Symbol(b.name, "_ofunc"),
+            Expr(:parameters, paramargs...), dxargs..., inargs...),
+        Expr(:block, body..., Expr(:tuple, scopeargs...)))
 end
+
+function expr_odemodel_ofunc(b::AbstractCompositeBlock)
+    dxargs = []
+    for (i,_) = enumerate(b.stateinports)
+        push!(dxargs, Expr(:ref, :dx, i))
+    end
+    inargs = []
+    for (i,_) = enumerate(b.inports)
+        push!(inargs, Expr(:ref, :dx, i + length(b.stateinports)))
+    end
+    scopeargs = []
+    for (s,p) = b.scopes
+        if p.type != Auto
+            push!(scopeargs, Expr(:(=), s, Expr(:call, p.type, p.name)))
+        else
+            push!(scopeargs, Expr(:(=), s, p.name))
+        end
+    end
+    paramargs = []
+    for (i,(x,_)) = enumerate(b.parameters)
+        push!(paramargs, Expr(:kw, x, Expr(:ref, :p, i)))
+    end
+    push!(paramargs, Expr(:kw, b.timeport.name, :t))
+    xscopes = [:($(Expr(:quote, s)) => [u.$s for u = result]) for (s,_) = b.scopes]
+    Expr(:->, Expr(:tuple, :x, :p, :ts), Expr(:block,
+        Expr(:(=), :result,
+            Expr(:comprehension,
+                Expr(:generator,
+                    Expr(:call, Symbol(b.name, "_ofunc"), dxargs..., inargs..., paramargs...,),
+                    Expr(:(=), :t, :ts)))),
+        Expr(:call, :Dict, xscopes...)
+    ))
+end
+
+#         ofunc = Expr(:->, Expr(:tuple, :u, :p, :ts),
+#                 Expr(:block,
+#                     :(result = [$(Expr(:call, Symbol(blk.name, "Function"), Expr(:kw, :time, :t), xparams..., xsins1...)) for t = ts]),
+#                     Expr(:call, :Dict, xscopes...)
+#                 )
+#             )
 
 """
 (:->, (:tuple, :dx, :x, :p, :t), (:block,
@@ -153,4 +248,66 @@ end
 
 (:function, (:call, :f, (:parameters, (:kw, (:(::), :a, :Any), 1.0), (:(::), :b, :Float64)), (:(::), :x, :Float64), (:(::), :y, :Int)), (:block,
 """
-  
+
+function expr_ifunc(b::AbstractCompositeBlock)
+    @assert length(b.stateinports) == length(b.stateoutports) && length(b.stateinports) != 0
+    dxargs = []
+    for p = b.stateinports
+        push!(dxargs, Expr(:kw, p.name, 0))
+    end
+    inargs = []
+    for p = b.inports
+        push!(inargs, Expr(:kw, p.name, 0))
+    end
+    xargs = []
+    for p = b.stateoutports
+        if p.type != Auto
+            push!(xargs, Expr(:call, p.type, p.name))
+        else
+            push!(xargs, p.name)
+        end
+    end
+    for p = b.inports
+        push!(xargs, p.name)
+    end
+    paramargs = []
+    for (x,v) = b.parameters
+        push!(paramargs, Expr(:kw, x, v))
+    end
+    push!(paramargs, Expr(:kw, b.timeport.name, 0))
+    body = [_expr_initial(m) for m = tsort(allcomponents(b))]
+    Expr(:function,
+        Expr(:call, Symbol(b.name, "_ifunc"),
+            Expr(:parameters, paramargs..., dxargs..., inargs...)),
+        Expr(:block, body..., Expr(:vect, xargs...)))
+end
+
+function expr_odemodel_ifunc(b::AbstractCompositeBlock)
+    @assert length(b.stateinports) == length(b.stateoutports) && length(b.stateinports) != 0
+    # dxargs = []
+    # for (i,_) = enumerate(b.stateinports)
+    #     push!(dxargs, Expr(:ref, :dx, i))
+    # end
+    # inargs = []
+    # for (i,_) = enumerate(b.inports)
+    #     push!(inargs, Expr(:ref, :dx, i + length(b.stateinports)))
+    # end
+    # xargs = []
+    # for (i,_) = enumerate(b.stateoutports)
+    #     push!(xargs, Expr(:ref, :x, i))
+    # end
+    # x0args = []
+    # for (i,_) = enumerate(b.inports)
+    #     push!(x0args, Expr(:ref, :x, i + length(b.stateoutports)))
+    # end
+    # outargs = []
+    # for (_,_) = enumerate(b.inports)
+    #     push!(outargs, :_)
+    # end
+    paramargs = []
+    for (i,(x,_)) = enumerate(b.parameters)
+        push!(paramargs, Expr(:kw, x, Expr(:ref, :p, i)))
+    end
+    push!(paramargs, Expr(:kw, b.timeport.name, 0))
+    Expr(:->, Expr(:tuple, :p), Expr(:call, Symbol(b.name, "_ifunc"), paramargs...,))
+end

@@ -19,8 +19,9 @@ function expr(b::SimpleBlock, ::Val{:Step})
     steptime = b.env[:steptime].name
     initialvalue = b.env[:initialvalue].name
     finalvalue = b.env[:finalvalue].name
+    out = b.outports[1].name
     quote
-        if $time < $steptime
+        $out = if $time < $steptime
             $initialvalue
         else
             $finalvalue
