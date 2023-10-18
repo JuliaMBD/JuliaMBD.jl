@@ -34,6 +34,11 @@ function allcomponents(b::AbstractCompositeBlock)
     for p = [b.inports..., b.outports..., b.stateinports..., b.stateoutports...]
         _allblocks(p, visited)
     end
+    for x = b.blocks
+        if typeof(x) <: AbstractSimpleBlock
+            _allblocks(x, visited)
+        end
+    end
     collect(visited)
 end
 

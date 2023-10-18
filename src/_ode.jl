@@ -24,7 +24,11 @@ end
 
 function simulate(blk::ODEModel, tspan; n = 1000, alg=DifferentialEquations.Tsit5(), kwargs...)
     params = [x[2] for x = blk.blk.parameters]
-    u = odesolve(blk, params, tspan; alg=alg, kwargs...)
+    if length(blk.blk.stateinports) != 0
+        u = odesolve(blk, params, tspan; alg=alg, kwargs...)
+    else
+        u = (t) -> 0.0
+    end
     ts = LinRange(tspan[1], tspan[2], n)
     results = blk.ofunc(u, params, ts)
     SimulationResult(params, ts, results, u)

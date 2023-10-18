@@ -3,6 +3,7 @@ module JuliaMBD
 import Base
 import Plots
 import DifferentialEquations
+import LookupTable
 
 include("_types.jl")
 include("_ports.jl")
@@ -14,6 +15,7 @@ include("predefined/MathOperations/_blocks.jl")
 include("predefined/Continuous/_blocks.jl")
 include("predefined/Sources/_blocks.jl")
 include("predefined/Discontinuities/_blocks.jl")
+include("predefined/LookupTables/_blocks.jl")
 
 include("_show.jl")
 include("_tsort.jl")

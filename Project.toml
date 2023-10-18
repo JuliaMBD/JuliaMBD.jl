@@ -5,6 +5,7 @@ version = "0.1.1"
 
 [deps]
 DifferentialEquations = "0c46a032-eb83-5123-abaf-570d42b7fbaa"
+LookupTable = "b19a02b0-50d5-4973-af73-300db3db3939"
 Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
 
 [compat]

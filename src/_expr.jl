@@ -75,7 +75,7 @@ end
 ### compile
 
 function expr_sfunc(b::AbstractCompositeBlock)
-    @assert length(b.stateinports) == length(b.stateoutports) && length(b.stateinports) != 0
+    # @assert length(b.stateinports) == length(b.stateoutports) && length(b.stateinports) != 0
     xargs = []
     for p = b.stateinports
         if p.type != Auto
@@ -126,7 +126,7 @@ end
 
 """
 function expr_odemodel_sfunc(b::AbstractCompositeBlock)
-    @assert length(b.stateinports) == length(b.stateoutports) && length(b.stateinports) != 0
+    # @assert length(b.stateinports) == length(b.stateoutports) && length(b.stateinports) != 0
     xargs = []
     for (i,_) = enumerate(b.stateinports)
         push!(xargs, Expr(:ref, :x, i))
@@ -242,7 +242,7 @@ end
 """
 
 function expr_ifunc(b::AbstractCompositeBlock)
-    @assert length(b.stateinports) == length(b.stateoutports) && length(b.stateinports) != 0
+    # @assert length(b.stateinports) == length(b.stateoutports) && length(b.stateinports) != 0
     xargs = []
     for p = b.stateinports
         push!(xargs, Expr(:kw, p.name, 0))
@@ -275,7 +275,7 @@ function expr_ifunc(b::AbstractCompositeBlock)
 end
 
 function expr_odemodel_ifunc(b::AbstractCompositeBlock)
-    @assert length(b.stateinports) == length(b.stateoutports) && length(b.stateinports) != 0
+    # @assert length(b.stateinports) == length(b.stateoutports) && length(b.stateinports) != 0
     # dxargs = []
     # for (i,_) = enumerate(b.stateinports)
     #     push!(dxargs, Expr(:ref, :dx, i))
