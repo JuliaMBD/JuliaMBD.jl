@@ -35,7 +35,7 @@ function simulate(blk::ODEModel, tspan; n = 1000, alg=DifferentialEquations.Tsit
     SimulationResult(params, ts, results, u)
 end
 
-function Plots.plot(x::SimulationResult, layout=(length(x.outputs), 1))
+function Plots.plot(x::SimulationResult; layout=(length(x.outputs), 1))
     n = length(x.outputs)
     Plots.plot(x.ts, [x for (_,x) = x.outputs], layout=layout, title=reshape([x for (x,_) = x.outputs], 1, n), leg=false)
 end

@@ -39,13 +39,15 @@ end
 # end
 
 function addparameter!(b::AbstractCompositeBlock, s::Symbol, x::Any)
-    ## set for parameter port
-    p = ParameterPort(s)
-    push!(b.parameterports, p)
-    b.env[s] = p
-    ## set for constsignal
-    cs = ConstSignal(x, p)
-    b.parameters[s] = cs
+    if !haskey(b.parameters, s)
+        ## set for parameter port
+        p = ParameterPort(s)
+        push!(b.parameterports, p)
+        b.env[s] = p
+        ## set for constsignal
+        cs = ConstSignal(x, p)
+        b.parameters[s] = cs
+    end
 end
 
 function addscope!(b::AbstractCompositeBlock, s::Symbol, p::AbstractPortBlock)
@@ -62,6 +64,13 @@ function add!(b::AbstractCompositeBlock, x::AbstractCompositeBlock)
     push!(b.stateoutports, x.stateoutports...)
     push!(b.scopes, x.scopes...)
     push!(b.blocks, x.blocks...)
+    for p = x.parameterports
+        s = p.name
+        if !haskey(b.parameters, s)
+            push!(b.parameterports, p)
+            b.parameters[s] = x.parameters[s]
+        end
+    end
 end
 
 function add!(b::AbstractCompositeBlock, x::AbstractSimpleBlock)
