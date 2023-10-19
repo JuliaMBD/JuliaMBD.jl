@@ -12,6 +12,7 @@ mutable struct SubSystemBlock <: AbstractCompositeBlock
     parameterports::Vector{AbstractParameterPortBlock}
     blocks::Vector{AbstractBlock}
     parameters::Vector{Tuple{Symbol,Any}}
+    # parameters::Dict{Symbol,AbstractConstSignal}
     scopes::Vector{Tuple{Symbol,AbstractPortBlock}}
     timeport::AbstractPortBlock
     env::Dict{Symbol,Any}
@@ -27,6 +28,7 @@ mutable struct SubSystemBlock <: AbstractCompositeBlock
             AbstractBlock[],
             Any[],
             Tuple{Symbol,AbstractPortBlock}[],
+            # Dict{Symbol,AbstractConstSignal},
             timeport,
             Dict{Symbol,Any}())
         b

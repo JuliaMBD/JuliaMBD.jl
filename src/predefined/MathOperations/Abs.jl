@@ -2,8 +2,8 @@ export Abs
 
 function Abs(;in = InPort(), out = OutPort())
     b = SimpleBlock(:Abs)
-    set!(b, :in, in)
-    set!(b, :out, out)
+    setport!(b, :in, in)
+    setport!(b, :out, out)
     b
 end
 

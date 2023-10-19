@@ -3,11 +3,11 @@ export Quantizer
 function Quantizer(;
     in = InPort(),
     out = OutPort(),
-    quantizationinterval = ParameterPort())
+    quantizationinterval = Float64(1))
     b = SimpleBlock(:Quantizer)
-    set!(b, :in, in)
-    set!(b, :out, out)
-    set!(b, :quantizationinterval, quantizationinterval)
+    setport!(b, :in, in)
+    setport!(b, :out, out)
+    setparameter!(b, :quantizationinterval, quantizationinterval)
     b
 end
 

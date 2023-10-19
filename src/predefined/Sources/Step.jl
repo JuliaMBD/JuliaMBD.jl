@@ -1,16 +1,16 @@
 export Step
 
 function Step(; out = OutPort(),
-    time = ParameterPort(),
-    steptime = ParameterPort(),
-    initialvalue = ParameterPort(),
-    finalvalue = ParameterPort())
+    time = InPort(),
+    steptime = Float64(0),
+    initialvalue = Float64(0),
+    finalvalue = Float64(0))
     b = SimpleBlock(:Step)
-    set!(b, :out, out)
-    set!(b, :time, time)
-    set!(b, :steptime, steptime)
-    set!(b, :initialvalue, initialvalue)
-    set!(b, :finalvalue, finalvalue)
+    setport!(b, :out, out)
+    setport!(b, :time, time)
+    setparameter!(b, :steptime, steptime)
+    setparameter!(b, :initialvalue, initialvalue)
+    setparameter!(b, :finalvalue, finalvalue)
     b
 end
 

@@ -6,10 +6,10 @@ function SaturationDynamic(;
     lo = InPort(),
     y = OutPort())
     b = SimpleBlock(:SaturationDynamic)
-    set!(b, :u, u)
-    set!(b, :up, up)
-    set!(b, :lo, lo)
-    set!(b, :y, y)
+    setport!(b, :u, u)
+    setport!(b, :up, up)
+    setport!(b, :lo, lo)
+    setport!(b, :y, y)
     b
 end
 

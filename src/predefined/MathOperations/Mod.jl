@@ -2,9 +2,9 @@ export Mod
 
 function Mod(;in1 = InPort(), in2 = InPort(), out = OutPort())
     b = SimpleBlock(:Mod)
-    set!(b, :in1, in1)
-    set!(b, :in2, in2)
-    set!(b, :out, out)
+    setport!(b, :in1, in1)
+    setport!(b, :in2, in2)
+    setport!(b, :out, out)
     b
 end
 

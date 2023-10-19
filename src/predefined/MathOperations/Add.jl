@@ -2,10 +2,10 @@ export Add
 
 function Add(; signs::Vector{Symbol}, out = OutPort())
     b = SimpleBlock(:Add)
-    for (i,s) = enumerate(signs)
-        set!(b, Symbol(:in, i), InPort())
+    for (i,_) = enumerate(signs)
+        setport!(b, Symbol(:in, i), InPort())
     end
-    set!(b, :out, out)
+    setport!(b, :out, out)
     b.env[:signs] = signs
     b
 end

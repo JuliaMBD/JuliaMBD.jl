@@ -1,16 +1,16 @@
 export Ramp
 
 function Ramp(; out = OutPort(),
-    time = ParameterPort(),
-    slope = ParameterPort(),
-    starttime = ParameterPort(),
-    initialoutput = ParameterPort())
+    time = InPort(),
+    slope = Float64(0),
+    starttime = Float64(0),
+    initialoutput = Float64(0))
     b = SimpleBlock(:Ramp)
-    set!(b, :out, out)
-    set!(b, :time, time)
-    set!(b, :slope, slope)
-    set!(b, :starttime, starttime)
-    set!(b, :initialoutput, initialoutput)
+    setport!(b, :out, out)
+    setport!(b, :time, time)
+    setparameter!(b, :slope, slope)
+    setparameter!(b, :starttime, starttime)
+    setparameter!(b, :initialoutput, initialoutput)
     b
 end
 

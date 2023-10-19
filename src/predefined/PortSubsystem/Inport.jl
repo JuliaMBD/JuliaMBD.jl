@@ -3,8 +3,8 @@ export Inport
 function Inport(name::Symbol, ::Type{Tv}; out = OutPort()) where Tv
     b = SimpleBlock(:Inport)
     in = InPort(name, Tv)
-    set!(b, in.name, in)
-    set!(b, :out, out)
+    setport!(b, in.name, in)
+    setport!(b, :out, out)
     b
 end
 

@@ -1,10 +1,9 @@
 export Constant
 
-function Constant(; out = OutPort(),
-    value = ParameterPort())
+function Constant(; value = Float64(0), out = OutPort())
     b = SimpleBlock(:Constant)
-    set!(b, :out, out)
-    set!(b, :value, value)
+    setport!(b, :out, out)
+    setparameter!(b, :value, value)
     b
 end
 

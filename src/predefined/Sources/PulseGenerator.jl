@@ -1,20 +1,18 @@
 export PulseGenerator
 
 function PulseGenerator(; out = OutPort(),
-    time = ParameterPort(),
-    amplitude = ParameterPort(),
-    period = ParameterPort(),
-    pulsewidth = ParameterPort(),
-    phasedelay = ParameterPort(),
-    steptime = ParameterPort())
+    time = InPort(),
+    amplitude = Float64(1),
+    period = Float64(10),
+    pulsewidth = Float64(5),
+    phasedelay = Float64(0))
     b = SimpleBlock(:PulseGenerator)
-    set!(b, :out, out)
-    set!(b, :time, time)
-    set!(b, :amplitude, amplitude)
-    set!(b, :period, period)
-    set!(b, :pulsewidth, pulsewidth)
-    set!(b, :phasedelay, phasedelay)
-    set!(b, :steptime, steptime)
+    setport!(b, :out, out)
+    setport!(b, :time, time)
+    setparameter!(b, :amplitude, amplitude)
+    setparameter!(b, :period, period)
+    setparameter!(b, :pulsewidth, pulsewidth)
+    setparameter!(b, :phasedelay, phasedelay)
     b
 end
 
@@ -24,7 +22,6 @@ function expr(b::SimpleBlock, ::Val{:PulseGenerator})
     period = b.env[:period].name
     pulsewidth = b.env[:pulsewidth].name
     phasedelay = b.env[:phasedelay].name
-    steptime = b.env[:steptime].name
     out = b.outports[1].name
     quote
         $out = if $time < $phasedelay

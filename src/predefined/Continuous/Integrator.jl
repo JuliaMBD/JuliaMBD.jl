@@ -10,16 +10,18 @@ line => in => block => sout
 [sin, out] => line
 """
 function Integrator(;
-        initialcondition = ParameterPort(),
-        saturationlimits = ParameterPort(NTuple{2,Auto}),
-        in = InPort(), sin = OutPort(), sout = OutPort())
+    initialcondition = Float64(0),
+    saturationlimits = (nothing,nothing),
+    in = InPort(),
+    sin = OutPort(),
+    sout = OutPort())
     b = SimpleBlock(:Integrator)
-    set!(b, :in, in)
-    set!(b, :sout, sout)
+    setport!(b, :in, in)
+    setport!(b, :sout, sout)
     b.env[:sin] = sin
     b.env[:out] = sin
-    set!(b, :initialcondition, initialcondition)
-    set!(b, :saturationlimits, saturationlimits)
+    setparameter!(b, :initialcondition, initialcondition)
+    setparameter!(b, :saturationlimits, saturationlimits)
     b
 end
 

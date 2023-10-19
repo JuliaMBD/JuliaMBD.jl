@@ -1,10 +1,10 @@
 export Gain
 
-function Gain(; K = ParameterPort(), in = InPort(), out = OutPort())
+function Gain(; K = :K, in = InPort(), out = OutPort())
     b = SimpleBlock(:Gain)
-    set!(b, :in, in)
-    set!(b, :out, out)
-    set!(b, :K, K)
+    setport!(b, :in, in)
+    setport!(b, :out, out)
+    setparameter!(b, :K, K)
     b
 end
 

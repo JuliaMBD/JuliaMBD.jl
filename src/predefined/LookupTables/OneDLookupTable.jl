@@ -3,13 +3,13 @@ export OneDLookupTable
 function OneDLookupTable(;
     in = InPort(),
     out = OutPort(),
-    breaks = ParameterPort(),
-    y = ParameterPort())
+    breaks = :breaks,
+    y = :y)
     b = SimpleBlock(:OneDLookupTable)
-    set!(b, :in, in)
-    set!(b, :out, out)
-    set!(b, :breaks, breaks)
-    set!(b, :y, y)
+    setport!(b, :in, in)
+    setport!(b, :out, out)
+    setparameter!(b, :breaks, breaks)
+    setparameter!(b, :y, y)
     b
 end
 

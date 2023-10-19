@@ -3,13 +3,13 @@ export Saturation
 function Saturation(;
     in = InPort(),
     out = OutPort(),
-    upperlimit = ParameterPort(),
-    lowerlimit = ParameterPort())
+    upperlimit = Float64(0),
+    lowerlimit = Float64(0))
     b = SimpleBlock(:Saturation)
-    set!(b, :in, in)
-    set!(b, :out, out)
-    set!(b, :upperlimit, upperlimit)
-    set!(b, :lowerlimit, lowerlimit)
+    setport!(b, :in, in)
+    setport!(b, :out, out)
+    setparameter!(b, :upperlimit, upperlimit)
+    setparameter!(b, :lowerlimit, lowerlimit)
     b
 end
 
