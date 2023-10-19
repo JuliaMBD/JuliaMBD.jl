@@ -11,8 +11,8 @@ mutable struct SubSystemBlock <: AbstractCompositeBlock
     stateoutports::Vector{AbstractPortBlock}
     parameterports::Vector{AbstractParameterPortBlock}
     blocks::Vector{AbstractBlock}
-    parameters::Vector{Tuple{Symbol,Any}}
-    # parameters::Dict{Symbol,AbstractConstSignal}
+    # parameters::Vector{Tuple{Symbol,Any}}
+    parameters::Dict{Symbol,AbstractConstSignal}
     scopes::Vector{Tuple{Symbol,AbstractPortBlock}}
     timeport::AbstractPortBlock
     env::Dict{Symbol,Any}
@@ -26,37 +26,42 @@ mutable struct SubSystemBlock <: AbstractCompositeBlock
             AbstractOutPortBlock[],
             AbstractParameterPortBlock[],
             AbstractBlock[],
-            Any[],
+            Dict{Symbol,AbstractConstSignal}(),
             Tuple{Symbol,AbstractPortBlock}[],
-            # Dict{Symbol,AbstractConstSignal},
             timeport,
             Dict{Symbol,Any}())
         b
     end
 end
 
-function addparameter!(b::AbstractCompositeBlock, x::Symbol)
-    push!(b.parameters, (x, x))
-end
+# function addparameter!(b::AbstractCompositeBlock, x::Symbol)
+#     push!(b.parameters, (x, x))
+# end
 
-function addparameter!(b::AbstractCompositeBlock, x::Symbol, v::Any)
-    push!(b.parameters, (x, v))
+function addparameter!(b::AbstractCompositeBlock, s::Symbol, x::Any)
+    ## set for parameter port
+    p = ParameterPort(s)
+    push!(b.parameterports, p)
+    b.env[s] = p
+    ## set for constsignal
+    cs = ConstSignal(x, p)
+    b.parameters[s] = cs
 end
 
 function addscope!(b::AbstractCompositeBlock, s::Symbol, p::AbstractPortBlock)
     push!(b.scopes, (s, p))
 end
 
-function set!(b::AbstractCompositeBlock, s::Symbol, x::AbstractParameterPortBlock)
-    push!(b.parameterports, x)
-    b.env[s] = x
-end
+# function set!(b::AbstractCompositeBlock, s::Symbol, x::AbstractParameterPortBlock)
+#     push!(b.parameterports, x)
+#     b.env[s] = x
+# end
 
 function add!(b::AbstractCompositeBlock, x::AbstractCompositeBlock)
     push!(b.stateinports, x.stateinports...)
     push!(b.stateoutports, x.stateoutports...)
     push!(b.scopes, x.scopes...)
-    push!(b.blocks, x)
+    push!(b.blocks, x.blocks...)
 end
 
 function add!(b::AbstractCompositeBlock, x::AbstractSimpleBlock)

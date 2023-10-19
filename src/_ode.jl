@@ -1,5 +1,6 @@
 struct ODEModel
     blk
+    pfunc # the function to obtain the values of parameters
     ifunc # the function to obtain the state vector from a given model parameters
     sfunc # the function to obtain the next state vector. This is an argument for ODEProblem
     ofunc # the function to obtain the outputs
@@ -23,7 +24,7 @@ end
 # end
 
 function simulate(blk::ODEModel, tspan; n = 1000, alg=DifferentialEquations.Tsit5(), kwargs...)
-    params = [x[2] for x = blk.blk.parameters]
+    params = blk.pfunc()
     if length(blk.blk.stateinports) != 0
         u = odesolve(blk, params, tspan; alg=alg, kwargs...)
     else
