@@ -167,15 +167,16 @@ macro model(f, block)
         end
     end
     push!(body, :tmp)
+    esc(Expr(:function, Expr(:call, f, Expr(:parameters, params...)), Expr(:block, body...)))
 
-    expr = []
-    push!(expr, Expr(:function, Expr(:call, f, Expr(:parameters, params...)), Expr(:block, body...)))
-    push!(expr, :(tmp = $f()))
-    push!(expr, :(eval(JuliaMBD.expr_sfunc(tmp))))
-    push!(expr, :(eval(JuliaMBD.expr_ofunc(tmp))))
-    push!(expr, :(eval(JuliaMBD.expr_ifunc(tmp))))
-    push!(expr, :(eval(JuliaMBD.expr_pfunc(tmp))))
-    esc(Expr(:block, expr...))
+    # expr = []
+    # push!(expr, Expr(:function, Expr(:call, f, Expr(:parameters, params...)), Expr(:block, body...)))
+    # push!(expr, :(tmp = $f()))
+    # push!(expr, :(eval(JuliaMBD.expr_sfunc(tmp))))
+    # push!(expr, :(eval(JuliaMBD.expr_ofunc(tmp))))
+    # push!(expr, :(eval(JuliaMBD.expr_ifunc(tmp))))
+    # push!(expr, :(eval(JuliaMBD.expr_pfunc(tmp))))
+    # esc(Expr(:block, expr...))
 end
 
 """
