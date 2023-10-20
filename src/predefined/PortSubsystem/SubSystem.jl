@@ -64,13 +64,13 @@ function add!(b::AbstractCompositeBlock, x::AbstractCompositeBlock)
     push!(b.stateoutports, x.stateoutports...)
     push!(b.scopes, x.scopes...)
     push!(b.blocks, x.blocks...)
-    for p = x.parameterports
-        s = p.name
-        if !haskey(b.parameters, s)
-            push!(b.parameterports, p)
-            b.parameters[s] = x.parameters[s]
-        end
-    end
+    # for p = x.parameterports
+    #     s = p.name
+    #     if !haskey(b.parameters, s)
+    #         push!(b.parameterports, p)
+    #         b.parameters[s] = x.parameters[s]
+    #     end
+    # end
     if hastimeport(x)
         LineSignal(b.timeport, gettimeport(x))
     end
