@@ -1,3 +1,5 @@
+export Auto
+
 abstract type AbstractComponent end
 abstract type AbstractBlock <: AbstractComponent end
 abstract type AbstractCompositeBlock <: AbstractBlock end

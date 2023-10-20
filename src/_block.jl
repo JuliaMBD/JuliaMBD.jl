@@ -27,6 +27,12 @@ function setport!(b::AbstractSimpleBlock, s::Symbol, x::AbstractInPortBlock)
     b.env[s] = x
 end
 
+function settimeport!(b::AbstractSimpleBlock, x::AbstractInPortBlock)
+    x.parent = b
+    push!(b.inports, x)
+    b.env[:__time__] = x
+end
+
 function setport!(b::AbstractSimpleBlock, s::Symbol, x::AbstractOutPortBlock)
     x.parent = b
     push!(b.outports, x)
@@ -50,3 +56,14 @@ function setparameter!(b::AbstractSimpleBlock, s::Symbol, x)
     b.parameters[s] = cs
 end
 
+function getport(b::AbstractBlock, s::Symbol)
+    b.env[s]
+end
+
+function gettimeport(b::AbstractBlock)
+    b.env[:__time__]
+end
+
+function hastimeport(b::AbstractBlock)
+    haskey(b.env, :__time__)
+end

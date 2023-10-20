@@ -38,14 +38,14 @@ end
 #     push!(b.parameters, (x, x))
 # end
 
-function addparameter!(b::AbstractCompositeBlock, s::Symbol, x::Any)
+function addparameter!(b::AbstractCompositeBlock, s::Symbol, x::Any, ::Type{Tv}) where Tv
     if !haskey(b.parameters, s)
         ## set for parameter port
         p = ParameterPort(s)
         push!(b.parameterports, p)
         b.env[s] = p
         ## set for constsignal
-        cs = ConstSignal(x, p)
+        cs = ConstSignal(x, p, Tv)
         b.parameters[s] = cs
     end
 end
@@ -71,11 +71,17 @@ function add!(b::AbstractCompositeBlock, x::AbstractCompositeBlock)
             b.parameters[s] = x.parameters[s]
         end
     end
+    if hastimeport(x)
+        LineSignal(b.timeport, gettimeport(x))
+    end
 end
 
 function add!(b::AbstractCompositeBlock, x::AbstractSimpleBlock)
     _add!(b, x, Val(x.name))
     push!(b.blocks, x)
+    if hastimeport(x)
+        LineSignal(b.timeport, gettimeport(x))
+    end
 end
 
 function _add!(::AbstractCompositeBlock, x::SimpleBlock, ::Any)

@@ -22,4 +22,6 @@ include("_tsort.jl")
 include("_expr.jl")
 include("_ode.jl")
 
+include("_macro.jl")
+
 end

@@ -7,7 +7,7 @@ function Step(; out = OutPort(),
     finalvalue = Float64(0))
     b = SimpleBlock(:Step)
     setport!(b, :out, out)
-    setport!(b, :time, time)
+    settimeport!(b, time)
     setparameter!(b, :steptime, steptime)
     setparameter!(b, :initialvalue, initialvalue)
     setparameter!(b, :finalvalue, finalvalue)
@@ -15,7 +15,7 @@ function Step(; out = OutPort(),
 end
 
 function expr(b::SimpleBlock, ::Val{:Step})
-    time = b.env[:time].name
+    time = gettimeport(b).name
     steptime = b.env[:steptime].name
     initialvalue = b.env[:initialvalue].name
     finalvalue = b.env[:finalvalue].name

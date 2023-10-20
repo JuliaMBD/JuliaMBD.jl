@@ -8,7 +8,7 @@ function PulseGenerator(; out = OutPort(),
     phasedelay = Float64(0))
     b = SimpleBlock(:PulseGenerator)
     setport!(b, :out, out)
-    setport!(b, :time, time)
+    settimeport!(b, time)
     setparameter!(b, :amplitude, amplitude)
     setparameter!(b, :period, period)
     setparameter!(b, :pulsewidth, pulsewidth)
@@ -17,11 +17,11 @@ function PulseGenerator(; out = OutPort(),
 end
 
 function expr(b::SimpleBlock, ::Val{:PulseGenerator})
-    time = b.env[:time].name
-    amplitude = b.env[:amplitude].name
-    period = b.env[:period].name
-    pulsewidth = b.env[:pulsewidth].name
-    phasedelay = b.env[:phasedelay].name
+    time = gettimeport(b).name
+    amplitude = getport(b, :amplitude).name
+    period = getport(b, :period).name
+    pulsewidth = getport(b, :pulsewidth).name
+    phasedelay = getport(b, :phasedelay).name
     out = b.outports[1].name
     quote
         $out = if $time < $phasedelay

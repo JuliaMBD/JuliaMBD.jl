@@ -320,9 +320,6 @@ function expr_pfunc(b::AbstractCompositeBlock)
     for p = b.inports
         push!(inargs, Expr(:kw, p.name, 0))
     end
-    for p = b.inports
-        push!(dxargs, p.name)
-    end
     paramargs = []
     for p = b.parameterports
         x = p.name

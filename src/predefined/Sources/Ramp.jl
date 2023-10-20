@@ -7,7 +7,7 @@ function Ramp(; out = OutPort(),
     initialoutput = Float64(0))
     b = SimpleBlock(:Ramp)
     setport!(b, :out, out)
-    setport!(b, :time, time)
+    settimeport!(b, time)
     setparameter!(b, :slope, slope)
     setparameter!(b, :starttime, starttime)
     setparameter!(b, :initialoutput, initialoutput)
@@ -15,7 +15,7 @@ function Ramp(; out = OutPort(),
 end
 
 function expr(b::SimpleBlock, ::Val{:Ramp})
-    time = b.env[:time].name
+    time = gettimeport(b).name
     slope = b.env[:slope].name
     starttime = b.env[:starttime].name
     initialoutput = b.env[:initialoutput].name
