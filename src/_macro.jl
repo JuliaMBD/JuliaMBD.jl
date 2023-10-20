@@ -59,12 +59,12 @@ function _toarg(x::Any, res)
 end
 
 function _toarg(x::Symbol, res)
-    push!(res, Expr(:kw, x, Expr(:quote, x)))
+    push!(res, x)
 end
 
 function _toarg(x::Expr, res)
     if Meta.isexpr(x, :(::)) && length(x.args) == 2
-        push!(res, Expr(:kw, x, 0))
+        push!(res, x)
     elseif Meta.isexpr(x, :(=)) && typeof(x.args[1]) == Symbol && length(x.args) == 2
         push!(res, Expr(:kw, x.args[1], x.args[2]))
     elseif Meta.isexpr(x, :(=)) && Meta.isexpr(x.args[1], :(::)) && length(x.args) == 2
