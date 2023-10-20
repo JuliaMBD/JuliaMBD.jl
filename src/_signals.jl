@@ -5,6 +5,9 @@ mutable struct LineSignal <: AbstractLineSignal
     dest::AbstractPortBlock
 
     function LineSignal(src::AbstractPortBlock, dest::AbstractPortBlock, desc::String)
+        if !(typeof(src) <: AbstractOutPortBlock && typeof(dest) <: AbstractInPortBlock)
+            @warn "The direction of signal may be wrong: $(src) $(dest)"
+        end
         line = new(gensym(), desc, src, dest)
         push!(src.outs, line)
         dest.in = line
@@ -12,6 +15,9 @@ mutable struct LineSignal <: AbstractLineSignal
     end
 
     function LineSignal(src::AbstractPortBlock, dest::AbstractPortBlock)
+        if !(typeof(src) <: AbstractOutPortBlock && typeof(dest) <: AbstractInPortBlock)
+            @warn "The direction of signal may be wrong: $(src) $(dest)"
+        end
         line = new(gensym(), "", src, dest)
         push!(src.outs, line)
         dest.in = line

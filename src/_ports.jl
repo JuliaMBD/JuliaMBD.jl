@@ -1,3 +1,6 @@
+export InPort
+export OutPort
+
 mutable struct InPort{Tv} <: AbstractInPortBlock
     name::Symbol
     type::Type{Tv}
