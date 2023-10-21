@@ -329,7 +329,7 @@ function expr_pfunc(b::AbstractCompositeBlock)
     push!(paramargs, Expr(:kw, b.timeport.name, 0))
     dxargs = []
     for p = b.parameterports
-        push!(dxargs, p.name)
+        push!(dxargs, Expr(:(=), p.name, p.name))
     end
     Expr(:function,
         Expr(:call, Symbol(b.name, "_pfunc"),
