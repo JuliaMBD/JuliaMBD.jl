@@ -57,7 +57,15 @@ function _expr(x::ConstSignal{Tv}) where Tv
 end
 
 function _expr(x::ConstSignal{Auto})
-    x.val
+    _expr_val(x.val)
+end
+
+function _expr_val(x::Any)
+    x
+end
+
+function _expr_val(x::AbstractSymbolic)
+    _expr(x)
 end
 
 function _expr(x::SimpleBlock)
@@ -339,9 +347,21 @@ end
 
 function expr_odemodel_pfunc(b::AbstractCompositeBlock)
     paramargs = []
-    for (i,p) = enumerate(b.parameterports)
-        push!(paramargs, Expr(:kw, p.name, Expr(:ref, :p, i)))
+    for p = b.parameterports
+        x = p.name
+        v = _expr(p.in)
+        push!(paramargs, Expr(:kw, x, v))
     end
-    push!(paramargs, Expr(:kw, b.timeport.name, 0))
-    Expr(:->, Expr(:tuple), Expr(:call, Symbol(b.name, "_pfunc"),))
+    # push!(paramargs, Expr(:kw, b.timeport.name, 0))
+    dxargs = []
+    for p = b.parameterports
+        # push!(dxargs, Expr(:kw, p.name, p.name))
+        push!(dxargs, p.name)
+    end
+    # paramargs = []
+    # for (i,p) = enumerate(b.parameterports)
+    #     push!(paramargs, Expr(:kw, p.name, Expr(:ref, :p, i)))
+    # end
+    # push!(paramargs, Expr(:kw, b.timeport.name, 0))
+    Expr(:->, Expr(:tuple, Expr(:parameters, paramargs...)), Expr(:tuple, dxargs...))
 end

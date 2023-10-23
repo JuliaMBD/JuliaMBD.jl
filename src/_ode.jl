@@ -45,8 +45,11 @@ end
 #     (t) -> 0.0
 # end
 
-function simulate(blk::ODEModel; tspan, params = blk.pfunc(), n = 1000, alg=DifferentialEquations.Tsit5(), kwargs...)
-    # params = blk.pfunc()
+function simulate(blk::ODEModel; tspan = (0, 1), parameters = (), n = 1000, alg=DifferentialEquations.Tsit5(), kwargs...)
+    # making a function to get parameters without default values; ex) params = blk.pfunc(M=10, R=1)
+    args = [Expr(:kw, k, parameters[k]) for k = keys(parameters)]
+    params = eval(Expr(:call, Expr(:., blk, Expr(:quote, :pfunc)), args...))
+
     if length(blk.blk.stateinports) != 0
         u = odesolve(blk, params, tspan; alg=alg, kwargs...)
     else

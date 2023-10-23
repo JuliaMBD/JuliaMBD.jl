@@ -6,6 +6,7 @@ import DifferentialEquations
 import LookupTable
 
 include("_types.jl")
+include("_vars.jl")
 include("_ports.jl")
 include("_signals.jl")
 include("_block.jl")
