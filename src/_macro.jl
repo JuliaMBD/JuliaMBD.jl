@@ -192,7 +192,7 @@ function _replace_macro(x::Any)
 end
 
 function _replace_macro(x::Expr)
-    if Meta.isexpr(x, :macrocall) && (x.args[1] == Symbol("@block") || x.args[1] == Symbol("@parameter") || x.args[1] == Symbol("@scope") || x.args[1] == Symbol("@connect"))
+    if Meta.isexpr(x, :macrocall) && (x.args[1] == Symbol("@block") || x.args[1] == Symbol("@parameter") || x.args[1] == Symbol("@scope") || x.args[1] == Symbol("@connect") || x.args[1] == Symbol("@xmlmodel"))
         Expr(:macrocall, x.args[1], x.args[2], :tmp, [_replace_macro(u) for u = x.args[3:end]]...)
     else
         Expr(x.head, [_replace_macro(u) for u = x.args]...)

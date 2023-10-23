@@ -1,6 +1,6 @@
 module Diagram
 
-export xmlmodel
+export @xmlmodel
 
 using EzXML
 
@@ -98,34 +98,50 @@ function makeconn(h, blkvars)
     "$(sourcevar).$(h["sourceport"]) => $(targetvar).$(h["targetport"])"
 end
 
-function output(io::IO, params, blks, edges, scopes)
-    blkvars = Dict()
-    println(io, "@parameter begin")
-    println(io, params)
-    println(io, "end")
-    println(io, "@block begin")
+function mkblocksection(blks, blkvars)
+    io = IOBuffer()
+    println(io, "begin")
     for h = blks
         println(io, makeblk(h, blkvars))
     end
     println(io, "end")
-    println(io, "@connect begin")
+    Meta.parse(String(take!(io)))
+end
+
+function mkconnectsection(edges, blkvars)
+    io = IOBuffer()
+    println(io, "begin")
     for h = edges
         println(io, makeconn(h, blkvars))
     end
     println(io, "end")
-    println(io, "@scope begin")
-    println(io, scopes)
-    println(io, "end")
+    Meta.parse(String(take!(io)))
 end
 
-function xmlmodel(modelname, params, scopes, xmlfile)
+function xmlmodel(m, xmlfile)
     mxgraph = getmxgraph(xmlfile)
-    io = IOBuffer()
-    println(io, "@model $modelname begin")
     blkdict, blks, edgedict, edges = parsemodel(mxgraph)
-    output(io, params, blks, edges, scopes)
-    println(io, "end")
-    String(take!(io))
+    blkvars = Dict()
+    quote
+        @block $m $(mkblocksection(blks, blkvars))
+        @connect $m $(mkconnectsection(edges, blkvars))
+    end
+end
+
+"""
+@model RLC begin
+    @parameter begin
+        R
+        L
+        C
+    end
+
+    @xmlmodel "RLC.drawio"
+end
+"""
+macro xmlmodel(m, xmlfile)
+    expr = xmlmodel(m, xmlfile)
+    esc(expr)
 end
 
 end
