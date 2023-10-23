@@ -182,6 +182,18 @@ The layout can be changed with `layout`
 plot(result, layout=(1,2))
 ```
 
+## Variable Parameters
+
+The default behavior of compile macro uses given model parameters to build the function for ODE solver directly. If some parameters are variable, i.e., you want to check the sensitivity of parameters, use the variable parameters. The variable parameters are indicated by a macro `@v`;
+```julia
+m = @compile Test(R= @v(R), L=100e-3, C=10e-6, voltage=5)
+```
+In the above example, `R` is a variable parameter. And we can run the simulation by concrete values are given to variable parameters;
+```julia
+result = simulate(m, tspan=(0, 1), parameters=(R=10,))
+```
+where the concrete parameters are given as the named tuple.
+
 ## Pre-defined blocks
 
 ### Available block

@@ -1,6 +1,7 @@
 {
     "name": "myjulia",
     "image": "okamumu/julia:1.8.3-arduino",
+    "forwardPorts": [1234, 1234],
     "customizations": {
         "vscode": {
             "extensions": [
