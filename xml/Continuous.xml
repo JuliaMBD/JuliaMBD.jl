@@ -1,0 +1,8 @@
+<mxlibrary>[
+  {
+    "xml": "&lt;mxGraphModel&gt;&lt;root&gt;&lt;mxCell id=\"0\"/&gt;&lt;mxCell id=\"1\" parent=\"0\"/&gt;&lt;object label=\"&amp;lt;font style=&amp;quot;font-size: 11px;&amp;quot;&amp;gt;1/s&amp;lt;/font&amp;gt;\" block=\"Integrator\" initialcondition=\"0\" type=\"block\" name=\"\" id=\"2\"&gt;&lt;mxCell style=\"whiteSpace=wrap;html=1;aspect=fixed;fontSize=11;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];\" vertex=\"1\" parent=\"1\"&gt;&lt;mxGeometry width=\"40\" height=\"40\" as=\"geometry\"/&gt;&lt;/mxCell&gt;&lt;/object&gt;&lt;/root&gt;&lt;/mxGraphModel&gt;",
+    "w": 40,
+    "h": 40,
+    "aspect": "fixed"
+  }
+]</mxlibrary>

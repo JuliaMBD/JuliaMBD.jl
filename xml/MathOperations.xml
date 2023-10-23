@@ -1,0 +1,43 @@
+<mxlibrary>[
+  {
+    "xml": "&lt;mxGraphModel&gt;&lt;root&gt;&lt;mxCell id=\"0\"/&gt;&lt;mxCell id=\"1\" parent=\"0\"/&gt;&lt;object label=\"Add\" block=\"Add\" signs=\"[:+, :+]\" type=\"block\" name=\"\" id=\"2\"&gt;&lt;mxCell style=\"rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.24,0,0,0],[0,0.76,0,0,0],[1,0.5,0,0,0]];\" vertex=\"1\" parent=\"1\"&gt;&lt;mxGeometry width=\"40\" height=\"70\" as=\"geometry\"/&gt;&lt;/mxCell&gt;&lt;/object&gt;&lt;/root&gt;&lt;/mxGraphModel&gt;",
+    "w": 40,
+    "h": 70,
+    "aspect": "fixed",
+    "title": "Add"
+  },
+  {
+    "xml": "&lt;mxGraphModel&gt;&lt;root&gt;&lt;mxCell id=\"0\"/&gt;&lt;mxCell id=\"1\" parent=\"0\"/&gt;&lt;object label=\"Gain\" block=\"Gain\" K=\"1\" type=\"block\" name=\"\" id=\"2\"&gt;&lt;mxCell style=\"triangle;html=1;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];whiteSpace=wrap;fontSize=11;align=left;spacingLeft=2;\" vertex=\"1\" parent=\"1\"&gt;&lt;mxGeometry width=\"37.5\" height=\"50\" as=\"geometry\"/&gt;&lt;/mxCell&gt;&lt;/object&gt;&lt;/root&gt;&lt;/mxGraphModel&gt;",
+    "w": 37.5,
+    "h": 50,
+    "aspect": "fixed",
+    "title": "Gain"
+  },
+  {
+    "xml": "&lt;mxGraphModel&gt;&lt;root&gt;&lt;mxCell id=\"0\"/&gt;&lt;mxCell id=\"1\" parent=\"0\"/&gt;&lt;object label=\"&amp;lt;font style=&amp;quot;font-size: 22px;&amp;quot;&amp;gt;*&amp;lt;/font&amp;gt;\" block=\"Product\" type=\"block\" name=\"\" id=\"2\"&gt;&lt;mxCell style=\"whiteSpace=wrap;html=1;aspect=fixed;fontSize=11;points=[[0,0.25,0,0,0],[0,0.75,0,0,0],[1,0.5,0,0,0]];\" vertex=\"1\" parent=\"1\"&gt;&lt;mxGeometry width=\"40\" height=\"40\" as=\"geometry\"/&gt;&lt;/mxCell&gt;&lt;/object&gt;&lt;/root&gt;&lt;/mxGraphModel&gt;",
+    "w": 40,
+    "h": 40,
+    "aspect": "fixed",
+    "title": "Product"
+  },
+  {
+    "xml": "&lt;mxGraphModel&gt;&lt;root&gt;&lt;mxCell id=\"0\"/&gt;&lt;mxCell id=\"1\" parent=\"0\"/&gt;&lt;object label=\"&amp;lt;font style=&amp;quot;font-size: 18px;&amp;quot;&amp;gt;/&amp;lt;/font&amp;gt;\" block=\"Divide\" type=\"block\" name=\"\" id=\"2\"&gt;&lt;mxCell style=\"whiteSpace=wrap;html=1;aspect=fixed;fontSize=11;points=[[0,0.25,0,0,0],[0,0.75,0,0,0],[1,0.5,0,0,0]];\" vertex=\"1\" parent=\"1\"&gt;&lt;mxGeometry width=\"40\" height=\"40\" as=\"geometry\"/&gt;&lt;/mxCell&gt;&lt;/object&gt;&lt;/root&gt;&lt;/mxGraphModel&gt;",
+    "w": 40,
+    "h": 40,
+    "aspect": "fixed",
+    "title": "Divide"
+  },
+  {
+    "xml": "&lt;mxGraphModel&gt;&lt;root&gt;&lt;mxCell id=\"0\"/&gt;&lt;mxCell id=\"1\" parent=\"0\"/&gt;&lt;object label=\"&amp;lt;font style=&amp;quot;font-size: 11px;&amp;quot;&amp;gt;Mod&amp;lt;/font&amp;gt;\" block=\"Mod\" type=\"block\" name=\"\" id=\"2\"&gt;&lt;mxCell style=\"whiteSpace=wrap;html=1;aspect=fixed;fontSize=11;points=[[0,0.25,0,0,0],[0,0.75,0,0,0],[1,0.5,0,0,0]];\" vertex=\"1\" parent=\"1\"&gt;&lt;mxGeometry width=\"40\" height=\"40\" as=\"geometry\"/&gt;&lt;/mxCell&gt;&lt;/object&gt;&lt;/root&gt;&lt;/mxGraphModel&gt;",
+    "w": 40,
+    "h": 40,
+    "aspect": "fixed",
+    "title": "Mod"
+  },
+  {
+    "xml": "&lt;mxGraphModel&gt;&lt;root&gt;&lt;mxCell id=\"0\"/&gt;&lt;mxCell id=\"1\" parent=\"0\"/&gt;&lt;object label=\"&amp;lt;font style=&amp;quot;font-size: 11px;&amp;quot;&amp;gt;Abs&amp;lt;/font&amp;gt;\" block=\"Abs\" type=\"block\" name=\"\" id=\"2\"&gt;&lt;mxCell style=\"whiteSpace=wrap;html=1;aspect=fixed;fontSize=11;points=[[0,0.25,0,0,0],[0,0.75,0,0,0],[1,0.5,0,0,0]];\" vertex=\"1\" parent=\"1\"&gt;&lt;mxGeometry width=\"40\" height=\"40\" as=\"geometry\"/&gt;&lt;/mxCell&gt;&lt;/object&gt;&lt;/root&gt;&lt;/mxGraphModel&gt;",
+    "w": 40,
+    "h": 40,
+    "aspect": "fixed"
+  }
+]</mxlibrary>
