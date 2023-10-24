@@ -238,7 +238,7 @@ to diagrams.net. In the template, a white and black squares indicate inport and 
 
 An example of model built by diagrams.net can be seen in
 
-[https://raw.githubusercontent.com/JuliaMBD/JuliaMBD/main/example/RLC.drawio](https://raw.githubusercontent.com/JuliaMBD/JuliaMBD/main/example/RLC.drawio)
+[https://raw.githubusercontent.com/JuliaMBD/JuliaMBD/main/examples/RLC.drawio](https://raw.githubusercontent.com/JuliaMBD/JuliaMBD/main/examples/RLC.drawio)
 
 which is also used as a template of diagrams.net.
 
