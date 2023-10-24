@@ -25,4 +25,6 @@ include("_ode.jl")
 
 include("_macro.jl")
 
+include("diagrams/_diagrams.jl")
+
 end

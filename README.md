@@ -226,6 +226,22 @@ where the concrete parameters are given as the named tuple.
 
 To be written
 
+## Simple GUI
+
+This tool utilizes the simulink-like diagram that is written by [diagrams.net](https://www.drawio.com/).
+
+The predefined block on diagrams.net can be used by installing (importing) the template 
+
+[https://raw.githubusercontent.com/JuliaMBD/JuliaMBD/main/xml/JuliaMBD.xml](https://raw.githubusercontent.com/JuliaMBD/JuliaMBD/main/xml/JuliaMBD.xml)
+
+to diagrams.net. In the template, a white and black squares indicate inport and outport respectively. By connecting from an outport (a black square) to an inport (a white square) by an edge, we can build the model. The properties of blocks and ports such as names and parameters can be edited by `Edit Data...` (double-clicking a block or a port).
+
+An example of model built by diagrams.net can be seen in
+
+[https://raw.githubusercontent.com/JuliaMBD/JuliaMBD/main/example/RLC.drawio](https://raw.githubusercontent.com/JuliaMBD/JuliaMBD/main/example/RLC.drawio)
+
+which is also used as a template of diagrams.net.
+
 ## For Developers
 
 To be written

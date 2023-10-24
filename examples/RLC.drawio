@@ -1,0 +1,161 @@
+<mxfile host="65bd71144e">
+    <diagram id="-AUvoxmyR2D6E3jA4wAn" name="Page-1">
+        <mxGraphModel dx="680" dy="667" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="1">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <object label="&lt;font style=&quot;font-size: 11px;&quot;&gt;IN&lt;/font&gt;" block="Inport" type="block" name="in" id="49">
+                    <mxCell style="ellipse;whiteSpace=wrap;html=1;fontSize=18;points=[[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;collapsible=0;spacingTop=-5;movable=1;connectable=0;" vertex="1" parent="1">
+                        <mxGeometry x="114.99999999999989" y="170" width="50" height="30" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;" type="outport" name="out" id="50">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="49">
+                        <mxGeometry x="45" y="10" width="10" height="10" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Add" block="Add" signs="[:+, :-, :-]" type="block" name="" id="51">
+                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.24,0,0,0],[0,0.76,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;allowArrows=0;resizable=0;container=1;collapsible=0;movable=1;connectable=0;" vertex="1" parent="1">
+                        <mxGeometry x="235" y="150" width="40" height="80" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;" type="outport" name="out" id="52">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="51">
+                        <mxGeometry x="35" y="34.285714285714285" width="10" height="10" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;" type="inport" name="in1" id="53">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;direction=east;" vertex="1" parent="51">
+                        <mxGeometry x="-5" y="9" width="10" height="10" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;" type="inport" name="in2" id="54">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;direction=east;" vertex="1" parent="51">
+                        <mxGeometry x="-5" y="26" width="10" height="10" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;" type="inport" name="in3" id="55">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;direction=east;" vertex="1" parent="51">
+                        <mxGeometry x="-5" y="43" width="10" height="10" as="geometry"/>
+                    </mxCell>
+                </object>
+                <mxCell id="57" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="50" target="53">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <object label="Gain" block="Gain" K="1/L" type="block" name="" id="58">
+                    <mxCell style="triangle;html=1;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];whiteSpace=wrap;fontSize=11;align=center;spacingLeft=-7;metaEdit=1;snapToPoint=0;allowArrows=0;resizable=0;rotatable=0;container=1;collapsible=0;movable=1;connectable=0;" vertex="1" parent="1">
+                        <mxGeometry x="335" y="165" width="50" height="50" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;" type="inport" name="in" id="59">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;direction=east;" vertex="1" parent="58">
+                        <mxGeometry x="-5" y="20" width="10" height="10" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;" type="outport" name="out" id="60">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="58">
+                        <mxGeometry x="45" y="20" width="10" height="10" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="&lt;font style=&quot;font-size: 11px;&quot;&gt;1/s&lt;/font&gt;" block="Integrator" initialcondition="0" type="block" name="" id="61">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;fontSize=11;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;collapsible=0;movable=1;connectable=0;" vertex="1" parent="1">
+                        <mxGeometry x="435" y="170" width="40" height="40" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;" type="outport" name="out" id="62">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="61">
+                        <mxGeometry x="35" y="15" width="10" height="10" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;" type="inport" name="in" id="63">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;direction=east;" vertex="1" parent="61">
+                        <mxGeometry x="-5" y="15" width="10" height="10" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="&lt;font style=&quot;font-size: 11px;&quot;&gt;OUT&lt;/font&gt;" block="Outport" type="block" name="out" id="64">
+                    <mxCell style="ellipse;whiteSpace=wrap;html=1;fontSize=18;points=[[0.02,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;collapsible=0;spacingTop=-4;movable=1;connectable=0;" vertex="1" parent="1">
+                        <mxGeometry x="545" y="175" width="50" height="30" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;" type="inport" name="in" id="65">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;direction=east;" vertex="1" parent="64">
+                        <mxGeometry x="-4" y="10" width="10" height="10" as="geometry"/>
+                    </mxCell>
+                </object>
+                <mxCell id="66" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="52" target="59">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="67" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="60" target="63">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="68" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="62" target="65">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <object label="Gain" block="Gain" K="R" type="block" name="" id="69">
+                    <mxCell style="triangle;html=1;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];whiteSpace=wrap;fontSize=11;align=center;spacingLeft=-7;metaEdit=1;snapToPoint=0;allowArrows=0;resizable=0;rotatable=0;container=1;collapsible=0;movable=1;connectable=0;flipH=1;" vertex="1" parent="1">
+                        <mxGeometry x="345" y="240" width="50" height="50" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;" type="inport" name="in" id="70">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;direction=east;" vertex="1" parent="69">
+                        <mxGeometry x="45" y="20" width="10" height="10" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;" type="outport" name="out" id="71">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="69">
+                        <mxGeometry x="-5" y="20" width="10" height="10" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Gain" block="Gain" K="1/C" type="block" name="" id="72">
+                    <mxCell style="triangle;html=1;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];whiteSpace=wrap;fontSize=11;align=center;spacingLeft=-7;metaEdit=1;snapToPoint=0;allowArrows=0;resizable=0;rotatable=0;container=1;collapsible=0;movable=1;connectable=0;flipH=1;" vertex="1" parent="1">
+                        <mxGeometry x="345" y="310" width="50" height="50" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;" type="inport" name="in" id="73">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;direction=east;" vertex="1" parent="72">
+                        <mxGeometry x="45" y="20" width="10" height="10" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;" type="outport" name="out" id="74">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="72">
+                        <mxGeometry x="-5" y="20" width="10" height="10" as="geometry"/>
+                    </mxCell>
+                </object>
+                <mxCell id="75" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.7;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="62" target="70">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="76" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.9;entryY=0.6;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="62" target="73">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="77" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="71" target="54">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="305" y="250" as="sourcePoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="79" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="74" target="82">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="265" y="310" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <object label="&lt;font style=&quot;font-size: 11px;&quot;&gt;1/s&lt;/font&gt;" block="Integrator" initialcondition="0" type="block" name="" id="80">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;fontSize=11;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;collapsible=0;movable=1;connectable=0;" vertex="1" parent="1">
+                        <mxGeometry x="125" y="230" width="40" height="40" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;" type="outport" name="out" id="81">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="80">
+                        <mxGeometry x="35" y="15" width="10" height="10" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;" type="inport" name="in" id="82">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;direction=east;" vertex="1" parent="80">
+                        <mxGeometry x="-5" y="15" width="10" height="10" as="geometry"/>
+                    </mxCell>
+                </object>
+                <mxCell id="83" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="81" target="55">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
