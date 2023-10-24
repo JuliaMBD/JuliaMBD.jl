@@ -242,6 +242,18 @@ An example of model built by diagrams.net can be seen in
 
 which is also used as a template of diagrams.net.
 
+The model is included by using `@xmlmodel "filename"` instead of `@block` and `@connect` in `@model`. For example, when we make the diagram as `RLC.drawio`, it can be included as follows.
+```julia
+@model RLC begin
+    @parameter begin
+        R
+        L
+        C
+    end
+    @xmlmodel "RLC.drawio"
+end
+```
+
 ## For Developers
 
 To be written
