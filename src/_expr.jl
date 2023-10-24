@@ -228,14 +228,14 @@ function expr_odemodel_ofunc(b::AbstractCompositeBlock)
         push!(paramargs, Expr(:kw, p.name, Expr(:ref, :p, i)))
     end
     push!(paramargs, Expr(:kw, b.timeport.name, :t))
-    xscopes = [:($(Expr(:quote, s)) => [u.$s for u = result]) for (s,_) = b.scopes]
+    xscopes = [:($s = [u.$s for u = result]) for (s,_) = b.scopes]
     Expr(:->, Expr(:tuple, :x, :p, :ts), Expr(:block,
         Expr(:(=), :result,
             Expr(:comprehension,
                 Expr(:generator,
                     Expr(:call, Symbol(b.name, "_ofunc"), xargs..., inargs..., paramargs...,),
                     Expr(:(=), :t, :ts)))),
-        Expr(:call, :Dict, xscopes...)
+        Expr(:tuple, xscopes...)
     ))
 end
 

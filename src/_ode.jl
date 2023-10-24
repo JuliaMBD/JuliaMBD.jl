@@ -60,8 +60,7 @@ function simulate(blk::ODEModel; tspan = (0, 1), parameters = (), n = 1000, alg=
     SimulationResult(params, ts, results, u)
 end
 
-function Plots.plot(x::SimulationResult; layout=(length(x.outputs), 1))
-    n = length(x.outputs)
-    Plots.plot(x.ts, [x for (_,x) = x.outputs], layout=layout, title=reshape([x for (x,_) = x.outputs], 1, n), leg=false)
+function Plots.plot(x::SimulationResult; vars=keys(x.outputs), layout=(length(vars), 1), kwargs...)
+    Plots.plot(x.ts, [x.outputs[k] for k = vars], layout=layout, title=reshape([k for k = vars], 1, length(vars)), leg=false, kwargs...)
 end
 

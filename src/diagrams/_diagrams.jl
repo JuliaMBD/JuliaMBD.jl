@@ -1,6 +1,7 @@
 module Diagram
 
 export @xmlmodel
+export show_xmlmodel
 
 using EzXML
 
@@ -13,8 +14,10 @@ end
 
 function parsemodel(mxGraphModel)
     blkdict = Dict()
+    portdict = Dict()
     edgedict = Dict()
     blks = []
+    ports = []
     edges = []
 
     for x = eachelement(mxGraphModel)
@@ -28,51 +31,58 @@ function parsemodel(mxGraphModel)
                 blkdict[y["id"]] = b
                 push!(blks, b)
             end
-            if y.name == "object" && y["type"] == "line"
-                edge = Dict()
-                edge["sourceport"] = y["source"]
-                edge["targetport"] = y["target"]
+            if y.name == "object" && (y["type"] == "inport" || y["type"] == "outport")
+                b = Dict()
+                for a = eachattribute(y)
+                    k = nodename(a)
+                    b[k] = y[k]
+                end
                 mxcell = firstelement(y)
-                if haskey(mxcell, "source") && haskey(mxcell, "target")
-                    edge["parent"] = mxcell["parent"]
-                    edge["source"] = mxcell["source"]
-                    edge["target"] = mxcell["target"]
+                b["parent"] = mxcell["parent"]
+                portdict[y["id"]] = b
+                push!(ports, b)
+            end
+            if y.name == "mxCell" && haskey(y, "edge") && y["edge"] == "1"
+                edge = Dict()
+                if haskey(y, "source") && haskey(y, "target")
+                    edge["parent"] = y["parent"]
+                    edge["source"] = y["source"]
+                    edge["target"] = y["target"]
                     edgedict[y["id"]] = edge
                     push!(edges, edge)
                 else
-                    println("An edge without connection")
+                    @warn "The edge without connection: $(y["id"])"
                 end
             end
         end
     end
-
-    for x = eachelement(mxGraphModel)
-        for y = eachelement(x)
-            if y.name == "mxCell" && haskey(y, "style") && occursin("edgeLabel", y["style"])
-                if haskey(edgedict, y["parent"])
-                    edge = edgedict[y["parent"]]
-                    edge["label"] = y["value"]
-                end
-            end
-        end
-    end
-
-    (blkdict, blks, edgedict, edges)
+    (blkdict, blks, portdict, ports, edgedict, edges)
 end
 
-function makeblk(h, blkvars)
+function mkblocksection(blks, blkvars)
+    io = IOBuffer()
+    blknames = Set()
+    println(io, "begin")
+    for h = blks
+        println(io, makeblk(h, blkvars, blknames))
+    end
+    println(io, "end")
+    Meta.parse(String(take!(io)))
+end
+
+function makeblk(h, blkvars, blknames)
     if h["name"] == ""
         s = "blk$(length(blkvars))"
     else
         s = h["name"]
     end
-    if haskey(blkvars, s)
-        println("error?")
+    if s in blknames
+        @warn "Duplicate block name $(s)"
     else
+        push!(blknames, s)
         blkvars[h["id"]] = s
     end
-    p = Val(Symbol(h["block"]))
-    _makeblk(h, s, p)
+    _makeblk(h, s, Val(Symbol(h["block"])))
 end
 
 function _makeblk(h, s, ::Any)
@@ -92,39 +102,43 @@ function _makeblk(h, s, ::Val{:Outport})
     "$s = $(h["block"])($(join(args, ", ")))"
 end
 
-function makeconn(h, blkvars)
-    sourcevar = blkvars[h["source"]]
-    targetvar = blkvars[h["target"]]
-    "$(sourcevar).$(h["sourceport"]) => $(targetvar).$(h["targetport"])"
-end
-
-function mkblocksection(blks, blkvars)
-    io = IOBuffer()
-    println(io, "begin")
-    for h = blks
-        println(io, makeblk(h, blkvars))
-    end
-    println(io, "end")
-    Meta.parse(String(take!(io)))
-end
-
-function mkconnectsection(edges, blkvars)
+function mkconnectsection(edges, blkvars, portdict)
     io = IOBuffer()
     println(io, "begin")
     for h = edges
-        println(io, makeconn(h, blkvars))
+        println(io, makeconn(h, blkvars, portdict))
     end
     println(io, "end")
     Meta.parse(String(take!(io)))
+end
+
+function makeconn(h, blkvars, portdict)
+    srcid = h["source"]
+    srcport = portdict[srcid]
+    srcblk = blkvars[srcport["parent"]]
+    tgtid = h["target"]
+    tgtport = portdict[tgtid]
+    tgtblk = blkvars[tgtport["parent"]]
+    "$(srcblk).$(srcport["name"]) => $(tgtblk).$(tgtport["name"])"
 end
 
 function xmlmodel(m, xmlfile)
     mxgraph = getmxgraph(xmlfile)
-    blkdict, blks, edgedict, edges = parsemodel(mxgraph)
+    blkdict, blks, portdict, ports, edgedict, edges = parsemodel(mxgraph)
     blkvars = Dict()
     quote
         @block $m $(mkblocksection(blks, blkvars))
-        @connect $m $(mkconnectsection(edges, blkvars))
+        @connect $m $(mkconnectsection(edges, blkvars, portdict))
+    end
+end
+
+function show_xmlmodel(xmlfile)
+    mxgraph = getmxgraph(xmlfile)
+    blkdict, blks, portdict, ports, edgedict, edges = parsemodel(mxgraph)
+    blkvars = Dict()
+    quote
+        @block $(mkblocksection(blks, blkvars))
+        @connect $(mkconnectsection(edges, blkvars, portdict))
     end
 end
 
