@@ -1,7 +1,7 @@
 name = "JuliaMBD"
 uuid = "b9b91b06-5013-452c-8095-0d620b23b3ed"
 authors = ["Hiroyuki Okamura"]
-version = "0.9.1"
+version = "0.10.0"
 
 [deps]
 DifferentialEquations = "0c46a032-eb83-5123-abaf-570d42b7fbaa"
