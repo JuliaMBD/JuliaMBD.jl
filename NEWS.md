@@ -1,3 +1,11 @@
+# JuliaMBD 0.10.1
+
+- bugfix
+    - add EzXML in requirements.jl
+    - update JuliaMBD.xml
+- enhancement
+    - read from multiple pages
+
 # JuliaMBD 0.10.0
 
 - Modify the plot function

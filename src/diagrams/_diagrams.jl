@@ -5,11 +5,21 @@ export show_xmlmodel
 
 using EzXML
 
-const kw = ["name", "label", "id", "type", "block"]
+const kw = ["name", "label", "id", "type", "block", "placeholders"]
 
-function getmxgraph(file)
+function getdocs(file)
+    docs = []
+    docdict = Dict()
     doc = readxml(file)
-    findfirst("//mxGraphModel", doc)
+    for x = findall("//diagram", doc)
+        push!(docs, x)
+        docdict[x["name"]] = length(docs)
+    end
+    docs, docdict
+end
+
+function getmxgraph(doc)
+    findfirst("mxGraphModel", doc)
 end
 
 function parsemodel(mxGraphModel)
@@ -122,8 +132,17 @@ function makeconn(h, blkvars, portdict)
     "$(srcblk).$(srcport["name"]) => $(tgtblk).$(tgtport["name"])"
 end
 
-function xmlmodel(m, xmlfile)
-    mxgraph = getmxgraph(xmlfile)
+function xmlmodel(m, xmlfile, name)
+    docs, docdict = getdocs(xmlfile)
+    if name != ""
+        doc = docs[docdict[name]]
+    else
+        if length(docs) > 1
+            @warn "Diagram has multiple pages. Use the diagram at the first page"
+        end
+        doc = docs[1]
+    end
+    mxgraph = getmxgraph(doc)
     blkdict, blks, portdict, ports, edgedict, edges = parsemodel(mxgraph)
     blkvars = Dict()
     quote
@@ -132,8 +151,17 @@ function xmlmodel(m, xmlfile)
     end
 end
 
-function show_xmlmodel(xmlfile)
-    mxgraph = getmxgraph(xmlfile)
+function show_xmlmodel(xmlfile, name)
+    docs, docdict = getdocs(xmlfile)
+    if name != ""
+        doc = docs[docdict[name]]
+    else
+        if length(docs) > 1
+            @warn "Diagram has multiple pages. Use the diagram at the first page"
+        end
+        doc = docs[2]
+    end
+    mxgraph = getmxgraph(doc)
     blkdict, blks, portdict, ports, edgedict, edges = parsemodel(mxgraph)
     blkvars = Dict()
     quote
@@ -153,8 +181,8 @@ end
     @xmlmodel "RLC.drawio"
 end
 """
-macro xmlmodel(m, xmlfile)
-    expr = xmlmodel(m, xmlfile)
+macro xmlmodel(m, xmlfile, name = "")
+    expr = xmlmodel(m, xmlfile, name)
     esc(expr)
 end
 
