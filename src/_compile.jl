@@ -27,7 +27,14 @@ end
 # Goto/From signals
 
 next(x::GotoSignal) = gotoports[x.name] # Dict{Symbol,Vector{FromSignal}}
-prev(x::FromSignal) = [fromports[x.name]] # Dict{Symbol,GotoSignal}
+
+function prev(x::FromSignal)
+    if !haskey(fromports, x.name)
+        error("Did not find Goto tag $(split(string(x.name), string(jumpprefix))[2])")
+    else
+        [fromports[x.name]] # Dict{Symbol,GotoSignal}
+    end
+end
 
 function cleargototag!()
     empty!(gotoports)
