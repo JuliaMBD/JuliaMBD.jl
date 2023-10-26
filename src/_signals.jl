@@ -46,3 +46,27 @@ mutable struct ConstSignal{Tv} <: AbstractConstSignal
         s
     end
 end
+
+const jumpprefix = :jumpprefix_
+
+mutable struct GotoSignal <: AbstractJumpSignal
+    name::Symbol
+    src::AbstractPortBlock
+
+    function GotoSignal(src::AbstractPortBlock, tag::Symbol)
+        s = new(Symbol(jumpprefix, tag), src)
+        push!(src.outs, s)
+        s
+    end
+end
+
+mutable struct FromSignal <: AbstractJumpSignal
+    name::Symbol
+    dest::AbstractPortBlock
+
+    function FromSignal(dest::AbstractPortBlock, tag::Symbol)
+        s = new(Symbol(jumpprefix, tag), dest)
+        dest.in = s
+        s
+    end
+end

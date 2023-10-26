@@ -131,5 +131,19 @@
     "h": 60,
     "aspect": "fixed",
     "title": "User-defined block"
+  },
+  {
+    "xml": "&lt;mxGraphModel&gt;&lt;root&gt;&lt;mxCell id=\"0\"/&gt;&lt;mxCell id=\"1\" parent=\"0\"/&gt;&lt;object label=\"%tag%\" placeholders=\"1\" block=\"Goto\" name=\"\" tag=\":a\" type=\"block\" id=\"2\"&gt;&lt;mxCell style=\"rhombus;whiteSpace=wrap;html=1;connectable=0;allowArrows=0;container=1;collapsible=0;resizable=0;fontSize=11;metaEdit=1;\" vertex=\"1\" parent=\"1\"&gt;&lt;mxGeometry width=\"40\" height=\"40\" as=\"geometry\"/&gt;&lt;/mxCell&gt;&lt;/object&gt;&lt;object label=\"&amp;lt;p style=&amp;quot;line-height: 100%;&amp;quot;&amp;gt;&amp;lt;br&amp;gt;&amp;lt;/p&amp;gt;\" type=\"inport\" name=\"in\" id=\"3\"&gt;&lt;mxCell style=\"whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;direction=east;\" vertex=\"1\" parent=\"2\"&gt;&lt;mxGeometry x=\"-4\" y=\"15\" width=\"10\" height=\"10\" as=\"geometry\"/&gt;&lt;/mxCell&gt;&lt;/object&gt;&lt;/root&gt;&lt;/mxGraphModel&gt;",
+    "w": 40,
+    "h": 40,
+    "aspect": "fixed",
+    "title": "Goto"
+  },
+  {
+    "xml": "&lt;mxGraphModel&gt;&lt;root&gt;&lt;mxCell id=\"0\"/&gt;&lt;mxCell id=\"1\" parent=\"0\"/&gt;&lt;object label=\"%tag%\" placeholders=\"1\" block=\"From\" name=\"\" tag=\":a\" type=\"block\" id=\"2\"&gt;&lt;mxCell style=\"rhombus;whiteSpace=wrap;html=1;connectable=0;allowArrows=0;container=1;collapsible=0;resizable=0;fontSize=11;metaEdit=1;\" vertex=\"1\" parent=\"1\"&gt;&lt;mxGeometry width=\"40\" height=\"40\" as=\"geometry\"/&gt;&lt;/mxCell&gt;&lt;/object&gt;&lt;object label=\"&amp;lt;p style=&amp;quot;line-height: 100%;&amp;quot;&amp;gt;&amp;lt;br&amp;gt;&amp;lt;/p&amp;gt;\" type=\"outport\" name=\"out\" id=\"3\"&gt;&lt;mxCell style=\"whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;\" vertex=\"1\" parent=\"2\"&gt;&lt;mxGeometry x=\"33\" y=\"15\" width=\"10\" height=\"10\" as=\"geometry\"/&gt;&lt;/mxCell&gt;&lt;/object&gt;&lt;/root&gt;&lt;/mxGraphModel&gt;",
+    "w": 40,
+    "h": 40,
+    "aspect": "fixed",
+    "title": "From"
   }
 ]</mxlibrary>

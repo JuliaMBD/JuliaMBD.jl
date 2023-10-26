@@ -1,3 +1,7 @@
+# JuliaMBD 0.10.2
+
+- add Goto/From
+
 # JuliaMBD 0.10.1
 
 - bugfix

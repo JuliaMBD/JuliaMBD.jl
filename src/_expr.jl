@@ -48,7 +48,7 @@ function _expr(x::ParameterPort{Auto})
     end
 end
 
-function _expr(x::LineSignal)
+function _expr(x::AbstractLineSignal)
     x.name
 end
 
@@ -118,6 +118,7 @@ function expr_sfunc(b::AbstractCompositeBlock)
         push!(paramargs, Expr(:kw, x, v))
     end
     push!(paramargs, Expr(:kw, b.timeport.name, 0))
+    connecttag(b.blocks)
     body = [_expr(m) for m = tsort(allcomponents(b))]
     Expr(:function,
         Expr(:call, Symbol(b.name, "_sfunc"),
@@ -199,6 +200,7 @@ function expr_ofunc(b::AbstractCompositeBlock)
         push!(paramargs, Expr(:kw, x, v))
     end
     push!(paramargs, Expr(:kw, b.timeport.name, 0))
+    connecttag(b.blocks)
     body = [_expr(m) for m = tsort(allcomponents(b))]
     Expr(:function,
         Expr(:call, Symbol(b.name, "_ofunc"),
@@ -281,6 +283,7 @@ function expr_ifunc(b::AbstractCompositeBlock)
         push!(paramargs, Expr(:kw, x, v))
     end
     push!(paramargs, Expr(:kw, b.timeport.name, 0))
+    connecttag(b.blocks)
     body = [_expr_initial(m) for m = tsort(allcomponents(b))]
     Expr(:function,
         Expr(:call, Symbol(b.name, "_ifunc"),
