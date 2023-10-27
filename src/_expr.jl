@@ -83,7 +83,9 @@ end
 ### compile
 
 function expr_sfunc(b::AbstractCompositeBlock)
-    # @assert length(b.stateinports) == length(b.stateoutports) && length(b.stateinports) != 0
+    if length(b.inports) != 0
+        @warn "This system requires inputs"
+    end
     xargs = []
     for p = b.stateinports
         if p.type != Auto
@@ -137,7 +139,6 @@ end
 
 """
 function expr_odemodel_sfunc(b::AbstractCompositeBlock)
-    # @assert length(b.stateinports) == length(b.stateoutports) && length(b.stateinports) != 0
     xargs = []
     for (i,_) = enumerate(b.stateinports)
         push!(xargs, Expr(:ref, :x, i))
@@ -154,10 +155,6 @@ function expr_odemodel_sfunc(b::AbstractCompositeBlock)
     for (i,_) = enumerate(b.inports)
         push!(dx0args, Expr(:ref, :dx, i + length(b.stateoutports)))
     end
-    # outargs = []
-    # for (_,_) = enumerate(b.inports)
-    #     push!(outargs, :_)
-    # end
     paramargs = []
     for (i,p) = enumerate(b.parameterports)
         push!(paramargs, Expr(:kw, p.name, Expr(:ref, :p, i)))
@@ -256,7 +253,6 @@ end
 """
 
 function expr_ifunc(b::AbstractCompositeBlock)
-    # @assert length(b.stateinports) == length(b.stateoutports) && length(b.stateinports) != 0
     xargs = []
     for p = b.stateinports
         push!(xargs, Expr(:kw, p.name, 0))
@@ -292,27 +288,6 @@ function expr_ifunc(b::AbstractCompositeBlock)
 end
 
 function expr_odemodel_ifunc(b::AbstractCompositeBlock)
-    # @assert length(b.stateinports) == length(b.stateoutports) && length(b.stateinports) != 0
-    # dxargs = []
-    # for (i,_) = enumerate(b.stateinports)
-    #     push!(dxargs, Expr(:ref, :dx, i))
-    # end
-    # inargs = []
-    # for (i,_) = enumerate(b.inports)
-    #     push!(inargs, Expr(:ref, :dx, i + length(b.stateinports)))
-    # end
-    # xargs = []
-    # for (i,_) = enumerate(b.stateoutports)
-    #     push!(xargs, Expr(:ref, :x, i))
-    # end
-    # x0args = []
-    # for (i,_) = enumerate(b.inports)
-    #     push!(x0args, Expr(:ref, :x, i + length(b.stateoutports)))
-    # end
-    # outargs = []
-    # for (_,_) = enumerate(b.inports)
-    #     push!(outargs, :_)
-    # end
     paramargs = []
     for (i,p) = enumerate(b.parameterports)
         push!(paramargs, Expr(:kw, p.name, Expr(:ref, :p, i)))
@@ -322,7 +297,6 @@ function expr_odemodel_ifunc(b::AbstractCompositeBlock)
 end
 
 function expr_pfunc(b::AbstractCompositeBlock)
-    # @assert length(b.stateinports) == length(b.stateoutports) && length(b.stateinports) != 0
     xargs = []
     for p = b.stateinports
         push!(xargs, Expr(:kw, p.name, 0))
@@ -355,16 +329,9 @@ function expr_odemodel_pfunc(b::AbstractCompositeBlock)
         v = _expr(p.in)
         push!(paramargs, Expr(:kw, x, v))
     end
-    # push!(paramargs, Expr(:kw, b.timeport.name, 0))
     dxargs = []
     for p = b.parameterports
-        # push!(dxargs, Expr(:kw, p.name, p.name))
         push!(dxargs, p.name)
     end
-    # paramargs = []
-    # for (i,p) = enumerate(b.parameterports)
-    #     push!(paramargs, Expr(:kw, p.name, Expr(:ref, :p, i)))
-    # end
-    # push!(paramargs, Expr(:kw, b.timeport.name, 0))
     Expr(:->, Expr(:tuple, Expr(:parameters, paramargs...)), Expr(:tuple, dxargs...))
 end
