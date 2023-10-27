@@ -151,7 +151,7 @@ function xmlmodel(m, xmlfile, name)
     end
 end
 
-function show_xmlmodel(xmlfile, name)
+function show_xmlmodel(xmlfile, name = "")
     docs, docdict = getdocs(xmlfile)
     if name != ""
         doc = docs[docdict[name]]
@@ -159,7 +159,7 @@ function show_xmlmodel(xmlfile, name)
         if length(docs) > 1
             @warn "Diagram has multiple pages. Use the diagram at the first page"
         end
-        doc = docs[2]
+        doc = docs[1]
     end
     mxgraph = getmxgraph(doc)
     blkdict, blks, portdict, ports, edgedict, edges = parsemodel(mxgraph)

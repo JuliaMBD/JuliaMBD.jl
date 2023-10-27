@@ -12,6 +12,7 @@ abstract type AbstractParameterPortBlock <: AbstractInPortBlock end
 abstract type AbstractSignal <: AbstractComponent end
 abstract type AbstractLineSignal <: AbstractSignal end
 abstract type AbstractConstSignal <: AbstractSignal end
+abstract type AbstractJumpSignal <: AbstractLineSignal end
 
 const Auto = Any
 
