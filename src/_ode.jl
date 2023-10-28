@@ -1,5 +1,6 @@
 export simulate
 export @compile
+export @compile_derivative
 
 macro compile(x)
     b = gensym()
@@ -15,6 +16,25 @@ macro compile(x)
             eval(JuliaMBD.expr_odemodel_ifunc($b)),
             eval(JuliaMBD.expr_odemodel_sfunc($b)),
             eval(JuliaMBD.expr_odemodel_ofunc($b))
+        )
+    end
+    esc(expr)
+end
+
+macro compile_derivative(x)
+    b = gensym()
+    expr = quote
+        $b = $x
+        eval(JuliaMBD.expr_sfunc_derivative($b))
+        eval(JuliaMBD.expr_ofunc_derivative($b))
+        eval(JuliaMBD.expr_ifunc_derivative($b))
+        eval(JuliaMBD.expr_pfunc($b))
+        JuliaMBD.ODEModel(
+            $b,
+            eval(JuliaMBD.expr_odemodel_pfunc($b)),
+            eval(JuliaMBD.expr_odemodel_ifunc_derivative($b)),
+            eval(JuliaMBD.expr_odemodel_sfunc_derivative($b)),
+            eval(JuliaMBD.expr_odemodel_ofunc_derivative($b))
         )
     end
     esc(expr)

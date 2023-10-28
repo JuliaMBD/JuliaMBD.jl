@@ -74,6 +74,32 @@ function _connecttag(b, ::Val{:From})
     push!(gotoports[s.name], s.dest)
 end
 
+# """
+# get all prev blocks
+# """
+# function allprev(b::AbstractBlock)
+#     blks = Set{AbstractComponent}()
+#     _allprev!(blks, b)
+#     collect(blks)
+# end
+
+# function _allprev!(blks, b::AbstractBlock)
+#     push!(blks, b)
+#     for x = prev(b)
+#         _allprev!(blks, x)
+#     end
+# end
+
+# function _allprev!(blks, b::Any)
+#     push!(blks, b)
+#     for x = prev(b)
+#         _allprev!(blks, x)
+#     end
+# end
+
+# function _allprev!(blks, b::T) where {T <: Union{UndefBlock, UndefPort, UndefSignal}}
+# end
+
 """
 all blocks
 

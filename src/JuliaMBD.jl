@@ -20,6 +20,8 @@ include("_compositeblock.jl")
 include("_show.jl")
 include("_compile.jl")
 include("_expr.jl")
+include("_expr_func.jl")
+include("_expr_func_derivative.jl")
 include("_ode.jl")
 
 include("_macro.jl")

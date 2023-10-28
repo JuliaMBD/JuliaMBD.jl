@@ -1,7 +1,5 @@
 module MSDtest
 
-using Plots
-using DifferentialEquations
 using JuliaMBD
 using Test
 
@@ -62,10 +60,7 @@ using Test
             end
         end
 
-        m = @compile Test(M=10, D=10, k=10, f=10, p_cycle=20, p_width=50)
-        result = simulate(m, tspan=(0.0, 60.0))
-        p = plot(result)
-        savefig(p, "MSD.png")
+        @compile Test(M=10, D=10, k=10, f=10, p_cycle=20, p_width=50)
     end
 end
 

@@ -9,6 +9,8 @@ mutable struct SubSystemBlock <: AbstractCompositeBlock
     outports::Vector{AbstractOutPort}
     stateinports::Vector{AbstractPort}
     stateoutports::Vector{AbstractPort}
+    dstateinports::Vector{AbstractPort}
+    dstateoutports::Vector{AbstractPort}
     parameterports::Vector{AbstractParameterPort}
     blocks::Vector{AbstractBlock}
     # parameters::Vector{Tuple{Symbol,Any}}
@@ -20,11 +22,13 @@ mutable struct SubSystemBlock <: AbstractCompositeBlock
     function SubSystemBlock(name::Symbol; timeport = OutPort(:time))
         b = new(name,
             "",
-            AbstractInPort[],
-            AbstractOutPort[],
-            AbstractInPort[],
-            AbstractOutPort[],
-            AbstractParameterPort[],
+            AbstractInPort[], # inports
+            AbstractOutPort[], # outports
+            AbstractInPort[], # stateinports
+            AbstractOutPort[], # stateoutports
+            AbstractInPort[], # dstateinports
+            AbstractOutPort[], # dstateoutports
+            AbstractParameterPort[], # parameterports
             AbstractBlock[],
             Dict{Symbol,AbstractConstSignal}(),
             Tuple{Symbol,AbstractPort}[],

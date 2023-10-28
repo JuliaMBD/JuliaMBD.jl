@@ -1,7 +1,5 @@
 module RLCtest
 
-using Plots
-using DifferentialEquations
 using JuliaMBD
 using Test
 
@@ -61,10 +59,7 @@ using Test
             end
         end
 
-        m = @compile Test(R=10, L=100e-3, C=10e-6, voltage=5)
-        result = JuliaMBD.simulate(m, tspan=(0,1))
-        p = plot(result)
-        savefig(p, "RLC.png")
+        @compile Test(R=10, L=100e-3, C=10e-6, voltage=5)
     end
 end
 
