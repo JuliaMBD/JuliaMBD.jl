@@ -9,14 +9,14 @@ next(x::AbstractConstSignal) = [x.dest]
 prev(x::AbstractLineSignal) = [x.src]
 next(x::AbstractLineSignal) = [x.dest]
 
-prev(x::AbstractInPortBlock) = [x.in]
-next(x::AbstractInPortBlock) = [x.parent]
+prev(x::AbstractInPort) = [x.in]
+next(x::AbstractInPort) = [x.parent]
 
-prev(x::AbstractOutPortBlock) = [x.parent]
-next(x::AbstractOutPortBlock) = x.outs
+prev(x::AbstractOutPort) = [x.parent]
+next(x::AbstractOutPort) = x.outs
 
-prev(x::AbstractParameterPortBlock) = [x.in]
-function next(x::AbstractParameterPortBlock)
+prev(x::AbstractParameterPort) = [x.in]
+function next(x::AbstractParameterPort)
     if x.parent in undefset
         x.outs
     else
@@ -61,7 +61,7 @@ function _connecttag(b, ::Val{:Goto})
         fromports[s.name] = s.src
     end
     if !haskey(gotoports, s.name)
-        gotoports[s.name] = AbstractPortBlock[]
+        gotoports[s.name] = AbstractPort[]
     end
 end
 
@@ -69,10 +69,36 @@ function _connecttag(b, ::Val{:From})
     ## tag
     s = b.inports[1].in
     if !haskey(gotoports, s.name)
-        gotoports[s.name] = AbstractPortBlock[]
+        gotoports[s.name] = AbstractPort[]
     end
     push!(gotoports[s.name], s.dest)
 end
+
+# """
+# get all prev blocks
+# """
+# function allprev(b::AbstractBlock)
+#     blks = Set{AbstractComponent}()
+#     _allprev!(blks, b)
+#     collect(blks)
+# end
+
+# function _allprev!(blks, b::AbstractBlock)
+#     push!(blks, b)
+#     for x = prev(b)
+#         _allprev!(blks, x)
+#     end
+# end
+
+# function _allprev!(blks, b::Any)
+#     push!(blks, b)
+#     for x = prev(b)
+#         _allprev!(blks, x)
+#     end
+# end
+
+# function _allprev!(blks, b::T) where {T <: Union{UndefBlock, UndefPort, UndefSignal}}
+# end
 
 """
 all blocks

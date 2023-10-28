@@ -1,3 +1,8 @@
+# JuliaMBD 0.10.3
+
+- TrigonometricFunction
+- Derivative (experimental)
+
 # JuliaMBD 0.10.2
 
 - add Goto/From

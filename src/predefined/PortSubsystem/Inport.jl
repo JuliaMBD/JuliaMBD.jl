@@ -2,9 +2,11 @@ export Inport
 
 function Inport(name::Symbol, ::Type{Tv}; out = OutPort()) where Tv
     b = SimpleBlock(:Inport)
-    in = InPort(name, Tv)
-    setport!(b, in.name, in)
+    in = InPort(Tv)
+    # setport!(b, in.name, in)
+    setport!(b, :in, in)
     setport!(b, :out, out)
+    b.env[:label] = name
     b
 end
 

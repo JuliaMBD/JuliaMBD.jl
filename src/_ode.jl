@@ -1,5 +1,6 @@
 export simulate
 export @compile
+export @compile_derivative
 
 macro compile(x)
     b = gensym()
@@ -8,13 +9,32 @@ macro compile(x)
         eval(JuliaMBD.expr_sfunc($b))
         eval(JuliaMBD.expr_ofunc($b))
         eval(JuliaMBD.expr_ifunc($b))
-        eval(JuliaMBD.expr_pfunc($b))
+        # eval(JuliaMBD.expr_pfunc($b))
         JuliaMBD.ODEModel(
             $b,
             eval(JuliaMBD.expr_odemodel_pfunc($b)),
             eval(JuliaMBD.expr_odemodel_ifunc($b)),
             eval(JuliaMBD.expr_odemodel_sfunc($b)),
             eval(JuliaMBD.expr_odemodel_ofunc($b))
+        )
+    end
+    esc(expr)
+end
+
+macro compile_derivative(x)
+    b = gensym()
+    expr = quote
+        $b = $x
+        eval(JuliaMBD.expr_sfunc_derivative($b))
+        eval(JuliaMBD.expr_ofunc_derivative($b))
+        eval(JuliaMBD.expr_ifunc_derivative($b))
+        # eval(JuliaMBD.expr_pfunc($b))
+        JuliaMBD.ODEModel(
+            $b,
+            eval(JuliaMBD.expr_odemodel_pfunc_derivative($b)),
+            eval(JuliaMBD.expr_odemodel_ifunc_derivative($b)),
+            eval(JuliaMBD.expr_odemodel_sfunc_derivative($b)),
+            eval(JuliaMBD.expr_odemodel_ofunc_derivative($b))
         )
     end
     esc(expr)
@@ -49,7 +69,6 @@ function simulate(blk::ODEModel; tspan = (0, 1), parameters = (), n = 1000, alg=
     # making a function to get parameters without default values; ex) params = blk.pfunc(M=10, R=1)
     args = [Expr(:kw, k, parameters[k]) for k = keys(parameters)]
     params = eval(Expr(:call, Expr(:., blk, Expr(:quote, :pfunc)), args...))
-
     if length(blk.blk.stateinports) != 0
         u = odesolve(blk, params, tspan; alg=alg, kwargs...)
     else

@@ -5,29 +5,33 @@ export set!
 mutable struct SubSystemBlock <: AbstractCompositeBlock
     name::Symbol
     desc::String
-    inports::Vector{AbstractInPortBlock}
-    outports::Vector{AbstractOutPortBlock}
-    stateinports::Vector{AbstractPortBlock}
-    stateoutports::Vector{AbstractPortBlock}
-    parameterports::Vector{AbstractParameterPortBlock}
+    inports::Vector{AbstractInPort}
+    outports::Vector{AbstractOutPort}
+    stateinports::Vector{AbstractPort}
+    stateoutports::Vector{AbstractPort}
+    dstateinports::Vector{AbstractPort}
+    dstateoutports::Vector{AbstractPort}
+    parameterports::Vector{AbstractParameterPort}
     blocks::Vector{AbstractBlock}
     # parameters::Vector{Tuple{Symbol,Any}}
     parameters::Dict{Symbol,AbstractConstSignal}
-    scopes::Vector{Tuple{Symbol,AbstractPortBlock}}
-    timeport::AbstractPortBlock
+    scopes::Vector{Tuple{Symbol,AbstractPort}}
+    timeport::AbstractPort
     env::Dict{Symbol,Any}
 
     function SubSystemBlock(name::Symbol; timeport = OutPort(:time))
         b = new(name,
             "",
-            AbstractInPortBlock[],
-            AbstractOutPortBlock[],
-            AbstractInPortBlock[],
-            AbstractOutPortBlock[],
-            AbstractParameterPortBlock[],
+            AbstractInPort[], # inports
+            AbstractOutPort[], # outports
+            AbstractInPort[], # stateinports
+            AbstractOutPort[], # stateoutports
+            AbstractInPort[], # dstateinports
+            AbstractOutPort[], # dstateoutports
+            AbstractParameterPort[], # parameterports
             AbstractBlock[],
             Dict{Symbol,AbstractConstSignal}(),
-            Tuple{Symbol,AbstractPortBlock}[],
+            Tuple{Symbol,AbstractPort}[],
             timeport,
             Dict{Symbol,Any}())
         b
@@ -50,11 +54,11 @@ function addparameter!(b::AbstractCompositeBlock, s::Symbol, x::Any, ::Type{Tv})
     end
 end
 
-function addscope!(b::AbstractCompositeBlock, s::Symbol, p::AbstractPortBlock)
+function addscope!(b::AbstractCompositeBlock, s::Symbol, p::AbstractPort)
     push!(b.scopes, (s, p))
 end
 
-# function set!(b::AbstractCompositeBlock, s::Symbol, x::AbstractParameterPortBlock)
+# function set!(b::AbstractCompositeBlock, s::Symbol, x::AbstractParameterPort)
 #     push!(b.parameterports, x)
 #     b.env[s] = x
 # end
@@ -90,11 +94,11 @@ end
 function _add!(b::AbstractCompositeBlock, x::SimpleBlock, ::Val{:Inport})
     p = x.inports[1]
     push!(b.inports, p)
-    b.env[x.inports[1].name] = p
+    b.env[x.env[:label]] = p
 end
 
 function _add!(b::AbstractCompositeBlock, x::SimpleBlock, ::Val{:Outport})
     p = x.outports[1]
     push!(b.outports, p)
-    b.env[x.outports[1].name] = p
+    b.env[x.env[:label]] = p
 end
