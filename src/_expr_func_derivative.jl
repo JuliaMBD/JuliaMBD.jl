@@ -1,3 +1,5 @@
+const default_derivative_h = 0.0001
+
 function expr_sfunc_derivative(b::AbstractCompositeBlock)
     if length(b.inports) != 0
         @warn "This system requires inputs"
@@ -65,27 +67,28 @@ function expr_sfunc_derivative(b::AbstractCompositeBlock)
             push!(x2args, Symbol(p.name, :dash))
         end
     end
+    dxx0 = [Symbol(p.name, :dummy) for p = b.stateinports]
     dxx = [Symbol(p.name, :dummy) for p = b.dstateinports]
     expr2 = Expr(:function,
         Expr(:call, Symbol(b.name, "_sfunc"),
-            Expr(:parameters, Expr(:kw, b.timeport.name, 0), paramargs..., Expr(:kw, :h, 0.0001)), xargs..., x2args..., inargs...),
+            Expr(:parameters, Expr(:kw, b.timeport.name, 0), paramargs..., Expr(:kw, :derivative_h, default_derivative_h)), xargs..., x2args..., inargs...),
         Expr(:block,
             Expr(:(=),
-                Expr(:tuple, [p.name for p = b.dstateoutports]...),
+                Expr(:tuple, dxx0..., [p.name for p = b.dstateoutports]...),
                 Expr(:call, Symbol(b.name, "_sfunc_derivative"), xargs...,
                     [0 for _ = b.dstateinports]..., inargs...,
                     Expr(:kw, b.timeport.name, b.timeport.name), paramargs...)),
             Expr(:(=),
-                Expr(:tuple, [Symbol(p.name, "dash") for p = b.dstateoutports]...),
+                Expr(:tuple, dxx0..., [Symbol(p.name, "dash") for p = b.dstateoutports]...),
                 Expr(:call, Symbol(b.name, "_sfunc_derivative"), x2args...,
                     [0 for _ = b.dstateinports]..., inargs...,
-                    Expr(:kw, b.timeport.name, Expr(:call, :+, b.timeport.name, :h)), paramargs...)),
+                    Expr(:kw, b.timeport.name, Expr(:call, :+, b.timeport.name, :derivative_h)), paramargs...)),
             Expr(:(=), Expr(:tuple, xargs..., dxx...), Expr(:call, Symbol(b.name, "_sfunc_derivative"), xargs...,
-                [Expr(:call, :/, Expr(:call, :-, Symbol(p.name, "dash"), p.name), :h) for p = b.dstateoutports]...,
+                [Expr(:call, :/, Expr(:call, :-, Symbol(p.name, "dash"), p.name), :derivative_h) for p = b.dstateoutports]...,
                 inargs...,  Expr(:kw, b.timeport.name, b.timeport.name), paramargs...)),
             Expr(:(=), Expr(:tuple, x2args..., dxx...), Expr(:call, Symbol(b.name, "_sfunc_derivative"), x2args...,
-                [Expr(:call, :/, Expr(:call, :-, Symbol(p.name, "dash"), p.name), :h) for p = b.dstateoutports]...,
-                inargs...,  Expr(:kw, b.timeport.name, Expr(:call, :+, b.timeport.name, :h)), paramargs...)),
+                [Expr(:call, :/, Expr(:call, :-, Symbol(p.name, "dash"), p.name), :derivative_h) for p = b.dstateoutports]...,
+                inargs...,  Expr(:kw, b.timeport.name, Expr(:call, :+, b.timeport.name, :derivative_h)), paramargs...)),
             Expr(:tuple, xargs..., x2args...)))
     Expr(:block, expr1, expr2)
 end
@@ -121,10 +124,13 @@ function expr_odemodel_sfunc_derivative(b::AbstractCompositeBlock)
         push!(dx0args, Expr(:ref, :dx, j))
         j += 1
     end
+    j = 1
     paramargs = []
     for (i,p) = enumerate(b.parameterports)
-        push!(paramargs, Expr(:kw, p.name, Expr(:ref, :p, i)))
+        push!(paramargs, Expr(:kw, p.name, Expr(:ref, :p, j)))
+        j += 1
     end
+    push!(paramargs, Expr(:kw, :derivative_h, Expr(:ref, :p, j)))
     push!(paramargs, Expr(:kw, b.timeport.name, :t))
     Expr(:->, Expr(:tuple, :dx, :x, :p, :t), Expr(:block,
         Expr(:(=), Expr(:tuple, dxargs..., dx0args...),
@@ -185,22 +191,23 @@ function expr_ofunc_derivative(b::AbstractCompositeBlock)
             push!(x2args, Symbol(p.name, :dash))
         end
     end
+    dxx0 = [Symbol(p.name, :dummy) for p = b.stateinports]
     expr2 = Expr(:function,
         Expr(:call, Symbol(b.name, "_ofunc"),
-            Expr(:parameters, Expr(:kw, b.timeport.name, 0), paramargs..., Expr(:kw, :h, 0.0001)), xargs..., x2args..., inargs...),
+            Expr(:parameters, Expr(:kw, b.timeport.name, 0), paramargs..., Expr(:kw, :derivative_h, default_derivative_h)), xargs..., x2args..., inargs...),
         Expr(:block,
             Expr(:(=),
-                Expr(:tuple, [p.name for p = b.dstateoutports]...),
+                Expr(:tuple, dxx0..., [p.name for p = b.dstateoutports]...),
                 Expr(:call, Symbol(b.name, "_sfunc_derivative"), xargs...,
                     [0 for _ = b.dstateinports]..., inargs...,
                     Expr(:kw, b.timeport.name, b.timeport.name), paramargs...)),
             Expr(:(=),
-                Expr(:tuple, [Symbol(p.name, "dash") for p = b.dstateoutports]...),
+                Expr(:tuple, dxx0..., [Symbol(p.name, "dash") for p = b.dstateoutports]...),
                 Expr(:call, Symbol(b.name, "_sfunc_derivative"), x2args...,
                     [0 for _ = b.dstateinports]..., inargs...,
-                    Expr(:kw, b.timeport.name, Expr(:call, :+, b.timeport.name, :h)), paramargs...)),
+                    Expr(:kw, b.timeport.name, Expr(:call, :+, b.timeport.name, :derivative_h)), paramargs...)),
             Expr(:call, Symbol(b.name, "_ofunc_derivative"), xargs...,
-                [Expr(:call, :/, Expr(:call, :-, Symbol(p.name, "dash"), p.name), :h) for p = b.dstateoutports]...,
+                [Expr(:call, :/, Expr(:call, :-, Symbol(p.name, "dash"), p.name), :derivative_h) for p = b.dstateoutports]...,
                 inargs...,  Expr(:kw, b.timeport.name, b.timeport.name), paramargs...)))
     Expr(:block, expr1, expr2)
 end
@@ -229,10 +236,12 @@ function expr_odemodel_ofunc_derivative(b::AbstractCompositeBlock)
             push!(scopeargs, Expr(:(=), s, p.name))
         end
     end
+    j = 1
     paramargs = []
     for (i,p) = enumerate(b.parameterports)
-        push!(paramargs, Expr(:kw, p.name, Expr(:ref, :p, i)))
+        push!(paramargs, Expr(:kw, p.name, Expr(:ref, :p, j)))
     end
+    push!(paramargs, Expr(:kw, :derivative_h, Expr(:ref, :p, j)))
     push!(paramargs, Expr(:kw, b.timeport.name, :t))
     xscopes = [:($s = [u.$s for u = result]) for (s,_) = b.scopes]
     Expr(:->, Expr(:tuple, :x, :p, :ts), Expr(:block,
@@ -283,24 +292,26 @@ function expr_ifunc_derivative(b::AbstractCompositeBlock)
         Expr(:block, body..., Expr(:vect, dxargs...)))
     expr2 = Expr(:function,
         Expr(:call, Symbol(b.name, "_ifunc"),
-            Expr(:parameters, Expr(:kw, b.timeport.name, 0), paramargs..., inargs..., Expr(:kw, :h, 0.0001))),
+            Expr(:parameters, Expr(:kw, b.timeport.name, 0), paramargs..., inargs..., Expr(:kw, :derivative_h, default_derivative_h))),
         Expr(:block,
             Expr(:(=), :x,
                 Expr(:call, Symbol(b.name, "_ifunc_derivative"),
                     Expr(:kw, b.timeport.name, b.timeport.name), paramargs..., inargs...)),
             Expr(:(=), :x2,
                 Expr(:call, Symbol(b.name, "_ifunc_derivative"),
-                    Expr(:kw, b.timeport.name, Expr(:call, :+, b.timeport.name, :h)), paramargs..., inargs...)),
+                    Expr(:kw, b.timeport.name, Expr(:call, :+, b.timeport.name, :derivative_h)), paramargs..., inargs...)),
             Expr(:vect, Expr(:..., :x), Expr(:..., :x2))
         ))
     Expr(:block, expr1, expr2)
 end
 
 function expr_odemodel_ifunc_derivative(b::AbstractCompositeBlock)
+    j = 1
     paramargs = []
     for (i,p) = enumerate(b.parameterports)
-        push!(paramargs, Expr(:kw, p.name, Expr(:ref, :p, i)))
+        push!(paramargs, Expr(:kw, p.name, Expr(:ref, :p, j)))
     end
+    push!(paramargs, Expr(:kw, :derivative_h, Expr(:ref, :p, j)))
     push!(paramargs, Expr(:kw, b.timeport.name, 0))
     Expr(:->, Expr(:tuple, :p), Expr(:call, Symbol(b.name, "_ifunc"), paramargs...,))
 end
@@ -331,16 +342,18 @@ end
 #             Expr(:tuple, dxargs...))
 # end
 
-# function expr_odemodel_pfunc(b::AbstractCompositeBlock)
-#     paramargs = []
-#     for p = b.parameterports
-#         x = p.name
-#         v = _expr(p.in)
-#         push!(paramargs, Expr(:kw, x, v))
-#     end
-#     dxargs = []
-#     for p = b.parameterports
-#         push!(dxargs, p.name)
-#     end
-#     Expr(:->, Expr(:tuple, Expr(:parameters, paramargs...)), Expr(:tuple, dxargs...))
-# end
+function expr_odemodel_pfunc_derivative(b::AbstractCompositeBlock)
+    paramargs = []
+    for p = b.parameterports
+        x = p.name
+        v = _expr(p.in)
+        push!(paramargs, Expr(:kw, x, v))
+    end
+    push!(paramargs, Expr(:kw, :derivative_h, default_derivative_h))
+    dxargs = []
+    for p = b.parameterports
+        push!(dxargs, p.name)
+    end
+    push!(dxargs, :derivative_h)
+    Expr(:->, Expr(:tuple, Expr(:parameters, paramargs...)), Expr(:tuple, dxargs...))
+end
