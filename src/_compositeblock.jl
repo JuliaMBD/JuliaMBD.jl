@@ -90,11 +90,11 @@ end
 function _add!(b::AbstractCompositeBlock, x::SimpleBlock, ::Val{:Inport})
     p = x.inports[1]
     push!(b.inports, p)
-    b.env[x.inports[1].name] = p
+    b.env[x.env[:label]] = p
 end
 
 function _add!(b::AbstractCompositeBlock, x::SimpleBlock, ::Val{:Outport})
     p = x.outports[1]
     push!(b.outports, p)
-    b.env[x.outports[1].name] = p
+    b.env[x.env[:label]] = p
 end
