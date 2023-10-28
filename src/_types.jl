@@ -4,7 +4,8 @@ abstract type AbstractComponent end
 abstract type AbstractBlock <: AbstractComponent end
 abstract type AbstractCompositeBlock <: AbstractBlock end
 abstract type AbstractSimpleBlock <: AbstractBlock end
-abstract type AbstractPortBlock <: AbstractSimpleBlock end
+
+abstract type AbstractPortBlock <: AbstractComponent end
 abstract type AbstractInPortBlock <: AbstractPortBlock end
 abstract type AbstractOutPortBlock <: AbstractPortBlock end
 abstract type AbstractParameterPortBlock <: AbstractInPortBlock end
