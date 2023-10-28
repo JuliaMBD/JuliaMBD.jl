@@ -1,7 +1,7 @@
 export InPort
 export OutPort
 
-mutable struct InPort{Tv} <: AbstractInPortBlock
+mutable struct InPort{Tv} <: AbstractInPort
     name::Symbol
     type::Type{Tv}
     parent::AbstractBlock
@@ -14,7 +14,7 @@ mutable struct InPort{Tv} <: AbstractInPortBlock
     InPort(name::Symbol, ::Type{Tv}) where Tv = new{Tv}(name, Tv, UndefBlock(), UndefSignal(), AbstractSignal[])
 end
 
-mutable struct OutPort{Tv} <: AbstractOutPortBlock
+mutable struct OutPort{Tv} <: AbstractOutPort
     name::Symbol
     type::Type{Tv}
     parent::AbstractBlock
@@ -27,7 +27,7 @@ mutable struct OutPort{Tv} <: AbstractOutPortBlock
     OutPort(name::Symbol, ::Type{Tv}) where Tv = new{Tv}(name, Tv, UndefBlock(), UndefSignal(), AbstractSignal[])
 end
 
-mutable struct ParameterPort{Tv} <: AbstractParameterPortBlock
+mutable struct ParameterPort{Tv} <: AbstractParameterPort
     name::Symbol
     type::Type{Tv}
     parent::AbstractBlock

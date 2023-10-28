@@ -3,43 +3,43 @@
 mutable struct SimpleBlock <: AbstractSimpleBlock
     name::Symbol
     desc::String
-    inports::Vector{AbstractInPortBlock}
-    outports::Vector{AbstractOutPortBlock}
-    parameterports::Vector{AbstractParameterPortBlock}
+    inports::Vector{AbstractInPort}
+    outports::Vector{AbstractOutPort}
+    parameterports::Vector{AbstractParameterPort}
     env::Dict{Symbol,Any}
     parameters::Dict{Symbol,AbstractConstSignal}
 
     function SimpleBlock(name::Symbol)
         b = new(name,
             "",
-            AbstractInPortBlock[],
-            AbstractOutPortBlock[],
-            AbstractParameterPortBlock[],
+            AbstractInPort[],
+            AbstractOutPort[],
+            AbstractParameterPort[],
             Dict{Symbol,Any}(),
             Dict{Symbol,AbstractConstSignal}())
         b
     end
 end
 
-function setport!(b::AbstractSimpleBlock, s::Symbol, x::AbstractInPortBlock)
+function setport!(b::AbstractSimpleBlock, s::Symbol, x::AbstractInPort)
     x.parent = b
     push!(b.inports, x)
     b.env[s] = x
 end
 
-function settimeport!(b::AbstractSimpleBlock, x::AbstractInPortBlock)
+function settimeport!(b::AbstractSimpleBlock, x::AbstractInPort)
     x.parent = b
     push!(b.inports, x)
     b.env[:__time__] = x
 end
 
-function setport!(b::AbstractSimpleBlock, s::Symbol, x::AbstractOutPortBlock)
+function setport!(b::AbstractSimpleBlock, s::Symbol, x::AbstractOutPort)
     x.parent = b
     push!(b.outports, x)
     b.env[s] = x
 end
 
-# function set!(b::AbstractSimpleBlock, s::Symbol, x::AbstractParameterPortBlock)
+# function set!(b::AbstractSimpleBlock, s::Symbol, x::AbstractParameterPort)
 #     x.parent = b
 #     push!(b.parameterports, x)
 #     b.env[s] = x

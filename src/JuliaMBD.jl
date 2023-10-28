@@ -8,8 +8,8 @@ import LookupTable
 include("_types.jl")
 
 ## global vars
-const gotoports = Dict{Symbol,Vector{AbstractPortBlock}}()
-const fromports = Dict{Symbol,AbstractPortBlock}()
+const gotoports = Dict{Symbol,Vector{AbstractPort}}()
+const fromports = Dict{Symbol,AbstractPort}()
 
 include("_vars.jl")
 include("_ports.jl")

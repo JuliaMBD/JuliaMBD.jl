@@ -5,29 +5,29 @@ export set!
 mutable struct SubSystemBlock <: AbstractCompositeBlock
     name::Symbol
     desc::String
-    inports::Vector{AbstractInPortBlock}
-    outports::Vector{AbstractOutPortBlock}
-    stateinports::Vector{AbstractPortBlock}
-    stateoutports::Vector{AbstractPortBlock}
-    parameterports::Vector{AbstractParameterPortBlock}
+    inports::Vector{AbstractInPort}
+    outports::Vector{AbstractOutPort}
+    stateinports::Vector{AbstractPort}
+    stateoutports::Vector{AbstractPort}
+    parameterports::Vector{AbstractParameterPort}
     blocks::Vector{AbstractBlock}
     # parameters::Vector{Tuple{Symbol,Any}}
     parameters::Dict{Symbol,AbstractConstSignal}
-    scopes::Vector{Tuple{Symbol,AbstractPortBlock}}
-    timeport::AbstractPortBlock
+    scopes::Vector{Tuple{Symbol,AbstractPort}}
+    timeport::AbstractPort
     env::Dict{Symbol,Any}
 
     function SubSystemBlock(name::Symbol; timeport = OutPort(:time))
         b = new(name,
             "",
-            AbstractInPortBlock[],
-            AbstractOutPortBlock[],
-            AbstractInPortBlock[],
-            AbstractOutPortBlock[],
-            AbstractParameterPortBlock[],
+            AbstractInPort[],
+            AbstractOutPort[],
+            AbstractInPort[],
+            AbstractOutPort[],
+            AbstractParameterPort[],
             AbstractBlock[],
             Dict{Symbol,AbstractConstSignal}(),
-            Tuple{Symbol,AbstractPortBlock}[],
+            Tuple{Symbol,AbstractPort}[],
             timeport,
             Dict{Symbol,Any}())
         b
@@ -50,11 +50,11 @@ function addparameter!(b::AbstractCompositeBlock, s::Symbol, x::Any, ::Type{Tv})
     end
 end
 
-function addscope!(b::AbstractCompositeBlock, s::Symbol, p::AbstractPortBlock)
+function addscope!(b::AbstractCompositeBlock, s::Symbol, p::AbstractPort)
     push!(b.scopes, (s, p))
 end
 
-# function set!(b::AbstractCompositeBlock, s::Symbol, x::AbstractParameterPortBlock)
+# function set!(b::AbstractCompositeBlock, s::Symbol, x::AbstractParameterPort)
 #     push!(b.parameterports, x)
 #     b.env[s] = x
 # end
