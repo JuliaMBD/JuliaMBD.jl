@@ -1,6 +1,6 @@
 ### compile
 
-function expr_sfunc(b::AbstractCompositeBlock)
+function expr_sfunc(b::AbstractCompositeBlock, bs = tsort(allcomponents(b)))
     if length(b.inports) != 0
         @warn "This system requires inputs"
     end
@@ -38,8 +38,7 @@ function expr_sfunc(b::AbstractCompositeBlock)
         push!(paramargs, Expr(:kw, x, v))
     end
     push!(paramargs, Expr(:kw, b.timeport.name, 0))
-    connecttag(b.blocks)
-    body = [_expr(m) for m = tsort(allcomponents(b))]
+    body = [_expr(m) for m = bs]
     Expr(:function,
         Expr(:call, Symbol(b.name, "_sfunc"),
             Expr(:parameters, paramargs...), xargs..., inargs...),
@@ -83,7 +82,7 @@ function expr_odemodel_sfunc(b::AbstractCompositeBlock)
         Expr(:call, Symbol(b.name, "_sfunc"), xargs..., inargs..., paramargs...,))))
 end
 
-function expr_ofunc(b::AbstractCompositeBlock)
+function expr_ofunc(b::AbstractCompositeBlock, bs = tsort(allcomponents(b)))
     xargs = []
     for p = b.stateinports
         if p.type != Auto
@@ -115,8 +114,7 @@ function expr_ofunc(b::AbstractCompositeBlock)
         push!(paramargs, Expr(:kw, x, v))
     end
     push!(paramargs, Expr(:kw, b.timeport.name, 0))
-    connecttag(b.blocks)
-    body = [_expr(m) for m = tsort(allcomponents(b))]
+    body = [_expr(m) for m = bs]
     Expr(:function,
         Expr(:call, Symbol(b.name, "_ofunc"),
             Expr(:parameters, paramargs...), xargs..., inargs...),
@@ -170,7 +168,7 @@ end
 (:function, (:call, :f, (:parameters, (:kw, (:(::), :a, :Any), 1.0), (:(::), :b, :Float64)), (:(::), :x, :Float64), (:(::), :y, :Int)), (:block,
 """
 
-function expr_ifunc(b::AbstractCompositeBlock)
+function expr_ifunc(b::AbstractCompositeBlock, bs = tsort(allcomponents(b)))
     xargs = []
     for p = b.stateinports
         push!(xargs, Expr(:kw, p.name, 0))
@@ -197,8 +195,7 @@ function expr_ifunc(b::AbstractCompositeBlock)
         push!(paramargs, Expr(:kw, x, v))
     end
     push!(paramargs, Expr(:kw, b.timeport.name, 0))
-    connecttag(b.blocks)
-    body = [_expr_initial(m) for m = tsort(allcomponents(b))]
+    body = [_expr_initial(m) for m = bs]
     Expr(:function,
         Expr(:call, Symbol(b.name, "_ifunc"),
             Expr(:parameters, paramargs..., xargs..., inargs...)),
