@@ -66,6 +66,8 @@ end
 function add!(b::AbstractCompositeBlock, x::AbstractCompositeBlock)
     push!(b.stateinports, x.stateinports...)
     push!(b.stateoutports, x.stateoutports...)
+    push!(b.dstateinports, x.dstateinports...)
+    push!(b.dstateoutports, x.dstateoutports...)
     push!(b.scopes, x.scopes...)
     push!(b.blocks, x.blocks...)
     # for p = x.parameterports

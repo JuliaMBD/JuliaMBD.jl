@@ -1,6 +1,6 @@
 const default_derivative_h = 0.0001
 
-function expr_sfunc_derivative(b::AbstractCompositeBlock)
+function expr_sfunc_derivative(b::AbstractCompositeBlock, bs = tsort(allcomponents(b)))
     if length(b.inports) != 0
         @warn "This system requires inputs"
     end
@@ -52,8 +52,7 @@ function expr_sfunc_derivative(b::AbstractCompositeBlock)
         v = _expr(p.in)
         push!(paramargs, Expr(:kw, x, v))
     end
-    connecttag(b.blocks)
-    body = [_expr(m) for m = tsort(allcomponents(b))]
+    body = [_expr(m) for m = bs]
     expr1 = Expr(:function,
         Expr(:call, Symbol(b.name, "_sfunc_derivative"),
             Expr(:parameters, Expr(:kw, b.timeport.name, 0), paramargs...), xargs..., xdashargs..., inargs...),
@@ -137,7 +136,7 @@ function expr_odemodel_sfunc_derivative(b::AbstractCompositeBlock)
         Expr(:call, Symbol(b.name, "_sfunc"), xargs..., inargs..., paramargs...,))))
 end
 
-function expr_ofunc_derivative(b::AbstractCompositeBlock)
+function expr_ofunc_derivative(b::AbstractCompositeBlock, bs = tsort(allcomponents(b)))
     xargs = []
     for p = b.stateinports
         if p.type != Auto
@@ -176,8 +175,7 @@ function expr_ofunc_derivative(b::AbstractCompositeBlock)
         v = _expr(p.in)
         push!(paramargs, Expr(:kw, x, v))
     end
-    connecttag(b.blocks)
-    body = [_expr(m) for m = tsort(allcomponents(b))]
+    body = [_expr(m) for m = bs]
     expr1 = Expr(:function,
         Expr(:call, Symbol(b.name, "_ofunc_derivative"),
             Expr(:parameters, Expr(:kw, b.timeport.name, 0), paramargs...), xargs..., xdashargs..., inargs...),
@@ -254,7 +252,7 @@ function expr_odemodel_ofunc_derivative(b::AbstractCompositeBlock)
     ))
 end
 
-function expr_ifunc_derivative(b::AbstractCompositeBlock)
+function expr_ifunc_derivative(b::AbstractCompositeBlock, bs = tsort(allcomponents(b)))
     xargs = []
     for p = b.stateinports
         push!(xargs, Expr(:kw, p.name, 0))
@@ -284,8 +282,7 @@ function expr_ifunc_derivative(b::AbstractCompositeBlock)
         v = _expr(p.in)
         push!(paramargs, Expr(:kw, x, v))
     end
-    connecttag(b.blocks)
-    body = [_expr_initial(m) for m = tsort(allcomponents(b))]
+    body = [_expr_initial(m) for m = bs]
     expr1 = Expr(:function,
         Expr(:call, Symbol(b.name, "_ifunc_derivative"),
             Expr(:parameters, Expr(:kw, b.timeport.name, 0), paramargs..., xargs..., xdashargs..., inargs...)),

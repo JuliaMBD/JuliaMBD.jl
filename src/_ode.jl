@@ -4,11 +4,14 @@ export @compile_derivative
 
 macro compile(x)
     b = gensym()
+    bs = gensym()
     expr = quote
         $b = $x
-        eval(JuliaMBD.expr_sfunc($b))
-        eval(JuliaMBD.expr_ofunc($b))
-        eval(JuliaMBD.expr_ifunc($b))
+        JuliaMBD.connecttag($b.blocks)
+        $bs = JuliaMBD.tsort(JuliaMBD.allcomponents($b))
+        eval(JuliaMBD.expr_sfunc($b, $bs))
+        eval(JuliaMBD.expr_ofunc($b, $bs))
+        eval(JuliaMBD.expr_ifunc($b, $bs))
         # eval(JuliaMBD.expr_pfunc($b))
         JuliaMBD.ODEModel(
             $b,
@@ -23,11 +26,14 @@ end
 
 macro compile_derivative(x)
     b = gensym()
+    bs = gensym()
     expr = quote
         $b = $x
-        eval(JuliaMBD.expr_sfunc_derivative($b))
-        eval(JuliaMBD.expr_ofunc_derivative($b))
-        eval(JuliaMBD.expr_ifunc_derivative($b))
+        JuliaMBD.connecttag($b.blocks)
+        $bs = JuliaMBD.tsort(JuliaMBD.allcomponents($b))
+        eval(JuliaMBD.expr_sfunc_derivative($b, $bs))
+        eval(JuliaMBD.expr_ofunc_derivative($b, $bs))
+        eval(JuliaMBD.expr_ifunc_derivative($b, $bs))
         # eval(JuliaMBD.expr_pfunc($b))
         JuliaMBD.ODEModel(
             $b,
