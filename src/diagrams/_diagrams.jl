@@ -22,13 +22,19 @@ function getmxgraph(doc)
     findfirst("mxGraphModel", doc)
 end
 
+"""
+parsemodel
+
+Get all blocks, ports and edges from a given "mxGraphModel" of XML
+"""
 function parsemodel(mxGraphModel)
-    blkdict = Dict()
-    portdict = Dict()
-    edgedict = Dict()
+    blkdict = Dict() # key => id, value => block
+    portdict = Dict() # key => id, value => port
+    edgedict = Dict() # key => id, value => edge
     blks = []
     ports = []
     edges = []
+    connectedports = Set()
 
     for x = eachelement(mxGraphModel)
         for y = eachelement(x)
@@ -60,10 +66,17 @@ function parsemodel(mxGraphModel)
                     edge["target"] = y["target"]
                     edgedict[y["id"]] = edge
                     push!(edges, edge)
+                    push!(connectedports, y["source"])
+                    push!(connectedports, y["target"])
                 else
                     @warn "The edge without connection: $(y["id"])"
                 end
             end
+        end
+    end
+    for (k,p) = portdict
+        if !(k in connectedports)
+            @warn "The port $(p) has not been used."
         end
     end
     (blkdict, blks, portdict, ports, edgedict, edges)
