@@ -1,3 +1,8 @@
+# JuliaMBD 0.10.4
+
+- add buildxml
+- modify default parameters
+
 # JuliaMBD 0.10.3
 
 - TrigonometricFunction
