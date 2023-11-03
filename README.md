@@ -199,28 +199,29 @@ where the concrete parameters are given as the named tuple.
 ### Available block
 
 - Continuous
-    - Integrator
+    - Integrator:integrates the input signal over time and provides the result as the output signal.
 - Discontinuities
-    - Quantizer
-    - Saturation
+    - Quantizer:discretize the input signal
+    - Saturation:produces an output signal that is the value of the input signal limited to upper and lower saturation values
+    - SaturationDynamic:produce an output signal that is the value of the input signal constrained to the saturation values ​​of input ports up and lo.
 - LookupTables
-    - OneDLookupTable (experimental)
+    - OneDLookupTable (experimental):maps inputs to output values ​​from a table of values ​​defined by the block's parameters
 - MathOperations
-    - Abs
-    - Add
-    - Divide
-    - Gain
-    - Mod
-    - Product
+    - Abs:outputs the absolute value of the input
+    - Add:adds or subtracts to the input
+    - Divide:outputs the result of dividing the first input by the second input
+    - Gain:multiply the input by a constant value
+    - Mod:outputs the remainder after division
+    - Product:outputs the result of multiplying two inputs
 - PortSubsystem
-    - Inport
-    - Outport
+    - Inport:link signals into the system from outside the system
+    - Outport:link signals from your system to a destination outside your system
     - (SubSystem is implemented as user-defined block)
 - Sources
-    - Constant
-    - PulseGenerator
-    - Ramp
-    - Step
+    - Constant:generates a real or complex constant value signal
+    - PulseGenerator:generates square wave pulses at regular intervals
+    - Ramp:generates a signal that starts at a specified time and value and changes at a specified rate
+    - Step:provides a step between two definable levels at a specified time
 
 ### Documents for blocks
 
