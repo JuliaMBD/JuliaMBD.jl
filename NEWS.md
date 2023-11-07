@@ -1,3 +1,7 @@
+# JuliaMBD 0.10.5
+
+- add OneDLookupTable
+
 # JuliaMBD 0.10.4
 
 - add buildxml

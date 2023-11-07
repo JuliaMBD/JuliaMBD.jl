@@ -18,5 +18,5 @@ function expr(b::SimpleBlock, ::Val{:OneDLookupTable})
     out = b.outports[1].name
     breaks = b.env[:breaks].name
     y = b.env[:y].name
-    :($out = LookupTable.interplinear($in, $breaks, $y))
+    :($out = LookupTable.lookup($in, breaks=$breaks, y=$y))
 end
