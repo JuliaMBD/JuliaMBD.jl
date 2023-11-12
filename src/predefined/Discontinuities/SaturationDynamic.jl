@@ -6,16 +6,16 @@ function SaturationDynamic(;
     lo = InPort(),
     y = OutPort())
     b = SimpleBlock(:SaturationDynamic)
-    setport!(b, :u, u)
+    setport!(b, :in, u)
     setport!(b, :up, up)
     setport!(b, :lo, lo)
-    setport!(b, :y, y)
+    setport!(b, :out, y)
     b
 end
 
 function expr(b::SimpleBlock, ::Val{:SaturationDynamic})
-    u = b.env[:u].name
-    y = b.env[:y].name
+    u = b.env[:in].name
+    y = b.env[:out].name
     up = b.env[:up].name
     lo = b.env[:lo].name
     quote
