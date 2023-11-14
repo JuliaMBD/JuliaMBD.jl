@@ -282,6 +282,9 @@ function expr_ifunc_derivative(b::AbstractCompositeBlock, bs = tsort(allcomponen
         v = _expr(p.in)
         push!(paramargs, Expr(:kw, x, v))
     end
+    xinit = [Symbol(p.name, :init) for p = b.stateinports]
+    dx = [Symbol(p.name, :dummy) for p = b.stateinports]
+    x2 = [Symbol(p.name, :x2) for p = b.stateinports]
     body = [_expr_initial(m) for m = bs]
     expr1 = Expr(:function,
         Expr(:call, Symbol(b.name, "_ifunc_derivative"),
@@ -291,13 +294,23 @@ function expr_ifunc_derivative(b::AbstractCompositeBlock, bs = tsort(allcomponen
         Expr(:call, Symbol(b.name, "_ifunc"),
             Expr(:parameters, Expr(:kw, b.timeport.name, 0), paramargs..., inargs..., Expr(:kw, :derivative_h, default_derivative_h))),
         Expr(:block,
-            Expr(:(=), :x,
+            Expr(:(=),
+                Expr(:tuple, xinit...),
                 Expr(:call, Symbol(b.name, "_ifunc_derivative"),
                     Expr(:kw, b.timeport.name, b.timeport.name), paramargs..., inargs...)),
-            Expr(:(=), :x2,
-                Expr(:call, Symbol(b.name, "_ifunc_derivative"),
-                    Expr(:kw, b.timeport.name, Expr(:call, :+, b.timeport.name, :derivative_h)), paramargs..., inargs...)),
-            Expr(:vect, Expr(:..., :x), Expr(:..., :x2))
+            Expr(:(=),
+                Expr(:tuple, dx..., [p.name for p = b.dstateoutports]...),
+                Expr(:call, Symbol(b.name, "_sfunc_derivative"), xinit...,
+                    [0 for _ = b.dstateinports]..., inargs...,
+                    Expr(:kw, b.timeport.name, b.timeport.name), paramargs...)),
+            Expr(:(=),
+                Expr(:tuple, x2...),
+                Expr(:call, :.+, Expr(:tuple, xinit...),
+                    Expr(:call, :.*, :derivative_h, Expr(:tuple, dx...)))),
+            # Expr(:(=), :x2,
+            #     Expr(:call, Symbol(b.name, "_ifunc_derivative"),
+            #         Expr(:kw, b.timeport.name, Expr(:call, :+, b.timeport.name, :derivative_h)), paramargs..., inargs...)),
+            Expr(:vect, xinit..., x2...)
         ))
     Expr(:block, expr1, expr2)
 end

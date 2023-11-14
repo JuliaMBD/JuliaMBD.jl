@@ -1,3 +1,7 @@
+# JuliaMBD 0.10.6
+
+- fix a bug of derivative
+
 # JuliaMBD 0.10.5
 
 - add OneDLookupTable
