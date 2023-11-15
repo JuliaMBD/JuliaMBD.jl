@@ -1,3 +1,7 @@
+# JuliaMBD 0.10.7
+
+- change add block
+
 # JuliaMBD 0.10.6
 
 - fix a bug of derivative
