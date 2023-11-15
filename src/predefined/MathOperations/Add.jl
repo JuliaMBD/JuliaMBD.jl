@@ -10,6 +10,17 @@ function Add(; signs::Vector{Symbol}, out = OutPort())
     b
 end
 
+function Add(; signs::AbstractString, out = OutPort())
+    b = SimpleBlock(:Add)
+    signs = [Symbol(u) for u = signs]
+    for (i,_) = enumerate(signs)
+        setport!(b, Symbol(:in, i), InPort())
+    end
+    setport!(b, :out, out)
+    b.env[:signs] = signs
+    b
+end
+
 function expr(b::SimpleBlock, ::Val{:Add})
     signs = b.env[:signs]
     expr = 0
