@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="20u1-b2coqtlTVBKbatw" name="DCMotorDisk">
-        <mxGraphModel dx="667" dy="411" grid="1" gridSize="2" guides="1" tooltips="1" connect="1" arrows="0" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="1">
+        <mxGraphModel dx="907" dy="667" grid="1" gridSize="2" guides="1" tooltips="1" connect="1" arrows="0" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="1">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -14,7 +14,7 @@
                         <mxGeometry x="45" y="10" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
-                <object label="%signs%" block="Add" signs="[:+, :-, :-]" type="block" name="" placeholders="1" id="4">
+                <object label="%signs%" block="Add" signs="&quot;+--&quot;" type="block" name="" placeholders="1" id="4">
                     <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.24,0,0,0],[0,0.76,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;allowArrows=0;resizable=1;container=1;collapsible=0;movable=1;connectable=0;" parent="1" vertex="1">
                         <mxGeometry x="120" y="138" width="60" height="64" as="geometry"/>
                     </mxCell>
@@ -84,7 +84,7 @@
                         <mxGeometry x="45" y="20" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
-                <object label="%signs%" block="Add" signs="[:+, :-]" type="block" name="" placeholders="1" id="19">
+                <object label="%signs%" block="Add" signs="&quot;+-&quot;" type="block" name="" placeholders="1" id="19">
                     <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.24,0,0,0],[0,0.76,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;allowArrows=0;resizable=0;container=1;collapsible=0;movable=1;connectable=0;autosize=1;" parent="1" vertex="1">
                         <mxGeometry x="540" y="134" width="40" height="80" as="geometry"/>
                     </mxCell>
@@ -255,7 +255,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="U3Uy3ABwT-g5PZvX5N0S" name="Tachogenerator">
-        <mxGraphModel dx="1067" dy="411" grid="1" gridSize="2" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="1307" dy="667" grid="1" gridSize="2" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -324,7 +324,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="hL2jOj8i1iL7Ms1LAvqU" name="MotorDriver">
-        <mxGraphModel dx="1067" dy="411" grid="1" gridSize="2" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="1307" dy="667" grid="1" gridSize="2" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -455,126 +455,126 @@
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
                 <object label="%name%" block="Inport" type="block" name="u_M" placeholders="1" id="TOb8OEA4T3fOqQIehJYv-1">
-                    <mxCell style="ellipse;whiteSpace=wrap;html=1;fontSize=11;points=[[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;collapsible=0;spacingTop=-5;movable=1;connectable=0;" vertex="1" parent="1">
+                    <mxCell style="ellipse;whiteSpace=wrap;html=1;fontSize=11;points=[[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;collapsible=0;spacingTop=-5;movable=1;connectable=0;" parent="1" vertex="1">
                         <mxGeometry x="89.99999999999989" y="180" width="50" height="30" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;" type="outport" name="out" id="TOb8OEA4T3fOqQIehJYv-2">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="TOb8OEA4T3fOqQIehJYv-1">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" parent="TOb8OEA4T3fOqQIehJYv-1" vertex="1">
                         <mxGeometry x="45" y="10" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="%value%" block="Constant" value="Vs" type="block" name="" placeholders="1" id="TOb8OEA4T3fOqQIehJYv-3">
-                    <mxCell style="whiteSpace=wrap;html=1;fontSize=11;points=[[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;resizeWidth=0;connectable=0;collapsible=0;movable=1;" vertex="1" parent="1">
+                    <mxCell style="whiteSpace=wrap;html=1;fontSize=11;points=[[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;resizeWidth=0;connectable=0;collapsible=0;movable=1;" parent="1" vertex="1">
                         <mxGeometry x="100" y="80" width="70" height="40" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;" type="outport" name="out" id="TOb8OEA4T3fOqQIehJYv-4">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="TOb8OEA4T3fOqQIehJYv-3">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" parent="TOb8OEA4T3fOqQIehJYv-3" vertex="1">
                         <mxGeometry x="65.25" y="15" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="%block%" block="MotorDriver" type="block" name="" placeholders="1" alpha_i="0.13333333333333333" id="TOb8OEA4T3fOqQIehJYv-5">
-                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;resizeHeight=0;connectable=0;collapsible=0;movable=1;" vertex="1" parent="1">
+                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;resizeHeight=0;connectable=0;collapsible=0;movable=1;" parent="1" vertex="1">
                         <mxGeometry x="240" y="100" width="90" height="60" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="inport" name="i_M" id="TOb8OEA4T3fOqQIehJYv-6">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" vertex="1" parent="TOb8OEA4T3fOqQIehJYv-5">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" parent="TOb8OEA4T3fOqQIehJYv-5" vertex="1">
                         <mxGeometry x="-5" y="10" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="inport" name="u_M" id="TOb8OEA4T3fOqQIehJYv-7">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" vertex="1" parent="TOb8OEA4T3fOqQIehJYv-5">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" parent="TOb8OEA4T3fOqQIehJYv-5" vertex="1">
                         <mxGeometry x="-5" y="25" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="inport" name="Vs" id="TOb8OEA4T3fOqQIehJYv-8">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" vertex="1" parent="TOb8OEA4T3fOqQIehJYv-5">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" parent="TOb8OEA4T3fOqQIehJYv-5" vertex="1">
                         <mxGeometry x="-5" y="40" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="outport" name="v_A" id="TOb8OEA4T3fOqQIehJYv-9">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="TOb8OEA4T3fOqQIehJYv-5">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" parent="TOb8OEA4T3fOqQIehJYv-5" vertex="1">
                         <mxGeometry x="85" y="15" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="outport" name="v_i" id="TOb8OEA4T3fOqQIehJYv-10">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="TOb8OEA4T3fOqQIehJYv-5">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" parent="TOb8OEA4T3fOqQIehJYv-5" vertex="1">
                         <mxGeometry x="85" y="35" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
-                <mxCell id="TOb8OEA4T3fOqQIehJYv-12" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="TOb8OEA4T3fOqQIehJYv-4" target="TOb8OEA4T3fOqQIehJYv-8">
+                <mxCell id="TOb8OEA4T3fOqQIehJYv-12" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="TOb8OEA4T3fOqQIehJYv-4" target="TOb8OEA4T3fOqQIehJYv-8" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="TOb8OEA4T3fOqQIehJYv-13" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="TOb8OEA4T3fOqQIehJYv-2" target="TOb8OEA4T3fOqQIehJYv-7">
+                <mxCell id="TOb8OEA4T3fOqQIehJYv-13" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="TOb8OEA4T3fOqQIehJYv-2" target="TOb8OEA4T3fOqQIehJYv-7" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <object label="%block%" block="DCMotorDisk" type="block" name="" placeholders="1" R="5.7" L="0.2" K_e="0.0716" K_tau="0.072" J_M="0.00011" J_I="0.0013" D="6.0e-5" id="TOb8OEA4T3fOqQIehJYv-14">
-                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;resizeHeight=0;connectable=0;collapsible=0;movable=1;" vertex="1" parent="1">
+                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;resizeHeight=0;connectable=0;collapsible=0;movable=1;" parent="1" vertex="1">
                         <mxGeometry x="369" y="90" width="90" height="60" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="inport" name="v_M" id="TOb8OEA4T3fOqQIehJYv-15">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" vertex="1" parent="TOb8OEA4T3fOqQIehJYv-14">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" parent="TOb8OEA4T3fOqQIehJYv-14" vertex="1">
                         <mxGeometry x="-5" y="25" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="outport" name="omega" id="TOb8OEA4T3fOqQIehJYv-16">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="TOb8OEA4T3fOqQIehJYv-14">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" parent="TOb8OEA4T3fOqQIehJYv-14" vertex="1">
                         <mxGeometry x="85" y="15" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="outport" name="i_M" id="TOb8OEA4T3fOqQIehJYv-17">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="TOb8OEA4T3fOqQIehJYv-14">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" parent="TOb8OEA4T3fOqQIehJYv-14" vertex="1">
                         <mxGeometry x="85" y="35" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
-                <mxCell id="TOb8OEA4T3fOqQIehJYv-18" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="TOb8OEA4T3fOqQIehJYv-9" target="TOb8OEA4T3fOqQIehJYv-15">
+                <mxCell id="TOb8OEA4T3fOqQIehJYv-18" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="TOb8OEA4T3fOqQIehJYv-9" target="TOb8OEA4T3fOqQIehJYv-15" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <object label="%block%" block="Tachogenerator" type="block" name="" placeholders="1" alpha_T="0.0015" id="TOb8OEA4T3fOqQIehJYv-19">
-                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;resizeHeight=0;connectable=0;collapsible=0;movable=1;" vertex="1" parent="1">
+                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;resizeHeight=0;connectable=0;collapsible=0;movable=1;" parent="1" vertex="1">
                         <mxGeometry x="500" y="70" width="90" height="60" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="inport" name="omega" id="TOb8OEA4T3fOqQIehJYv-20">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" vertex="1" parent="TOb8OEA4T3fOqQIehJYv-19">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" parent="TOb8OEA4T3fOqQIehJYv-19" vertex="1">
                         <mxGeometry x="-5" y="25" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="outport" name="v_N" id="TOb8OEA4T3fOqQIehJYv-21">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="TOb8OEA4T3fOqQIehJYv-19">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" parent="TOb8OEA4T3fOqQIehJYv-19" vertex="1">
                         <mxGeometry x="85" y="25" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
-                <mxCell id="TOb8OEA4T3fOqQIehJYv-22" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="TOb8OEA4T3fOqQIehJYv-16" target="TOb8OEA4T3fOqQIehJYv-20">
+                <mxCell id="TOb8OEA4T3fOqQIehJYv-22" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="TOb8OEA4T3fOqQIehJYv-16" target="TOb8OEA4T3fOqQIehJYv-20" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <object label="%name%" block="Outport" type="block" name="v_N" placeholders="1" id="TOb8OEA4T3fOqQIehJYv-23">
-                    <mxCell style="ellipse;whiteSpace=wrap;html=1;fontSize=11;points=[[0.02,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;collapsible=0;spacingTop=-4;movable=1;connectable=0;" vertex="1" parent="1">
+                    <mxCell style="ellipse;whiteSpace=wrap;html=1;fontSize=11;points=[[0.02,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;collapsible=0;spacingTop=-4;movable=1;connectable=0;" parent="1" vertex="1">
                         <mxGeometry x="640" y="85" width="50" height="30" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;" type="inport" name="in" id="TOb8OEA4T3fOqQIehJYv-24">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;direction=east;" vertex="1" parent="TOb8OEA4T3fOqQIehJYv-23">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;direction=east;" parent="TOb8OEA4T3fOqQIehJYv-23" vertex="1">
                         <mxGeometry x="-4" y="10" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
-                <mxCell id="TOb8OEA4T3fOqQIehJYv-25" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="TOb8OEA4T3fOqQIehJYv-21" target="TOb8OEA4T3fOqQIehJYv-24">
+                <mxCell id="TOb8OEA4T3fOqQIehJYv-25" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="TOb8OEA4T3fOqQIehJYv-21" target="TOb8OEA4T3fOqQIehJYv-24" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <object label="%name%" block="Outport" type="block" name="v_i" placeholders="1" id="TOb8OEA4T3fOqQIehJYv-26">
-                    <mxCell style="ellipse;whiteSpace=wrap;html=1;fontSize=11;points=[[0.02,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;collapsible=0;spacingTop=-4;movable=1;connectable=0;" vertex="1" parent="1">
+                    <mxCell style="ellipse;whiteSpace=wrap;html=1;fontSize=11;points=[[0.02,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;collapsible=0;spacingTop=-4;movable=1;connectable=0;" parent="1" vertex="1">
                         <mxGeometry x="630" y="200" width="50" height="30" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;" type="inport" name="in" id="TOb8OEA4T3fOqQIehJYv-27">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;direction=east;" vertex="1" parent="TOb8OEA4T3fOqQIehJYv-26">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;direction=east;" parent="TOb8OEA4T3fOqQIehJYv-26" vertex="1">
                         <mxGeometry x="-4" y="10" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
-                <mxCell id="TOb8OEA4T3fOqQIehJYv-28" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="TOb8OEA4T3fOqQIehJYv-10" target="TOb8OEA4T3fOqQIehJYv-27">
+                <mxCell id="TOb8OEA4T3fOqQIehJYv-28" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="TOb8OEA4T3fOqQIehJYv-10" target="TOb8OEA4T3fOqQIehJYv-27" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <mxPoint x="515" y="215" as="targetPoint"/>
                         <Array as="points">
@@ -582,7 +582,7 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="TOb8OEA4T3fOqQIehJYv-30" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="TOb8OEA4T3fOqQIehJYv-17" target="TOb8OEA4T3fOqQIehJYv-6">
+                <mxCell id="TOb8OEA4T3fOqQIehJYv-30" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="TOb8OEA4T3fOqQIehJYv-17" target="TOb8OEA4T3fOqQIehJYv-6" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="474" y="130"/>
@@ -625,7 +625,7 @@
                         <mxGeometry x="65" y="15" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
-                <object label="%signs%" block="Add" signs="[:+, :-]" type="block" name="" placeholders="1" id="76V6u-i-tu0U1GrjRFSD-6">
+                <object label="%signs%" block="Add" signs="&quot;+-&quot;" type="block" name="" placeholders="1" id="76V6u-i-tu0U1GrjRFSD-6">
                     <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.24,0,0,0],[0,0.76,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;allowArrows=0;resizable=0;container=1;collapsible=0;movable=1;connectable=0;" parent="1" vertex="1">
                         <mxGeometry x="164" y="144" width="40" height="80" as="geometry"/>
                     </mxCell>
@@ -853,7 +853,7 @@
                         <mxGeometry x="45" y="20" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
-                <object label="%signs%" block="Add" signs="[:+, :+]" type="block" name="" placeholders="1" id="bx6P4MaRMG0EpHnPDTfZ-8">
+                <object label="%signs%" block="Add" signs="&quot;++&quot;" type="block" name="" placeholders="1" id="bx6P4MaRMG0EpHnPDTfZ-8">
                     <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.24,0,0,0],[0,0.76,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;allowArrows=0;resizable=0;container=1;collapsible=0;movable=1;connectable=0;" parent="1" vertex="1">
                         <mxGeometry x="164" y="72" width="40" height="80" as="geometry"/>
                     </mxCell>
@@ -948,7 +948,7 @@
                         <mxGeometry x="45" y="20" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
-                <object label="%signs%" block="Add" signs="[:+, :+]" type="block" name="" placeholders="1" id="bx6P4MaRMG0EpHnPDTfZ-31">
+                <object label="%signs%" block="Add" signs="&quot;++&quot;" type="block" name="" placeholders="1" id="bx6P4MaRMG0EpHnPDTfZ-31">
                     <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.24,0,0,0],[0,0.76,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;allowArrows=0;resizable=0;container=1;collapsible=0;movable=1;connectable=0;" parent="1" vertex="1">
                         <mxGeometry x="164" y="244" width="40" height="80" as="geometry"/>
                     </mxCell>
@@ -1046,7 +1046,7 @@
                         <mxGeometry x="65.25" y="15" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
-                <object label="%signs%" block="Add" signs="[:+, :+]" type="block" name="" placeholders="1" id="jiudQcIriw3dF1sGCBhK-5">
+                <object label="%signs%" block="Add" signs="&quot;++&quot;" type="block" name="" placeholders="1" id="jiudQcIriw3dF1sGCBhK-5">
                     <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.24,0,0,0],[0,0.76,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;allowArrows=0;resizable=0;container=1;collapsible=0;movable=1;connectable=0;" parent="1" vertex="1">
                         <mxGeometry x="218" y="160" width="40" height="80" as="geometry"/>
                     </mxCell>
@@ -1114,134 +1114,134 @@
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
                 <object label="%name%" block="Inport" type="block" name="d_N" placeholders="1" id="uBYnZZk--zr145xB62Kh-1">
-                    <mxCell style="ellipse;whiteSpace=wrap;html=1;fontSize=11;points=[[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;collapsible=0;spacingTop=-5;movable=1;connectable=0;" vertex="1" parent="1">
+                    <mxCell style="ellipse;whiteSpace=wrap;html=1;fontSize=11;points=[[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;collapsible=0;spacingTop=-5;movable=1;connectable=0;" parent="1" vertex="1">
                         <mxGeometry x="89.99999999999989" y="100" width="50" height="30" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;" type="outport" name="out" id="uBYnZZk--zr145xB62Kh-2">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="uBYnZZk--zr145xB62Kh-1">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" parent="uBYnZZk--zr145xB62Kh-1" vertex="1">
                         <mxGeometry x="45" y="10" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="%name%" block="Inport" type="block" name="d_i" placeholders="1" id="uBYnZZk--zr145xB62Kh-3">
-                    <mxCell style="ellipse;whiteSpace=wrap;html=1;fontSize=11;points=[[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;collapsible=0;spacingTop=-5;movable=1;connectable=0;" vertex="1" parent="1">
+                    <mxCell style="ellipse;whiteSpace=wrap;html=1;fontSize=11;points=[[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;collapsible=0;spacingTop=-5;movable=1;connectable=0;" parent="1" vertex="1">
                         <mxGeometry x="89.99999999999989" y="190" width="50" height="30" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;" type="outport" name="out" id="uBYnZZk--zr145xB62Kh-4">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="uBYnZZk--zr145xB62Kh-3">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" parent="uBYnZZk--zr145xB62Kh-3" vertex="1">
                         <mxGeometry x="45" y="10" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="%name%" block="Outport" type="block" name="d_P" placeholders="1" id="uBYnZZk--zr145xB62Kh-5">
-                    <mxCell style="ellipse;whiteSpace=wrap;html=1;fontSize=11;points=[[0.02,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;collapsible=0;spacingTop=-4;movable=1;connectable=0;" vertex="1" parent="1">
+                    <mxCell style="ellipse;whiteSpace=wrap;html=1;fontSize=11;points=[[0.02,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;collapsible=0;spacingTop=-4;movable=1;connectable=0;" parent="1" vertex="1">
                         <mxGeometry x="640" y="152" width="50" height="30" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;" type="inport" name="in" id="uBYnZZk--zr145xB62Kh-6">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;direction=east;" vertex="1" parent="uBYnZZk--zr145xB62Kh-5">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;direction=east;" parent="uBYnZZk--zr145xB62Kh-5" vertex="1">
                         <mxGeometry x="-4" y="10" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="%tag%" placeholders="1" block="Goto" name="" tag=":soft_i" type="block" id="uBYnZZk--zr145xB62Kh-7">
-                    <mxCell style="rhombus;whiteSpace=wrap;html=1;connectable=0;allowArrows=0;container=1;collapsible=0;resizable=0;fontSize=11;metaEdit=1;" vertex="1" parent="1">
+                    <mxCell style="rhombus;whiteSpace=wrap;html=1;connectable=0;allowArrows=0;container=1;collapsible=0;resizable=0;fontSize=11;metaEdit=1;" parent="1" vertex="1">
                         <mxGeometry x="340" y="272" width="40" height="40" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;" type="inport" name="in" id="uBYnZZk--zr145xB62Kh-8">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;direction=east;" vertex="1" parent="uBYnZZk--zr145xB62Kh-7">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;direction=east;" parent="uBYnZZk--zr145xB62Kh-7" vertex="1">
                         <mxGeometry x="-4" y="15" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="%tag%" placeholders="1" block="Goto" name="" tag=":soft_N" type="block" id="uBYnZZk--zr145xB62Kh-9">
-                    <mxCell style="rhombus;whiteSpace=wrap;html=1;connectable=0;allowArrows=0;container=1;collapsible=0;resizable=0;fontSize=11;metaEdit=1;" vertex="1" parent="1">
+                    <mxCell style="rhombus;whiteSpace=wrap;html=1;connectable=0;allowArrows=0;container=1;collapsible=0;resizable=0;fontSize=11;metaEdit=1;" parent="1" vertex="1">
                         <mxGeometry x="330" y="70" width="40" height="40" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;" type="inport" name="in" id="uBYnZZk--zr145xB62Kh-10">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;direction=east;" vertex="1" parent="uBYnZZk--zr145xB62Kh-9">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;direction=east;" parent="uBYnZZk--zr145xB62Kh-9" vertex="1">
                         <mxGeometry x="-4" y="15" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="%tag%" placeholders="1" block="Goto" name="" tag=":soft_u" type="block" id="uBYnZZk--zr145xB62Kh-11">
-                    <mxCell style="rhombus;whiteSpace=wrap;html=1;connectable=0;allowArrows=0;container=1;collapsible=0;resizable=0;fontSize=11;metaEdit=1;" vertex="1" parent="1">
+                    <mxCell style="rhombus;whiteSpace=wrap;html=1;connectable=0;allowArrows=0;container=1;collapsible=0;resizable=0;fontSize=11;metaEdit=1;" parent="1" vertex="1">
                         <mxGeometry x="542" y="240" width="40" height="40" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;" type="inport" name="in" id="uBYnZZk--zr145xB62Kh-12">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;direction=east;" vertex="1" parent="uBYnZZk--zr145xB62Kh-11">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;direction=east;" parent="uBYnZZk--zr145xB62Kh-11" vertex="1">
                         <mxGeometry x="-4" y="15" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="%block%" block="Decoder" type="block" name="" placeholders="1" alpha_T="0.0015" alpha_i="0.13333333333333333" n="10" V_A_max="5" V_A_min="0" alpha_A="204.6" id="uBYnZZk--zr145xB62Kh-13">
-                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;resizeHeight=0;connectable=0;collapsible=0;movable=1;" vertex="1" parent="1">
+                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;resizeHeight=0;connectable=0;collapsible=0;movable=1;" parent="1" vertex="1">
                         <mxGeometry x="192" y="128" width="90" height="60" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="inport" name="d_N" id="uBYnZZk--zr145xB62Kh-14">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" vertex="1" parent="uBYnZZk--zr145xB62Kh-13">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" parent="uBYnZZk--zr145xB62Kh-13" vertex="1">
                         <mxGeometry x="-5" y="15" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="inport" name="d_i" id="uBYnZZk--zr145xB62Kh-15">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" vertex="1" parent="uBYnZZk--zr145xB62Kh-13">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" parent="uBYnZZk--zr145xB62Kh-13" vertex="1">
                         <mxGeometry x="-5" y="35" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="outport" name="Nstar" id="uBYnZZk--zr145xB62Kh-16">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="uBYnZZk--zr145xB62Kh-13">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" parent="uBYnZZk--zr145xB62Kh-13" vertex="1">
                         <mxGeometry x="85" y="15" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="outport" name="istar" id="uBYnZZk--zr145xB62Kh-17">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="uBYnZZk--zr145xB62Kh-13">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" parent="uBYnZZk--zr145xB62Kh-13" vertex="1">
                         <mxGeometry x="85" y="35" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="%block%" block="Encoder" type="block" name="" placeholders="1" m="8" u_max="100" u_min="0" id="uBYnZZk--zr145xB62Kh-18">
-                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;resizeHeight=0;connectable=0;collapsible=0;movable=1;" vertex="1" parent="1">
+                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;resizeHeight=0;connectable=0;collapsible=0;movable=1;" parent="1" vertex="1">
                         <mxGeometry x="480" y="112" width="90" height="60" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="inport" name="u" id="uBYnZZk--zr145xB62Kh-19">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" vertex="1" parent="uBYnZZk--zr145xB62Kh-18">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" parent="uBYnZZk--zr145xB62Kh-18" vertex="1">
                         <mxGeometry x="-5" y="25" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="outport" name="d_P" id="uBYnZZk--zr145xB62Kh-20">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="uBYnZZk--zr145xB62Kh-18">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" parent="uBYnZZk--zr145xB62Kh-18" vertex="1">
                         <mxGeometry x="85" y="25" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
-                <mxCell id="uBYnZZk--zr145xB62Kh-21" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="uBYnZZk--zr145xB62Kh-2" target="uBYnZZk--zr145xB62Kh-14">
+                <mxCell id="uBYnZZk--zr145xB62Kh-21" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="uBYnZZk--zr145xB62Kh-2" target="uBYnZZk--zr145xB62Kh-14" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="uBYnZZk--zr145xB62Kh-22" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="uBYnZZk--zr145xB62Kh-4" target="uBYnZZk--zr145xB62Kh-15">
+                <mxCell id="uBYnZZk--zr145xB62Kh-22" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="uBYnZZk--zr145xB62Kh-4" target="uBYnZZk--zr145xB62Kh-15" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="uBYnZZk--zr145xB62Kh-23" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="uBYnZZk--zr145xB62Kh-20" target="uBYnZZk--zr145xB62Kh-6">
+                <mxCell id="uBYnZZk--zr145xB62Kh-23" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="uBYnZZk--zr145xB62Kh-20" target="uBYnZZk--zr145xB62Kh-6" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="uBYnZZk--zr145xB62Kh-24" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="uBYnZZk--zr145xB62Kh-16" target="uBYnZZk--zr145xB62Kh-10">
+                <mxCell id="uBYnZZk--zr145xB62Kh-24" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="uBYnZZk--zr145xB62Kh-16" target="uBYnZZk--zr145xB62Kh-10" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="uBYnZZk--zr145xB62Kh-25" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="uBYnZZk--zr145xB62Kh-17" target="uBYnZZk--zr145xB62Kh-8">
+                <mxCell id="uBYnZZk--zr145xB62Kh-25" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="uBYnZZk--zr145xB62Kh-17" target="uBYnZZk--zr145xB62Kh-8" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <object label="Pulse&lt;br&gt;Generator" block="PulseGenerator" amplitude="100" period="30" pulsewidth="50" phasedelay="0" type="block" name="" id="19aH3_u5UOcYGMmN7CkV-1">
-                    <mxCell style="whiteSpace=wrap;html=1;fontSize=11;points=[[1,0.5,0,0,0]];metaEdit=1;snapToPoint=1;resizable=0;rotatable=0;allowArrows=0;container=1;collapsible=0;movable=1;connectable=0;" vertex="1" parent="1">
+                    <mxCell style="whiteSpace=wrap;html=1;fontSize=11;points=[[1,0.5,0,0,0]];metaEdit=1;snapToPoint=1;resizable=0;rotatable=0;allowArrows=0;container=1;collapsible=0;movable=1;connectable=0;" parent="1" vertex="1">
                         <mxGeometry x="350" y="122" width="70" height="40" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;" type="outport" name="out" id="19aH3_u5UOcYGMmN7CkV-2">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="19aH3_u5UOcYGMmN7CkV-1">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" parent="19aH3_u5UOcYGMmN7CkV-1" vertex="1">
                         <mxGeometry x="65" y="15" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
-                <mxCell id="19aH3_u5UOcYGMmN7CkV-3" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="19aH3_u5UOcYGMmN7CkV-2" target="uBYnZZk--zr145xB62Kh-19">
+                <mxCell id="19aH3_u5UOcYGMmN7CkV-3" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="19aH3_u5UOcYGMmN7CkV-2" target="uBYnZZk--zr145xB62Kh-19" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="19aH3_u5UOcYGMmN7CkV-4" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="19aH3_u5UOcYGMmN7CkV-2" target="uBYnZZk--zr145xB62Kh-12">
+                <mxCell id="19aH3_u5UOcYGMmN7CkV-4" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="19aH3_u5UOcYGMmN7CkV-2" target="uBYnZZk--zr145xB62Kh-12" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="425" y="190"/>
@@ -1309,39 +1309,39 @@
                     </mxGeometry>
                 </mxCell>
                 <object label="%block%" block="ADConverter" type="block" name="" placeholders="1" n="10" V_A_max="5" V_A_min="0" alpha_A="204.6" id="hdQdkrygUNVzA9lMCSff-1">
-                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;resizeHeight=0;connectable=0;collapsible=0;movable=1;" vertex="1" parent="1">
+                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;resizeHeight=0;connectable=0;collapsible=0;movable=1;" parent="1" vertex="1">
                         <mxGeometry x="94" y="98" width="90" height="60" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="inport" name="v_A" id="hdQdkrygUNVzA9lMCSff-2">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" vertex="1" parent="hdQdkrygUNVzA9lMCSff-1">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" parent="hdQdkrygUNVzA9lMCSff-1" vertex="1">
                         <mxGeometry x="-5" y="25" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="outport" name="d_A" id="hdQdkrygUNVzA9lMCSff-3">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="hdQdkrygUNVzA9lMCSff-1">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" parent="hdQdkrygUNVzA9lMCSff-1" vertex="1">
                         <mxGeometry x="85" y="25" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="%block%" block="ADConverter" type="block" name="" placeholders="1" n="10" V_A_max="5" V_A_min="0" alpha_A="204.6" id="hdQdkrygUNVzA9lMCSff-4">
-                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;resizeHeight=0;connectable=0;collapsible=0;movable=1;" vertex="1" parent="1">
+                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;resizeHeight=0;connectable=0;collapsible=0;movable=1;" parent="1" vertex="1">
                         <mxGeometry x="96" y="182" width="90" height="60" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="inport" name="v_A" id="hdQdkrygUNVzA9lMCSff-5">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" vertex="1" parent="hdQdkrygUNVzA9lMCSff-4">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" parent="hdQdkrygUNVzA9lMCSff-4" vertex="1">
                         <mxGeometry x="-5" y="25" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="outport" name="d_A" id="hdQdkrygUNVzA9lMCSff-6">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="hdQdkrygUNVzA9lMCSff-4">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" parent="hdQdkrygUNVzA9lMCSff-4" vertex="1">
                         <mxGeometry x="85" y="25" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
-                <mxCell id="hdQdkrygUNVzA9lMCSff-7" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="hdQdkrygUNVzA9lMCSff-3" target="Sv8jjVJnhY3cJulqWYff-18">
+                <mxCell id="hdQdkrygUNVzA9lMCSff-7" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="hdQdkrygUNVzA9lMCSff-3" target="Sv8jjVJnhY3cJulqWYff-18" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="hdQdkrygUNVzA9lMCSff-8" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="hdQdkrygUNVzA9lMCSff-6" target="Sv8jjVJnhY3cJulqWYff-16">
+                <mxCell id="hdQdkrygUNVzA9lMCSff-8" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="hdQdkrygUNVzA9lMCSff-6" target="Sv8jjVJnhY3cJulqWYff-16" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
             </root>
@@ -1353,111 +1353,111 @@
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
                 <object label="%block%" block="ADConverters" type="block" name="" placeholders="1" id="cV_YHp9A6Y8BbFTW2ai1-1">
-                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;resizeHeight=0;connectable=0;collapsible=0;movable=1;" vertex="1" parent="1">
+                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;resizeHeight=0;connectable=0;collapsible=0;movable=1;" parent="1" vertex="1">
                         <mxGeometry y="-90" width="90" height="60" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="inport" name="v_N" id="cV_YHp9A6Y8BbFTW2ai1-2">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" vertex="1" parent="cV_YHp9A6Y8BbFTW2ai1-1">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" parent="cV_YHp9A6Y8BbFTW2ai1-1" vertex="1">
                         <mxGeometry x="-5" y="15" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="inport" name="v_i" id="cV_YHp9A6Y8BbFTW2ai1-3">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" vertex="1" parent="cV_YHp9A6Y8BbFTW2ai1-1">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" parent="cV_YHp9A6Y8BbFTW2ai1-1" vertex="1">
                         <mxGeometry x="-5" y="35" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="outport" name="d_i" id="cV_YHp9A6Y8BbFTW2ai1-4">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="cV_YHp9A6Y8BbFTW2ai1-1">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" parent="cV_YHp9A6Y8BbFTW2ai1-1" vertex="1">
                         <mxGeometry x="85" y="15" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="outport" name="d_N" id="cV_YHp9A6Y8BbFTW2ai1-5">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="cV_YHp9A6Y8BbFTW2ai1-1">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" parent="cV_YHp9A6Y8BbFTW2ai1-1" vertex="1">
                         <mxGeometry x="85" y="35" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="%block%" block="Controller" type="block" name="" placeholders="1" id="cV_YHp9A6Y8BbFTW2ai1-6">
-                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;resizeHeight=0;connectable=0;collapsible=0;movable=1;" vertex="1" parent="1">
+                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;resizeHeight=0;connectable=0;collapsible=0;movable=1;" parent="1" vertex="1">
                         <mxGeometry x="190" y="-100" width="90" height="60" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="inport" name="d_N" id="cV_YHp9A6Y8BbFTW2ai1-7">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" vertex="1" parent="cV_YHp9A6Y8BbFTW2ai1-6">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" parent="cV_YHp9A6Y8BbFTW2ai1-6" vertex="1">
                         <mxGeometry x="-5" y="42" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="inport" name="d_i" id="cV_YHp9A6Y8BbFTW2ai1-8">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" vertex="1" parent="cV_YHp9A6Y8BbFTW2ai1-6">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" parent="cV_YHp9A6Y8BbFTW2ai1-6" vertex="1">
                         <mxGeometry x="-5" y="27" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="outport" name="d_P" id="cV_YHp9A6Y8BbFTW2ai1-9">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="cV_YHp9A6Y8BbFTW2ai1-6">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" parent="cV_YHp9A6Y8BbFTW2ai1-6" vertex="1">
                         <mxGeometry x="85" y="25" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="%block%" block="PulseGenerator2" type="block" name="" placeholders="1" m="8" alpha_P="0.39215686274509803" id="cV_YHp9A6Y8BbFTW2ai1-10">
-                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;resizeHeight=0;connectable=0;collapsible=0;movable=1;" vertex="1" parent="1">
+                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;resizeHeight=0;connectable=0;collapsible=0;movable=1;" parent="1" vertex="1">
                         <mxGeometry x="340" y="-100" width="90" height="60" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="inport" name="d_P" id="cV_YHp9A6Y8BbFTW2ai1-11">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" vertex="1" parent="cV_YHp9A6Y8BbFTW2ai1-10">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" parent="cV_YHp9A6Y8BbFTW2ai1-10" vertex="1">
                         <mxGeometry x="-5" y="25" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="outport" name="u_P" id="cV_YHp9A6Y8BbFTW2ai1-12">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="cV_YHp9A6Y8BbFTW2ai1-10">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" parent="cV_YHp9A6Y8BbFTW2ai1-10" vertex="1">
                         <mxGeometry x="85" y="25" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="%name%" block="Inport" type="block" name="v_N" placeholders="1" id="cV_YHp9A6Y8BbFTW2ai1-13">
-                    <mxCell style="ellipse;whiteSpace=wrap;html=1;fontSize=11;points=[[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;collapsible=0;spacingTop=-5;movable=1;connectable=0;" vertex="1" parent="1">
+                    <mxCell style="ellipse;whiteSpace=wrap;html=1;fontSize=11;points=[[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;collapsible=0;spacingTop=-5;movable=1;connectable=0;" parent="1" vertex="1">
                         <mxGeometry x="-100.00000000000011" y="-125" width="50" height="30" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;" type="outport" name="out" id="cV_YHp9A6Y8BbFTW2ai1-14">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="cV_YHp9A6Y8BbFTW2ai1-13">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" parent="cV_YHp9A6Y8BbFTW2ai1-13" vertex="1">
                         <mxGeometry x="45" y="10" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="%name%" block="Inport" type="block" name="v_i" placeholders="1" id="cV_YHp9A6Y8BbFTW2ai1-15">
-                    <mxCell style="ellipse;whiteSpace=wrap;html=1;fontSize=11;points=[[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;collapsible=0;spacingTop=-5;movable=1;connectable=0;" vertex="1" parent="1">
+                    <mxCell style="ellipse;whiteSpace=wrap;html=1;fontSize=11;points=[[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;collapsible=0;spacingTop=-5;movable=1;connectable=0;" parent="1" vertex="1">
                         <mxGeometry x="-100.00000000000011" y="-30" width="50" height="30" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;" type="outport" name="out" id="cV_YHp9A6Y8BbFTW2ai1-16">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="cV_YHp9A6Y8BbFTW2ai1-15">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" parent="cV_YHp9A6Y8BbFTW2ai1-15" vertex="1">
                         <mxGeometry x="45" y="10" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
-                <mxCell id="cV_YHp9A6Y8BbFTW2ai1-17" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="cV_YHp9A6Y8BbFTW2ai1-14" target="cV_YHp9A6Y8BbFTW2ai1-2">
+                <mxCell id="cV_YHp9A6Y8BbFTW2ai1-17" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="cV_YHp9A6Y8BbFTW2ai1-14" target="cV_YHp9A6Y8BbFTW2ai1-2" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="cV_YHp9A6Y8BbFTW2ai1-18" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="cV_YHp9A6Y8BbFTW2ai1-16" target="cV_YHp9A6Y8BbFTW2ai1-3">
+                <mxCell id="cV_YHp9A6Y8BbFTW2ai1-18" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="cV_YHp9A6Y8BbFTW2ai1-16" target="cV_YHp9A6Y8BbFTW2ai1-3" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="cV_YHp9A6Y8BbFTW2ai1-20" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="cV_YHp9A6Y8BbFTW2ai1-4" target="cV_YHp9A6Y8BbFTW2ai1-8">
+                <mxCell id="cV_YHp9A6Y8BbFTW2ai1-20" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="cV_YHp9A6Y8BbFTW2ai1-4" target="cV_YHp9A6Y8BbFTW2ai1-8" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="cV_YHp9A6Y8BbFTW2ai1-21" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="cV_YHp9A6Y8BbFTW2ai1-5" target="cV_YHp9A6Y8BbFTW2ai1-7">
+                <mxCell id="cV_YHp9A6Y8BbFTW2ai1-21" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="cV_YHp9A6Y8BbFTW2ai1-5" target="cV_YHp9A6Y8BbFTW2ai1-7" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="cV_YHp9A6Y8BbFTW2ai1-22" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="cV_YHp9A6Y8BbFTW2ai1-9" target="cV_YHp9A6Y8BbFTW2ai1-11">
+                <mxCell id="cV_YHp9A6Y8BbFTW2ai1-22" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="cV_YHp9A6Y8BbFTW2ai1-9" target="cV_YHp9A6Y8BbFTW2ai1-11" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <object label="%name%" block="Outport" type="block" name="u_P" placeholders="1" id="cV_YHp9A6Y8BbFTW2ai1-23">
-                    <mxCell style="ellipse;whiteSpace=wrap;html=1;fontSize=11;points=[[0.02,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;collapsible=0;spacingTop=-4;movable=1;connectable=0;" vertex="1" parent="1">
+                    <mxCell style="ellipse;whiteSpace=wrap;html=1;fontSize=11;points=[[0.02,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;collapsible=0;spacingTop=-4;movable=1;connectable=0;" parent="1" vertex="1">
                         <mxGeometry x="470" y="-85" width="50" height="30" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;" type="inport" name="in" id="cV_YHp9A6Y8BbFTW2ai1-24">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;direction=east;" vertex="1" parent="cV_YHp9A6Y8BbFTW2ai1-23">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;direction=east;" parent="cV_YHp9A6Y8BbFTW2ai1-23" vertex="1">
                         <mxGeometry x="-4" y="10" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
-                <mxCell id="cV_YHp9A6Y8BbFTW2ai1-25" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="cV_YHp9A6Y8BbFTW2ai1-12" target="cV_YHp9A6Y8BbFTW2ai1-24">
+                <mxCell id="cV_YHp9A6Y8BbFTW2ai1-25" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="cV_YHp9A6Y8BbFTW2ai1-12" target="cV_YHp9A6Y8BbFTW2ai1-24" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
             </root>
@@ -1469,49 +1469,49 @@
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
                 <object label="%block%" block="PlantModel" type="block" name="" placeholders="1" Vs="24" id="57oWLjHtaxXfam44-4T6-1">
-                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;resizeHeight=0;connectable=0;collapsible=0;movable=1;" vertex="1" parent="1">
+                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;resizeHeight=0;connectable=0;collapsible=0;movable=1;" parent="1" vertex="1">
                         <mxGeometry x="550" y="190" width="90" height="60" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="inport" name="u_M" id="57oWLjHtaxXfam44-4T6-2">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" vertex="1" parent="57oWLjHtaxXfam44-4T6-1">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" parent="57oWLjHtaxXfam44-4T6-1" vertex="1">
                         <mxGeometry x="-5" y="25" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="outport" name="v_N" id="57oWLjHtaxXfam44-4T6-3">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="57oWLjHtaxXfam44-4T6-1">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" parent="57oWLjHtaxXfam44-4T6-1" vertex="1">
                         <mxGeometry x="85" y="15" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="outport" name="v_i" id="57oWLjHtaxXfam44-4T6-4">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="57oWLjHtaxXfam44-4T6-1">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" parent="57oWLjHtaxXfam44-4T6-1" vertex="1">
                         <mxGeometry x="85" y="35" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="%block%" block="ControllerModel" type="block" name="c" placeholders="1" id="57oWLjHtaxXfam44-4T6-5">
-                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;resizeHeight=0;connectable=0;collapsible=0;movable=1;" vertex="1" parent="1">
+                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;resizeHeight=0;connectable=0;collapsible=0;movable=1;" parent="1" vertex="1">
                         <mxGeometry x="390" y="190" width="90" height="60" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="inport" name="v_N" id="57oWLjHtaxXfam44-4T6-6">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" vertex="1" parent="57oWLjHtaxXfam44-4T6-5">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" parent="57oWLjHtaxXfam44-4T6-5" vertex="1">
                         <mxGeometry x="-5" y="15" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="inport" name="v_i" id="57oWLjHtaxXfam44-4T6-7">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" vertex="1" parent="57oWLjHtaxXfam44-4T6-5">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" parent="57oWLjHtaxXfam44-4T6-5" vertex="1">
                         <mxGeometry x="-5" y="35" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="outport" name="u_P" id="57oWLjHtaxXfam44-4T6-8">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="57oWLjHtaxXfam44-4T6-5">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" parent="57oWLjHtaxXfam44-4T6-5" vertex="1">
                         <mxGeometry x="85" y="25" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
-                <mxCell id="57oWLjHtaxXfam44-4T6-9" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="57oWLjHtaxXfam44-4T6-8" target="57oWLjHtaxXfam44-4T6-2">
+                <mxCell id="57oWLjHtaxXfam44-4T6-9" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="57oWLjHtaxXfam44-4T6-8" target="57oWLjHtaxXfam44-4T6-2" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="57oWLjHtaxXfam44-4T6-10" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="57oWLjHtaxXfam44-4T6-3" target="57oWLjHtaxXfam44-4T6-6">
+                <mxCell id="57oWLjHtaxXfam44-4T6-10" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="57oWLjHtaxXfam44-4T6-3" target="57oWLjHtaxXfam44-4T6-6" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="655" y="210"/>
@@ -1521,7 +1521,7 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="57oWLjHtaxXfam44-4T6-11" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="57oWLjHtaxXfam44-4T6-4" target="57oWLjHtaxXfam44-4T6-7">
+                <mxCell id="57oWLjHtaxXfam44-4T6-11" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="57oWLjHtaxXfam44-4T6-4" target="57oWLjHtaxXfam44-4T6-7" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="655" y="230"/>
@@ -1532,42 +1532,42 @@
                     </mxGeometry>
                 </mxCell>
                 <object label="%tag%" placeholders="1" block="Goto" name="" tag=":sys_N" type="block" id="57oWLjHtaxXfam44-4T6-12">
-                    <mxCell style="rhombus;whiteSpace=wrap;html=1;connectable=0;allowArrows=0;container=1;collapsible=0;resizable=0;fontSize=11;metaEdit=1;" vertex="1" parent="1">
+                    <mxCell style="rhombus;whiteSpace=wrap;html=1;connectable=0;allowArrows=0;container=1;collapsible=0;resizable=0;fontSize=11;metaEdit=1;" parent="1" vertex="1">
                         <mxGeometry x="700" y="60" width="40" height="40" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;" type="inport" name="in" id="57oWLjHtaxXfam44-4T6-13">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;direction=east;" vertex="1" parent="57oWLjHtaxXfam44-4T6-12">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;direction=east;" parent="57oWLjHtaxXfam44-4T6-12" vertex="1">
                         <mxGeometry x="-4" y="15" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="%tag%" placeholders="1" block="Goto" name="" tag=":sys_i" type="block" id="57oWLjHtaxXfam44-4T6-14">
-                    <mxCell style="rhombus;whiteSpace=wrap;html=1;connectable=0;allowArrows=0;container=1;collapsible=0;resizable=0;fontSize=11;metaEdit=1;" vertex="1" parent="1">
+                    <mxCell style="rhombus;whiteSpace=wrap;html=1;connectable=0;allowArrows=0;container=1;collapsible=0;resizable=0;fontSize=11;metaEdit=1;" parent="1" vertex="1">
                         <mxGeometry x="700" y="210" width="40" height="40" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;" type="inport" name="in" id="57oWLjHtaxXfam44-4T6-15">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;direction=east;" vertex="1" parent="57oWLjHtaxXfam44-4T6-14">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;direction=east;" parent="57oWLjHtaxXfam44-4T6-14" vertex="1">
                         <mxGeometry x="-4" y="15" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="%tag%" placeholders="1" block="Goto" name="" tag=":sys_u" type="block" id="57oWLjHtaxXfam44-4T6-16">
-                    <mxCell style="rhombus;whiteSpace=wrap;html=1;connectable=0;allowArrows=0;container=1;collapsible=0;resizable=0;fontSize=11;metaEdit=1;" vertex="1" parent="1">
+                    <mxCell style="rhombus;whiteSpace=wrap;html=1;connectable=0;allowArrows=0;container=1;collapsible=0;resizable=0;fontSize=11;metaEdit=1;" parent="1" vertex="1">
                         <mxGeometry x="510" y="310" width="40" height="40" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;" type="inport" name="in" id="57oWLjHtaxXfam44-4T6-17">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;direction=east;" vertex="1" parent="57oWLjHtaxXfam44-4T6-16">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;direction=east;" parent="57oWLjHtaxXfam44-4T6-16" vertex="1">
                         <mxGeometry x="-4" y="15" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
-                <mxCell id="57oWLjHtaxXfam44-4T6-18" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="57oWLjHtaxXfam44-4T6-3" target="57oWLjHtaxXfam44-4T6-13">
+                <mxCell id="57oWLjHtaxXfam44-4T6-18" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="57oWLjHtaxXfam44-4T6-3" target="57oWLjHtaxXfam44-4T6-13" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="57oWLjHtaxXfam44-4T6-20" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="57oWLjHtaxXfam44-4T6-8" target="57oWLjHtaxXfam44-4T6-17">
+                <mxCell id="57oWLjHtaxXfam44-4T6-20" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="57oWLjHtaxXfam44-4T6-8" target="57oWLjHtaxXfam44-4T6-17" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="57oWLjHtaxXfam44-4T6-21" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="57oWLjHtaxXfam44-4T6-4" target="57oWLjHtaxXfam44-4T6-15">
+                <mxCell id="57oWLjHtaxXfam44-4T6-21" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="57oWLjHtaxXfam44-4T6-4" target="57oWLjHtaxXfam44-4T6-15" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
             </root>
@@ -1579,126 +1579,126 @@
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
                 <object label="%name%" block="Inport" type="block" name="u_M" placeholders="1" id="7wjEoIORLovNiEQRU_V3-1">
-                    <mxCell style="ellipse;whiteSpace=wrap;html=1;fontSize=11;points=[[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;collapsible=0;spacingTop=-5;movable=1;connectable=0;" vertex="1" parent="1">
+                    <mxCell style="ellipse;whiteSpace=wrap;html=1;fontSize=11;points=[[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;collapsible=0;spacingTop=-5;movable=1;connectable=0;" parent="1" vertex="1">
                         <mxGeometry x="89.99999999999989" y="180" width="50" height="30" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;" type="outport" name="out" id="7wjEoIORLovNiEQRU_V3-2">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="7wjEoIORLovNiEQRU_V3-1">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" parent="7wjEoIORLovNiEQRU_V3-1" vertex="1">
                         <mxGeometry x="45" y="10" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="%value%" block="Constant" value="Vs" type="block" name="" placeholders="1" id="7wjEoIORLovNiEQRU_V3-3">
-                    <mxCell style="whiteSpace=wrap;html=1;fontSize=11;points=[[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;resizeWidth=0;connectable=0;collapsible=0;movable=1;" vertex="1" parent="1">
+                    <mxCell style="whiteSpace=wrap;html=1;fontSize=11;points=[[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;resizeWidth=0;connectable=0;collapsible=0;movable=1;" parent="1" vertex="1">
                         <mxGeometry x="100" y="80" width="70" height="40" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;" type="outport" name="out" id="7wjEoIORLovNiEQRU_V3-4">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="7wjEoIORLovNiEQRU_V3-3">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" parent="7wjEoIORLovNiEQRU_V3-3" vertex="1">
                         <mxGeometry x="65.25" y="15" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="%block%" block="MotorDriver" type="block" name="" placeholders="1" alpha_i="0.13333333333333333" id="7wjEoIORLovNiEQRU_V3-5">
-                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;resizeHeight=0;connectable=0;collapsible=0;movable=1;" vertex="1" parent="1">
+                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;resizeHeight=0;connectable=0;collapsible=0;movable=1;" parent="1" vertex="1">
                         <mxGeometry x="240" y="100" width="90" height="60" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="inport" name="i_M" id="7wjEoIORLovNiEQRU_V3-6">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" vertex="1" parent="7wjEoIORLovNiEQRU_V3-5">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" parent="7wjEoIORLovNiEQRU_V3-5" vertex="1">
                         <mxGeometry x="-5" y="10" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="inport" name="u_M" id="7wjEoIORLovNiEQRU_V3-7">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" vertex="1" parent="7wjEoIORLovNiEQRU_V3-5">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" parent="7wjEoIORLovNiEQRU_V3-5" vertex="1">
                         <mxGeometry x="-5" y="25" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="inport" name="Vs" id="7wjEoIORLovNiEQRU_V3-8">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" vertex="1" parent="7wjEoIORLovNiEQRU_V3-5">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" parent="7wjEoIORLovNiEQRU_V3-5" vertex="1">
                         <mxGeometry x="-5" y="40" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="outport" name="v_A" id="7wjEoIORLovNiEQRU_V3-9">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="7wjEoIORLovNiEQRU_V3-5">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" parent="7wjEoIORLovNiEQRU_V3-5" vertex="1">
                         <mxGeometry x="85" y="15" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="outport" name="v_i" id="7wjEoIORLovNiEQRU_V3-10">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="7wjEoIORLovNiEQRU_V3-5">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" parent="7wjEoIORLovNiEQRU_V3-5" vertex="1">
                         <mxGeometry x="85" y="35" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
-                <mxCell id="7wjEoIORLovNiEQRU_V3-11" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="7wjEoIORLovNiEQRU_V3-4" target="7wjEoIORLovNiEQRU_V3-8">
+                <mxCell id="7wjEoIORLovNiEQRU_V3-11" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="7wjEoIORLovNiEQRU_V3-4" target="7wjEoIORLovNiEQRU_V3-8" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="7wjEoIORLovNiEQRU_V3-12" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="7wjEoIORLovNiEQRU_V3-2" target="7wjEoIORLovNiEQRU_V3-7">
+                <mxCell id="7wjEoIORLovNiEQRU_V3-12" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="7wjEoIORLovNiEQRU_V3-2" target="7wjEoIORLovNiEQRU_V3-7" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <object label="%block%" block="DCMotorDisk" type="block" name="" placeholders="1" R="5.7" L="0.2" K_e="0.0716" K_tau="0.072" J_M="0.00011" J_I="0.0013" D="6.0e-5" id="7wjEoIORLovNiEQRU_V3-13">
-                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;resizeHeight=0;connectable=0;collapsible=0;movable=1;" vertex="1" parent="1">
+                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;resizeHeight=0;connectable=0;collapsible=0;movable=1;" parent="1" vertex="1">
                         <mxGeometry x="369" y="90" width="90" height="60" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="inport" name="v_M" id="7wjEoIORLovNiEQRU_V3-14">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" vertex="1" parent="7wjEoIORLovNiEQRU_V3-13">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" parent="7wjEoIORLovNiEQRU_V3-13" vertex="1">
                         <mxGeometry x="-5" y="25" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="outport" name="omega" id="7wjEoIORLovNiEQRU_V3-15">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="7wjEoIORLovNiEQRU_V3-13">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" parent="7wjEoIORLovNiEQRU_V3-13" vertex="1">
                         <mxGeometry x="85" y="15" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="outport" name="i_M" id="7wjEoIORLovNiEQRU_V3-16">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="7wjEoIORLovNiEQRU_V3-13">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" parent="7wjEoIORLovNiEQRU_V3-13" vertex="1">
                         <mxGeometry x="85" y="35" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
-                <mxCell id="7wjEoIORLovNiEQRU_V3-17" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="7wjEoIORLovNiEQRU_V3-9" target="7wjEoIORLovNiEQRU_V3-14">
+                <mxCell id="7wjEoIORLovNiEQRU_V3-17" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="7wjEoIORLovNiEQRU_V3-9" target="7wjEoIORLovNiEQRU_V3-14" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <object label="%block%" block="Tachogenerator" type="block" name="" placeholders="1" alpha_T="0.0015" id="7wjEoIORLovNiEQRU_V3-18">
-                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;resizeHeight=0;connectable=0;collapsible=0;movable=1;" vertex="1" parent="1">
+                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;resizeHeight=0;connectable=0;collapsible=0;movable=1;" parent="1" vertex="1">
                         <mxGeometry x="500" y="70" width="90" height="60" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="inport" name="omega" id="7wjEoIORLovNiEQRU_V3-19">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" vertex="1" parent="7wjEoIORLovNiEQRU_V3-18">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" parent="7wjEoIORLovNiEQRU_V3-18" vertex="1">
                         <mxGeometry x="-5" y="25" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="outport" name="v_N" id="7wjEoIORLovNiEQRU_V3-20">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="7wjEoIORLovNiEQRU_V3-18">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" parent="7wjEoIORLovNiEQRU_V3-18" vertex="1">
                         <mxGeometry x="85" y="25" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
-                <mxCell id="7wjEoIORLovNiEQRU_V3-21" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="7wjEoIORLovNiEQRU_V3-15" target="7wjEoIORLovNiEQRU_V3-19">
+                <mxCell id="7wjEoIORLovNiEQRU_V3-21" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="7wjEoIORLovNiEQRU_V3-15" target="7wjEoIORLovNiEQRU_V3-19" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <object label="%name%" block="Outport" type="block" name="v_N" placeholders="1" id="7wjEoIORLovNiEQRU_V3-22">
-                    <mxCell style="ellipse;whiteSpace=wrap;html=1;fontSize=11;points=[[0.02,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;collapsible=0;spacingTop=-4;movable=1;connectable=0;" vertex="1" parent="1">
+                    <mxCell style="ellipse;whiteSpace=wrap;html=1;fontSize=11;points=[[0.02,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;collapsible=0;spacingTop=-4;movable=1;connectable=0;" parent="1" vertex="1">
                         <mxGeometry x="640" y="85" width="50" height="30" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;" type="inport" name="in" id="7wjEoIORLovNiEQRU_V3-23">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;direction=east;" vertex="1" parent="7wjEoIORLovNiEQRU_V3-22">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;direction=east;" parent="7wjEoIORLovNiEQRU_V3-22" vertex="1">
                         <mxGeometry x="-4" y="10" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
-                <mxCell id="7wjEoIORLovNiEQRU_V3-24" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="7wjEoIORLovNiEQRU_V3-20" target="7wjEoIORLovNiEQRU_V3-23">
+                <mxCell id="7wjEoIORLovNiEQRU_V3-24" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="7wjEoIORLovNiEQRU_V3-20" target="7wjEoIORLovNiEQRU_V3-23" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <object label="%name%" block="Outport" type="block" name="v_i" placeholders="1" id="7wjEoIORLovNiEQRU_V3-25">
-                    <mxCell style="ellipse;whiteSpace=wrap;html=1;fontSize=11;points=[[0.02,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;collapsible=0;spacingTop=-4;movable=1;connectable=0;" vertex="1" parent="1">
+                    <mxCell style="ellipse;whiteSpace=wrap;html=1;fontSize=11;points=[[0.02,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;collapsible=0;spacingTop=-4;movable=1;connectable=0;" parent="1" vertex="1">
                         <mxGeometry x="630" y="200" width="50" height="30" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;" type="inport" name="in" id="7wjEoIORLovNiEQRU_V3-26">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;direction=east;" vertex="1" parent="7wjEoIORLovNiEQRU_V3-25">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;direction=east;" parent="7wjEoIORLovNiEQRU_V3-25" vertex="1">
                         <mxGeometry x="-4" y="10" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
-                <mxCell id="7wjEoIORLovNiEQRU_V3-28" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="7wjEoIORLovNiEQRU_V3-16" target="7wjEoIORLovNiEQRU_V3-6">
+                <mxCell id="7wjEoIORLovNiEQRU_V3-28" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="7wjEoIORLovNiEQRU_V3-16" target="7wjEoIORLovNiEQRU_V3-6" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="474" y="130"/>
@@ -1709,24 +1709,24 @@
                     </mxGeometry>
                 </mxCell>
                 <object label="Saturation" block="Saturation" upperlimit="5" lowerlimit="0" type="block" name="" id="7wjEoIORLovNiEQRU_V3-29">
-                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;connectable=0;collapsible=0;movable=1;" vertex="1" parent="1">
+                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;connectable=0;collapsible=0;movable=1;" parent="1" vertex="1">
                         <mxGeometry x="459" y="250" width="70" height="40" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;" type="inport" name="in" id="7wjEoIORLovNiEQRU_V3-30">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;direction=east;" vertex="1" parent="7wjEoIORLovNiEQRU_V3-29">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;direction=east;" parent="7wjEoIORLovNiEQRU_V3-29" vertex="1">
                         <mxGeometry x="-5" y="15" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;" type="outport" name="out" id="7wjEoIORLovNiEQRU_V3-31">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="7wjEoIORLovNiEQRU_V3-29">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=0;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" parent="7wjEoIORLovNiEQRU_V3-29" vertex="1">
                         <mxGeometry x="65" y="15" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
-                <mxCell id="7wjEoIORLovNiEQRU_V3-32" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="7wjEoIORLovNiEQRU_V3-31" target="7wjEoIORLovNiEQRU_V3-26">
+                <mxCell id="7wjEoIORLovNiEQRU_V3-32" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="7wjEoIORLovNiEQRU_V3-31" target="7wjEoIORLovNiEQRU_V3-26" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="bPB7Uo_jaPWNd-9H4ser-1" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="7wjEoIORLovNiEQRU_V3-10" target="7wjEoIORLovNiEQRU_V3-30">
+                <mxCell id="bPB7Uo_jaPWNd-9H4ser-1" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="7wjEoIORLovNiEQRU_V3-10" target="7wjEoIORLovNiEQRU_V3-30" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
             </root>
@@ -1757,7 +1757,7 @@
                         <mxGeometry x="45" y="10" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
-                <object label="%signs%" block="Add" signs="[:+, :-]" type="block" name="" placeholders="1" id="U5rKFNsNTDXOEKKOMWsq-5">
+                <object label="%signs%" block="Add" signs="&quot;+-&quot;" type="block" name="" placeholders="1" id="U5rKFNsNTDXOEKKOMWsq-5">
                     <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.24,0,0,0],[0,0.76,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;allowArrows=0;resizable=0;container=1;collapsible=0;movable=1;connectable=0;" parent="1" vertex="1">
                         <mxGeometry x="112" y="152" width="40" height="80" as="geometry"/>
                     </mxCell>
@@ -1903,7 +1903,7 @@
                 <mxCell id="U5rKFNsNTDXOEKKOMWsq-43" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="U5rKFNsNTDXOEKKOMWsq-15" target="U5rKFNsNTDXOEKKOMWsq-24" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <object label="%signs%" block="Add" signs="[:+, :+, :+]" type="block" name="" placeholders="1" id="U5rKFNsNTDXOEKKOMWsq-44">
+                <object label="%signs%" block="Add" signs="&quot;+++&quot;" type="block" name="" placeholders="1" id="U5rKFNsNTDXOEKKOMWsq-44">
                     <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.24,0,0,0],[0,0.76,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;allowArrows=0;resizable=0;container=1;collapsible=0;movable=1;connectable=0;" parent="1" vertex="1">
                         <mxGeometry x="404" y="128" width="40" height="80" as="geometry"/>
                     </mxCell>
@@ -2012,82 +2012,82 @@
                     </mxCell>
                 </object>
                 <object label="%block%" block="Decoder" type="block" name="" placeholders="1" alpha_T="0.0015" alpha_i="0.13333333333333333" n="10" V_A_max="5" V_A_min="0" alpha_A="204.6" id="ym-pTdv0wtZo1ZpyTwsC-1">
-                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;resizeHeight=0;connectable=0;collapsible=0;movable=1;" vertex="1" parent="1">
+                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;resizeHeight=0;connectable=0;collapsible=0;movable=1;" parent="1" vertex="1">
                         <mxGeometry x="22" y="122" width="90" height="60" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="inport" name="d_N" id="ym-pTdv0wtZo1ZpyTwsC-2">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" vertex="1" parent="ym-pTdv0wtZo1ZpyTwsC-1">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" parent="ym-pTdv0wtZo1ZpyTwsC-1" vertex="1">
                         <mxGeometry x="-5" y="15" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="inport" name="d_i" id="ym-pTdv0wtZo1ZpyTwsC-3">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" vertex="1" parent="ym-pTdv0wtZo1ZpyTwsC-1">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" parent="ym-pTdv0wtZo1ZpyTwsC-1" vertex="1">
                         <mxGeometry x="-5" y="35" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="outport" name="Nstar" id="ym-pTdv0wtZo1ZpyTwsC-4">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="ym-pTdv0wtZo1ZpyTwsC-1">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" parent="ym-pTdv0wtZo1ZpyTwsC-1" vertex="1">
                         <mxGeometry x="85" y="15" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="outport" name="istar" id="ym-pTdv0wtZo1ZpyTwsC-5">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="ym-pTdv0wtZo1ZpyTwsC-1">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" parent="ym-pTdv0wtZo1ZpyTwsC-1" vertex="1">
                         <mxGeometry x="85" y="35" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="%block%" block="Encoder" type="block" name="" placeholders="1" m="8" u_max="100" u_min="0" id="ym-pTdv0wtZo1ZpyTwsC-6">
-                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;resizeHeight=0;connectable=0;collapsible=0;movable=1;" vertex="1" parent="1">
+                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;resizeHeight=0;connectable=0;collapsible=0;movable=1;" parent="1" vertex="1">
                         <mxGeometry x="310" y="106" width="90" height="60" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="inport" name="u" id="ym-pTdv0wtZo1ZpyTwsC-7">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" vertex="1" parent="ym-pTdv0wtZo1ZpyTwsC-6">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" parent="ym-pTdv0wtZo1ZpyTwsC-6" vertex="1">
                         <mxGeometry x="-5" y="25" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="outport" name="d_P" id="ym-pTdv0wtZo1ZpyTwsC-8">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="ym-pTdv0wtZo1ZpyTwsC-6">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" parent="ym-pTdv0wtZo1ZpyTwsC-6" vertex="1">
                         <mxGeometry x="85" y="25" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
-                <mxCell id="ym-pTdv0wtZo1ZpyTwsC-9" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="53Wxo-phatnWuWdNYizw-2" target="ym-pTdv0wtZo1ZpyTwsC-2">
+                <mxCell id="ym-pTdv0wtZo1ZpyTwsC-9" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="53Wxo-phatnWuWdNYizw-2" target="ym-pTdv0wtZo1ZpyTwsC-2" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="ym-pTdv0wtZo1ZpyTwsC-10" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="53Wxo-phatnWuWdNYizw-4" target="ym-pTdv0wtZo1ZpyTwsC-3">
+                <mxCell id="ym-pTdv0wtZo1ZpyTwsC-10" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="53Wxo-phatnWuWdNYizw-4" target="ym-pTdv0wtZo1ZpyTwsC-3" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="ym-pTdv0wtZo1ZpyTwsC-11" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="ym-pTdv0wtZo1ZpyTwsC-8" target="53Wxo-phatnWuWdNYizw-25">
+                <mxCell id="ym-pTdv0wtZo1ZpyTwsC-11" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="ym-pTdv0wtZo1ZpyTwsC-8" target="53Wxo-phatnWuWdNYizw-25" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="ym-pTdv0wtZo1ZpyTwsC-15" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="ym-pTdv0wtZo1ZpyTwsC-4" target="PSyd5PyKM44SdCG5Up0D-2">
+                <mxCell id="ym-pTdv0wtZo1ZpyTwsC-15" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="ym-pTdv0wtZo1ZpyTwsC-4" target="PSyd5PyKM44SdCG5Up0D-2" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="ym-pTdv0wtZo1ZpyTwsC-16" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="ym-pTdv0wtZo1ZpyTwsC-5" target="53Wxo-phatnWuWdNYizw-32">
+                <mxCell id="ym-pTdv0wtZo1ZpyTwsC-16" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="ym-pTdv0wtZo1ZpyTwsC-5" target="53Wxo-phatnWuWdNYizw-32" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <object label="%block%" block="PIDControl" type="block" name="" placeholders="1" SV="1000" K_P="0.1" K_I="0.05" K_D="0.01" u_min="0" u_max="100" id="7j7_-4raddZumE451m7x-1">
-                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;resizeHeight=0;connectable=0;collapsible=0;movable=1;" vertex="1" parent="1">
+                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;points=[[0,0.5,0,0,0],[1,0.5,0,0,0]];metaEdit=1;snapToPoint=0;resizable=0;rotatable=0;allowArrows=0;container=1;resizeHeight=0;connectable=0;collapsible=0;movable=1;" parent="1" vertex="1">
                         <mxGeometry x="162" y="118" width="90" height="60" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="inport" name="Nstar" id="7j7_-4raddZumE451m7x-2">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" vertex="1" parent="7j7_-4raddZumE451m7x-1">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[0,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;" parent="7j7_-4raddZumE451m7x-1" vertex="1">
                         <mxGeometry x="-5" y="25" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
                 <object label="" type="outport" name="u" id="7j7_-4raddZumE451m7x-3">
-                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" vertex="1" parent="7j7_-4raddZumE451m7x-1">
+                    <mxCell style="whiteSpace=wrap;html=1;aspect=fixed;snapToPoint=1;resizable=0;metaEdit=1;points=[[1,0.5,0,0,0]];editable=1;movable=1;rotatable=1;deletable=1;locked=0;connectable=1;noLabel=0;overflow=visible;fillColor=#000000;" parent="7j7_-4raddZumE451m7x-1" vertex="1">
                         <mxGeometry x="85" y="25" width="10" height="10" as="geometry"/>
                     </mxCell>
                 </object>
-                <mxCell id="7j7_-4raddZumE451m7x-4" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="ym-pTdv0wtZo1ZpyTwsC-4" target="7j7_-4raddZumE451m7x-2">
+                <mxCell id="7j7_-4raddZumE451m7x-4" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="ym-pTdv0wtZo1ZpyTwsC-4" target="7j7_-4raddZumE451m7x-2" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="7j7_-4raddZumE451m7x-5" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="7j7_-4raddZumE451m7x-3" target="ym-pTdv0wtZo1ZpyTwsC-7">
+                <mxCell id="7j7_-4raddZumE451m7x-5" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="7j7_-4raddZumE451m7x-3" target="ym-pTdv0wtZo1ZpyTwsC-7" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="7j7_-4raddZumE451m7x-6" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="7j7_-4raddZumE451m7x-3" target="PSyd5PyKM44SdCG5Up0D-4">
+                <mxCell id="7j7_-4raddZumE451m7x-6" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="7j7_-4raddZumE451m7x-3" target="PSyd5PyKM44SdCG5Up0D-4" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="292" y="148"/>

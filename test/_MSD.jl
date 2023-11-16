@@ -22,7 +22,7 @@ using Test
                 int1 = Integrator()
                 int2 = Integrator()
                 constant2 = Constant(value = M*g/k)
-                sum1 = Add(signs=[:+, :+, :-, :-])
+                sum1 = Add(signs="++--")
             end
             @connect begin
                 in1.out => sum1.in1
