@@ -20,7 +20,7 @@ using Test
                 gain1 = Gain(K = R)
                 gain2 = Gain(K = 1/C)
                 gain3 = Gain(K = 1/L)
-                sum1 = Add(signs=[:+, :-, :-])
+                sum1 = Add(signs="+--")
             end
         
             @connect begin

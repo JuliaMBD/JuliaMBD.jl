@@ -53,7 +53,7 @@ Consider an RLC circuit. An example of model description is
         gain1 = Gain(K = R)
         gain2 = Gain(K = 1/C)
         gain3 = Gain(K = 1/L)
-        sum1 = Add(signs=[:+, :-, :-])
+        sum1 = Add(signs="+--")
     end
     # define the connections between blocks
     @connect begin
@@ -126,7 +126,7 @@ In this section, we define all the blocks that are used to build the system. `@b
 @block a = Gain(K=10)
 @block begin
     b = Integrator()
-    c = Add(sigins=[:+, :+])
+    c = Add(sigins="++")
 end
 ```
 
@@ -188,6 +188,10 @@ The default behavior of compile macro uses given model parameters to build the f
 ```julia
 m = @compile Test(R= @v(R), L=100e-3, C=10e-6, voltage=5)
 ```
+or, if `R` has no default value, it can be used by skipping the substitusion into `R`
+```julia
+m = @compile Test(L=100e-3, C=10e-6, voltage=5)
+```
 In the above example, `R` is a variable parameter. And we can run the simulation by concrete values are given to variable parameters;
 ```julia
 result = simulate(m, tspan=(0, 1), parameters=(R=10,))
@@ -199,10 +203,12 @@ where the concrete parameters are given as the named tuple.
 ### Available block
 
 - Continuous
+    - Derivative (experimental)
     - Integrator
 - Discontinuities
     - Quantizer
     - Saturation
+    - SaturationDynamic
 - LookupTables
     - OneDLookupTable (experimental)
 - MathOperations
